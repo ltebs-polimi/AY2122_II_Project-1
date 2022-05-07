@@ -1,0 +1,32 @@
+--------------- Build Started: 05/07/2022 19:49:26 Project: Saturimetro, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+The code generation step is up to date.
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/main.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -c main.c -o .\CortexM3\ARM_GCC_541\Debug\main.o
+main.c: In function 'main':
+main.c:35:40: error: 'UART_Debug_PutString' undeclared (first use in this function)
+     void (*print_ptr)(const char*) = &(UART_Debug_PutString);
+                                        ^
+main.c:35:40: note: each undeclared identifier is reported only once for each function it appears in
+main.c:41:5: warning: implicit declaration of function 'UART_Debug_Start' [-Wimplicit-function-declaration]
+     UART_Debug_Start();
+     ^
+main.c:22:47: warning: implicit declaration of function 'UART_Debug_PutString' [-Wimplicit-function-declaration]
+ #define debug_print(msg) do { if (DEBUG_TEST) UART_Debug_PutString(msg);} while (0)
+                                               ^
+main.c:45:5: note: in expansion of macro 'debug_print'
+     debug_print("**************************\r\n");
+     ^
+main.c:53:9: warning: implicit declaration of function 'Connection_LED_Write' [-Wimplicit-function-declaration]
+         Connection_LED_Write(1);
+         ^
+main.c:118:5: warning: implicit declaration of function 'isr_MAX30101_StartEx' [-Wimplicit-function-declaration]
+     isr_MAX30101_StartEx(MAX30101_ISR);
+     ^
+main.c: In function 'MAX30101_ISR':
+main.c:151:27: warning: implicit declaration of function 'Connection_LED_Read' [-Wimplicit-function-declaration]
+     Connection_LED_Write(!Connection_LED_Read());
+                           ^
+main.c:152:5: warning: implicit declaration of function 'MAX30101_INT_ClearInterrupt' [-Wimplicit-function-declaration]
+     MAX30101_INT_ClearInterrupt();
+     ^
+The command 'arm-none-eabi-gcc.exe' failed with exit code '1'.
+--------------- Build Failed: 05/07/2022 19:49:27 ---------------

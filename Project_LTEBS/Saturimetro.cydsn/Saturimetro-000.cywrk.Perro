@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
+<CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
+<indicators />
+</CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
+</dataGuid>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Saturimetro-000\Saturimetro\Source Files">
+<ExpandedNodeIds>
+<v>Saturimetro-000</v>
+<v>Saturimetro-000\Saturimetro</v>
+<v>Saturimetro-000\Saturimetro\TopDesign</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Pins</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Analog</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Clocks</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Interrupts</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\DMA</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\System</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Directives</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Flash Security</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\EEPROM</v>
+<v>Saturimetro-000\Saturimetro\Header Files</v>
+<v>Saturimetro-000\Saturimetro\Header Files\cyapicallbacks.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\HeartRate.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\I2C_Interface.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\MAX30101.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\MAX30101_Defs.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\SpO2.h</v>
+<v>Saturimetro-000\Saturimetro\Source Files</v>
+<v>Saturimetro-000\Saturimetro\Source Files\HeartRate.c</v>
+<v>Saturimetro-000\Saturimetro\Source Files\I2C_Interface.c</v>
+<v>Saturimetro-000\Saturimetro\Source Files\main.c</v>
+<v>Saturimetro-000\Saturimetro\Source Files\MAX30101.c</v>
+<v>Saturimetro-000\Saturimetro\Source Files\SpO2.c</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5</v>
+<v>Saturimetro-000\Saturimetro\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Saturimetro-000</v>
+<v>Saturimetro-000\Saturimetro</v>
+<v>Saturimetro-000\Saturimetro\TopDesign</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Pins</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Analog</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Clocks</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Interrupts</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\DMA</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\System</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Directives</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Flash Security</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\EEPROM</v>
+<v>Saturimetro-000\Saturimetro\Header Files</v>
+<v>Saturimetro-000\Saturimetro\Header Files\cyapicallbacks.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\HeartRate.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\I2C_Interface.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\MAX30101.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\MAX30101_Defs.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\SpO2.h</v>
+<v>Saturimetro-000\Saturimetro\Source Files</v>
+<v>Saturimetro-000\Saturimetro\Source Files\HeartRate.c</v>
+<v>Saturimetro-000\Saturimetro\Source Files\I2C_Interface.c</v>
+<v>Saturimetro-000\Saturimetro\Source Files\main.c</v>
+<v>Saturimetro-000\Saturimetro\Source Files\MAX30101.c</v>
+<v>Saturimetro-000\Saturimetro\Source Files\SpO2.c</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\Connection_LED</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cy_boot</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\I2C_Master</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\isr_MAX30101</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\MAX30101_INT</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\SCL_1</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\SDA_1</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\UART_Debug</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\UART_Debug_IntClock</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cycodeshareexport.ld</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cycodeshareimport.ld</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cycodeshareimport.scat</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cydevice.h</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cydevice_trm.h</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cydevicegnu.inc</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cydevicegnu_trm.inc</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cydeviceiar.inc</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cydeviceiar_trm.inc</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cydevicerv.inc</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cydevicerv_trm.inc</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Saturimetro-000</v>
+<v>Saturimetro-000\Saturimetro</v>
+<v>Saturimetro-000\Saturimetro\TopDesign</v>
+<v>Saturimetro-000\Saturimetro\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Saturimetro-000</v>
+<v>Saturimetro-000\Saturimetro</v>
+<v>Saturimetro-000\Saturimetro\TopDesign</v>
+<v>Saturimetro-000\Saturimetro\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Saturimetro-000</v>
+<v>Saturimetro-000\Saturimetro</v>
+<v>Saturimetro-000\Saturimetro\CortexM3</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Saturimetro.elf</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Saturimetro.hex</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Saturimetro.map</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.gpdsc</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.rpt</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Saturimetro-000</v>
+<v>Saturimetro-000\Saturimetro</v>
+<v>Saturimetro-000\Saturimetro\CortexM3</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Saturimetro.elf</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Saturimetro.hex</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Saturimetro.map</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.gpdsc</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro.rpt</v>
+<v>Saturimetro-000\Saturimetro\Saturimetro_timing.html</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Saturimetro-000</v>
+<v>Saturimetro-000\Saturimetro</v>
+<v>Saturimetro-000\Saturimetro\PSoC 5LP Architecture TRM</v>
+<v>Saturimetro-000\Saturimetro\CY8C58LP Family Datasheet</v>
+<v>Saturimetro-000\Saturimetro\System Reference Guides</v>
+<v>Saturimetro-000\Saturimetro\System Reference Guides\cy_boot_v6_0</v>
+<v>Saturimetro-000\Saturimetro\cy_isr_v1_70.pdf</v>
+<v>Saturimetro-000\Saturimetro\cy_pins_v2_20</v>
+<v>Saturimetro-000\Saturimetro\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Saturimetro-000\Saturimetro\I2C_v3_50.pdf</v>
+<v>Saturimetro-000\Saturimetro\UART_v2_50.pdf</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Saturimetro-000</v>
+<v>Saturimetro-000\Saturimetro</v>
+<v>Saturimetro-000\Saturimetro\PSoC 5LP Architecture TRM</v>
+<v>Saturimetro-000\Saturimetro\CY8C58LP Family Datasheet</v>
+<v>Saturimetro-000\Saturimetro\System Reference Guides</v>
+<v>Saturimetro-000\Saturimetro\System Reference Guides\cy_boot_v6_0</v>
+<v>Saturimetro-000\Saturimetro\cy_isr_v1_70.pdf</v>
+<v>Saturimetro-000\Saturimetro\cy_pins_v2_20</v>
+<v>Saturimetro-000\Saturimetro\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Saturimetro-000\Saturimetro\I2C_v3_50.pdf</v>
+<v>Saturimetro-000\Saturimetro\UART_v2_50.pdf</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\Saturimetro.cydwr" />
+<name v=".\TopDesign\TopDesign.cysch" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1432, 757" SelectedTabbedMdiWindow="84d607a6-a634-4b1b-8b69-f6c099f487f7"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="fd141e05-5341-4623-8d11-033a064196ea" /><DocumentWindow Key="C:\Users\Perro\Documents\PSoC Creator\Pulseoximeter\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cydwr" Guid="b0689e5f-940b-4229-b883-a51dae1d7380" /><DocumentWindow Key="C:\Users\Perro\Documents\PSoC Creator\Pulseoximeter\Project_LTEBS\Saturimetro.cydsn\TopDesign\TopDesign.cysch" Guid="84d607a6-a634-4b1b-8b69-f6c099f487f7" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>

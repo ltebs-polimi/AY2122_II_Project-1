@@ -1,0 +1,6 @@
+C:\Users\Perro\Documents\PSoC Creator\Pulseoximeter\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cyprj|6f563fc3-5da0-4793-9717-4279acaed7ea
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|e66132e6-de78-4c4d-85d5-fa72c34c9e86
+C:\Users\Perro\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|56bd8ad0-08af-400f-bf2a-a4d9e7d691c0
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|a6de38a1-4cfd-4fd4-abe3-04204828b8b1
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|17265323-23ec-4062-8242-4caedfa4a049
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|a549a908-cec6-45bb-8bce-f40965e2047c
