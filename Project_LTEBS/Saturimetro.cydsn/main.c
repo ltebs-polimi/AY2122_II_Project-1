@@ -86,13 +86,13 @@ int main(void)
         MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_2);
         
         // Set LED Power level
-        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x1F);
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x0A);
         
-        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x1F);
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x0A);
         
-        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_3, 0x1F);
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_3, 0x0A);
         
-        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_4, 0x1F);
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_4, 0x0A);
         
         // Set ADC Range
         MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_4096);
@@ -139,6 +139,10 @@ int main(void)
                 debug_print(msg);
                 // Read FIFO
                 MAX30101_ReadFIFO(num_samples, active_leds, &data);
+                
+                sprintf(msg,  "%ld\r\n", getFIFORed(&data));
+                
+                debug_print(msg);
             }
             
             flag_temp = 0;

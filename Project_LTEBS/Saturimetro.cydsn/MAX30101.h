@@ -565,5 +565,9 @@
     */
     uint8_t MAX30101_PrintRegister(void (*print_fun)(const char*), uint8_t reg_addr);
 
+      uint32_t getFIFORed(MAX30101_Data* data); //Returns the FIFO sample pointed to by tail
+      uint32_t getFIFOIR(MAX30101_Data* data); //Returns the FIFO sample pointed to by tail
+    
+    
 #endif
 /* [] END OF FILE */

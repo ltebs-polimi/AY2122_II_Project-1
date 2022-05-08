@@ -431,6 +431,8 @@ uint8_t MAX30101_ReadRawFIFO(uint8_t num_samples, uint8_t active_leds, uint32_t*
     return error;
 }
 
+// Print FIFO Data
+
 // Read FIFO Data
 uint8_t MAX30101_ReadFIFO(uint8_t num_samples, uint8_t active_leds, MAX30101_Data* data)
 {
@@ -805,6 +807,18 @@ static uint8_t MAX30101_BitMask(uint8_t reg_addr, uint8_t mask, uint8_t thing)
         error = MAX30101_WriteRegister(reg_addr, reg_data | thing);
     }
     return error;
+}
+
+//Report the next Red value in the FIFO
+uint32_t getFIFORed(MAX30101_Data* data)
+{
+  return (data->red[data->tail]);
+}
+
+//Report the next IR value in the FIFO
+uint32_t getFIFOIR(MAX30101_Data* data)
+{
+  return (data->IR[data->tail]);
 }
 
 /* [] END OF FILE */
