@@ -1,0 +1,2206 @@
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"I2C_Interface.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.I2C_Peripheral_Start,"ax",%progbits
+  20              		.align	2
+  21              		.global	I2C_Peripheral_Start
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	I2C_Peripheral_Start, %function
+  25              	I2C_Peripheral_Start:
+  26              	.LFB0:
+  27              		.file 1 "I2C_Interface.c"
+   1:I2C_Interface.c **** /*
+   2:I2C_Interface.c **** * This file includes all the required source code to interface
+   3:I2C_Interface.c **** * the I2C peripheral.
+   4:I2C_Interface.c **** */
+   5:I2C_Interface.c **** 
+   6:I2C_Interface.c **** 
+   7:I2C_Interface.c **** #include "I2C_Interface.h" 
+   8:I2C_Interface.c **** #include "I2C_Master.h"
+   9:I2C_Interface.c **** 
+  10:I2C_Interface.c ****     uint8_t I2C_Peripheral_Start(void) 
+  11:I2C_Interface.c ****     {
+  28              		.loc 1 11 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 00AF     		add	r7, sp, #0
+  37              		.cfi_def_cfa_register 7
+  12:I2C_Interface.c ****         // Start I2C peripheral
+  13:I2C_Interface.c ****         I2C_Master_Start();  
+  38              		.loc 1 13 0
+  39 0004 FFF7FEFF 		bl	I2C_Master_Start
+  14:I2C_Interface.c ****         
+  15:I2C_Interface.c ****         // Return no error since start function does not return any error
+  16:I2C_Interface.c ****         return I2C_NO_ERROR;
+  40              		.loc 1 16 0
+  41 0008 0023     		movs	r3, #0
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 2
+
+
+  17:I2C_Interface.c ****     }
+  42              		.loc 1 17 0
+  43 000a 1846     		mov	r0, r3
+  44 000c 80BD     		pop	{r7, pc}
+  45              		.cfi_endproc
+  46              	.LFE0:
+  47              		.size	I2C_Peripheral_Start, .-I2C_Peripheral_Start
+  48 000e 00BF     		.section	.text.I2C_Peripheral_Stop,"ax",%progbits
+  49              		.align	2
+  50              		.global	I2C_Peripheral_Stop
+  51              		.thumb
+  52              		.thumb_func
+  53              		.type	I2C_Peripheral_Stop, %function
+  54              	I2C_Peripheral_Stop:
+  55              	.LFB1:
+  18:I2C_Interface.c ****     
+  19:I2C_Interface.c ****     
+  20:I2C_Interface.c ****     uint8_t I2C_Peripheral_Stop(void)
+  21:I2C_Interface.c ****     {
+  56              		.loc 1 21 0
+  57              		.cfi_startproc
+  58              		@ args = 0, pretend = 0, frame = 0
+  59              		@ frame_needed = 1, uses_anonymous_args = 0
+  60 0000 80B5     		push	{r7, lr}
+  61              		.cfi_def_cfa_offset 8
+  62              		.cfi_offset 7, -8
+  63              		.cfi_offset 14, -4
+  64 0002 00AF     		add	r7, sp, #0
+  65              		.cfi_def_cfa_register 7
+  22:I2C_Interface.c ****         // Stop I2C peripheral
+  23:I2C_Interface.c ****         I2C_Master_Stop();
+  66              		.loc 1 23 0
+  67 0004 FFF7FEFF 		bl	I2C_Master_Stop
+  24:I2C_Interface.c ****         // Return no error since stop function does not return any error
+  25:I2C_Interface.c ****         return I2C_NO_ERROR;
+  68              		.loc 1 25 0
+  69 0008 0023     		movs	r3, #0
+  26:I2C_Interface.c ****     }
+  70              		.loc 1 26 0
+  71 000a 1846     		mov	r0, r3
+  72 000c 80BD     		pop	{r7, pc}
+  73              		.cfi_endproc
+  74              	.LFE1:
+  75              		.size	I2C_Peripheral_Stop, .-I2C_Peripheral_Stop
+  76 000e 00BF     		.section	.text.I2C_Peripheral_SendStop,"ax",%progbits
+  77              		.align	2
+  78              		.global	I2C_Peripheral_SendStop
+  79              		.thumb
+  80              		.thumb_func
+  81              		.type	I2C_Peripheral_SendStop, %function
+  82              	I2C_Peripheral_SendStop:
+  83              	.LFB2:
+  27:I2C_Interface.c ****     
+  28:I2C_Interface.c ****     uint8_t I2C_Peripheral_SendStop(void)
+  29:I2C_Interface.c ****     {
+  84              		.loc 1 29 0
+  85              		.cfi_startproc
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 3
+
+
+  86              		@ args = 0, pretend = 0, frame = 0
+  87              		@ frame_needed = 1, uses_anonymous_args = 0
+  88 0000 80B5     		push	{r7, lr}
+  89              		.cfi_def_cfa_offset 8
+  90              		.cfi_offset 7, -8
+  91              		.cfi_offset 14, -4
+  92 0002 00AF     		add	r7, sp, #0
+  93              		.cfi_def_cfa_register 7
+  30:I2C_Interface.c ****         I2C_Master_MasterSendStop();
+  94              		.loc 1 30 0
+  95 0004 FFF7FEFF 		bl	I2C_Master_MasterSendStop
+  31:I2C_Interface.c ****         return I2C_NO_ERROR;
+  96              		.loc 1 31 0
+  97 0008 0023     		movs	r3, #0
+  32:I2C_Interface.c ****     }
+  98              		.loc 1 32 0
+  99 000a 1846     		mov	r0, r3
+ 100 000c 80BD     		pop	{r7, pc}
+ 101              		.cfi_endproc
+ 102              	.LFE2:
+ 103              		.size	I2C_Peripheral_SendStop, .-I2C_Peripheral_SendStop
+ 104 000e 00BF     		.section	.text.I2C_Peripheral_ReadRegister,"ax",%progbits
+ 105              		.align	2
+ 106              		.global	I2C_Peripheral_ReadRegister
+ 107              		.thumb
+ 108              		.thumb_func
+ 109              		.type	I2C_Peripheral_ReadRegister, %function
+ 110              	I2C_Peripheral_ReadRegister:
+ 111              	.LFB3:
+  33:I2C_Interface.c ****     
+  34:I2C_Interface.c ****     uint8_t I2C_Peripheral_ReadRegister(uint8_t device_address, 
+  35:I2C_Interface.c ****                                             uint8_t register_address,
+  36:I2C_Interface.c ****                                             uint8_t* data)
+  37:I2C_Interface.c ****     {
+ 112              		.loc 1 37 0
+ 113              		.cfi_startproc
+ 114              		@ args = 0, pretend = 0, frame = 16
+ 115              		@ frame_needed = 1, uses_anonymous_args = 0
+ 116 0000 80B5     		push	{r7, lr}
+ 117              		.cfi_def_cfa_offset 8
+ 118              		.cfi_offset 7, -8
+ 119              		.cfi_offset 14, -4
+ 120 0002 84B0     		sub	sp, sp, #16
+ 121              		.cfi_def_cfa_offset 24
+ 122 0004 00AF     		add	r7, sp, #0
+ 123              		.cfi_def_cfa_register 7
+ 124 0006 0346     		mov	r3, r0
+ 125 0008 3A60     		str	r2, [r7]
+ 126 000a FB71     		strb	r3, [r7, #7]
+ 127 000c 0B46     		mov	r3, r1
+ 128 000e BB71     		strb	r3, [r7, #6]
+  38:I2C_Interface.c ****         // Send start condition
+  39:I2C_Interface.c ****         uint8_t error = I2C_Master_MasterSendStart(device_address,I2C_Master_WRITE_XFER_MODE);
+ 129              		.loc 1 39 0
+ 130 0010 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 131 0012 0021     		movs	r1, #0
+ 132 0014 1846     		mov	r0, r3
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 4
+
+
+ 133 0016 FFF7FEFF 		bl	I2C_Master_MasterSendStart
+ 134 001a 0346     		mov	r3, r0
+ 135 001c FB73     		strb	r3, [r7, #15]
+  40:I2C_Interface.c ****         if (error == I2C_Master_MSTR_NO_ERROR)
+ 136              		.loc 1 40 0
+ 137 001e FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 138 0020 002B     		cmp	r3, #0
+ 139 0022 1DD1     		bne	.L8
+  41:I2C_Interface.c ****         {
+  42:I2C_Interface.c ****             // Write address of register to be read
+  43:I2C_Interface.c ****             error = I2C_Master_MasterWriteByte(register_address);
+ 140              		.loc 1 43 0
+ 141 0024 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 142 0026 1846     		mov	r0, r3
+ 143 0028 FFF7FEFF 		bl	I2C_Master_MasterWriteByte
+ 144 002c 0346     		mov	r3, r0
+ 145 002e FB73     		strb	r3, [r7, #15]
+  44:I2C_Interface.c ****             if (error == I2C_Master_MSTR_NO_ERROR)
+ 146              		.loc 1 44 0
+ 147 0030 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 148 0032 002B     		cmp	r3, #0
+ 149 0034 14D1     		bne	.L8
+  45:I2C_Interface.c ****             {
+  46:I2C_Interface.c ****                 // Send restart condition
+  47:I2C_Interface.c ****                 error = I2C_Master_MasterSendRestart(device_address, I2C_Master_READ_XFER_MODE);
+ 150              		.loc 1 47 0
+ 151 0036 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 152 0038 0121     		movs	r1, #1
+ 153 003a 1846     		mov	r0, r3
+ 154 003c FFF7FEFF 		bl	I2C_Master_MasterSendRestart
+ 155 0040 0346     		mov	r3, r0
+ 156 0042 FB73     		strb	r3, [r7, #15]
+  48:I2C_Interface.c ****                 if (error == I2C_Master_MSTR_NO_ERROR)
+ 157              		.loc 1 48 0
+ 158 0044 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 159 0046 002B     		cmp	r3, #0
+ 160 0048 0AD1     		bne	.L8
+  49:I2C_Interface.c ****                 {
+  50:I2C_Interface.c ****                     // Read data without acknowledgement
+  51:I2C_Interface.c ****                     *data = I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
+ 161              		.loc 1 51 0
+ 162 004a 0120     		movs	r0, #1
+ 163 004c FFF7FEFF 		bl	I2C_Master_MasterReadByte
+ 164 0050 0346     		mov	r3, r0
+ 165 0052 1A46     		mov	r2, r3
+ 166 0054 3B68     		ldr	r3, [r7]
+ 167 0056 1A70     		strb	r2, [r3]
+  52:I2C_Interface.c ****                     // Send stop condition and return no error
+  53:I2C_Interface.c ****                     I2C_Master_MasterSendStop();
+ 168              		.loc 1 53 0
+ 169 0058 FFF7FEFF 		bl	I2C_Master_MasterSendStop
+  54:I2C_Interface.c ****                     return I2C_NO_ERROR;
+ 170              		.loc 1 54 0
+ 171 005c 0023     		movs	r3, #0
+ 172 005e 02E0     		b	.L9
+ 173              	.L8:
+  55:I2C_Interface.c ****                 }
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 5
+
+
+  56:I2C_Interface.c ****             }
+  57:I2C_Interface.c ****         }
+  58:I2C_Interface.c ****         // Send stop condition if something went wrong
+  59:I2C_Interface.c ****         I2C_Master_MasterSendStop();
+ 174              		.loc 1 59 0
+ 175 0060 FFF7FEFF 		bl	I2C_Master_MasterSendStop
+  60:I2C_Interface.c ****         // Return error code
+  61:I2C_Interface.c ****         return I2C_DEV_NOT_FOUND;
+ 176              		.loc 1 61 0
+ 177 0064 0123     		movs	r3, #1
+ 178              	.L9:
+  62:I2C_Interface.c ****     }
+ 179              		.loc 1 62 0
+ 180 0066 1846     		mov	r0, r3
+ 181 0068 1037     		adds	r7, r7, #16
+ 182              		.cfi_def_cfa_offset 8
+ 183 006a BD46     		mov	sp, r7
+ 184              		.cfi_def_cfa_register 13
+ 185              		@ sp needed
+ 186 006c 80BD     		pop	{r7, pc}
+ 187              		.cfi_endproc
+ 188              	.LFE3:
+ 189              		.size	I2C_Peripheral_ReadRegister, .-I2C_Peripheral_ReadRegister
+ 190 006e 00BF     		.section	.text.I2C_Peripheral_ReadRegisterMulti,"ax",%progbits
+ 191              		.align	2
+ 192              		.global	I2C_Peripheral_ReadRegisterMulti
+ 193              		.thumb
+ 194              		.thumb_func
+ 195              		.type	I2C_Peripheral_ReadRegisterMulti, %function
+ 196              	I2C_Peripheral_ReadRegisterMulti:
+ 197              	.LFB4:
+  63:I2C_Interface.c ****     
+  64:I2C_Interface.c ****     uint8_t I2C_Peripheral_ReadRegisterMulti(uint8_t device_address,
+  65:I2C_Interface.c ****                                                 uint8_t register_address,
+  66:I2C_Interface.c ****                                                 uint16_t register_count,
+  67:I2C_Interface.c ****                                                 uint8_t* data)
+  68:I2C_Interface.c ****     {
+ 198              		.loc 1 68 0
+ 199              		.cfi_startproc
+ 200              		@ args = 0, pretend = 0, frame = 16
+ 201              		@ frame_needed = 1, uses_anonymous_args = 0
+ 202 0000 90B5     		push	{r4, r7, lr}
+ 203              		.cfi_def_cfa_offset 12
+ 204              		.cfi_offset 4, -12
+ 205              		.cfi_offset 7, -8
+ 206              		.cfi_offset 14, -4
+ 207 0002 85B0     		sub	sp, sp, #20
+ 208              		.cfi_def_cfa_offset 32
+ 209 0004 00AF     		add	r7, sp, #0
+ 210              		.cfi_def_cfa_register 7
+ 211 0006 3B60     		str	r3, [r7]
+ 212 0008 0346     		mov	r3, r0
+ 213 000a FB71     		strb	r3, [r7, #7]
+ 214 000c 0B46     		mov	r3, r1
+ 215 000e BB71     		strb	r3, [r7, #6]
+ 216 0010 1346     		mov	r3, r2	@ movhi
+ 217 0012 BB80     		strh	r3, [r7, #4]	@ movhi
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 6
+
+
+  69:I2C_Interface.c ****         // Send start condition
+  70:I2C_Interface.c ****         uint8_t error = I2C_Master_MasterSendStart(device_address,I2C_Master_WRITE_XFER_MODE);
+ 218              		.loc 1 70 0
+ 219 0014 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 220 0016 0021     		movs	r1, #0
+ 221 0018 1846     		mov	r0, r3
+ 222 001a FFF7FEFF 		bl	I2C_Master_MasterSendStart
+ 223 001e 0346     		mov	r3, r0
+ 224 0020 7B73     		strb	r3, [r7, #13]
+  71:I2C_Interface.c ****         if (error == I2C_Master_MSTR_NO_ERROR)
+ 225              		.loc 1 71 0
+ 226 0022 7B7B     		ldrb	r3, [r7, #13]	@ zero_extendqisi2
+ 227 0024 002B     		cmp	r3, #0
+ 228 0026 33D1     		bne	.L11
+  72:I2C_Interface.c ****         {
+  73:I2C_Interface.c ****             // Write address of register to be read with the MSB equal to 1
+  74:I2C_Interface.c ****             // register_address |= 0x80;
+  75:I2C_Interface.c ****             error = I2C_Master_MasterWriteByte(register_address);
+ 229              		.loc 1 75 0
+ 230 0028 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 231 002a 1846     		mov	r0, r3
+ 232 002c FFF7FEFF 		bl	I2C_Master_MasterWriteByte
+ 233 0030 0346     		mov	r3, r0
+ 234 0032 7B73     		strb	r3, [r7, #13]
+  76:I2C_Interface.c ****             if (error == I2C_Master_MSTR_NO_ERROR)
+ 235              		.loc 1 76 0
+ 236 0034 7B7B     		ldrb	r3, [r7, #13]	@ zero_extendqisi2
+ 237 0036 002B     		cmp	r3, #0
+ 238 0038 2AD1     		bne	.L11
+  77:I2C_Interface.c ****             {
+  78:I2C_Interface.c ****                 // Send restart condition
+  79:I2C_Interface.c ****                 error = I2C_Master_MasterSendRestart(device_address, I2C_Master_READ_XFER_MODE);
+ 239              		.loc 1 79 0
+ 240 003a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 241 003c 0121     		movs	r1, #1
+ 242 003e 1846     		mov	r0, r3
+ 243 0040 FFF7FEFF 		bl	I2C_Master_MasterSendRestart
+ 244 0044 0346     		mov	r3, r0
+ 245 0046 7B73     		strb	r3, [r7, #13]
+  80:I2C_Interface.c ****                 if (error == I2C_Master_MSTR_NO_ERROR)
+ 246              		.loc 1 80 0
+ 247 0048 7B7B     		ldrb	r3, [r7, #13]	@ zero_extendqisi2
+ 248 004a 002B     		cmp	r3, #0
+ 249 004c 20D1     		bne	.L11
+ 250              	.LBB2:
+  81:I2C_Interface.c ****                 {
+  82:I2C_Interface.c ****                     // Continue reading until we have register to read
+  83:I2C_Interface.c ****                     uint16_t counter = register_count;
+ 251              		.loc 1 83 0
+ 252 004e BB88     		ldrh	r3, [r7, #4]	@ movhi
+ 253 0050 FB81     		strh	r3, [r7, #14]	@ movhi
+  84:I2C_Interface.c ****                     while(counter>1)
+ 254              		.loc 1 84 0
+ 255 0052 0DE0     		b	.L12
+ 256              	.L13:
+  85:I2C_Interface.c ****                     {
+  86:I2C_Interface.c ****                         data[register_count-counter] =
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 7
+
+
+ 257              		.loc 1 86 0
+ 258 0054 BA88     		ldrh	r2, [r7, #4]
+ 259 0056 FB89     		ldrh	r3, [r7, #14]
+ 260 0058 D31A     		subs	r3, r2, r3
+ 261 005a 1A46     		mov	r2, r3
+ 262 005c 3B68     		ldr	r3, [r7]
+ 263 005e 9C18     		adds	r4, r3, r2
+  87:I2C_Interface.c ****                             I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
+ 264              		.loc 1 87 0
+ 265 0060 0120     		movs	r0, #1
+ 266 0062 FFF7FEFF 		bl	I2C_Master_MasterReadByte
+ 267 0066 0346     		mov	r3, r0
+  86:I2C_Interface.c ****                             I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
+ 268              		.loc 1 86 0
+ 269 0068 2370     		strb	r3, [r4]
+  88:I2C_Interface.c ****                         counter--;
+ 270              		.loc 1 88 0
+ 271 006a FB89     		ldrh	r3, [r7, #14]
+ 272 006c 013B     		subs	r3, r3, #1
+ 273 006e FB81     		strh	r3, [r7, #14]	@ movhi
+ 274              	.L12:
+  84:I2C_Interface.c ****                     {
+ 275              		.loc 1 84 0
+ 276 0070 FB89     		ldrh	r3, [r7, #14]
+ 277 0072 012B     		cmp	r3, #1
+ 278 0074 EED8     		bhi	.L13
+  89:I2C_Interface.c ****                     }
+  90:I2C_Interface.c ****                     // Read last data without acknowledgement
+  91:I2C_Interface.c ****                     data[register_count-1]
+ 279              		.loc 1 91 0
+ 280 0076 BB88     		ldrh	r3, [r7, #4]
+ 281 0078 013B     		subs	r3, r3, #1
+ 282 007a 3A68     		ldr	r2, [r7]
+ 283 007c D418     		adds	r4, r2, r3
+  92:I2C_Interface.c ****                         = I2C_Master_MasterReadByte(I2C_Master_NAK_DATA);
+ 284              		.loc 1 92 0
+ 285 007e 0020     		movs	r0, #0
+ 286 0080 FFF7FEFF 		bl	I2C_Master_MasterReadByte
+ 287 0084 0346     		mov	r3, r0
+ 288 0086 2370     		strb	r3, [r4]
+  93:I2C_Interface.c ****                     // Send stop condition and return no error
+  94:I2C_Interface.c ****                     I2C_Master_MasterSendStop();
+ 289              		.loc 1 94 0
+ 290 0088 FFF7FEFF 		bl	I2C_Master_MasterSendStop
+  95:I2C_Interface.c ****                     return I2C_NO_ERROR;
+ 291              		.loc 1 95 0
+ 292 008c 0023     		movs	r3, #0
+ 293 008e 02E0     		b	.L14
+ 294              	.L11:
+ 295              	.LBE2:
+  96:I2C_Interface.c ****                 }
+  97:I2C_Interface.c ****             }
+  98:I2C_Interface.c ****         }
+  99:I2C_Interface.c ****         // Send stop condition if something went wrong
+ 100:I2C_Interface.c ****         I2C_Master_MasterSendStop();
+ 296              		.loc 1 100 0
+ 297 0090 FFF7FEFF 		bl	I2C_Master_MasterSendStop
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 8
+
+
+ 101:I2C_Interface.c ****         // Return error code
+ 102:I2C_Interface.c ****         return I2C_DEV_NOT_FOUND;
+ 298              		.loc 1 102 0
+ 299 0094 0123     		movs	r3, #1
+ 300              	.L14:
+ 103:I2C_Interface.c ****     }
+ 301              		.loc 1 103 0
+ 302 0096 1846     		mov	r0, r3
+ 303 0098 1437     		adds	r7, r7, #20
+ 304              		.cfi_def_cfa_offset 12
+ 305 009a BD46     		mov	sp, r7
+ 306              		.cfi_def_cfa_register 13
+ 307              		@ sp needed
+ 308 009c 90BD     		pop	{r4, r7, pc}
+ 309              		.cfi_endproc
+ 310              	.LFE4:
+ 311              		.size	I2C_Peripheral_ReadRegisterMulti, .-I2C_Peripheral_ReadRegisterMulti
+ 312 009e 00BF     		.section	.text.I2C_Peripheral_ReadRegisterMultiNoAddress,"ax",%progbits
+ 313              		.align	2
+ 314              		.global	I2C_Peripheral_ReadRegisterMultiNoAddress
+ 315              		.thumb
+ 316              		.thumb_func
+ 317              		.type	I2C_Peripheral_ReadRegisterMultiNoAddress, %function
+ 318              	I2C_Peripheral_ReadRegisterMultiNoAddress:
+ 319              	.LFB5:
+ 104:I2C_Interface.c ****     
+ 105:I2C_Interface.c ****     uint8_t I2C_Peripheral_ReadRegisterMultiNoAddress(uint8_t device_address,
+ 106:I2C_Interface.c ****                                                       uint16_t register_count, 
+ 107:I2C_Interface.c ****                                                       uint8_t* data)
+ 108:I2C_Interface.c ****     {
+ 320              		.loc 1 108 0
+ 321              		.cfi_startproc
+ 322              		@ args = 0, pretend = 0, frame = 16
+ 323              		@ frame_needed = 1, uses_anonymous_args = 0
+ 324 0000 90B5     		push	{r4, r7, lr}
+ 325              		.cfi_def_cfa_offset 12
+ 326              		.cfi_offset 4, -12
+ 327              		.cfi_offset 7, -8
+ 328              		.cfi_offset 14, -4
+ 329 0002 85B0     		sub	sp, sp, #20
+ 330              		.cfi_def_cfa_offset 32
+ 331 0004 00AF     		add	r7, sp, #0
+ 332              		.cfi_def_cfa_register 7
+ 333 0006 0346     		mov	r3, r0
+ 334 0008 3A60     		str	r2, [r7]
+ 335 000a FB71     		strb	r3, [r7, #7]
+ 336 000c 0B46     		mov	r3, r1	@ movhi
+ 337 000e BB80     		strh	r3, [r7, #4]	@ movhi
+ 109:I2C_Interface.c ****         // Send restart condition
+ 110:I2C_Interface.c ****         uint8_t error = I2C_Master_MasterSendStart(device_address, I2C_Master_READ_XFER_MODE);
+ 338              		.loc 1 110 0
+ 339 0010 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 340 0012 0121     		movs	r1, #1
+ 341 0014 1846     		mov	r0, r3
+ 342 0016 FFF7FEFF 		bl	I2C_Master_MasterSendStart
+ 343 001a 0346     		mov	r3, r0
+ 344 001c 7B73     		strb	r3, [r7, #13]
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 9
+
+
+ 111:I2C_Interface.c ****         if (error == I2C_Master_MSTR_NO_ERROR)
+ 345              		.loc 1 111 0
+ 346 001e 7B7B     		ldrb	r3, [r7, #13]	@ zero_extendqisi2
+ 347 0020 002B     		cmp	r3, #0
+ 348 0022 20D1     		bne	.L16
+ 349              	.LBB3:
+ 112:I2C_Interface.c ****         {
+ 113:I2C_Interface.c ****             // Continue reading until we have register to read
+ 114:I2C_Interface.c ****             uint16_t counter = register_count;
+ 350              		.loc 1 114 0
+ 351 0024 BB88     		ldrh	r3, [r7, #4]	@ movhi
+ 352 0026 FB81     		strh	r3, [r7, #14]	@ movhi
+ 115:I2C_Interface.c ****             while(counter>1)
+ 353              		.loc 1 115 0
+ 354 0028 0DE0     		b	.L17
+ 355              	.L18:
+ 116:I2C_Interface.c ****             {
+ 117:I2C_Interface.c ****                 data[register_count-counter] =
+ 356              		.loc 1 117 0
+ 357 002a BA88     		ldrh	r2, [r7, #4]
+ 358 002c FB89     		ldrh	r3, [r7, #14]
+ 359 002e D31A     		subs	r3, r2, r3
+ 360 0030 1A46     		mov	r2, r3
+ 361 0032 3B68     		ldr	r3, [r7]
+ 362 0034 9C18     		adds	r4, r3, r2
+ 118:I2C_Interface.c ****                     I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
+ 363              		.loc 1 118 0
+ 364 0036 0120     		movs	r0, #1
+ 365 0038 FFF7FEFF 		bl	I2C_Master_MasterReadByte
+ 366 003c 0346     		mov	r3, r0
+ 117:I2C_Interface.c ****                     I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
+ 367              		.loc 1 117 0
+ 368 003e 2370     		strb	r3, [r4]
+ 119:I2C_Interface.c ****                 counter--;
+ 369              		.loc 1 119 0
+ 370 0040 FB89     		ldrh	r3, [r7, #14]
+ 371 0042 013B     		subs	r3, r3, #1
+ 372 0044 FB81     		strh	r3, [r7, #14]	@ movhi
+ 373              	.L17:
+ 115:I2C_Interface.c ****             {
+ 374              		.loc 1 115 0
+ 375 0046 FB89     		ldrh	r3, [r7, #14]
+ 376 0048 012B     		cmp	r3, #1
+ 377 004a EED8     		bhi	.L18
+ 120:I2C_Interface.c ****             }
+ 121:I2C_Interface.c ****             // Read last data without acknowledgement
+ 122:I2C_Interface.c ****             data[register_count-1] = I2C_Master_MasterReadByte(I2C_Master_NAK_DATA);
+ 378              		.loc 1 122 0
+ 379 004c BB88     		ldrh	r3, [r7, #4]
+ 380 004e 013B     		subs	r3, r3, #1
+ 381 0050 3A68     		ldr	r2, [r7]
+ 382 0052 D418     		adds	r4, r2, r3
+ 383 0054 0020     		movs	r0, #0
+ 384 0056 FFF7FEFF 		bl	I2C_Master_MasterReadByte
+ 385 005a 0346     		mov	r3, r0
+ 386 005c 2370     		strb	r3, [r4]
+ 123:I2C_Interface.c ****             // Send stop condition and return no error
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 10
+
+
+ 124:I2C_Interface.c ****             I2C_Master_MasterSendStop();
+ 387              		.loc 1 124 0
+ 388 005e FFF7FEFF 		bl	I2C_Master_MasterSendStop
+ 125:I2C_Interface.c ****             return I2C_NO_ERROR;
+ 389              		.loc 1 125 0
+ 390 0062 0023     		movs	r3, #0
+ 391 0064 02E0     		b	.L19
+ 392              	.L16:
+ 393              	.LBE3:
+ 126:I2C_Interface.c ****         }
+ 127:I2C_Interface.c ****         // Send stop condition if something went wrong
+ 128:I2C_Interface.c ****         I2C_Master_MasterSendStop();
+ 394              		.loc 1 128 0
+ 395 0066 FFF7FEFF 		bl	I2C_Master_MasterSendStop
+ 129:I2C_Interface.c ****         // Return error code
+ 130:I2C_Interface.c ****         return I2C_DEV_NOT_FOUND;
+ 396              		.loc 1 130 0
+ 397 006a 0123     		movs	r3, #1
+ 398              	.L19:
+ 131:I2C_Interface.c ****     }
+ 399              		.loc 1 131 0
+ 400 006c 1846     		mov	r0, r3
+ 401 006e 1437     		adds	r7, r7, #20
+ 402              		.cfi_def_cfa_offset 12
+ 403 0070 BD46     		mov	sp, r7
+ 404              		.cfi_def_cfa_register 13
+ 405              		@ sp needed
+ 406 0072 90BD     		pop	{r4, r7, pc}
+ 407              		.cfi_endproc
+ 408              	.LFE5:
+ 409              		.size	I2C_Peripheral_ReadRegisterMultiNoAddress, .-I2C_Peripheral_ReadRegisterMultiNoAddress
+ 410              		.section	.text.I2C_Peripheral_StartReadNoAddress,"ax",%progbits
+ 411              		.align	2
+ 412              		.global	I2C_Peripheral_StartReadNoAddress
+ 413              		.thumb
+ 414              		.thumb_func
+ 415              		.type	I2C_Peripheral_StartReadNoAddress, %function
+ 416              	I2C_Peripheral_StartReadNoAddress:
+ 417              	.LFB6:
+ 132:I2C_Interface.c ****     
+ 133:I2C_Interface.c ****     uint8_t I2C_Peripheral_StartReadNoAddress(uint8_t device_address)
+ 134:I2C_Interface.c ****     {
+ 418              		.loc 1 134 0
+ 419              		.cfi_startproc
+ 420              		@ args = 0, pretend = 0, frame = 16
+ 421              		@ frame_needed = 1, uses_anonymous_args = 0
+ 422 0000 80B5     		push	{r7, lr}
+ 423              		.cfi_def_cfa_offset 8
+ 424              		.cfi_offset 7, -8
+ 425              		.cfi_offset 14, -4
+ 426 0002 84B0     		sub	sp, sp, #16
+ 427              		.cfi_def_cfa_offset 24
+ 428 0004 00AF     		add	r7, sp, #0
+ 429              		.cfi_def_cfa_register 7
+ 430 0006 0346     		mov	r3, r0
+ 431 0008 FB71     		strb	r3, [r7, #7]
+ 135:I2C_Interface.c ****         // Send restart condition
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 11
+
+
+ 136:I2C_Interface.c ****         uint8_t error = I2C_Master_MasterSendStart(device_address, I2C_Master_READ_XFER_MODE);
+ 432              		.loc 1 136 0
+ 433 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 434 000c 0121     		movs	r1, #1
+ 435 000e 1846     		mov	r0, r3
+ 436 0010 FFF7FEFF 		bl	I2C_Master_MasterSendStart
+ 437 0014 0346     		mov	r3, r0
+ 438 0016 FB73     		strb	r3, [r7, #15]
+ 137:I2C_Interface.c ****         if (error == I2C_Master_MSTR_NO_ERROR)
+ 439              		.loc 1 137 0
+ 440 0018 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 441 001a 002B     		cmp	r3, #0
+ 442 001c 01D1     		bne	.L21
+ 138:I2C_Interface.c ****         {
+ 139:I2C_Interface.c ****             return I2C_NO_ERROR;
+ 443              		.loc 1 139 0
+ 444 001e 0023     		movs	r3, #0
+ 445 0020 00E0     		b	.L22
+ 446              	.L21:
+ 140:I2C_Interface.c ****         }
+ 141:I2C_Interface.c ****         // Return error code
+ 142:I2C_Interface.c ****         return I2C_DEV_NOT_FOUND;
+ 447              		.loc 1 142 0
+ 448 0022 0123     		movs	r3, #1
+ 449              	.L22:
+ 143:I2C_Interface.c ****     }
+ 450              		.loc 1 143 0
+ 451 0024 1846     		mov	r0, r3
+ 452 0026 1037     		adds	r7, r7, #16
+ 453              		.cfi_def_cfa_offset 8
+ 454 0028 BD46     		mov	sp, r7
+ 455              		.cfi_def_cfa_register 13
+ 456              		@ sp needed
+ 457 002a 80BD     		pop	{r7, pc}
+ 458              		.cfi_endproc
+ 459              	.LFE6:
+ 460              		.size	I2C_Peripheral_StartReadNoAddress, .-I2C_Peripheral_StartReadNoAddress
+ 461              		.section	.text.I2C_Peripheral_ReadBytes,"ax",%progbits
+ 462              		.align	2
+ 463              		.global	I2C_Peripheral_ReadBytes
+ 464              		.thumb
+ 465              		.thumb_func
+ 466              		.type	I2C_Peripheral_ReadBytes, %function
+ 467              	I2C_Peripheral_ReadBytes:
+ 468              	.LFB7:
+ 144:I2C_Interface.c ****     
+ 145:I2C_Interface.c ****     uint8_t I2C_Peripheral_ReadBytes(uint8_t* data, uint8_t len)
+ 146:I2C_Interface.c ****     {
+ 469              		.loc 1 146 0
+ 470              		.cfi_startproc
+ 471              		@ args = 0, pretend = 0, frame = 16
+ 472              		@ frame_needed = 1, uses_anonymous_args = 0
+ 473 0000 90B5     		push	{r4, r7, lr}
+ 474              		.cfi_def_cfa_offset 12
+ 475              		.cfi_offset 4, -12
+ 476              		.cfi_offset 7, -8
+ 477              		.cfi_offset 14, -4
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 12
+
+
+ 478 0002 85B0     		sub	sp, sp, #20
+ 479              		.cfi_def_cfa_offset 32
+ 480 0004 00AF     		add	r7, sp, #0
+ 481              		.cfi_def_cfa_register 7
+ 482 0006 7860     		str	r0, [r7, #4]
+ 483 0008 0B46     		mov	r3, r1
+ 484 000a FB70     		strb	r3, [r7, #3]
+ 147:I2C_Interface.c ****         // Continue reading until we have register to read
+ 148:I2C_Interface.c ****         uint16_t counter = len;
+ 485              		.loc 1 148 0
+ 486 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 487 000e FB81     		strh	r3, [r7, #14]	@ movhi
+ 149:I2C_Interface.c ****         while(counter>1)
+ 488              		.loc 1 149 0
+ 489 0010 0DE0     		b	.L24
+ 490              	.L25:
+ 150:I2C_Interface.c ****         {
+ 151:I2C_Interface.c ****             data[len-counter] = I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
+ 491              		.loc 1 151 0
+ 492 0012 FA78     		ldrb	r2, [r7, #3]	@ zero_extendqisi2
+ 493 0014 FB89     		ldrh	r3, [r7, #14]
+ 494 0016 D31A     		subs	r3, r2, r3
+ 495 0018 1A46     		mov	r2, r3
+ 496 001a 7B68     		ldr	r3, [r7, #4]
+ 497 001c 9C18     		adds	r4, r3, r2
+ 498 001e 0120     		movs	r0, #1
+ 499 0020 FFF7FEFF 		bl	I2C_Master_MasterReadByte
+ 500 0024 0346     		mov	r3, r0
+ 501 0026 2370     		strb	r3, [r4]
+ 152:I2C_Interface.c ****             counter--;
+ 502              		.loc 1 152 0
+ 503 0028 FB89     		ldrh	r3, [r7, #14]
+ 504 002a 013B     		subs	r3, r3, #1
+ 505 002c FB81     		strh	r3, [r7, #14]	@ movhi
+ 506              	.L24:
+ 149:I2C_Interface.c ****         while(counter>1)
+ 507              		.loc 1 149 0
+ 508 002e FB89     		ldrh	r3, [r7, #14]
+ 509 0030 012B     		cmp	r3, #1
+ 510 0032 EED8     		bhi	.L25
+ 153:I2C_Interface.c ****         }
+ 154:I2C_Interface.c ****         
+ 155:I2C_Interface.c ****         return I2C_NO_ERROR;
+ 511              		.loc 1 155 0
+ 512 0034 0023     		movs	r3, #0
+ 156:I2C_Interface.c ****     }
+ 513              		.loc 1 156 0
+ 514 0036 1846     		mov	r0, r3
+ 515 0038 1437     		adds	r7, r7, #20
+ 516              		.cfi_def_cfa_offset 12
+ 517 003a BD46     		mov	sp, r7
+ 518              		.cfi_def_cfa_register 13
+ 519              		@ sp needed
+ 520 003c 90BD     		pop	{r4, r7, pc}
+ 521              		.cfi_endproc
+ 522              	.LFE7:
+ 523              		.size	I2C_Peripheral_ReadBytes, .-I2C_Peripheral_ReadBytes
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 13
+
+
+ 524 003e 00BF     		.section	.text.I2C_Peripheral_WriteRegister,"ax",%progbits
+ 525              		.align	2
+ 526              		.global	I2C_Peripheral_WriteRegister
+ 527              		.thumb
+ 528              		.thumb_func
+ 529              		.type	I2C_Peripheral_WriteRegister, %function
+ 530              	I2C_Peripheral_WriteRegister:
+ 531              	.LFB8:
+ 157:I2C_Interface.c ****     
+ 158:I2C_Interface.c ****     uint8_t I2C_Peripheral_WriteRegister(uint8_t device_address,
+ 159:I2C_Interface.c ****                                             uint8_t register_address,
+ 160:I2C_Interface.c ****                                             uint8_t data)
+ 161:I2C_Interface.c ****     {
+ 532              		.loc 1 161 0
+ 533              		.cfi_startproc
+ 534              		@ args = 0, pretend = 0, frame = 16
+ 535              		@ frame_needed = 1, uses_anonymous_args = 0
+ 536 0000 80B5     		push	{r7, lr}
+ 537              		.cfi_def_cfa_offset 8
+ 538              		.cfi_offset 7, -8
+ 539              		.cfi_offset 14, -4
+ 540 0002 84B0     		sub	sp, sp, #16
+ 541              		.cfi_def_cfa_offset 24
+ 542 0004 00AF     		add	r7, sp, #0
+ 543              		.cfi_def_cfa_register 7
+ 544 0006 0346     		mov	r3, r0
+ 545 0008 FB71     		strb	r3, [r7, #7]
+ 546 000a 0B46     		mov	r3, r1
+ 547 000c BB71     		strb	r3, [r7, #6]
+ 548 000e 1346     		mov	r3, r2
+ 549 0010 7B71     		strb	r3, [r7, #5]
+ 162:I2C_Interface.c ****         // Send start condition
+ 163:I2C_Interface.c ****         uint8_t error = I2C_Master_MasterSendStart(device_address, I2C_Master_WRITE_XFER_MODE);
+ 550              		.loc 1 163 0
+ 551 0012 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 552 0014 0021     		movs	r1, #0
+ 553 0016 1846     		mov	r0, r3
+ 554 0018 FFF7FEFF 		bl	I2C_Master_MasterSendStart
+ 555 001c 0346     		mov	r3, r0
+ 556 001e FB73     		strb	r3, [r7, #15]
+ 164:I2C_Interface.c ****         if (error == I2C_Master_MSTR_NO_ERROR)
+ 557              		.loc 1 164 0
+ 558 0020 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 559 0022 002B     		cmp	r3, #0
+ 560 0024 15D1     		bne	.L28
+ 165:I2C_Interface.c ****         {
+ 166:I2C_Interface.c ****             // Write register address
+ 167:I2C_Interface.c ****             error = I2C_Master_MasterWriteByte(register_address);
+ 561              		.loc 1 167 0
+ 562 0026 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 563 0028 1846     		mov	r0, r3
+ 564 002a FFF7FEFF 		bl	I2C_Master_MasterWriteByte
+ 565 002e 0346     		mov	r3, r0
+ 566 0030 FB73     		strb	r3, [r7, #15]
+ 168:I2C_Interface.c ****             if (error == I2C_Master_MSTR_NO_ERROR)
+ 567              		.loc 1 168 0
+ 568 0032 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 14
+
+
+ 569 0034 002B     		cmp	r3, #0
+ 570 0036 0CD1     		bne	.L28
+ 169:I2C_Interface.c ****             {
+ 170:I2C_Interface.c ****                 // Write byte of interest
+ 171:I2C_Interface.c ****                 error = I2C_Master_MasterWriteByte(data);
+ 571              		.loc 1 171 0
+ 572 0038 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
+ 573 003a 1846     		mov	r0, r3
+ 574 003c FFF7FEFF 		bl	I2C_Master_MasterWriteByte
+ 575 0040 0346     		mov	r3, r0
+ 576 0042 FB73     		strb	r3, [r7, #15]
+ 172:I2C_Interface.c ****                 if (error == I2C_Master_MSTR_NO_ERROR)
+ 577              		.loc 1 172 0
+ 578 0044 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 579 0046 002B     		cmp	r3, #0
+ 580 0048 03D1     		bne	.L28
+ 173:I2C_Interface.c ****                 {
+ 174:I2C_Interface.c ****                     // Send stop condition
+ 175:I2C_Interface.c ****                     I2C_Master_MasterSendStop();
+ 581              		.loc 1 175 0
+ 582 004a FFF7FEFF 		bl	I2C_Master_MasterSendStop
+ 176:I2C_Interface.c ****                     // Return with no error
+ 177:I2C_Interface.c ****                     return I2C_NO_ERROR;
+ 583              		.loc 1 177 0
+ 584 004e 0023     		movs	r3, #0
+ 585 0050 02E0     		b	.L29
+ 586              	.L28:
+ 178:I2C_Interface.c ****                 }
+ 179:I2C_Interface.c ****             }
+ 180:I2C_Interface.c ****         }
+ 181:I2C_Interface.c ****         // Send stop condition in case something didn't work out correctly
+ 182:I2C_Interface.c ****         I2C_Master_MasterSendStop();
+ 587              		.loc 1 182 0
+ 588 0052 FFF7FEFF 		bl	I2C_Master_MasterSendStop
+ 183:I2C_Interface.c ****         // Return error code
+ 184:I2C_Interface.c ****         return I2C_DEV_NOT_FOUND;
+ 589              		.loc 1 184 0
+ 590 0056 0123     		movs	r3, #1
+ 591              	.L29:
+ 185:I2C_Interface.c ****     }
+ 592              		.loc 1 185 0
+ 593 0058 1846     		mov	r0, r3
+ 594 005a 1037     		adds	r7, r7, #16
+ 595              		.cfi_def_cfa_offset 8
+ 596 005c BD46     		mov	sp, r7
+ 597              		.cfi_def_cfa_register 13
+ 598              		@ sp needed
+ 599 005e 80BD     		pop	{r7, pc}
+ 600              		.cfi_endproc
+ 601              	.LFE8:
+ 602              		.size	I2C_Peripheral_WriteRegister, .-I2C_Peripheral_WriteRegister
+ 603              		.section	.text.I2C_Peripheral_WriteRegisterNoData,"ax",%progbits
+ 604              		.align	2
+ 605              		.global	I2C_Peripheral_WriteRegisterNoData
+ 606              		.thumb
+ 607              		.thumb_func
+ 608              		.type	I2C_Peripheral_WriteRegisterNoData, %function
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 15
+
+
+ 609              	I2C_Peripheral_WriteRegisterNoData:
+ 610              	.LFB9:
+ 186:I2C_Interface.c ****     
+ 187:I2C_Interface.c ****     uint8_t I2C_Peripheral_WriteRegisterNoData(uint8_t device_address,
+ 188:I2C_Interface.c ****                                             uint8_t register_address)
+ 189:I2C_Interface.c ****     {
+ 611              		.loc 1 189 0
+ 612              		.cfi_startproc
+ 613              		@ args = 0, pretend = 0, frame = 16
+ 614              		@ frame_needed = 1, uses_anonymous_args = 0
+ 615 0000 80B5     		push	{r7, lr}
+ 616              		.cfi_def_cfa_offset 8
+ 617              		.cfi_offset 7, -8
+ 618              		.cfi_offset 14, -4
+ 619 0002 84B0     		sub	sp, sp, #16
+ 620              		.cfi_def_cfa_offset 24
+ 621 0004 00AF     		add	r7, sp, #0
+ 622              		.cfi_def_cfa_register 7
+ 623 0006 0346     		mov	r3, r0
+ 624 0008 0A46     		mov	r2, r1
+ 625 000a FB71     		strb	r3, [r7, #7]
+ 626 000c 1346     		mov	r3, r2
+ 627 000e BB71     		strb	r3, [r7, #6]
+ 190:I2C_Interface.c ****         // Send start condition
+ 191:I2C_Interface.c ****         uint8_t error = I2C_Master_MasterSendStart(device_address, I2C_Master_WRITE_XFER_MODE);
+ 628              		.loc 1 191 0
+ 629 0010 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 630 0012 0021     		movs	r1, #0
+ 631 0014 1846     		mov	r0, r3
+ 632 0016 FFF7FEFF 		bl	I2C_Master_MasterSendStart
+ 633 001a 0346     		mov	r3, r0
+ 634 001c FB73     		strb	r3, [r7, #15]
+ 192:I2C_Interface.c ****         if (error == I2C_Master_MSTR_NO_ERROR)
+ 635              		.loc 1 192 0
+ 636 001e FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 637 0020 002B     		cmp	r3, #0
+ 638 0022 0CD1     		bne	.L31
+ 193:I2C_Interface.c ****         {
+ 194:I2C_Interface.c ****             // Write register address
+ 195:I2C_Interface.c ****             error = I2C_Master_MasterWriteByte(register_address);
+ 639              		.loc 1 195 0
+ 640 0024 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 641 0026 1846     		mov	r0, r3
+ 642 0028 FFF7FEFF 		bl	I2C_Master_MasterWriteByte
+ 643 002c 0346     		mov	r3, r0
+ 644 002e FB73     		strb	r3, [r7, #15]
+ 196:I2C_Interface.c ****             if (error == I2C_Master_MSTR_NO_ERROR)
+ 645              		.loc 1 196 0
+ 646 0030 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 647 0032 002B     		cmp	r3, #0
+ 648 0034 03D1     		bne	.L31
+ 197:I2C_Interface.c ****             {
+ 198:I2C_Interface.c ****                 // Send stop condition
+ 199:I2C_Interface.c ****                 I2C_Master_MasterSendStop();
+ 649              		.loc 1 199 0
+ 650 0036 FFF7FEFF 		bl	I2C_Master_MasterSendStop
+ 200:I2C_Interface.c ****                 // Return with no error
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 16
+
+
+ 201:I2C_Interface.c ****                 return I2C_NO_ERROR;
+ 651              		.loc 1 201 0
+ 652 003a 0023     		movs	r3, #0
+ 653 003c 02E0     		b	.L32
+ 654              	.L31:
+ 202:I2C_Interface.c ****                 
+ 203:I2C_Interface.c ****             }
+ 204:I2C_Interface.c ****         }
+ 205:I2C_Interface.c ****         // Send stop condition in case something didn't work out correctly
+ 206:I2C_Interface.c ****         I2C_Master_MasterSendStop();
+ 655              		.loc 1 206 0
+ 656 003e FFF7FEFF 		bl	I2C_Master_MasterSendStop
+ 207:I2C_Interface.c ****         // Return error code
+ 208:I2C_Interface.c ****         return I2C_DEV_NOT_FOUND;
+ 657              		.loc 1 208 0
+ 658 0042 0123     		movs	r3, #1
+ 659              	.L32:
+ 209:I2C_Interface.c ****     }
+ 660              		.loc 1 209 0
+ 661 0044 1846     		mov	r0, r3
+ 662 0046 1037     		adds	r7, r7, #16
+ 663              		.cfi_def_cfa_offset 8
+ 664 0048 BD46     		mov	sp, r7
+ 665              		.cfi_def_cfa_register 13
+ 666              		@ sp needed
+ 667 004a 80BD     		pop	{r7, pc}
+ 668              		.cfi_endproc
+ 669              	.LFE9:
+ 670              		.size	I2C_Peripheral_WriteRegisterNoData, .-I2C_Peripheral_WriteRegisterNoData
+ 671              		.section	.text.I2C_Peripheral_WriteRegisterMulti,"ax",%progbits
+ 672              		.align	2
+ 673              		.global	I2C_Peripheral_WriteRegisterMulti
+ 674              		.thumb
+ 675              		.thumb_func
+ 676              		.type	I2C_Peripheral_WriteRegisterMulti, %function
+ 677              	I2C_Peripheral_WriteRegisterMulti:
+ 678              	.LFB10:
+ 210:I2C_Interface.c ****     
+ 211:I2C_Interface.c ****     uint8_t I2C_Peripheral_WriteRegisterMulti(uint8_t device_address,
+ 212:I2C_Interface.c ****                                             uint8_t register_address,
+ 213:I2C_Interface.c ****                                             uint8_t register_count,
+ 214:I2C_Interface.c ****                                             uint8_t* data)
+ 215:I2C_Interface.c ****     {
+ 679              		.loc 1 215 0
+ 680              		.cfi_startproc
+ 681              		@ args = 0, pretend = 0, frame = 16
+ 682              		@ frame_needed = 1, uses_anonymous_args = 0
+ 683 0000 80B5     		push	{r7, lr}
+ 684              		.cfi_def_cfa_offset 8
+ 685              		.cfi_offset 7, -8
+ 686              		.cfi_offset 14, -4
+ 687 0002 84B0     		sub	sp, sp, #16
+ 688              		.cfi_def_cfa_offset 24
+ 689 0004 00AF     		add	r7, sp, #0
+ 690              		.cfi_def_cfa_register 7
+ 691 0006 3B60     		str	r3, [r7]
+ 692 0008 0346     		mov	r3, r0
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 17
+
+
+ 693 000a FB71     		strb	r3, [r7, #7]
+ 694 000c 0B46     		mov	r3, r1
+ 695 000e BB71     		strb	r3, [r7, #6]
+ 696 0010 1346     		mov	r3, r2
+ 697 0012 7B71     		strb	r3, [r7, #5]
+ 216:I2C_Interface.c ****         // Send start condition
+ 217:I2C_Interface.c ****         uint8_t error = I2C_Master_MasterSendStart(device_address, I2C_Master_WRITE_XFER_MODE);
+ 698              		.loc 1 217 0
+ 699 0014 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 700 0016 0021     		movs	r1, #0
+ 701 0018 1846     		mov	r0, r3
+ 702 001a FFF7FEFF 		bl	I2C_Master_MasterSendStart
+ 703 001e 0346     		mov	r3, r0
+ 704 0020 BB73     		strb	r3, [r7, #14]
+ 218:I2C_Interface.c ****         if (error == I2C_Master_MSTR_NO_ERROR)
+ 705              		.loc 1 218 0
+ 706 0022 BB7B     		ldrb	r3, [r7, #14]	@ zero_extendqisi2
+ 707 0024 002B     		cmp	r3, #0
+ 708 0026 28D1     		bne	.L34
+ 219:I2C_Interface.c ****         {
+ 220:I2C_Interface.c ****             // Write register address
+ 221:I2C_Interface.c ****             error = I2C_Master_MasterWriteByte(register_address);
+ 709              		.loc 1 221 0
+ 710 0028 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 711 002a 1846     		mov	r0, r3
+ 712 002c FFF7FEFF 		bl	I2C_Master_MasterWriteByte
+ 713 0030 0346     		mov	r3, r0
+ 714 0032 BB73     		strb	r3, [r7, #14]
+ 222:I2C_Interface.c ****             if (error == I2C_Master_MSTR_NO_ERROR)
+ 715              		.loc 1 222 0
+ 716 0034 BB7B     		ldrb	r3, [r7, #14]	@ zero_extendqisi2
+ 717 0036 002B     		cmp	r3, #0
+ 718 0038 1FD1     		bne	.L34
+ 719              	.LBB4:
+ 223:I2C_Interface.c ****             {
+ 224:I2C_Interface.c ****                 // Continue writing until we have data to write
+ 225:I2C_Interface.c ****                 uint8_t counter = register_count;
+ 720              		.loc 1 225 0
+ 721 003a 7B79     		ldrb	r3, [r7, #5]
+ 722 003c FB73     		strb	r3, [r7, #15]
+ 226:I2C_Interface.c ****                 while(counter > 0)
+ 723              		.loc 1 226 0
+ 724 003e 15E0     		b	.L35
+ 725              	.L38:
+ 227:I2C_Interface.c ****                 {
+ 228:I2C_Interface.c ****                     error = I2C_Master_MasterWriteByte(data[register_count-counter]);
+ 726              		.loc 1 228 0
+ 727 0040 7A79     		ldrb	r2, [r7, #5]	@ zero_extendqisi2
+ 728 0042 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 729 0044 D31A     		subs	r3, r2, r3
+ 730 0046 1A46     		mov	r2, r3
+ 731 0048 3B68     		ldr	r3, [r7]
+ 732 004a 1344     		add	r3, r3, r2
+ 733 004c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 734 004e 1846     		mov	r0, r3
+ 735 0050 FFF7FEFF 		bl	I2C_Master_MasterWriteByte
+ 736 0054 0346     		mov	r3, r0
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 18
+
+
+ 737 0056 BB73     		strb	r3, [r7, #14]
+ 229:I2C_Interface.c ****                     if (error != I2C_Master_MSTR_NO_ERROR)
+ 738              		.loc 1 229 0
+ 739 0058 BB7B     		ldrb	r3, [r7, #14]	@ zero_extendqisi2
+ 740 005a 002B     		cmp	r3, #0
+ 741 005c 03D0     		beq	.L36
+ 230:I2C_Interface.c ****                     {
+ 231:I2C_Interface.c ****                         // Send stop condition
+ 232:I2C_Interface.c ****                         I2C_Master_MasterSendStop();
+ 742              		.loc 1 232 0
+ 743 005e FFF7FEFF 		bl	I2C_Master_MasterSendStop
+ 233:I2C_Interface.c ****                         // Return error code
+ 234:I2C_Interface.c ****                         return I2C_ERROR;
+ 744              		.loc 1 234 0
+ 745 0062 0223     		movs	r3, #2
+ 746 0064 0CE0     		b	.L37
+ 747              	.L36:
+ 235:I2C_Interface.c ****                     }
+ 236:I2C_Interface.c ****                     counter--;
+ 748              		.loc 1 236 0
+ 749 0066 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 750 0068 013B     		subs	r3, r3, #1
+ 751 006a FB73     		strb	r3, [r7, #15]
+ 752              	.L35:
+ 226:I2C_Interface.c ****                 {
+ 753              		.loc 1 226 0
+ 754 006c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 755 006e 002B     		cmp	r3, #0
+ 756 0070 E6D1     		bne	.L38
+ 237:I2C_Interface.c ****                 }
+ 238:I2C_Interface.c ****                 // Send stop condition and return no error
+ 239:I2C_Interface.c ****                 I2C_Master_MasterSendStop();
+ 757              		.loc 1 239 0
+ 758 0072 FFF7FEFF 		bl	I2C_Master_MasterSendStop
+ 240:I2C_Interface.c ****                 return I2C_NO_ERROR;
+ 759              		.loc 1 240 0
+ 760 0076 0023     		movs	r3, #0
+ 761 0078 02E0     		b	.L37
+ 762              	.L34:
+ 763              	.LBE4:
+ 241:I2C_Interface.c ****             }
+ 242:I2C_Interface.c ****         }
+ 243:I2C_Interface.c ****         // Send stop condition in case something didn't work out correctly
+ 244:I2C_Interface.c ****         I2C_Master_MasterSendStop();
+ 764              		.loc 1 244 0
+ 765 007a FFF7FEFF 		bl	I2C_Master_MasterSendStop
+ 245:I2C_Interface.c ****         // Return error code
+ 246:I2C_Interface.c ****         return I2C_DEV_NOT_FOUND;
+ 766              		.loc 1 246 0
+ 767 007e 0123     		movs	r3, #1
+ 768              	.L37:
+ 247:I2C_Interface.c ****     }
+ 769              		.loc 1 247 0
+ 770 0080 1846     		mov	r0, r3
+ 771 0082 1037     		adds	r7, r7, #16
+ 772              		.cfi_def_cfa_offset 8
+ 773 0084 BD46     		mov	sp, r7
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 19
+
+
+ 774              		.cfi_def_cfa_register 13
+ 775              		@ sp needed
+ 776 0086 80BD     		pop	{r7, pc}
+ 777              		.cfi_endproc
+ 778              	.LFE10:
+ 779              		.size	I2C_Peripheral_WriteRegisterMulti, .-I2C_Peripheral_WriteRegisterMulti
+ 780              		.section	.text.I2C_Peripheral_IsDeviceConnected,"ax",%progbits
+ 781              		.align	2
+ 782              		.global	I2C_Peripheral_IsDeviceConnected
+ 783              		.thumb
+ 784              		.thumb_func
+ 785              		.type	I2C_Peripheral_IsDeviceConnected, %function
+ 786              	I2C_Peripheral_IsDeviceConnected:
+ 787              	.LFB11:
+ 248:I2C_Interface.c ****     
+ 249:I2C_Interface.c ****     
+ 250:I2C_Interface.c ****     uint8_t I2C_Peripheral_IsDeviceConnected(uint8_t device_address)
+ 251:I2C_Interface.c ****     {
+ 788              		.loc 1 251 0
+ 789              		.cfi_startproc
+ 790              		@ args = 0, pretend = 0, frame = 16
+ 791              		@ frame_needed = 1, uses_anonymous_args = 0
+ 792 0000 80B5     		push	{r7, lr}
+ 793              		.cfi_def_cfa_offset 8
+ 794              		.cfi_offset 7, -8
+ 795              		.cfi_offset 14, -4
+ 796 0002 84B0     		sub	sp, sp, #16
+ 797              		.cfi_def_cfa_offset 24
+ 798 0004 00AF     		add	r7, sp, #0
+ 799              		.cfi_def_cfa_register 7
+ 800 0006 0346     		mov	r3, r0
+ 801 0008 FB71     		strb	r3, [r7, #7]
+ 252:I2C_Interface.c ****         // Send a start condition followed by a stop condition
+ 253:I2C_Interface.c ****         uint8_t error = I2C_Master_MasterSendStart(device_address, I2C_Master_WRITE_XFER_MODE);
+ 802              		.loc 1 253 0
+ 803 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 804 000c 0021     		movs	r1, #0
+ 805 000e 1846     		mov	r0, r3
+ 806 0010 FFF7FEFF 		bl	I2C_Master_MasterSendStart
+ 807 0014 0346     		mov	r3, r0
+ 808 0016 FB73     		strb	r3, [r7, #15]
+ 254:I2C_Interface.c ****         I2C_Master_MasterSendStop();
+ 809              		.loc 1 254 0
+ 810 0018 FFF7FEFF 		bl	I2C_Master_MasterSendStop
+ 255:I2C_Interface.c ****         // If no error generated during stop, device is connected
+ 256:I2C_Interface.c ****         if (error == I2C_Master_MSTR_NO_ERROR)
+ 811              		.loc 1 256 0
+ 812 001c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 813 001e 002B     		cmp	r3, #0
+ 814 0020 01D1     		bne	.L40
+ 257:I2C_Interface.c ****         {
+ 258:I2C_Interface.c ****             return I2C_NO_ERROR;
+ 815              		.loc 1 258 0
+ 816 0022 0023     		movs	r3, #0
+ 817 0024 00E0     		b	.L41
+ 818              	.L40:
+ 259:I2C_Interface.c ****         }
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 20
+
+
+ 260:I2C_Interface.c ****         else
+ 261:I2C_Interface.c ****         {
+ 262:I2C_Interface.c ****             return I2C_DEV_NOT_FOUND;
+ 819              		.loc 1 262 0
+ 820 0026 0123     		movs	r3, #1
+ 821              	.L41:
+ 263:I2C_Interface.c ****         }
+ 264:I2C_Interface.c ****         
+ 265:I2C_Interface.c ****     }
+ 822              		.loc 1 265 0
+ 823 0028 1846     		mov	r0, r3
+ 824 002a 1037     		adds	r7, r7, #16
+ 825              		.cfi_def_cfa_offset 8
+ 826 002c BD46     		mov	sp, r7
+ 827              		.cfi_def_cfa_register 13
+ 828              		@ sp needed
+ 829 002e 80BD     		pop	{r7, pc}
+ 830              		.cfi_endproc
+ 831              	.LFE11:
+ 832              		.size	I2C_Peripheral_IsDeviceConnected, .-I2C_Peripheral_IsDeviceConnected
+ 833              		.text
+ 834              	.Letext0:
+ 835              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 836              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 837              		.section	.debug_info,"",%progbits
+ 838              	.Ldebug_info0:
+ 839 0000 EA030000 		.4byte	0x3ea
+ 840 0004 0400     		.2byte	0x4
+ 841 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 842 000a 04       		.byte	0x4
+ 843 000b 01       		.uleb128 0x1
+ 844 000c 22000000 		.4byte	.LASF35
+ 845 0010 0C       		.byte	0xc
+ 846 0011 BF000000 		.4byte	.LASF36
+ 847 0015 CF000000 		.4byte	.LASF37
+ 848 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 849 001d 00000000 		.4byte	0
+ 850 0021 00000000 		.4byte	.Ldebug_line0
+ 851 0025 02       		.uleb128 0x2
+ 852 0026 01       		.byte	0x1
+ 853 0027 06       		.byte	0x6
+ 854 0028 27030000 		.4byte	.LASF0
+ 855 002c 03       		.uleb128 0x3
+ 856 002d 18000000 		.4byte	.LASF3
+ 857 0031 02       		.byte	0x2
+ 858 0032 1D       		.byte	0x1d
+ 859 0033 37000000 		.4byte	0x37
+ 860 0037 02       		.uleb128 0x2
+ 861 0038 01       		.byte	0x1
+ 862 0039 08       		.byte	0x8
+ 863 003a 9B010000 		.4byte	.LASF1
+ 864 003e 02       		.uleb128 0x2
+ 865 003f 02       		.byte	0x2
+ 866 0040 05       		.byte	0x5
+ 867 0041 F0020000 		.4byte	.LASF2
+ 868 0045 03       		.uleb128 0x3
+ 869 0046 10020000 		.4byte	.LASF4
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 21
+
+
+ 870 004a 02       		.byte	0x2
+ 871 004b 2B       		.byte	0x2b
+ 872 004c 50000000 		.4byte	0x50
+ 873 0050 02       		.uleb128 0x2
+ 874 0051 02       		.byte	0x2
+ 875 0052 07       		.byte	0x7
+ 876 0053 CB010000 		.4byte	.LASF5
+ 877 0057 02       		.uleb128 0x2
+ 878 0058 04       		.byte	0x4
+ 879 0059 05       		.byte	0x5
+ 880 005a 12030000 		.4byte	.LASF6
+ 881 005e 02       		.uleb128 0x2
+ 882 005f 04       		.byte	0x4
+ 883 0060 07       		.byte	0x7
+ 884 0061 60020000 		.4byte	.LASF7
+ 885 0065 02       		.uleb128 0x2
+ 886 0066 08       		.byte	0x8
+ 887 0067 05       		.byte	0x5
+ 888 0068 AD020000 		.4byte	.LASF8
+ 889 006c 02       		.uleb128 0x2
+ 890 006d 08       		.byte	0x8
+ 891 006e 07       		.byte	0x7
+ 892 006f 7F020000 		.4byte	.LASF9
+ 893 0073 04       		.uleb128 0x4
+ 894 0074 04       		.byte	0x4
+ 895 0075 05       		.byte	0x5
+ 896 0076 696E7400 		.ascii	"int\000"
+ 897 007a 02       		.uleb128 0x2
+ 898 007b 04       		.byte	0x4
+ 899 007c 07       		.byte	0x7
+ 900 007d 72020000 		.4byte	.LASF10
+ 901 0081 03       		.uleb128 0x3
+ 902 0082 96020000 		.4byte	.LASF11
+ 903 0086 03       		.byte	0x3
+ 904 0087 18       		.byte	0x18
+ 905 0088 2C000000 		.4byte	0x2c
+ 906 008c 03       		.uleb128 0x3
+ 907 008d 09030000 		.4byte	.LASF12
+ 908 0091 03       		.byte	0x3
+ 909 0092 24       		.byte	0x24
+ 910 0093 45000000 		.4byte	0x45
+ 911 0097 02       		.uleb128 0x2
+ 912 0098 04       		.byte	0x4
+ 913 0099 04       		.byte	0x4
+ 914 009a 90010000 		.4byte	.LASF13
+ 915 009e 02       		.uleb128 0x2
+ 916 009f 08       		.byte	0x8
+ 917 00a0 04       		.byte	0x4
+ 918 00a1 1B020000 		.4byte	.LASF14
+ 919 00a5 02       		.uleb128 0x2
+ 920 00a6 01       		.byte	0x1
+ 921 00a7 08       		.byte	0x8
+ 922 00a8 BB020000 		.4byte	.LASF15
+ 923 00ac 02       		.uleb128 0x2
+ 924 00ad 08       		.byte	0x8
+ 925 00ae 04       		.byte	0x4
+ 926 00af 1B030000 		.4byte	.LASF16
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 22
+
+
+ 927 00b3 02       		.uleb128 0x2
+ 928 00b4 04       		.byte	0x4
+ 929 00b5 07       		.byte	0x7
+ 930 00b6 9E020000 		.4byte	.LASF17
+ 931 00ba 05       		.uleb128 0x5
+ 932 00bb 56030000 		.4byte	.LASF18
+ 933 00bf 01       		.byte	0x1
+ 934 00c0 0A       		.byte	0xa
+ 935 00c1 81000000 		.4byte	0x81
+ 936 00c5 00000000 		.4byte	.LFB0
+ 937 00c9 0E000000 		.4byte	.LFE0-.LFB0
+ 938 00cd 01       		.uleb128 0x1
+ 939 00ce 9C       		.byte	0x9c
+ 940 00cf 05       		.uleb128 0x5
+ 941 00d0 C0020000 		.4byte	.LASF19
+ 942 00d4 01       		.byte	0x1
+ 943 00d5 14       		.byte	0x14
+ 944 00d6 81000000 		.4byte	0x81
+ 945 00da 00000000 		.4byte	.LFB1
+ 946 00de 0E000000 		.4byte	.LFE1-.LFB1
+ 947 00e2 01       		.uleb128 0x1
+ 948 00e3 9C       		.byte	0x9c
+ 949 00e4 05       		.uleb128 0x5
+ 950 00e5 00000000 		.4byte	.LASF20
+ 951 00e9 01       		.byte	0x1
+ 952 00ea 1C       		.byte	0x1c
+ 953 00eb 81000000 		.4byte	0x81
+ 954 00ef 00000000 		.4byte	.LFB2
+ 955 00f3 0E000000 		.4byte	.LFE2-.LFB2
+ 956 00f7 01       		.uleb128 0x1
+ 957 00f8 9C       		.byte	0x9c
+ 958 00f9 06       		.uleb128 0x6
+ 959 00fa D4020000 		.4byte	.LASF24
+ 960 00fe 01       		.byte	0x1
+ 961 00ff 22       		.byte	0x22
+ 962 0100 81000000 		.4byte	0x81
+ 963 0104 00000000 		.4byte	.LFB3
+ 964 0108 6E000000 		.4byte	.LFE3-.LFB3
+ 965 010c 01       		.uleb128 0x1
+ 966 010d 9C       		.byte	0x9c
+ 967 010e 4B010000 		.4byte	0x14b
+ 968 0112 07       		.uleb128 0x7
+ 969 0113 FA020000 		.4byte	.LASF21
+ 970 0117 01       		.byte	0x1
+ 971 0118 22       		.byte	0x22
+ 972 0119 81000000 		.4byte	0x81
+ 973 011d 02       		.uleb128 0x2
+ 974 011e 91       		.byte	0x91
+ 975 011f 6F       		.sleb128 -17
+ 976 0120 07       		.uleb128 0x7
+ 977 0121 DE010000 		.4byte	.LASF22
+ 978 0125 01       		.byte	0x1
+ 979 0126 23       		.byte	0x23
+ 980 0127 81000000 		.4byte	0x81
+ 981 012b 02       		.uleb128 0x2
+ 982 012c 91       		.byte	0x91
+ 983 012d 6E       		.sleb128 -18
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 23
+
+
+ 984 012e 07       		.uleb128 0x7
+ 985 012f 96010000 		.4byte	.LASF23
+ 986 0133 01       		.byte	0x1
+ 987 0134 24       		.byte	0x24
+ 988 0135 4B010000 		.4byte	0x14b
+ 989 0139 02       		.uleb128 0x2
+ 990 013a 91       		.byte	0x91
+ 991 013b 68       		.sleb128 -24
+ 992 013c 08       		.uleb128 0x8
+ 993 013d A7020000 		.4byte	.LASF27
+ 994 0141 01       		.byte	0x1
+ 995 0142 27       		.byte	0x27
+ 996 0143 81000000 		.4byte	0x81
+ 997 0147 02       		.uleb128 0x2
+ 998 0148 91       		.byte	0x91
+ 999 0149 77       		.sleb128 -9
+ 1000 014a 00       		.byte	0
+ 1001 014b 09       		.uleb128 0x9
+ 1002 014c 04       		.byte	0x4
+ 1003 014d 81000000 		.4byte	0x81
+ 1004 0151 06       		.uleb128 0x6
+ 1005 0152 22020000 		.4byte	.LASF25
+ 1006 0156 01       		.byte	0x1
+ 1007 0157 40       		.byte	0x40
+ 1008 0158 81000000 		.4byte	0x81
+ 1009 015c 00000000 		.4byte	.LFB4
+ 1010 0160 9E000000 		.4byte	.LFE4-.LFB4
+ 1011 0164 01       		.uleb128 0x1
+ 1012 0165 9C       		.byte	0x9c
+ 1013 0166 C9010000 		.4byte	0x1c9
+ 1014 016a 07       		.uleb128 0x7
+ 1015 016b FA020000 		.4byte	.LASF21
+ 1016 016f 01       		.byte	0x1
+ 1017 0170 40       		.byte	0x40
+ 1018 0171 81000000 		.4byte	0x81
+ 1019 0175 02       		.uleb128 0x2
+ 1020 0176 91       		.byte	0x91
+ 1021 0177 67       		.sleb128 -25
+ 1022 0178 07       		.uleb128 0x7
+ 1023 0179 DE010000 		.4byte	.LASF22
+ 1024 017d 01       		.byte	0x1
+ 1025 017e 41       		.byte	0x41
+ 1026 017f 81000000 		.4byte	0x81
+ 1027 0183 02       		.uleb128 0x2
+ 1028 0184 91       		.byte	0x91
+ 1029 0185 66       		.sleb128 -26
+ 1030 0186 07       		.uleb128 0x7
+ 1031 0187 B0000000 		.4byte	.LASF26
+ 1032 018b 01       		.byte	0x1
+ 1033 018c 42       		.byte	0x42
+ 1034 018d 8C000000 		.4byte	0x8c
+ 1035 0191 02       		.uleb128 0x2
+ 1036 0192 91       		.byte	0x91
+ 1037 0193 64       		.sleb128 -28
+ 1038 0194 07       		.uleb128 0x7
+ 1039 0195 96010000 		.4byte	.LASF23
+ 1040 0199 01       		.byte	0x1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 24
+
+
+ 1041 019a 43       		.byte	0x43
+ 1042 019b 4B010000 		.4byte	0x14b
+ 1043 019f 02       		.uleb128 0x2
+ 1044 01a0 91       		.byte	0x91
+ 1045 01a1 60       		.sleb128 -32
+ 1046 01a2 08       		.uleb128 0x8
+ 1047 01a3 A7020000 		.4byte	.LASF27
+ 1048 01a7 01       		.byte	0x1
+ 1049 01a8 46       		.byte	0x46
+ 1050 01a9 81000000 		.4byte	0x81
+ 1051 01ad 02       		.uleb128 0x2
+ 1052 01ae 91       		.byte	0x91
+ 1053 01af 6D       		.sleb128 -19
+ 1054 01b0 0A       		.uleb128 0xa
+ 1055 01b1 4E000000 		.4byte	.LBB2
+ 1056 01b5 42000000 		.4byte	.LBE2-.LBB2
+ 1057 01b9 08       		.uleb128 0x8
+ 1058 01ba 08020000 		.4byte	.LASF28
+ 1059 01be 01       		.byte	0x1
+ 1060 01bf 53       		.byte	0x53
+ 1061 01c0 8C000000 		.4byte	0x8c
+ 1062 01c4 02       		.uleb128 0x2
+ 1063 01c5 91       		.byte	0x91
+ 1064 01c6 6E       		.sleb128 -18
+ 1065 01c7 00       		.byte	0
+ 1066 01c8 00       		.byte	0
+ 1067 01c9 06       		.uleb128 0x6
+ 1068 01ca 23010000 		.4byte	.LASF29
+ 1069 01ce 01       		.byte	0x1
+ 1070 01cf 69       		.byte	0x69
+ 1071 01d0 81000000 		.4byte	0x81
+ 1072 01d4 00000000 		.4byte	.LFB5
+ 1073 01d8 74000000 		.4byte	.LFE5-.LFB5
+ 1074 01dc 01       		.uleb128 0x1
+ 1075 01dd 9C       		.byte	0x9c
+ 1076 01de 33020000 		.4byte	0x233
+ 1077 01e2 07       		.uleb128 0x7
+ 1078 01e3 FA020000 		.4byte	.LASF21
+ 1079 01e7 01       		.byte	0x1
+ 1080 01e8 69       		.byte	0x69
+ 1081 01e9 81000000 		.4byte	0x81
+ 1082 01ed 02       		.uleb128 0x2
+ 1083 01ee 91       		.byte	0x91
+ 1084 01ef 67       		.sleb128 -25
+ 1085 01f0 07       		.uleb128 0x7
+ 1086 01f1 B0000000 		.4byte	.LASF26
+ 1087 01f5 01       		.byte	0x1
+ 1088 01f6 6A       		.byte	0x6a
+ 1089 01f7 8C000000 		.4byte	0x8c
+ 1090 01fb 02       		.uleb128 0x2
+ 1091 01fc 91       		.byte	0x91
+ 1092 01fd 64       		.sleb128 -28
+ 1093 01fe 07       		.uleb128 0x7
+ 1094 01ff 96010000 		.4byte	.LASF23
+ 1095 0203 01       		.byte	0x1
+ 1096 0204 6B       		.byte	0x6b
+ 1097 0205 4B010000 		.4byte	0x14b
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 25
+
+
+ 1098 0209 02       		.uleb128 0x2
+ 1099 020a 91       		.byte	0x91
+ 1100 020b 60       		.sleb128 -32
+ 1101 020c 08       		.uleb128 0x8
+ 1102 020d A7020000 		.4byte	.LASF27
+ 1103 0211 01       		.byte	0x1
+ 1104 0212 6E       		.byte	0x6e
+ 1105 0213 81000000 		.4byte	0x81
+ 1106 0217 02       		.uleb128 0x2
+ 1107 0218 91       		.byte	0x91
+ 1108 0219 6D       		.sleb128 -19
+ 1109 021a 0A       		.uleb128 0xa
+ 1110 021b 24000000 		.4byte	.LBB3
+ 1111 021f 42000000 		.4byte	.LBE3-.LBB3
+ 1112 0223 08       		.uleb128 0x8
+ 1113 0224 08020000 		.4byte	.LASF28
+ 1114 0228 01       		.byte	0x1
+ 1115 0229 72       		.byte	0x72
+ 1116 022a 8C000000 		.4byte	0x8c
+ 1117 022e 02       		.uleb128 0x2
+ 1118 022f 91       		.byte	0x91
+ 1119 0230 6E       		.sleb128 -18
+ 1120 0231 00       		.byte	0
+ 1121 0232 00       		.byte	0
+ 1122 0233 06       		.uleb128 0x6
+ 1123 0234 6E010000 		.4byte	.LASF30
+ 1124 0238 01       		.byte	0x1
+ 1125 0239 85       		.byte	0x85
+ 1126 023a 81000000 		.4byte	0x81
+ 1127 023e 00000000 		.4byte	.LFB6
+ 1128 0242 2C000000 		.4byte	.LFE6-.LFB6
+ 1129 0246 01       		.uleb128 0x1
+ 1130 0247 9C       		.byte	0x9c
+ 1131 0248 69020000 		.4byte	0x269
+ 1132 024c 07       		.uleb128 0x7
+ 1133 024d FA020000 		.4byte	.LASF21
+ 1134 0251 01       		.byte	0x1
+ 1135 0252 85       		.byte	0x85
+ 1136 0253 81000000 		.4byte	0x81
+ 1137 0257 02       		.uleb128 0x2
+ 1138 0258 91       		.byte	0x91
+ 1139 0259 6F       		.sleb128 -17
+ 1140 025a 08       		.uleb128 0x8
+ 1141 025b A7020000 		.4byte	.LASF27
+ 1142 025f 01       		.byte	0x1
+ 1143 0260 88       		.byte	0x88
+ 1144 0261 81000000 		.4byte	0x81
+ 1145 0265 02       		.uleb128 0x2
+ 1146 0266 91       		.byte	0x91
+ 1147 0267 77       		.sleb128 -9
+ 1148 0268 00       		.byte	0
+ 1149 0269 06       		.uleb128 0x6
+ 1150 026a EF010000 		.4byte	.LASF31
+ 1151 026e 01       		.byte	0x1
+ 1152 026f 91       		.byte	0x91
+ 1153 0270 81000000 		.4byte	0x81
+ 1154 0274 00000000 		.4byte	.LFB7
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 26
+
+
+ 1155 0278 3E000000 		.4byte	.LFE7-.LFB7
+ 1156 027c 01       		.uleb128 0x1
+ 1157 027d 9C       		.byte	0x9c
+ 1158 027e AD020000 		.4byte	0x2ad
+ 1159 0282 07       		.uleb128 0x7
+ 1160 0283 96010000 		.4byte	.LASF23
+ 1161 0287 01       		.byte	0x1
+ 1162 0288 91       		.byte	0x91
+ 1163 0289 4B010000 		.4byte	0x14b
+ 1164 028d 02       		.uleb128 0x2
+ 1165 028e 91       		.byte	0x91
+ 1166 028f 64       		.sleb128 -28
+ 1167 0290 0B       		.uleb128 0xb
+ 1168 0291 6C656E00 		.ascii	"len\000"
+ 1169 0295 01       		.byte	0x1
+ 1170 0296 91       		.byte	0x91
+ 1171 0297 81000000 		.4byte	0x81
+ 1172 029b 02       		.uleb128 0x2
+ 1173 029c 91       		.byte	0x91
+ 1174 029d 63       		.sleb128 -29
+ 1175 029e 08       		.uleb128 0x8
+ 1176 029f 08020000 		.4byte	.LASF28
+ 1177 02a3 01       		.byte	0x1
+ 1178 02a4 94       		.byte	0x94
+ 1179 02a5 8C000000 		.4byte	0x8c
+ 1180 02a9 02       		.uleb128 0x2
+ 1181 02aa 91       		.byte	0x91
+ 1182 02ab 6E       		.sleb128 -18
+ 1183 02ac 00       		.byte	0
+ 1184 02ad 06       		.uleb128 0x6
+ 1185 02ae 43020000 		.4byte	.LASF32
+ 1186 02b2 01       		.byte	0x1
+ 1187 02b3 9E       		.byte	0x9e
+ 1188 02b4 81000000 		.4byte	0x81
+ 1189 02b8 00000000 		.4byte	.LFB8
+ 1190 02bc 60000000 		.4byte	.LFE8-.LFB8
+ 1191 02c0 01       		.uleb128 0x1
+ 1192 02c1 9C       		.byte	0x9c
+ 1193 02c2 FF020000 		.4byte	0x2ff
+ 1194 02c6 07       		.uleb128 0x7
+ 1195 02c7 FA020000 		.4byte	.LASF21
+ 1196 02cb 01       		.byte	0x1
+ 1197 02cc 9E       		.byte	0x9e
+ 1198 02cd 81000000 		.4byte	0x81
+ 1199 02d1 02       		.uleb128 0x2
+ 1200 02d2 91       		.byte	0x91
+ 1201 02d3 6F       		.sleb128 -17
+ 1202 02d4 07       		.uleb128 0x7
+ 1203 02d5 DE010000 		.4byte	.LASF22
+ 1204 02d9 01       		.byte	0x1
+ 1205 02da 9F       		.byte	0x9f
+ 1206 02db 81000000 		.4byte	0x81
+ 1207 02df 02       		.uleb128 0x2
+ 1208 02e0 91       		.byte	0x91
+ 1209 02e1 6E       		.sleb128 -18
+ 1210 02e2 07       		.uleb128 0x7
+ 1211 02e3 96010000 		.4byte	.LASF23
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 27
+
+
+ 1212 02e7 01       		.byte	0x1
+ 1213 02e8 A0       		.byte	0xa0
+ 1214 02e9 81000000 		.4byte	0x81
+ 1215 02ed 02       		.uleb128 0x2
+ 1216 02ee 91       		.byte	0x91
+ 1217 02ef 6D       		.sleb128 -19
+ 1218 02f0 08       		.uleb128 0x8
+ 1219 02f1 A7020000 		.4byte	.LASF27
+ 1220 02f5 01       		.byte	0x1
+ 1221 02f6 A3       		.byte	0xa3
+ 1222 02f7 81000000 		.4byte	0x81
+ 1223 02fb 02       		.uleb128 0x2
+ 1224 02fc 91       		.byte	0x91
+ 1225 02fd 77       		.sleb128 -9
+ 1226 02fe 00       		.byte	0
+ 1227 02ff 06       		.uleb128 0x6
+ 1228 0300 33030000 		.4byte	.LASF33
+ 1229 0304 01       		.byte	0x1
+ 1230 0305 BB       		.byte	0xbb
+ 1231 0306 81000000 		.4byte	0x81
+ 1232 030a 00000000 		.4byte	.LFB9
+ 1233 030e 4C000000 		.4byte	.LFE9-.LFB9
+ 1234 0312 01       		.uleb128 0x1
+ 1235 0313 9C       		.byte	0x9c
+ 1236 0314 43030000 		.4byte	0x343
+ 1237 0318 07       		.uleb128 0x7
+ 1238 0319 FA020000 		.4byte	.LASF21
+ 1239 031d 01       		.byte	0x1
+ 1240 031e BB       		.byte	0xbb
+ 1241 031f 81000000 		.4byte	0x81
+ 1242 0323 02       		.uleb128 0x2
+ 1243 0324 91       		.byte	0x91
+ 1244 0325 6F       		.sleb128 -17
+ 1245 0326 07       		.uleb128 0x7
+ 1246 0327 DE010000 		.4byte	.LASF22
+ 1247 032b 01       		.byte	0x1
+ 1248 032c BC       		.byte	0xbc
+ 1249 032d 81000000 		.4byte	0x81
+ 1250 0331 02       		.uleb128 0x2
+ 1251 0332 91       		.byte	0x91
+ 1252 0333 6E       		.sleb128 -18
+ 1253 0334 08       		.uleb128 0x8
+ 1254 0335 A7020000 		.4byte	.LASF27
+ 1255 0339 01       		.byte	0x1
+ 1256 033a BF       		.byte	0xbf
+ 1257 033b 81000000 		.4byte	0x81
+ 1258 033f 02       		.uleb128 0x2
+ 1259 0340 91       		.byte	0x91
+ 1260 0341 77       		.sleb128 -9
+ 1261 0342 00       		.byte	0
+ 1262 0343 06       		.uleb128 0x6
+ 1263 0344 A9010000 		.4byte	.LASF34
+ 1264 0348 01       		.byte	0x1
+ 1265 0349 D3       		.byte	0xd3
+ 1266 034a 81000000 		.4byte	0x81
+ 1267 034e 00000000 		.4byte	.LFB10
+ 1268 0352 88000000 		.4byte	.LFE10-.LFB10
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 28
+
+
+ 1269 0356 01       		.uleb128 0x1
+ 1270 0357 9C       		.byte	0x9c
+ 1271 0358 BB030000 		.4byte	0x3bb
+ 1272 035c 07       		.uleb128 0x7
+ 1273 035d FA020000 		.4byte	.LASF21
+ 1274 0361 01       		.byte	0x1
+ 1275 0362 D3       		.byte	0xd3
+ 1276 0363 81000000 		.4byte	0x81
+ 1277 0367 02       		.uleb128 0x2
+ 1278 0368 91       		.byte	0x91
+ 1279 0369 6F       		.sleb128 -17
+ 1280 036a 07       		.uleb128 0x7
+ 1281 036b DE010000 		.4byte	.LASF22
+ 1282 036f 01       		.byte	0x1
+ 1283 0370 D4       		.byte	0xd4
+ 1284 0371 81000000 		.4byte	0x81
+ 1285 0375 02       		.uleb128 0x2
+ 1286 0376 91       		.byte	0x91
+ 1287 0377 6E       		.sleb128 -18
+ 1288 0378 07       		.uleb128 0x7
+ 1289 0379 B0000000 		.4byte	.LASF26
+ 1290 037d 01       		.byte	0x1
+ 1291 037e D5       		.byte	0xd5
+ 1292 037f 81000000 		.4byte	0x81
+ 1293 0383 02       		.uleb128 0x2
+ 1294 0384 91       		.byte	0x91
+ 1295 0385 6D       		.sleb128 -19
+ 1296 0386 07       		.uleb128 0x7
+ 1297 0387 96010000 		.4byte	.LASF23
+ 1298 038b 01       		.byte	0x1
+ 1299 038c D6       		.byte	0xd6
+ 1300 038d 4B010000 		.4byte	0x14b
+ 1301 0391 02       		.uleb128 0x2
+ 1302 0392 91       		.byte	0x91
+ 1303 0393 68       		.sleb128 -24
+ 1304 0394 08       		.uleb128 0x8
+ 1305 0395 A7020000 		.4byte	.LASF27
+ 1306 0399 01       		.byte	0x1
+ 1307 039a D9       		.byte	0xd9
+ 1308 039b 81000000 		.4byte	0x81
+ 1309 039f 02       		.uleb128 0x2
+ 1310 03a0 91       		.byte	0x91
+ 1311 03a1 76       		.sleb128 -10
+ 1312 03a2 0A       		.uleb128 0xa
+ 1313 03a3 3A000000 		.4byte	.LBB4
+ 1314 03a7 40000000 		.4byte	.LBE4-.LBB4
+ 1315 03ab 08       		.uleb128 0x8
+ 1316 03ac 08020000 		.4byte	.LASF28
+ 1317 03b0 01       		.byte	0x1
+ 1318 03b1 E1       		.byte	0xe1
+ 1319 03b2 81000000 		.4byte	0x81
+ 1320 03b6 02       		.uleb128 0x2
+ 1321 03b7 91       		.byte	0x91
+ 1322 03b8 77       		.sleb128 -9
+ 1323 03b9 00       		.byte	0
+ 1324 03ba 00       		.byte	0
+ 1325 03bb 0C       		.uleb128 0xc
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 29
+
+
+ 1326 03bc 4D010000 		.4byte	.LASF38
+ 1327 03c0 01       		.byte	0x1
+ 1328 03c1 FA       		.byte	0xfa
+ 1329 03c2 81000000 		.4byte	0x81
+ 1330 03c6 00000000 		.4byte	.LFB11
+ 1331 03ca 30000000 		.4byte	.LFE11-.LFB11
+ 1332 03ce 01       		.uleb128 0x1
+ 1333 03cf 9C       		.byte	0x9c
+ 1334 03d0 07       		.uleb128 0x7
+ 1335 03d1 FA020000 		.4byte	.LASF21
+ 1336 03d5 01       		.byte	0x1
+ 1337 03d6 FA       		.byte	0xfa
+ 1338 03d7 81000000 		.4byte	0x81
+ 1339 03db 02       		.uleb128 0x2
+ 1340 03dc 91       		.byte	0x91
+ 1341 03dd 6F       		.sleb128 -17
+ 1342 03de 08       		.uleb128 0x8
+ 1343 03df A7020000 		.4byte	.LASF27
+ 1344 03e3 01       		.byte	0x1
+ 1345 03e4 FD       		.byte	0xfd
+ 1346 03e5 81000000 		.4byte	0x81
+ 1347 03e9 02       		.uleb128 0x2
+ 1348 03ea 91       		.byte	0x91
+ 1349 03eb 77       		.sleb128 -9
+ 1350 03ec 00       		.byte	0
+ 1351 03ed 00       		.byte	0
+ 1352              		.section	.debug_abbrev,"",%progbits
+ 1353              	.Ldebug_abbrev0:
+ 1354 0000 01       		.uleb128 0x1
+ 1355 0001 11       		.uleb128 0x11
+ 1356 0002 01       		.byte	0x1
+ 1357 0003 25       		.uleb128 0x25
+ 1358 0004 0E       		.uleb128 0xe
+ 1359 0005 13       		.uleb128 0x13
+ 1360 0006 0B       		.uleb128 0xb
+ 1361 0007 03       		.uleb128 0x3
+ 1362 0008 0E       		.uleb128 0xe
+ 1363 0009 1B       		.uleb128 0x1b
+ 1364 000a 0E       		.uleb128 0xe
+ 1365 000b 55       		.uleb128 0x55
+ 1366 000c 17       		.uleb128 0x17
+ 1367 000d 11       		.uleb128 0x11
+ 1368 000e 01       		.uleb128 0x1
+ 1369 000f 10       		.uleb128 0x10
+ 1370 0010 17       		.uleb128 0x17
+ 1371 0011 00       		.byte	0
+ 1372 0012 00       		.byte	0
+ 1373 0013 02       		.uleb128 0x2
+ 1374 0014 24       		.uleb128 0x24
+ 1375 0015 00       		.byte	0
+ 1376 0016 0B       		.uleb128 0xb
+ 1377 0017 0B       		.uleb128 0xb
+ 1378 0018 3E       		.uleb128 0x3e
+ 1379 0019 0B       		.uleb128 0xb
+ 1380 001a 03       		.uleb128 0x3
+ 1381 001b 0E       		.uleb128 0xe
+ 1382 001c 00       		.byte	0
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 30
+
+
+ 1383 001d 00       		.byte	0
+ 1384 001e 03       		.uleb128 0x3
+ 1385 001f 16       		.uleb128 0x16
+ 1386 0020 00       		.byte	0
+ 1387 0021 03       		.uleb128 0x3
+ 1388 0022 0E       		.uleb128 0xe
+ 1389 0023 3A       		.uleb128 0x3a
+ 1390 0024 0B       		.uleb128 0xb
+ 1391 0025 3B       		.uleb128 0x3b
+ 1392 0026 0B       		.uleb128 0xb
+ 1393 0027 49       		.uleb128 0x49
+ 1394 0028 13       		.uleb128 0x13
+ 1395 0029 00       		.byte	0
+ 1396 002a 00       		.byte	0
+ 1397 002b 04       		.uleb128 0x4
+ 1398 002c 24       		.uleb128 0x24
+ 1399 002d 00       		.byte	0
+ 1400 002e 0B       		.uleb128 0xb
+ 1401 002f 0B       		.uleb128 0xb
+ 1402 0030 3E       		.uleb128 0x3e
+ 1403 0031 0B       		.uleb128 0xb
+ 1404 0032 03       		.uleb128 0x3
+ 1405 0033 08       		.uleb128 0x8
+ 1406 0034 00       		.byte	0
+ 1407 0035 00       		.byte	0
+ 1408 0036 05       		.uleb128 0x5
+ 1409 0037 2E       		.uleb128 0x2e
+ 1410 0038 00       		.byte	0
+ 1411 0039 3F       		.uleb128 0x3f
+ 1412 003a 19       		.uleb128 0x19
+ 1413 003b 03       		.uleb128 0x3
+ 1414 003c 0E       		.uleb128 0xe
+ 1415 003d 3A       		.uleb128 0x3a
+ 1416 003e 0B       		.uleb128 0xb
+ 1417 003f 3B       		.uleb128 0x3b
+ 1418 0040 0B       		.uleb128 0xb
+ 1419 0041 27       		.uleb128 0x27
+ 1420 0042 19       		.uleb128 0x19
+ 1421 0043 49       		.uleb128 0x49
+ 1422 0044 13       		.uleb128 0x13
+ 1423 0045 11       		.uleb128 0x11
+ 1424 0046 01       		.uleb128 0x1
+ 1425 0047 12       		.uleb128 0x12
+ 1426 0048 06       		.uleb128 0x6
+ 1427 0049 40       		.uleb128 0x40
+ 1428 004a 18       		.uleb128 0x18
+ 1429 004b 9642     		.uleb128 0x2116
+ 1430 004d 19       		.uleb128 0x19
+ 1431 004e 00       		.byte	0
+ 1432 004f 00       		.byte	0
+ 1433 0050 06       		.uleb128 0x6
+ 1434 0051 2E       		.uleb128 0x2e
+ 1435 0052 01       		.byte	0x1
+ 1436 0053 3F       		.uleb128 0x3f
+ 1437 0054 19       		.uleb128 0x19
+ 1438 0055 03       		.uleb128 0x3
+ 1439 0056 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 31
+
+
+ 1440 0057 3A       		.uleb128 0x3a
+ 1441 0058 0B       		.uleb128 0xb
+ 1442 0059 3B       		.uleb128 0x3b
+ 1443 005a 0B       		.uleb128 0xb
+ 1444 005b 27       		.uleb128 0x27
+ 1445 005c 19       		.uleb128 0x19
+ 1446 005d 49       		.uleb128 0x49
+ 1447 005e 13       		.uleb128 0x13
+ 1448 005f 11       		.uleb128 0x11
+ 1449 0060 01       		.uleb128 0x1
+ 1450 0061 12       		.uleb128 0x12
+ 1451 0062 06       		.uleb128 0x6
+ 1452 0063 40       		.uleb128 0x40
+ 1453 0064 18       		.uleb128 0x18
+ 1454 0065 9642     		.uleb128 0x2116
+ 1455 0067 19       		.uleb128 0x19
+ 1456 0068 01       		.uleb128 0x1
+ 1457 0069 13       		.uleb128 0x13
+ 1458 006a 00       		.byte	0
+ 1459 006b 00       		.byte	0
+ 1460 006c 07       		.uleb128 0x7
+ 1461 006d 05       		.uleb128 0x5
+ 1462 006e 00       		.byte	0
+ 1463 006f 03       		.uleb128 0x3
+ 1464 0070 0E       		.uleb128 0xe
+ 1465 0071 3A       		.uleb128 0x3a
+ 1466 0072 0B       		.uleb128 0xb
+ 1467 0073 3B       		.uleb128 0x3b
+ 1468 0074 0B       		.uleb128 0xb
+ 1469 0075 49       		.uleb128 0x49
+ 1470 0076 13       		.uleb128 0x13
+ 1471 0077 02       		.uleb128 0x2
+ 1472 0078 18       		.uleb128 0x18
+ 1473 0079 00       		.byte	0
+ 1474 007a 00       		.byte	0
+ 1475 007b 08       		.uleb128 0x8
+ 1476 007c 34       		.uleb128 0x34
+ 1477 007d 00       		.byte	0
+ 1478 007e 03       		.uleb128 0x3
+ 1479 007f 0E       		.uleb128 0xe
+ 1480 0080 3A       		.uleb128 0x3a
+ 1481 0081 0B       		.uleb128 0xb
+ 1482 0082 3B       		.uleb128 0x3b
+ 1483 0083 0B       		.uleb128 0xb
+ 1484 0084 49       		.uleb128 0x49
+ 1485 0085 13       		.uleb128 0x13
+ 1486 0086 02       		.uleb128 0x2
+ 1487 0087 18       		.uleb128 0x18
+ 1488 0088 00       		.byte	0
+ 1489 0089 00       		.byte	0
+ 1490 008a 09       		.uleb128 0x9
+ 1491 008b 0F       		.uleb128 0xf
+ 1492 008c 00       		.byte	0
+ 1493 008d 0B       		.uleb128 0xb
+ 1494 008e 0B       		.uleb128 0xb
+ 1495 008f 49       		.uleb128 0x49
+ 1496 0090 13       		.uleb128 0x13
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 32
+
+
+ 1497 0091 00       		.byte	0
+ 1498 0092 00       		.byte	0
+ 1499 0093 0A       		.uleb128 0xa
+ 1500 0094 0B       		.uleb128 0xb
+ 1501 0095 01       		.byte	0x1
+ 1502 0096 11       		.uleb128 0x11
+ 1503 0097 01       		.uleb128 0x1
+ 1504 0098 12       		.uleb128 0x12
+ 1505 0099 06       		.uleb128 0x6
+ 1506 009a 00       		.byte	0
+ 1507 009b 00       		.byte	0
+ 1508 009c 0B       		.uleb128 0xb
+ 1509 009d 05       		.uleb128 0x5
+ 1510 009e 00       		.byte	0
+ 1511 009f 03       		.uleb128 0x3
+ 1512 00a0 08       		.uleb128 0x8
+ 1513 00a1 3A       		.uleb128 0x3a
+ 1514 00a2 0B       		.uleb128 0xb
+ 1515 00a3 3B       		.uleb128 0x3b
+ 1516 00a4 0B       		.uleb128 0xb
+ 1517 00a5 49       		.uleb128 0x49
+ 1518 00a6 13       		.uleb128 0x13
+ 1519 00a7 02       		.uleb128 0x2
+ 1520 00a8 18       		.uleb128 0x18
+ 1521 00a9 00       		.byte	0
+ 1522 00aa 00       		.byte	0
+ 1523 00ab 0C       		.uleb128 0xc
+ 1524 00ac 2E       		.uleb128 0x2e
+ 1525 00ad 01       		.byte	0x1
+ 1526 00ae 3F       		.uleb128 0x3f
+ 1527 00af 19       		.uleb128 0x19
+ 1528 00b0 03       		.uleb128 0x3
+ 1529 00b1 0E       		.uleb128 0xe
+ 1530 00b2 3A       		.uleb128 0x3a
+ 1531 00b3 0B       		.uleb128 0xb
+ 1532 00b4 3B       		.uleb128 0x3b
+ 1533 00b5 0B       		.uleb128 0xb
+ 1534 00b6 27       		.uleb128 0x27
+ 1535 00b7 19       		.uleb128 0x19
+ 1536 00b8 49       		.uleb128 0x49
+ 1537 00b9 13       		.uleb128 0x13
+ 1538 00ba 11       		.uleb128 0x11
+ 1539 00bb 01       		.uleb128 0x1
+ 1540 00bc 12       		.uleb128 0x12
+ 1541 00bd 06       		.uleb128 0x6
+ 1542 00be 40       		.uleb128 0x40
+ 1543 00bf 18       		.uleb128 0x18
+ 1544 00c0 9642     		.uleb128 0x2116
+ 1545 00c2 19       		.uleb128 0x19
+ 1546 00c3 00       		.byte	0
+ 1547 00c4 00       		.byte	0
+ 1548 00c5 00       		.byte	0
+ 1549              		.section	.debug_aranges,"",%progbits
+ 1550 0000 74000000 		.4byte	0x74
+ 1551 0004 0200     		.2byte	0x2
+ 1552 0006 00000000 		.4byte	.Ldebug_info0
+ 1553 000a 04       		.byte	0x4
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 33
+
+
+ 1554 000b 00       		.byte	0
+ 1555 000c 0000     		.2byte	0
+ 1556 000e 0000     		.2byte	0
+ 1557 0010 00000000 		.4byte	.LFB0
+ 1558 0014 0E000000 		.4byte	.LFE0-.LFB0
+ 1559 0018 00000000 		.4byte	.LFB1
+ 1560 001c 0E000000 		.4byte	.LFE1-.LFB1
+ 1561 0020 00000000 		.4byte	.LFB2
+ 1562 0024 0E000000 		.4byte	.LFE2-.LFB2
+ 1563 0028 00000000 		.4byte	.LFB3
+ 1564 002c 6E000000 		.4byte	.LFE3-.LFB3
+ 1565 0030 00000000 		.4byte	.LFB4
+ 1566 0034 9E000000 		.4byte	.LFE4-.LFB4
+ 1567 0038 00000000 		.4byte	.LFB5
+ 1568 003c 74000000 		.4byte	.LFE5-.LFB5
+ 1569 0040 00000000 		.4byte	.LFB6
+ 1570 0044 2C000000 		.4byte	.LFE6-.LFB6
+ 1571 0048 00000000 		.4byte	.LFB7
+ 1572 004c 3E000000 		.4byte	.LFE7-.LFB7
+ 1573 0050 00000000 		.4byte	.LFB8
+ 1574 0054 60000000 		.4byte	.LFE8-.LFB8
+ 1575 0058 00000000 		.4byte	.LFB9
+ 1576 005c 4C000000 		.4byte	.LFE9-.LFB9
+ 1577 0060 00000000 		.4byte	.LFB10
+ 1578 0064 88000000 		.4byte	.LFE10-.LFB10
+ 1579 0068 00000000 		.4byte	.LFB11
+ 1580 006c 30000000 		.4byte	.LFE11-.LFB11
+ 1581 0070 00000000 		.4byte	0
+ 1582 0074 00000000 		.4byte	0
+ 1583              		.section	.debug_ranges,"",%progbits
+ 1584              	.Ldebug_ranges0:
+ 1585 0000 00000000 		.4byte	.LFB0
+ 1586 0004 0E000000 		.4byte	.LFE0
+ 1587 0008 00000000 		.4byte	.LFB1
+ 1588 000c 0E000000 		.4byte	.LFE1
+ 1589 0010 00000000 		.4byte	.LFB2
+ 1590 0014 0E000000 		.4byte	.LFE2
+ 1591 0018 00000000 		.4byte	.LFB3
+ 1592 001c 6E000000 		.4byte	.LFE3
+ 1593 0020 00000000 		.4byte	.LFB4
+ 1594 0024 9E000000 		.4byte	.LFE4
+ 1595 0028 00000000 		.4byte	.LFB5
+ 1596 002c 74000000 		.4byte	.LFE5
+ 1597 0030 00000000 		.4byte	.LFB6
+ 1598 0034 2C000000 		.4byte	.LFE6
+ 1599 0038 00000000 		.4byte	.LFB7
+ 1600 003c 3E000000 		.4byte	.LFE7
+ 1601 0040 00000000 		.4byte	.LFB8
+ 1602 0044 60000000 		.4byte	.LFE8
+ 1603 0048 00000000 		.4byte	.LFB9
+ 1604 004c 4C000000 		.4byte	.LFE9
+ 1605 0050 00000000 		.4byte	.LFB10
+ 1606 0054 88000000 		.4byte	.LFE10
+ 1607 0058 00000000 		.4byte	.LFB11
+ 1608 005c 30000000 		.4byte	.LFE11
+ 1609 0060 00000000 		.4byte	0
+ 1610 0064 00000000 		.4byte	0
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 34
+
+
+ 1611              		.section	.debug_line,"",%progbits
+ 1612              	.Ldebug_line0:
+ 1613 0000 58020000 		.section	.debug_str,"MS",%progbits,1
+ 1613      02002301 
+ 1613      00000201 
+ 1613      FB0E0D00 
+ 1613      01010101 
+ 1614              	.LASF20:
+ 1615 0000 4932435F 		.ascii	"I2C_Peripheral_SendStop\000"
+ 1615      50657269 
+ 1615      70686572 
+ 1615      616C5F53 
+ 1615      656E6453 
+ 1616              	.LASF3:
+ 1617 0018 5F5F7569 		.ascii	"__uint8_t\000"
+ 1617      6E74385F 
+ 1617      7400
+ 1618              	.LASF35:
+ 1619 0022 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1619      43313120 
+ 1619      352E342E 
+ 1619      31203230 
+ 1619      31363036 
+ 1620 0055 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1620      20726576 
+ 1620      6973696F 
+ 1620      6E203233 
+ 1620      37373135 
+ 1621 0088 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1621      66756E63 
+ 1621      74696F6E 
+ 1621      2D736563 
+ 1621      74696F6E 
+ 1622              	.LASF26:
+ 1623 00b0 72656769 		.ascii	"register_count\000"
+ 1623      73746572 
+ 1623      5F636F75 
+ 1623      6E7400
+ 1624              	.LASF36:
+ 1625 00bf 4932435F 		.ascii	"I2C_Interface.c\000"
+ 1625      496E7465 
+ 1625      72666163 
+ 1625      652E6300 
+ 1626              	.LASF37:
+ 1627 00cf 433A5C55 		.ascii	"C:\\Users\\Perro\\Documents\\PSoC Creator\\Pulseoxi"
+ 1627      73657273 
+ 1627      5C506572 
+ 1627      726F5C44 
+ 1627      6F63756D 
+ 1628 00fd 6D657465 		.ascii	"meter\\Project_LTEBS\\Saturimetro.cydsn\000"
+ 1628      725C5072 
+ 1628      6F6A6563 
+ 1628      745F4C54 
+ 1628      4542535C 
+ 1629              	.LASF29:
+ 1630 0123 4932435F 		.ascii	"I2C_Peripheral_ReadRegisterMultiNoAddress\000"
+ 1630      50657269 
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 35
+
+
+ 1630      70686572 
+ 1630      616C5F52 
+ 1630      65616452 
+ 1631              	.LASF38:
+ 1632 014d 4932435F 		.ascii	"I2C_Peripheral_IsDeviceConnected\000"
+ 1632      50657269 
+ 1632      70686572 
+ 1632      616C5F49 
+ 1632      73446576 
+ 1633              	.LASF30:
+ 1634 016e 4932435F 		.ascii	"I2C_Peripheral_StartReadNoAddress\000"
+ 1634      50657269 
+ 1634      70686572 
+ 1634      616C5F53 
+ 1634      74617274 
+ 1635              	.LASF13:
+ 1636 0190 666C6F61 		.ascii	"float\000"
+ 1636      7400
+ 1637              	.LASF23:
+ 1638 0196 64617461 		.ascii	"data\000"
+ 1638      00
+ 1639              	.LASF1:
+ 1640 019b 756E7369 		.ascii	"unsigned char\000"
+ 1640      676E6564 
+ 1640      20636861 
+ 1640      7200
+ 1641              	.LASF34:
+ 1642 01a9 4932435F 		.ascii	"I2C_Peripheral_WriteRegisterMulti\000"
+ 1642      50657269 
+ 1642      70686572 
+ 1642      616C5F57 
+ 1642      72697465 
+ 1643              	.LASF5:
+ 1644 01cb 73686F72 		.ascii	"short unsigned int\000"
+ 1644      7420756E 
+ 1644      7369676E 
+ 1644      65642069 
+ 1644      6E7400
+ 1645              	.LASF22:
+ 1646 01de 72656769 		.ascii	"register_address\000"
+ 1646      73746572 
+ 1646      5F616464 
+ 1646      72657373 
+ 1646      00
+ 1647              	.LASF31:
+ 1648 01ef 4932435F 		.ascii	"I2C_Peripheral_ReadBytes\000"
+ 1648      50657269 
+ 1648      70686572 
+ 1648      616C5F52 
+ 1648      65616442 
+ 1649              	.LASF28:
+ 1650 0208 636F756E 		.ascii	"counter\000"
+ 1650      74657200 
+ 1651              	.LASF4:
+ 1652 0210 5F5F7569 		.ascii	"__uint16_t\000"
+ 1652      6E743136 
+ 1652      5F7400
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 36
+
+
+ 1653              	.LASF14:
+ 1654 021b 646F7562 		.ascii	"double\000"
+ 1654      6C6500
+ 1655              	.LASF25:
+ 1656 0222 4932435F 		.ascii	"I2C_Peripheral_ReadRegisterMulti\000"
+ 1656      50657269 
+ 1656      70686572 
+ 1656      616C5F52 
+ 1656      65616452 
+ 1657              	.LASF32:
+ 1658 0243 4932435F 		.ascii	"I2C_Peripheral_WriteRegister\000"
+ 1658      50657269 
+ 1658      70686572 
+ 1658      616C5F57 
+ 1658      72697465 
+ 1659              	.LASF7:
+ 1660 0260 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1660      20756E73 
+ 1660      69676E65 
+ 1660      6420696E 
+ 1660      7400
+ 1661              	.LASF10:
+ 1662 0272 756E7369 		.ascii	"unsigned int\000"
+ 1662      676E6564 
+ 1662      20696E74 
+ 1662      00
+ 1663              	.LASF9:
+ 1664 027f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1664      206C6F6E 
+ 1664      6720756E 
+ 1664      7369676E 
+ 1664      65642069 
+ 1665              	.LASF11:
+ 1666 0296 75696E74 		.ascii	"uint8_t\000"
+ 1666      385F7400 
+ 1667              	.LASF17:
+ 1668 029e 73697A65 		.ascii	"sizetype\000"
+ 1668      74797065 
+ 1668      00
+ 1669              	.LASF27:
+ 1670 02a7 6572726F 		.ascii	"error\000"
+ 1670      7200
+ 1671              	.LASF8:
+ 1672 02ad 6C6F6E67 		.ascii	"long long int\000"
+ 1672      206C6F6E 
+ 1672      6720696E 
+ 1672      7400
+ 1673              	.LASF15:
+ 1674 02bb 63686172 		.ascii	"char\000"
+ 1674      00
+ 1675              	.LASF19:
+ 1676 02c0 4932435F 		.ascii	"I2C_Peripheral_Stop\000"
+ 1676      50657269 
+ 1676      70686572 
+ 1676      616C5F53 
+ 1676      746F7000 
+ 1677              	.LASF24:
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 37
+
+
+ 1678 02d4 4932435F 		.ascii	"I2C_Peripheral_ReadRegister\000"
+ 1678      50657269 
+ 1678      70686572 
+ 1678      616C5F52 
+ 1678      65616452 
+ 1679              	.LASF2:
+ 1680 02f0 73686F72 		.ascii	"short int\000"
+ 1680      7420696E 
+ 1680      7400
+ 1681              	.LASF21:
+ 1682 02fa 64657669 		.ascii	"device_address\000"
+ 1682      63655F61 
+ 1682      64647265 
+ 1682      737300
+ 1683              	.LASF12:
+ 1684 0309 75696E74 		.ascii	"uint16_t\000"
+ 1684      31365F74 
+ 1684      00
+ 1685              	.LASF6:
+ 1686 0312 6C6F6E67 		.ascii	"long int\000"
+ 1686      20696E74 
+ 1686      00
+ 1687              	.LASF16:
+ 1688 031b 6C6F6E67 		.ascii	"long double\000"
+ 1688      20646F75 
+ 1688      626C6500 
+ 1689              	.LASF0:
+ 1690 0327 7369676E 		.ascii	"signed char\000"
+ 1690      65642063 
+ 1690      68617200 
+ 1691              	.LASF33:
+ 1692 0333 4932435F 		.ascii	"I2C_Peripheral_WriteRegisterNoData\000"
+ 1692      50657269 
+ 1692      70686572 
+ 1692      616C5F57 
+ 1692      72697465 
+ 1693              	.LASF18:
+ 1694 0356 4932435F 		.ascii	"I2C_Peripheral_Start\000"
+ 1694      50657269 
+ 1694      70686572 
+ 1694      616C5F53 
+ 1694      74617274 
+ 1695              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

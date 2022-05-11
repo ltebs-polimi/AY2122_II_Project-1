@@ -1,6 +1,7 @@
-C:\Users\Perro\Documents\PSoC Creator\Pulseoximeter\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cyprj|6f563fc3-5da0-4793-9717-4279acaed7ea
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|e66132e6-de78-4c4d-85d5-fa72c34c9e86
-C:\Users\Perro\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|56bd8ad0-08af-400f-bf2a-a4d9e7d691c0
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|a6de38a1-4cfd-4fd4-abe3-04204828b8b1
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|17265323-23ec-4062-8242-4caedfa4a049
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|a549a908-cec6-45bb-8bce-f40965e2047c
+C:\Users\Perro\Documents\PSoC Creator\Pulseoximeter\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cyprj|eb2a1276-3ca8-43b9-8020-57ab51792dc5
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|9edf627f-389a-4484-bb18-afc97442e116
+C:\Users\Perro\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|ef06efc0-260e-4cbd-a676-5d23bd022ca4
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|6275f627-9b72-4120-8bf7-5b3bc4a81353
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|1b32ce7e-6076-4a7f-9840-e5dd2d6278cd
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|1a139da5-6ab7-433f-8470-3a46327fafdf
+C:\Users\Perro\Desktop\WeBeep\ELECTRONIC TECHNOLOGIES AND BIOSENSORS LABORATORY\03_Support_Materials\PSOC\AnnotationLibrary\AnnotationLibrary_lib\AnnotationLibrary_lib.cylib\AnnotationLibrary_lib.cyprj|33aaf8ac-d309-4917-b519-dd9e578ebabb

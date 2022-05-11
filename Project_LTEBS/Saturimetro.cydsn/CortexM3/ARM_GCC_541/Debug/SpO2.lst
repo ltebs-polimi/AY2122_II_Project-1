@@ -1,0 +1,3356 @@
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"SpO2.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	uch_spo2_table
+  20              		.section	.rodata
+  21              		.align	2
+  22              		.type	uch_spo2_table, %object
+  23              		.size	uch_spo2_table, 184
+  24              	uch_spo2_table:
+  25 0000 5F       		.byte	95
+  26 0001 5F       		.byte	95
+  27 0002 5F       		.byte	95
+  28 0003 60       		.byte	96
+  29 0004 60       		.byte	96
+  30 0005 60       		.byte	96
+  31 0006 61       		.byte	97
+  32 0007 61       		.byte	97
+  33 0008 61       		.byte	97
+  34 0009 61       		.byte	97
+  35 000a 61       		.byte	97
+  36 000b 62       		.byte	98
+  37 000c 62       		.byte	98
+  38 000d 62       		.byte	98
+  39 000e 62       		.byte	98
+  40 000f 62       		.byte	98
+  41 0010 63       		.byte	99
+  42 0011 63       		.byte	99
+  43 0012 63       		.byte	99
+  44 0013 63       		.byte	99
+  45 0014 63       		.byte	99
+  46 0015 63       		.byte	99
+  47 0016 63       		.byte	99
+  48 0017 63       		.byte	99
+  49 0018 64       		.byte	100
+  50 0019 64       		.byte	100
+  51 001a 64       		.byte	100
+  52 001b 64       		.byte	100
+  53 001c 64       		.byte	100
+  54 001d 64       		.byte	100
+  55 001e 64       		.byte	100
+  56 001f 64       		.byte	100
+  57 0020 64       		.byte	100
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 2
+
+
+  58 0021 64       		.byte	100
+  59 0022 64       		.byte	100
+  60 0023 64       		.byte	100
+  61 0024 64       		.byte	100
+  62 0025 64       		.byte	100
+  63 0026 64       		.byte	100
+  64 0027 64       		.byte	100
+  65 0028 64       		.byte	100
+  66 0029 64       		.byte	100
+  67 002a 64       		.byte	100
+  68 002b 64       		.byte	100
+  69 002c 63       		.byte	99
+  70 002d 63       		.byte	99
+  71 002e 63       		.byte	99
+  72 002f 63       		.byte	99
+  73 0030 63       		.byte	99
+  74 0031 63       		.byte	99
+  75 0032 63       		.byte	99
+  76 0033 63       		.byte	99
+  77 0034 62       		.byte	98
+  78 0035 62       		.byte	98
+  79 0036 62       		.byte	98
+  80 0037 62       		.byte	98
+  81 0038 62       		.byte	98
+  82 0039 62       		.byte	98
+  83 003a 61       		.byte	97
+  84 003b 61       		.byte	97
+  85 003c 61       		.byte	97
+  86 003d 61       		.byte	97
+  87 003e 60       		.byte	96
+  88 003f 60       		.byte	96
+  89 0040 60       		.byte	96
+  90 0041 60       		.byte	96
+  91 0042 5F       		.byte	95
+  92 0043 5F       		.byte	95
+  93 0044 5F       		.byte	95
+  94 0045 5E       		.byte	94
+  95 0046 5E       		.byte	94
+  96 0047 5E       		.byte	94
+  97 0048 5D       		.byte	93
+  98 0049 5D       		.byte	93
+  99 004a 5D       		.byte	93
+ 100 004b 5C       		.byte	92
+ 101 004c 5C       		.byte	92
+ 102 004d 5C       		.byte	92
+ 103 004e 5B       		.byte	91
+ 104 004f 5B       		.byte	91
+ 105 0050 5A       		.byte	90
+ 106 0051 5A       		.byte	90
+ 107 0052 59       		.byte	89
+ 108 0053 59       		.byte	89
+ 109 0054 59       		.byte	89
+ 110 0055 58       		.byte	88
+ 111 0056 58       		.byte	88
+ 112 0057 57       		.byte	87
+ 113 0058 57       		.byte	87
+ 114 0059 56       		.byte	86
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 3
+
+
+ 115 005a 56       		.byte	86
+ 116 005b 55       		.byte	85
+ 117 005c 55       		.byte	85
+ 118 005d 54       		.byte	84
+ 119 005e 54       		.byte	84
+ 120 005f 53       		.byte	83
+ 121 0060 52       		.byte	82
+ 122 0061 52       		.byte	82
+ 123 0062 51       		.byte	81
+ 124 0063 51       		.byte	81
+ 125 0064 50       		.byte	80
+ 126 0065 50       		.byte	80
+ 127 0066 4F       		.byte	79
+ 128 0067 4E       		.byte	78
+ 129 0068 4E       		.byte	78
+ 130 0069 4D       		.byte	77
+ 131 006a 4C       		.byte	76
+ 132 006b 4C       		.byte	76
+ 133 006c 4B       		.byte	75
+ 134 006d 4A       		.byte	74
+ 135 006e 4A       		.byte	74
+ 136 006f 49       		.byte	73
+ 137 0070 48       		.byte	72
+ 138 0071 48       		.byte	72
+ 139 0072 47       		.byte	71
+ 140 0073 46       		.byte	70
+ 141 0074 45       		.byte	69
+ 142 0075 45       		.byte	69
+ 143 0076 44       		.byte	68
+ 144 0077 43       		.byte	67
+ 145 0078 42       		.byte	66
+ 146 0079 42       		.byte	66
+ 147 007a 41       		.byte	65
+ 148 007b 40       		.byte	64
+ 149 007c 3F       		.byte	63
+ 150 007d 3E       		.byte	62
+ 151 007e 3E       		.byte	62
+ 152 007f 3D       		.byte	61
+ 153 0080 3C       		.byte	60
+ 154 0081 3B       		.byte	59
+ 155 0082 3A       		.byte	58
+ 156 0083 39       		.byte	57
+ 157 0084 38       		.byte	56
+ 158 0085 38       		.byte	56
+ 159 0086 37       		.byte	55
+ 160 0087 36       		.byte	54
+ 161 0088 35       		.byte	53
+ 162 0089 34       		.byte	52
+ 163 008a 33       		.byte	51
+ 164 008b 32       		.byte	50
+ 165 008c 31       		.byte	49
+ 166 008d 30       		.byte	48
+ 167 008e 2F       		.byte	47
+ 168 008f 2E       		.byte	46
+ 169 0090 2D       		.byte	45
+ 170 0091 2C       		.byte	44
+ 171 0092 2B       		.byte	43
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 4
+
+
+ 172 0093 2A       		.byte	42
+ 173 0094 29       		.byte	41
+ 174 0095 28       		.byte	40
+ 175 0096 27       		.byte	39
+ 176 0097 26       		.byte	38
+ 177 0098 25       		.byte	37
+ 178 0099 24       		.byte	36
+ 179 009a 23       		.byte	35
+ 180 009b 22       		.byte	34
+ 181 009c 21       		.byte	33
+ 182 009d 1F       		.byte	31
+ 183 009e 1E       		.byte	30
+ 184 009f 1D       		.byte	29
+ 185 00a0 1C       		.byte	28
+ 186 00a1 1B       		.byte	27
+ 187 00a2 1A       		.byte	26
+ 188 00a3 19       		.byte	25
+ 189 00a4 17       		.byte	23
+ 190 00a5 16       		.byte	22
+ 191 00a6 15       		.byte	21
+ 192 00a7 14       		.byte	20
+ 193 00a8 13       		.byte	19
+ 194 00a9 11       		.byte	17
+ 195 00aa 10       		.byte	16
+ 196 00ab 0F       		.byte	15
+ 197 00ac 0E       		.byte	14
+ 198 00ad 0C       		.byte	12
+ 199 00ae 0B       		.byte	11
+ 200 00af 0A       		.byte	10
+ 201 00b0 09       		.byte	9
+ 202 00b1 07       		.byte	7
+ 203 00b2 06       		.byte	6
+ 204 00b3 05       		.byte	5
+ 205 00b4 03       		.byte	3
+ 206 00b5 02       		.byte	2
+ 207 00b6 01       		.byte	1
+ 208 00b7 00       		.space	1
+ 209              		.bss
+ 210              		.align	2
+ 211              	an_x:
+ 212 0000 00000000 		.space	800
+ 212      00000000 
+ 212      00000000 
+ 212      00000000 
+ 212      00000000 
+ 213              		.align	2
+ 214              	an_y:
+ 215 0320 00000000 		.space	800
+ 215      00000000 
+ 215      00000000 
+ 215      00000000 
+ 215      00000000 
+ 216              		.section	.text.maxim_heart_rate_and_oxygen_saturation,"ax",%progbits
+ 217              		.align	2
+ 218              		.global	maxim_heart_rate_and_oxygen_saturation
+ 219              		.thumb
+ 220              		.thumb_func
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 5
+
+
+ 221              		.type	maxim_heart_rate_and_oxygen_saturation, %function
+ 222              	maxim_heart_rate_and_oxygen_saturation:
+ 223              	.LFB63:
+ 224              		.file 1 "SpO2.c"
+   1:SpO2.c        **** /* ========================================
+   2:SpO2.c        ****  *
+   3:SpO2.c        ****  * Copyright YOUR COMPANY, THE YEAR
+   4:SpO2.c        ****  * All Rights Reserved
+   5:SpO2.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:SpO2.c        ****  *
+   7:SpO2.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:SpO2.c        ****  * WHICH IS THE PROPERTY OF your company.
+   9:SpO2.c        ****  *
+  10:SpO2.c        ****  * ========================================
+  11:SpO2.c        **** */
+  12:SpO2.c        **** 
+  13:SpO2.c        **** #include "SpO2.h"
+  14:SpO2.c        **** #include "project.h"
+  15:SpO2.c        **** #include <stdbool.h>
+  16:SpO2.c        **** 
+  17:SpO2.c        **** void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_buffer_length, uint3
+  18:SpO2.c        **** 
+  19:SpO2.c        **** /**
+  20:SpO2.c        **** * \brief        Calculate the heart rate and SpO2 level
+  21:SpO2.c        **** * \par          Details
+  22:SpO2.c        **** *               By detecting  peaks of PPG cycle and corresponding AC/DC of red/infra-red signal, t
+  23:SpO2.c        **** *               Since this algorithm is aiming for Arm M0/M3. formaula for SPO2 did not achieve the
+  24:SpO2.c        **** *               Thus, accurate SPO2 is precalculated and save longo uch_spo2_table[] per each an_ra
+  25:SpO2.c        **** *
+  26:SpO2.c        **** * \param[in]    *pun_ir_buffer           - IR sensor data buffer
+  27:SpO2.c        **** * \param[in]    n_buffer_length      - sensor data buffer length
+  28:SpO2.c        **** * \param[in]    *pun_red_buffer          - Red sensor data buffer
+  29:SpO2.c        **** * \param[out]    *pn_spo2                - Calculated SpO2 value
+  30:SpO2.c        **** * \param[out]    *pch_spo2_valid         - 1 if the calculated SpO2 value is valid
+  31:SpO2.c        **** * \param[out]    *pn_heart_rate          - Calculated heart rate value
+  32:SpO2.c        **** * \param[out]    *pch_hr_valid           - 1 if the calculated heart rate value is valid
+  33:SpO2.c        **** *
+  34:SpO2.c        **** * \retval       None
+  35:SpO2.c        **** */
+  36:SpO2.c        **** {
+ 225              		.loc 1 36 0
+ 226              		.cfi_startproc
+ 227              		@ args = 12, pretend = 0, frame = 176
+ 228              		@ frame_needed = 1, uses_anonymous_args = 0
+ 229 0000 80B5     		push	{r7, lr}
+ 230              		.cfi_def_cfa_offset 8
+ 231              		.cfi_offset 7, -8
+ 232              		.cfi_offset 14, -4
+ 233 0002 B0B0     		sub	sp, sp, #192
+ 234              		.cfi_def_cfa_offset 200
+ 235 0004 04AF     		add	r7, sp, #16
+ 236              		.cfi_def_cfa 7, 184
+ 237 0006 F860     		str	r0, [r7, #12]
+ 238 0008 B960     		str	r1, [r7, #8]
+ 239 000a 7A60     		str	r2, [r7, #4]
+ 240 000c 3B60     		str	r3, [r7]
+  37:SpO2.c        ****   uint32_t un_ir_mean;
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 6
+
+
+  38:SpO2.c        ****   int32_t k, n_i_ratio_count;
+  39:SpO2.c        ****   int32_t i, n_exact_ir_valley_locs_count, n_middle_idx;
+  40:SpO2.c        ****   int32_t n_th1, n_npks;   
+  41:SpO2.c        ****   int32_t an_ir_valley_locs[15] ;
+  42:SpO2.c        ****   int32_t n_peak_interval_sum;
+  43:SpO2.c        ****   
+  44:SpO2.c        ****   int32_t n_y_ac, n_x_ac;
+  45:SpO2.c        ****   int32_t n_spo2_calc; 
+  46:SpO2.c        ****   int32_t n_y_dc_max, n_x_dc_max; 
+  47:SpO2.c        ****   int32_t n_y_dc_max_idx = 0;
+ 241              		.loc 1 47 0
+ 242 000e 0023     		movs	r3, #0
+ 243 0010 C7F88C30 		str	r3, [r7, #140]
+  48:SpO2.c        ****   int32_t n_x_dc_max_idx = 0; 
+ 244              		.loc 1 48 0
+ 245 0014 0023     		movs	r3, #0
+ 246 0016 C7F88830 		str	r3, [r7, #136]
+  49:SpO2.c        ****   int32_t an_ratio[5], n_ratio_average; 
+  50:SpO2.c        ****   int32_t n_nume, n_denom ;
+  51:SpO2.c        **** 
+  52:SpO2.c        ****   // calculates DC mean and subtract DC from ir
+  53:SpO2.c        ****   un_ir_mean =0; 
+ 247              		.loc 1 53 0
+ 248 001a 0023     		movs	r3, #0
+ 249 001c C7F8AC30 		str	r3, [r7, #172]
+  54:SpO2.c        ****   for (k=0 ; k<n_buffer_length ; k++ ) un_ir_mean += pun_ir_buffer[k] ;
+ 250              		.loc 1 54 0
+ 251 0020 0023     		movs	r3, #0
+ 252 0022 C7F8A830 		str	r3, [r7, #168]
+ 253 0026 0FE0     		b	.L2
+ 254              	.L3:
+ 255              		.loc 1 54 0 is_stmt 0 discriminator 3
+ 256 0028 D7F8A830 		ldr	r3, [r7, #168]
+ 257 002c 9B00     		lsls	r3, r3, #2
+ 258 002e FA68     		ldr	r2, [r7, #12]
+ 259 0030 1344     		add	r3, r3, r2
+ 260 0032 1B68     		ldr	r3, [r3]
+ 261 0034 D7F8AC20 		ldr	r2, [r7, #172]
+ 262 0038 1344     		add	r3, r3, r2
+ 263 003a C7F8AC30 		str	r3, [r7, #172]
+ 264 003e D7F8A830 		ldr	r3, [r7, #168]
+ 265 0042 0133     		adds	r3, r3, #1
+ 266 0044 C7F8A830 		str	r3, [r7, #168]
+ 267              	.L2:
+ 268              		.loc 1 54 0 discriminator 1
+ 269 0048 D7F8A820 		ldr	r2, [r7, #168]
+ 270 004c BB68     		ldr	r3, [r7, #8]
+ 271 004e 9A42     		cmp	r2, r3
+ 272 0050 EADB     		blt	.L3
+  55:SpO2.c        ****   un_ir_mean =un_ir_mean/n_buffer_length ;
+ 273              		.loc 1 55 0 is_stmt 1
+ 274 0052 BB68     		ldr	r3, [r7, #8]
+ 275 0054 D7F8AC20 		ldr	r2, [r7, #172]
+ 276 0058 B2FBF3F3 		udiv	r3, r2, r3
+ 277 005c C7F8AC30 		str	r3, [r7, #172]
+  56:SpO2.c        ****     
+  57:SpO2.c        ****   // remove DC and invert signal so that we can use peak detector as valley detector
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 7
+
+
+  58:SpO2.c        ****   for (k=0 ; k<n_buffer_length ; k++ )  
+ 278              		.loc 1 58 0
+ 279 0060 0023     		movs	r3, #0
+ 280 0062 C7F8A830 		str	r3, [r7, #168]
+ 281 0066 13E0     		b	.L4
+ 282              	.L5:
+  59:SpO2.c        ****     an_x[k] = -1*(pun_ir_buffer[k] - un_ir_mean) ; 
+ 283              		.loc 1 59 0 discriminator 3
+ 284 0068 D7F8A830 		ldr	r3, [r7, #168]
+ 285 006c 9B00     		lsls	r3, r3, #2
+ 286 006e FA68     		ldr	r2, [r7, #12]
+ 287 0070 1344     		add	r3, r3, r2
+ 288 0072 1B68     		ldr	r3, [r3]
+ 289 0074 D7F8AC20 		ldr	r2, [r7, #172]
+ 290 0078 D31A     		subs	r3, r2, r3
+ 291 007a 1946     		mov	r1, r3
+ 292 007c B84A     		ldr	r2, .L38
+ 293 007e D7F8A830 		ldr	r3, [r7, #168]
+ 294 0082 42F82310 		str	r1, [r2, r3, lsl #2]
+  58:SpO2.c        ****     an_x[k] = -1*(pun_ir_buffer[k] - un_ir_mean) ; 
+ 295              		.loc 1 58 0 discriminator 3
+ 296 0086 D7F8A830 		ldr	r3, [r7, #168]
+ 297 008a 0133     		adds	r3, r3, #1
+ 298 008c C7F8A830 		str	r3, [r7, #168]
+ 299              	.L4:
+  58:SpO2.c        ****     an_x[k] = -1*(pun_ir_buffer[k] - un_ir_mean) ; 
+ 300              		.loc 1 58 0 is_stmt 0 discriminator 1
+ 301 0090 D7F8A820 		ldr	r2, [r7, #168]
+ 302 0094 BB68     		ldr	r3, [r7, #8]
+ 303 0096 9A42     		cmp	r2, r3
+ 304 0098 E6DB     		blt	.L5
+  60:SpO2.c        ****     
+  61:SpO2.c        ****   // 4 pt Moving Average
+  62:SpO2.c        ****   for(k=0; k< BUFFER_SIZE-MA4_SIZE; k++){
+ 305              		.loc 1 62 0 is_stmt 1
+ 306 009a 0023     		movs	r3, #0
+ 307 009c C7F8A830 		str	r3, [r7, #168]
+ 308 00a0 28E0     		b	.L6
+ 309              	.L8:
+  63:SpO2.c        ****     an_x[k]=( an_x[k]+an_x[k+1]+ an_x[k+2]+ an_x[k+3])/(int)4;        
+ 310              		.loc 1 63 0 discriminator 3
+ 311 00a2 AF4A     		ldr	r2, .L38
+ 312 00a4 D7F8A830 		ldr	r3, [r7, #168]
+ 313 00a8 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 314 00ac D7F8A830 		ldr	r3, [r7, #168]
+ 315 00b0 0133     		adds	r3, r3, #1
+ 316 00b2 AB49     		ldr	r1, .L38
+ 317 00b4 51F82330 		ldr	r3, [r1, r3, lsl #2]
+ 318 00b8 1A44     		add	r2, r2, r3
+ 319 00ba D7F8A830 		ldr	r3, [r7, #168]
+ 320 00be 0233     		adds	r3, r3, #2
+ 321 00c0 A749     		ldr	r1, .L38
+ 322 00c2 51F82330 		ldr	r3, [r1, r3, lsl #2]
+ 323 00c6 1A44     		add	r2, r2, r3
+ 324 00c8 D7F8A830 		ldr	r3, [r7, #168]
+ 325 00cc 0333     		adds	r3, r3, #3
+ 326 00ce A449     		ldr	r1, .L38
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 8
+
+
+ 327 00d0 51F82330 		ldr	r3, [r1, r3, lsl #2]
+ 328 00d4 1344     		add	r3, r3, r2
+ 329 00d6 002B     		cmp	r3, #0
+ 330 00d8 00DA     		bge	.L7
+ 331 00da 0333     		adds	r3, r3, #3
+ 332              	.L7:
+ 333 00dc 9B10     		asrs	r3, r3, #2
+ 334 00de 1946     		mov	r1, r3
+ 335 00e0 9F4A     		ldr	r2, .L38
+ 336 00e2 D7F8A830 		ldr	r3, [r7, #168]
+ 337 00e6 42F82310 		str	r1, [r2, r3, lsl #2]
+  62:SpO2.c        ****     an_x[k]=( an_x[k]+an_x[k+1]+ an_x[k+2]+ an_x[k+3])/(int)4;        
+ 338              		.loc 1 62 0 discriminator 3
+ 339 00ea D7F8A830 		ldr	r3, [r7, #168]
+ 340 00ee 0133     		adds	r3, r3, #1
+ 341 00f0 C7F8A830 		str	r3, [r7, #168]
+ 342              	.L6:
+  62:SpO2.c        ****     an_x[k]=( an_x[k]+an_x[k+1]+ an_x[k+2]+ an_x[k+3])/(int)4;        
+ 343              		.loc 1 62 0 is_stmt 0 discriminator 1
+ 344 00f4 D7F8A830 		ldr	r3, [r7, #168]
+ 345 00f8 C32B     		cmp	r3, #195
+ 346 00fa D2DD     		ble	.L8
+  64:SpO2.c        ****   }
+  65:SpO2.c        ****   // calculate threshold  
+  66:SpO2.c        ****   n_th1=0; 
+ 347              		.loc 1 66 0 is_stmt 1
+ 348 00fc 0023     		movs	r3, #0
+ 349 00fe C7F89C30 		str	r3, [r7, #156]
+  67:SpO2.c        ****   for ( k=0 ; k<BUFFER_SIZE ;k++){
+ 350              		.loc 1 67 0
+ 351 0102 0023     		movs	r3, #0
+ 352 0104 C7F8A830 		str	r3, [r7, #168]
+ 353 0108 0EE0     		b	.L9
+ 354              	.L10:
+  68:SpO2.c        ****     n_th1 +=  an_x[k];
+ 355              		.loc 1 68 0 discriminator 3
+ 356 010a 954A     		ldr	r2, .L38
+ 357 010c D7F8A830 		ldr	r3, [r7, #168]
+ 358 0110 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 359 0114 D7F89C20 		ldr	r2, [r7, #156]
+ 360 0118 1344     		add	r3, r3, r2
+ 361 011a C7F89C30 		str	r3, [r7, #156]
+  67:SpO2.c        ****   for ( k=0 ; k<BUFFER_SIZE ;k++){
+ 362              		.loc 1 67 0 discriminator 3
+ 363 011e D7F8A830 		ldr	r3, [r7, #168]
+ 364 0122 0133     		adds	r3, r3, #1
+ 365 0124 C7F8A830 		str	r3, [r7, #168]
+ 366              	.L9:
+  67:SpO2.c        ****   for ( k=0 ; k<BUFFER_SIZE ;k++){
+ 367              		.loc 1 67 0 is_stmt 0 discriminator 1
+ 368 0128 D7F8A830 		ldr	r3, [r7, #168]
+ 369 012c C72B     		cmp	r3, #199
+ 370 012e ECDD     		ble	.L10
+  69:SpO2.c        ****   }
+  70:SpO2.c        ****   n_th1=  n_th1/ ( BUFFER_SIZE);
+ 371              		.loc 1 70 0 is_stmt 1
+ 372 0130 D7F89C30 		ldr	r3, [r7, #156]
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 9
+
+
+ 373 0134 8B4A     		ldr	r2, .L38+4
+ 374 0136 82FB0312 		smull	r1, r2, r2, r3
+ 375 013a 9211     		asrs	r2, r2, #6
+ 376 013c DB17     		asrs	r3, r3, #31
+ 377 013e D31A     		subs	r3, r2, r3
+ 378 0140 C7F89C30 		str	r3, [r7, #156]
+  71:SpO2.c        ****   if( n_th1<30) n_th1=30; // min allowed
+ 379              		.loc 1 71 0
+ 380 0144 D7F89C30 		ldr	r3, [r7, #156]
+ 381 0148 1D2B     		cmp	r3, #29
+ 382 014a 02DC     		bgt	.L11
+ 383              		.loc 1 71 0 is_stmt 0 discriminator 1
+ 384 014c 1E23     		movs	r3, #30
+ 385 014e C7F89C30 		str	r3, [r7, #156]
+ 386              	.L11:
+  72:SpO2.c        ****   if( n_th1>60) n_th1=60; // max allowed
+ 387              		.loc 1 72 0 is_stmt 1
+ 388 0152 D7F89C30 		ldr	r3, [r7, #156]
+ 389 0156 3C2B     		cmp	r3, #60
+ 390 0158 02DD     		ble	.L12
+ 391              		.loc 1 72 0 is_stmt 0 discriminator 1
+ 392 015a 3C23     		movs	r3, #60
+ 393 015c C7F89C30 		str	r3, [r7, #156]
+ 394              	.L12:
+  73:SpO2.c        **** 
+  74:SpO2.c        ****   for ( k=0 ; k<15;k++) an_ir_valley_locs[k]=0;
+ 395              		.loc 1 74 0 is_stmt 1
+ 396 0160 0023     		movs	r3, #0
+ 397 0162 C7F8A830 		str	r3, [r7, #168]
+ 398 0166 0DE0     		b	.L13
+ 399              	.L14:
+ 400              		.loc 1 74 0 is_stmt 0 discriminator 3
+ 401 0168 D7F8A830 		ldr	r3, [r7, #168]
+ 402 016c 9B00     		lsls	r3, r3, #2
+ 403 016e 07F1B002 		add	r2, r7, #176
+ 404 0172 1344     		add	r3, r3, r2
+ 405 0174 0022     		movs	r2, #0
+ 406 0176 43F8882C 		str	r2, [r3, #-136]
+ 407 017a D7F8A830 		ldr	r3, [r7, #168]
+ 408 017e 0133     		adds	r3, r3, #1
+ 409 0180 C7F8A830 		str	r3, [r7, #168]
+ 410              	.L13:
+ 411              		.loc 1 74 0 discriminator 1
+ 412 0184 D7F8A830 		ldr	r3, [r7, #168]
+ 413 0188 0E2B     		cmp	r3, #14
+ 414 018a EDDD     		ble	.L14
+  75:SpO2.c        ****   // since we flipped signal, we use peak detector as valley detector
+  76:SpO2.c        ****   maxim_find_peaks( an_ir_valley_locs, &n_npks, an_x, BUFFER_SIZE, n_th1, 4, 15 );//peak_height, pe
+ 415              		.loc 1 76 0 is_stmt 1
+ 416 018c 07F16401 		add	r1, r7, #100
+ 417 0190 07F12800 		add	r0, r7, #40
+ 418 0194 0F23     		movs	r3, #15
+ 419 0196 0293     		str	r3, [sp, #8]
+ 420 0198 0423     		movs	r3, #4
+ 421 019a 0193     		str	r3, [sp, #4]
+ 422 019c D7F89C30 		ldr	r3, [r7, #156]
+ 423 01a0 0093     		str	r3, [sp]
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 10
+
+
+ 424 01a2 C823     		movs	r3, #200
+ 425 01a4 6E4A     		ldr	r2, .L38
+ 426 01a6 FFF7FEFF 		bl	maxim_find_peaks
+  77:SpO2.c        ****   n_peak_interval_sum =0;
+ 427              		.loc 1 77 0
+ 428 01aa 0023     		movs	r3, #0
+ 429 01ac C7F89830 		str	r3, [r7, #152]
+  78:SpO2.c        ****   if (n_npks>=2){
+ 430              		.loc 1 78 0
+ 431 01b0 7B6E     		ldr	r3, [r7, #100]
+ 432 01b2 012B     		cmp	r3, #1
+ 433 01b4 3ADD     		ble	.L15
+  79:SpO2.c        ****     for (k=1; k<n_npks; k++) n_peak_interval_sum += (an_ir_valley_locs[k] -an_ir_valley_locs[k -1] 
+ 434              		.loc 1 79 0
+ 435 01b6 0123     		movs	r3, #1
+ 436 01b8 C7F8A830 		str	r3, [r7, #168]
+ 437 01bc 1BE0     		b	.L16
+ 438              	.L17:
+ 439              		.loc 1 79 0 is_stmt 0 discriminator 3
+ 440 01be D7F8A830 		ldr	r3, [r7, #168]
+ 441 01c2 9B00     		lsls	r3, r3, #2
+ 442 01c4 07F1B002 		add	r2, r7, #176
+ 443 01c8 1344     		add	r3, r3, r2
+ 444 01ca 53F8882C 		ldr	r2, [r3, #-136]
+ 445 01ce D7F8A830 		ldr	r3, [r7, #168]
+ 446 01d2 013B     		subs	r3, r3, #1
+ 447 01d4 9B00     		lsls	r3, r3, #2
+ 448 01d6 07F1B001 		add	r1, r7, #176
+ 449 01da 0B44     		add	r3, r3, r1
+ 450 01dc 53F8883C 		ldr	r3, [r3, #-136]
+ 451 01e0 D31A     		subs	r3, r2, r3
+ 452 01e2 D7F89820 		ldr	r2, [r7, #152]
+ 453 01e6 1344     		add	r3, r3, r2
+ 454 01e8 C7F89830 		str	r3, [r7, #152]
+ 455 01ec D7F8A830 		ldr	r3, [r7, #168]
+ 456 01f0 0133     		adds	r3, r3, #1
+ 457 01f2 C7F8A830 		str	r3, [r7, #168]
+ 458              	.L16:
+ 459              		.loc 1 79 0 discriminator 1
+ 460 01f6 7B6E     		ldr	r3, [r7, #100]
+ 461 01f8 D7F8A820 		ldr	r2, [r7, #168]
+ 462 01fc 9A42     		cmp	r2, r3
+ 463 01fe DEDB     		blt	.L17
+  80:SpO2.c        ****     n_peak_interval_sum =n_peak_interval_sum/(n_npks-1);
+ 464              		.loc 1 80 0 is_stmt 1
+ 465 0200 7B6E     		ldr	r3, [r7, #100]
+ 466 0202 013B     		subs	r3, r3, #1
+ 467 0204 D7F89820 		ldr	r2, [r7, #152]
+ 468 0208 92FBF3F3 		sdiv	r3, r2, r3
+ 469 020c C7F89830 		str	r3, [r7, #152]
+  81:SpO2.c        ****     *pn_heart_rate =(int32_t)( (FreqS*60)/ n_peak_interval_sum );
+ 470              		.loc 1 81 0
+ 471 0210 40F6B832 		movw	r2, #3000
+ 472 0214 D7F89830 		ldr	r3, [r7, #152]
+ 473 0218 92FBF3F2 		sdiv	r2, r2, r3
+ 474 021c D7F8BC30 		ldr	r3, [r7, #188]
+ 475 0220 1A60     		str	r2, [r3]
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 11
+
+
+  82:SpO2.c        ****     *pch_hr_valid  = 1;
+ 476              		.loc 1 82 0
+ 477 0222 D7F8C030 		ldr	r3, [r7, #192]
+ 478 0226 0122     		movs	r2, #1
+ 479 0228 1A70     		strb	r2, [r3]
+ 480 022a 07E0     		b	.L18
+ 481              	.L15:
+  83:SpO2.c        ****   }
+  84:SpO2.c        ****   else  { 
+  85:SpO2.c        ****     *pn_heart_rate = -999; // unable to calculate because # of peaks are too small
+ 482              		.loc 1 85 0
+ 483 022c D7F8BC30 		ldr	r3, [r7, #188]
+ 484 0230 4D4A     		ldr	r2, .L38+8
+ 485 0232 1A60     		str	r2, [r3]
+  86:SpO2.c        ****     *pch_hr_valid  = 0;
+ 486              		.loc 1 86 0
+ 487 0234 D7F8C030 		ldr	r3, [r7, #192]
+ 488 0238 0022     		movs	r2, #0
+ 489 023a 1A70     		strb	r2, [r3]
+ 490              	.L18:
+  87:SpO2.c        ****   }
+  88:SpO2.c        **** 
+  89:SpO2.c        ****   //  load raw value again for SPO2 calculation : RED(=y) and IR(=X)
+  90:SpO2.c        ****   for (k=0 ; k<n_buffer_length ; k++ )  {
+ 491              		.loc 1 90 0
+ 492 023c 0023     		movs	r3, #0
+ 493 023e C7F8A830 		str	r3, [r7, #168]
+ 494 0242 1CE0     		b	.L19
+ 495              	.L20:
+  91:SpO2.c        ****       an_x[k] =  pun_ir_buffer[k] ; 
+ 496              		.loc 1 91 0 discriminator 3
+ 497 0244 D7F8A830 		ldr	r3, [r7, #168]
+ 498 0248 9B00     		lsls	r3, r3, #2
+ 499 024a FA68     		ldr	r2, [r7, #12]
+ 500 024c 1344     		add	r3, r3, r2
+ 501 024e 1B68     		ldr	r3, [r3]
+ 502 0250 1946     		mov	r1, r3
+ 503 0252 434A     		ldr	r2, .L38
+ 504 0254 D7F8A830 		ldr	r3, [r7, #168]
+ 505 0258 42F82310 		str	r1, [r2, r3, lsl #2]
+  92:SpO2.c        ****       an_y[k] =  pun_red_buffer[k] ; 
+ 506              		.loc 1 92 0 discriminator 3
+ 507 025c D7F8A830 		ldr	r3, [r7, #168]
+ 508 0260 9B00     		lsls	r3, r3, #2
+ 509 0262 7A68     		ldr	r2, [r7, #4]
+ 510 0264 1344     		add	r3, r3, r2
+ 511 0266 1B68     		ldr	r3, [r3]
+ 512 0268 1946     		mov	r1, r3
+ 513 026a 404A     		ldr	r2, .L38+12
+ 514 026c D7F8A830 		ldr	r3, [r7, #168]
+ 515 0270 42F82310 		str	r1, [r2, r3, lsl #2]
+  90:SpO2.c        ****       an_x[k] =  pun_ir_buffer[k] ; 
+ 516              		.loc 1 90 0 discriminator 3
+ 517 0274 D7F8A830 		ldr	r3, [r7, #168]
+ 518 0278 0133     		adds	r3, r3, #1
+ 519 027a C7F8A830 		str	r3, [r7, #168]
+ 520              	.L19:
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 12
+
+
+  90:SpO2.c        ****       an_x[k] =  pun_ir_buffer[k] ; 
+ 521              		.loc 1 90 0 is_stmt 0 discriminator 1
+ 522 027e D7F8A820 		ldr	r2, [r7, #168]
+ 523 0282 BB68     		ldr	r3, [r7, #8]
+ 524 0284 9A42     		cmp	r2, r3
+ 525 0286 DDDB     		blt	.L20
+  93:SpO2.c        ****   }
+  94:SpO2.c        **** 
+  95:SpO2.c        ****   // find precise min near an_ir_valley_locs
+  96:SpO2.c        ****   n_exact_ir_valley_locs_count =n_npks; 
+ 526              		.loc 1 96 0 is_stmt 1
+ 527 0288 7B6E     		ldr	r3, [r7, #100]
+ 528 028a C7F88030 		str	r3, [r7, #128]
+  97:SpO2.c        ****   
+  98:SpO2.c        ****   //using exact_ir_valley_locs , find ir-red DC andir-red AC for SPO2 calibration an_ratio
+  99:SpO2.c        ****   //finding AC/DC maximum of raw
+ 100:SpO2.c        **** 
+ 101:SpO2.c        ****   n_ratio_average =0; 
+ 529              		.loc 1 101 0
+ 530 028e 0023     		movs	r3, #0
+ 531 0290 C7F88430 		str	r3, [r7, #132]
+ 102:SpO2.c        ****   n_i_ratio_count = 0; 
+ 532              		.loc 1 102 0
+ 533 0294 0023     		movs	r3, #0
+ 534 0296 C7F8A430 		str	r3, [r7, #164]
+ 103:SpO2.c        ****   for(k=0; k< 5; k++) an_ratio[k]=0;
+ 535              		.loc 1 103 0
+ 536 029a 0023     		movs	r3, #0
+ 537 029c C7F8A830 		str	r3, [r7, #168]
+ 538 02a0 0DE0     		b	.L21
+ 539              	.L22:
+ 540              		.loc 1 103 0 is_stmt 0 discriminator 3
+ 541 02a2 D7F8A830 		ldr	r3, [r7, #168]
+ 542 02a6 9B00     		lsls	r3, r3, #2
+ 543 02a8 07F1B002 		add	r2, r7, #176
+ 544 02ac 1344     		add	r3, r3, r2
+ 545 02ae 0022     		movs	r2, #0
+ 546 02b0 43F89C2C 		str	r2, [r3, #-156]
+ 547 02b4 D7F8A830 		ldr	r3, [r7, #168]
+ 548 02b8 0133     		adds	r3, r3, #1
+ 549 02ba C7F8A830 		str	r3, [r7, #168]
+ 550              	.L21:
+ 551              		.loc 1 103 0 discriminator 1
+ 552 02be D7F8A830 		ldr	r3, [r7, #168]
+ 553 02c2 042B     		cmp	r3, #4
+ 554 02c4 EDDD     		ble	.L22
+ 104:SpO2.c        ****   for (k=0; k< n_exact_ir_valley_locs_count; k++){
+ 555              		.loc 1 104 0 is_stmt 1
+ 556 02c6 0023     		movs	r3, #0
+ 557 02c8 C7F8A830 		str	r3, [r7, #168]
+ 558 02cc 16E0     		b	.L23
+ 559              	.L26:
+ 105:SpO2.c        ****     if (an_ir_valley_locs[k] > BUFFER_SIZE ){
+ 560              		.loc 1 105 0
+ 561 02ce D7F8A830 		ldr	r3, [r7, #168]
+ 562 02d2 9B00     		lsls	r3, r3, #2
+ 563 02d4 07F1B002 		add	r2, r7, #176
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 13
+
+
+ 564 02d8 1344     		add	r3, r3, r2
+ 565 02da 53F8883C 		ldr	r3, [r3, #-136]
+ 566 02de C82B     		cmp	r3, #200
+ 567 02e0 07DD     		ble	.L24
+ 106:SpO2.c        ****       *pn_spo2 =  -999 ; // do not use SPO2 since valley loc is out of range
+ 568              		.loc 1 106 0
+ 569 02e2 3B68     		ldr	r3, [r7]
+ 570 02e4 204A     		ldr	r2, .L38+8
+ 571 02e6 1A60     		str	r2, [r3]
+ 107:SpO2.c        ****       *pch_spo2_valid  = 0; 
+ 572              		.loc 1 107 0
+ 573 02e8 D7F8B830 		ldr	r3, [r7, #184]
+ 574 02ec 0022     		movs	r2, #0
+ 575 02ee 1A70     		strb	r2, [r3]
+ 576 02f0 9DE1     		b	.L1
+ 577              	.L24:
+ 104:SpO2.c        ****     if (an_ir_valley_locs[k] > BUFFER_SIZE ){
+ 578              		.loc 1 104 0 discriminator 2
+ 579 02f2 D7F8A830 		ldr	r3, [r7, #168]
+ 580 02f6 0133     		adds	r3, r3, #1
+ 581 02f8 C7F8A830 		str	r3, [r7, #168]
+ 582              	.L23:
+ 104:SpO2.c        ****     if (an_ir_valley_locs[k] > BUFFER_SIZE ){
+ 583              		.loc 1 104 0 is_stmt 0 discriminator 1
+ 584 02fc D7F8A820 		ldr	r2, [r7, #168]
+ 585 0300 D7F88030 		ldr	r3, [r7, #128]
+ 586 0304 9A42     		cmp	r2, r3
+ 587 0306 E2DB     		blt	.L26
+ 108:SpO2.c        ****       return;
+ 109:SpO2.c        ****     }
+ 110:SpO2.c        ****   }
+ 111:SpO2.c        ****   // find max between two valley locations 
+ 112:SpO2.c        ****   // and use an_ratio betwen AC compoent of Ir & Red and DC compoent of Ir & Red for SPO2 
+ 113:SpO2.c        ****   for (k=0; k< n_exact_ir_valley_locs_count-1; k++){
+ 588              		.loc 1 113 0 is_stmt 1
+ 589 0308 0023     		movs	r3, #0
+ 590 030a C7F8A830 		str	r3, [r7, #168]
+ 591 030e 3AE1     		b	.L27
+ 592              	.L33:
+ 114:SpO2.c        ****     n_y_dc_max= -16777216 ; 
+ 593              		.loc 1 114 0
+ 594 0310 4FF07F43 		mov	r3, #-16777216
+ 595 0314 C7F89430 		str	r3, [r7, #148]
+ 115:SpO2.c        ****     n_x_dc_max= -16777216; 
+ 596              		.loc 1 115 0
+ 597 0318 4FF07F43 		mov	r3, #-16777216
+ 598 031c C7F89030 		str	r3, [r7, #144]
+ 116:SpO2.c        ****     if (an_ir_valley_locs[k+1]-an_ir_valley_locs[k] >3){
+ 599              		.loc 1 116 0
+ 600 0320 D7F8A830 		ldr	r3, [r7, #168]
+ 601 0324 0133     		adds	r3, r3, #1
+ 602 0326 9B00     		lsls	r3, r3, #2
+ 603 0328 07F1B002 		add	r2, r7, #176
+ 604 032c 1344     		add	r3, r3, r2
+ 605 032e 53F8882C 		ldr	r2, [r3, #-136]
+ 606 0332 D7F8A830 		ldr	r3, [r7, #168]
+ 607 0336 9B00     		lsls	r3, r3, #2
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 14
+
+
+ 608 0338 07F1B001 		add	r1, r7, #176
+ 609 033c 0B44     		add	r3, r3, r1
+ 610 033e 53F8883C 		ldr	r3, [r3, #-136]
+ 611 0342 D31A     		subs	r3, r2, r3
+ 612 0344 032B     		cmp	r3, #3
+ 613 0346 40F31981 		ble	.L28
+ 117:SpO2.c        ****         for (i=an_ir_valley_locs[k]; i< an_ir_valley_locs[k+1]; i++){
+ 614              		.loc 1 117 0
+ 615 034a D7F8A830 		ldr	r3, [r7, #168]
+ 616 034e 9B00     		lsls	r3, r3, #2
+ 617 0350 07F1B002 		add	r2, r7, #176
+ 618 0354 1344     		add	r3, r3, r2
+ 619 0356 53F8883C 		ldr	r3, [r3, #-136]
+ 620 035a C7F8A030 		str	r3, [r7, #160]
+ 621 035e 34E0     		b	.L29
+ 622              	.L39:
+ 623              		.align	2
+ 624              	.L38:
+ 625 0360 00000000 		.word	an_x
+ 626 0364 1F85EB51 		.word	1374389535
+ 627 0368 19FCFFFF 		.word	-999
+ 628 036c 20030000 		.word	an_y
+ 629              	.L32:
+ 118:SpO2.c        ****           if (an_x[i]> n_x_dc_max) {n_x_dc_max =an_x[i]; n_x_dc_max_idx=i;}
+ 630              		.loc 1 118 0
+ 631 0370 B04A     		ldr	r2, .L40
+ 632 0372 D7F8A030 		ldr	r3, [r7, #160]
+ 633 0376 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 634 037a D7F89030 		ldr	r3, [r7, #144]
+ 635 037e 9A42     		cmp	r2, r3
+ 636 0380 0ADD     		ble	.L30
+ 637              		.loc 1 118 0 is_stmt 0 discriminator 1
+ 638 0382 AC4A     		ldr	r2, .L40
+ 639 0384 D7F8A030 		ldr	r3, [r7, #160]
+ 640 0388 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 641 038c C7F89030 		str	r3, [r7, #144]
+ 642 0390 D7F8A030 		ldr	r3, [r7, #160]
+ 643 0394 C7F88830 		str	r3, [r7, #136]
+ 644              	.L30:
+ 119:SpO2.c        ****           if (an_y[i]> n_y_dc_max) {n_y_dc_max =an_y[i]; n_y_dc_max_idx=i;}
+ 645              		.loc 1 119 0 is_stmt 1
+ 646 0398 A74A     		ldr	r2, .L40+4
+ 647 039a D7F8A030 		ldr	r3, [r7, #160]
+ 648 039e 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 649 03a2 D7F89430 		ldr	r3, [r7, #148]
+ 650 03a6 9A42     		cmp	r2, r3
+ 651 03a8 0ADD     		ble	.L31
+ 652              		.loc 1 119 0 is_stmt 0 discriminator 1
+ 653 03aa A34A     		ldr	r2, .L40+4
+ 654 03ac D7F8A030 		ldr	r3, [r7, #160]
+ 655 03b0 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 656 03b4 C7F89430 		str	r3, [r7, #148]
+ 657 03b8 D7F8A030 		ldr	r3, [r7, #160]
+ 658 03bc C7F88C30 		str	r3, [r7, #140]
+ 659              	.L31:
+ 117:SpO2.c        ****         for (i=an_ir_valley_locs[k]; i< an_ir_valley_locs[k+1]; i++){
+ 660              		.loc 1 117 0 is_stmt 1 discriminator 2
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 15
+
+
+ 661 03c0 D7F8A030 		ldr	r3, [r7, #160]
+ 662 03c4 0133     		adds	r3, r3, #1
+ 663 03c6 C7F8A030 		str	r3, [r7, #160]
+ 664              	.L29:
+ 117:SpO2.c        ****         for (i=an_ir_valley_locs[k]; i< an_ir_valley_locs[k+1]; i++){
+ 665              		.loc 1 117 0 is_stmt 0 discriminator 1
+ 666 03ca D7F8A830 		ldr	r3, [r7, #168]
+ 667 03ce 0133     		adds	r3, r3, #1
+ 668 03d0 9B00     		lsls	r3, r3, #2
+ 669 03d2 07F1B002 		add	r2, r7, #176
+ 670 03d6 1344     		add	r3, r3, r2
+ 671 03d8 53F8882C 		ldr	r2, [r3, #-136]
+ 672 03dc D7F8A030 		ldr	r3, [r7, #160]
+ 673 03e0 9A42     		cmp	r2, r3
+ 674 03e2 C5DC     		bgt	.L32
+ 120:SpO2.c        ****       }
+ 121:SpO2.c        ****       n_y_ac= (an_y[an_ir_valley_locs[k+1]] - an_y[an_ir_valley_locs[k] ] )*(n_y_dc_max_idx -an_ir_
+ 675              		.loc 1 121 0 is_stmt 1
+ 676 03e4 D7F8A830 		ldr	r3, [r7, #168]
+ 677 03e8 0133     		adds	r3, r3, #1
+ 678 03ea 9B00     		lsls	r3, r3, #2
+ 679 03ec 07F1B002 		add	r2, r7, #176
+ 680 03f0 1344     		add	r3, r3, r2
+ 681 03f2 53F8883C 		ldr	r3, [r3, #-136]
+ 682 03f6 904A     		ldr	r2, .L40+4
+ 683 03f8 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 684 03fc D7F8A830 		ldr	r3, [r7, #168]
+ 685 0400 9B00     		lsls	r3, r3, #2
+ 686 0402 07F1B001 		add	r1, r7, #176
+ 687 0406 0B44     		add	r3, r3, r1
+ 688 0408 53F8883C 		ldr	r3, [r3, #-136]
+ 689 040c 8A49     		ldr	r1, .L40+4
+ 690 040e 51F82330 		ldr	r3, [r1, r3, lsl #2]
+ 691 0412 D21A     		subs	r2, r2, r3
+ 692 0414 D7F8A830 		ldr	r3, [r7, #168]
+ 693 0418 9B00     		lsls	r3, r3, #2
+ 694 041a 07F1B001 		add	r1, r7, #176
+ 695 041e 0B44     		add	r3, r3, r1
+ 696 0420 53F8883C 		ldr	r3, [r3, #-136]
+ 697 0424 D7F88C10 		ldr	r1, [r7, #140]
+ 698 0428 CB1A     		subs	r3, r1, r3
+ 699 042a 03FB02F3 		mul	r3, r3, r2
+ 700 042e FB67     		str	r3, [r7, #124]
+ 122:SpO2.c        ****       n_y_ac=  an_y[an_ir_valley_locs[k]] + n_y_ac/ (an_ir_valley_locs[k+1] - an_ir_valley_locs[k])
+ 701              		.loc 1 122 0
+ 702 0430 D7F8A830 		ldr	r3, [r7, #168]
+ 703 0434 9B00     		lsls	r3, r3, #2
+ 704 0436 07F1B002 		add	r2, r7, #176
+ 705 043a 1344     		add	r3, r3, r2
+ 706 043c 53F8883C 		ldr	r3, [r3, #-136]
+ 707 0440 7D4A     		ldr	r2, .L40+4
+ 708 0442 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 709 0446 D7F8A830 		ldr	r3, [r7, #168]
+ 710 044a 0133     		adds	r3, r3, #1
+ 711 044c 9B00     		lsls	r3, r3, #2
+ 712 044e 07F1B001 		add	r1, r7, #176
+ 713 0452 0B44     		add	r3, r3, r1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 16
+
+
+ 714 0454 53F8881C 		ldr	r1, [r3, #-136]
+ 715 0458 D7F8A830 		ldr	r3, [r7, #168]
+ 716 045c 9B00     		lsls	r3, r3, #2
+ 717 045e 07F1B000 		add	r0, r7, #176
+ 718 0462 0344     		add	r3, r3, r0
+ 719 0464 53F8883C 		ldr	r3, [r3, #-136]
+ 720 0468 CB1A     		subs	r3, r1, r3
+ 721 046a F96F     		ldr	r1, [r7, #124]
+ 722 046c 91FBF3F3 		sdiv	r3, r1, r3
+ 723 0470 1344     		add	r3, r3, r2
+ 724 0472 FB67     		str	r3, [r7, #124]
+ 123:SpO2.c        ****       n_y_ac=  an_y[n_y_dc_max_idx] - n_y_ac;    // subracting linear DC compoenents from raw 
+ 725              		.loc 1 123 0
+ 726 0474 704A     		ldr	r2, .L40+4
+ 727 0476 D7F88C30 		ldr	r3, [r7, #140]
+ 728 047a 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 729 047e FB6F     		ldr	r3, [r7, #124]
+ 730 0480 D31A     		subs	r3, r2, r3
+ 731 0482 FB67     		str	r3, [r7, #124]
+ 124:SpO2.c        ****       n_x_ac= (an_x[an_ir_valley_locs[k+1]] - an_x[an_ir_valley_locs[k] ] )*(n_x_dc_max_idx -an_ir_
+ 732              		.loc 1 124 0
+ 733 0484 D7F8A830 		ldr	r3, [r7, #168]
+ 734 0488 0133     		adds	r3, r3, #1
+ 735 048a 9B00     		lsls	r3, r3, #2
+ 736 048c 07F1B002 		add	r2, r7, #176
+ 737 0490 1344     		add	r3, r3, r2
+ 738 0492 53F8883C 		ldr	r3, [r3, #-136]
+ 739 0496 674A     		ldr	r2, .L40
+ 740 0498 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 741 049c D7F8A830 		ldr	r3, [r7, #168]
+ 742 04a0 9B00     		lsls	r3, r3, #2
+ 743 04a2 07F1B001 		add	r1, r7, #176
+ 744 04a6 0B44     		add	r3, r3, r1
+ 745 04a8 53F8883C 		ldr	r3, [r3, #-136]
+ 746 04ac 6149     		ldr	r1, .L40
+ 747 04ae 51F82330 		ldr	r3, [r1, r3, lsl #2]
+ 748 04b2 D21A     		subs	r2, r2, r3
+ 749 04b4 D7F8A830 		ldr	r3, [r7, #168]
+ 750 04b8 9B00     		lsls	r3, r3, #2
+ 751 04ba 07F1B001 		add	r1, r7, #176
+ 752 04be 0B44     		add	r3, r3, r1
+ 753 04c0 53F8883C 		ldr	r3, [r3, #-136]
+ 754 04c4 D7F88810 		ldr	r1, [r7, #136]
+ 755 04c8 CB1A     		subs	r3, r1, r3
+ 756 04ca 03FB02F3 		mul	r3, r3, r2
+ 757 04ce BB67     		str	r3, [r7, #120]
+ 125:SpO2.c        ****       n_x_ac=  an_x[an_ir_valley_locs[k]] + n_x_ac/ (an_ir_valley_locs[k+1] - an_ir_valley_locs[k])
+ 758              		.loc 1 125 0
+ 759 04d0 D7F8A830 		ldr	r3, [r7, #168]
+ 760 04d4 9B00     		lsls	r3, r3, #2
+ 761 04d6 07F1B002 		add	r2, r7, #176
+ 762 04da 1344     		add	r3, r3, r2
+ 763 04dc 53F8883C 		ldr	r3, [r3, #-136]
+ 764 04e0 544A     		ldr	r2, .L40
+ 765 04e2 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 766 04e6 D7F8A830 		ldr	r3, [r7, #168]
+ 767 04ea 0133     		adds	r3, r3, #1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 17
+
+
+ 768 04ec 9B00     		lsls	r3, r3, #2
+ 769 04ee 07F1B001 		add	r1, r7, #176
+ 770 04f2 0B44     		add	r3, r3, r1
+ 771 04f4 53F8881C 		ldr	r1, [r3, #-136]
+ 772 04f8 D7F8A830 		ldr	r3, [r7, #168]
+ 773 04fc 9B00     		lsls	r3, r3, #2
+ 774 04fe 07F1B000 		add	r0, r7, #176
+ 775 0502 0344     		add	r3, r3, r0
+ 776 0504 53F8883C 		ldr	r3, [r3, #-136]
+ 777 0508 CB1A     		subs	r3, r1, r3
+ 778 050a B96F     		ldr	r1, [r7, #120]
+ 779 050c 91FBF3F3 		sdiv	r3, r1, r3
+ 780 0510 1344     		add	r3, r3, r2
+ 781 0512 BB67     		str	r3, [r7, #120]
+ 126:SpO2.c        ****       n_x_ac=  an_x[n_y_dc_max_idx] - n_x_ac;      // subracting linear DC compoenents from raw 
+ 782              		.loc 1 126 0
+ 783 0514 474A     		ldr	r2, .L40
+ 784 0516 D7F88C30 		ldr	r3, [r7, #140]
+ 785 051a 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 786 051e BB6F     		ldr	r3, [r7, #120]
+ 787 0520 D31A     		subs	r3, r2, r3
+ 788 0522 BB67     		str	r3, [r7, #120]
+ 127:SpO2.c        ****       n_nume=( n_y_ac *n_x_dc_max)>>7 ; //prepare X100 to preserve floating value
+ 789              		.loc 1 127 0
+ 790 0524 FB6F     		ldr	r3, [r7, #124]
+ 791 0526 D7F89020 		ldr	r2, [r7, #144]
+ 792 052a 02FB03F3 		mul	r3, r2, r3
+ 793 052e DB11     		asrs	r3, r3, #7
+ 794 0530 7B67     		str	r3, [r7, #116]
+ 128:SpO2.c        ****       n_denom= ( n_x_ac *n_y_dc_max)>>7;
+ 795              		.loc 1 128 0
+ 796 0532 BB6F     		ldr	r3, [r7, #120]
+ 797 0534 D7F89420 		ldr	r2, [r7, #148]
+ 798 0538 02FB03F3 		mul	r3, r2, r3
+ 799 053c DB11     		asrs	r3, r3, #7
+ 800 053e 3B67     		str	r3, [r7, #112]
+ 129:SpO2.c        ****       if (n_denom>0  && n_i_ratio_count <5 &&  n_nume != 0)
+ 801              		.loc 1 129 0
+ 802 0540 3B6F     		ldr	r3, [r7, #112]
+ 803 0542 002B     		cmp	r3, #0
+ 804 0544 1ADD     		ble	.L28
+ 805              		.loc 1 129 0 is_stmt 0 discriminator 1
+ 806 0546 D7F8A430 		ldr	r3, [r7, #164]
+ 807 054a 042B     		cmp	r3, #4
+ 808 054c 16DC     		bgt	.L28
+ 809              		.loc 1 129 0 discriminator 2
+ 810 054e 7B6F     		ldr	r3, [r7, #116]
+ 811 0550 002B     		cmp	r3, #0
+ 812 0552 13D0     		beq	.L28
+ 130:SpO2.c        ****       {   
+ 131:SpO2.c        ****         an_ratio[n_i_ratio_count]= (n_nume*100)/n_denom ; //formular is ( n_y_ac *n_x_dc_max) / ( n
+ 813              		.loc 1 131 0 is_stmt 1
+ 814 0554 7B6F     		ldr	r3, [r7, #116]
+ 815 0556 6422     		movs	r2, #100
+ 816 0558 02FB03F2 		mul	r2, r2, r3
+ 817 055c 3B6F     		ldr	r3, [r7, #112]
+ 818 055e 92FBF3F2 		sdiv	r2, r2, r3
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 18
+
+
+ 819 0562 D7F8A430 		ldr	r3, [r7, #164]
+ 820 0566 9B00     		lsls	r3, r3, #2
+ 821 0568 07F1B001 		add	r1, r7, #176
+ 822 056c 0B44     		add	r3, r3, r1
+ 823 056e 43F89C2C 		str	r2, [r3, #-156]
+ 132:SpO2.c        ****         n_i_ratio_count++;
+ 824              		.loc 1 132 0
+ 825 0572 D7F8A430 		ldr	r3, [r7, #164]
+ 826 0576 0133     		adds	r3, r3, #1
+ 827 0578 C7F8A430 		str	r3, [r7, #164]
+ 828              	.L28:
+ 113:SpO2.c        ****     n_y_dc_max= -16777216 ; 
+ 829              		.loc 1 113 0 discriminator 2
+ 830 057c D7F8A830 		ldr	r3, [r7, #168]
+ 831 0580 0133     		adds	r3, r3, #1
+ 832 0582 C7F8A830 		str	r3, [r7, #168]
+ 833              	.L27:
+ 113:SpO2.c        ****     n_y_dc_max= -16777216 ; 
+ 834              		.loc 1 113 0 is_stmt 0 discriminator 1
+ 835 0586 D7F88030 		ldr	r3, [r7, #128]
+ 836 058a 5A1E     		subs	r2, r3, #1
+ 837 058c D7F8A830 		ldr	r3, [r7, #168]
+ 838 0590 9A42     		cmp	r2, r3
+ 839 0592 3FF7BDAE 		bgt	.L33
+ 133:SpO2.c        ****       }
+ 134:SpO2.c        ****     }
+ 135:SpO2.c        ****   }
+ 136:SpO2.c        ****   // choose median value since PPG signal may varies from beat to beat
+ 137:SpO2.c        ****   maxim_sort_ascend(an_ratio, n_i_ratio_count);
+ 840              		.loc 1 137 0 is_stmt 1
+ 841 0596 07F11403 		add	r3, r7, #20
+ 842 059a D7F8A410 		ldr	r1, [r7, #164]
+ 843 059e 1846     		mov	r0, r3
+ 844 05a0 FFF7FEFF 		bl	maxim_sort_ascend
+ 138:SpO2.c        ****   n_middle_idx= n_i_ratio_count/2;
+ 845              		.loc 1 138 0
+ 846 05a4 D7F8A430 		ldr	r3, [r7, #164]
+ 847 05a8 DA0F     		lsrs	r2, r3, #31
+ 848 05aa 1344     		add	r3, r3, r2
+ 849 05ac 5B10     		asrs	r3, r3, #1
+ 850 05ae FB66     		str	r3, [r7, #108]
+ 139:SpO2.c        **** 
+ 140:SpO2.c        ****   if (n_middle_idx >1)
+ 851              		.loc 1 140 0
+ 852 05b0 FB6E     		ldr	r3, [r7, #108]
+ 853 05b2 012B     		cmp	r3, #1
+ 854 05b4 15DD     		ble	.L34
+ 141:SpO2.c        ****     n_ratio_average =( an_ratio[n_middle_idx-1] +an_ratio[n_middle_idx])/2; // use median
+ 855              		.loc 1 141 0
+ 856 05b6 FB6E     		ldr	r3, [r7, #108]
+ 857 05b8 013B     		subs	r3, r3, #1
+ 858 05ba 9B00     		lsls	r3, r3, #2
+ 859 05bc 07F1B002 		add	r2, r7, #176
+ 860 05c0 1344     		add	r3, r3, r2
+ 861 05c2 53F89C2C 		ldr	r2, [r3, #-156]
+ 862 05c6 FB6E     		ldr	r3, [r7, #108]
+ 863 05c8 9B00     		lsls	r3, r3, #2
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 19
+
+
+ 864 05ca 07F1B001 		add	r1, r7, #176
+ 865 05ce 0B44     		add	r3, r3, r1
+ 866 05d0 53F89C3C 		ldr	r3, [r3, #-156]
+ 867 05d4 1344     		add	r3, r3, r2
+ 868 05d6 DA0F     		lsrs	r2, r3, #31
+ 869 05d8 1344     		add	r3, r3, r2
+ 870 05da 5B10     		asrs	r3, r3, #1
+ 871 05dc C7F88430 		str	r3, [r7, #132]
+ 872 05e0 08E0     		b	.L35
+ 873              	.L34:
+ 142:SpO2.c        ****   else
+ 143:SpO2.c        ****     n_ratio_average = an_ratio[n_middle_idx ];
+ 874              		.loc 1 143 0
+ 875 05e2 FB6E     		ldr	r3, [r7, #108]
+ 876 05e4 9B00     		lsls	r3, r3, #2
+ 877 05e6 07F1B002 		add	r2, r7, #176
+ 878 05ea 1344     		add	r3, r3, r2
+ 879 05ec 53F89C3C 		ldr	r3, [r3, #-156]
+ 880 05f0 C7F88430 		str	r3, [r7, #132]
+ 881              	.L35:
+ 144:SpO2.c        **** 
+ 145:SpO2.c        ****   if( n_ratio_average>2 && n_ratio_average <184){
+ 882              		.loc 1 145 0
+ 883 05f4 D7F88430 		ldr	r3, [r7, #132]
+ 884 05f8 022B     		cmp	r3, #2
+ 885 05fa 11DD     		ble	.L36
+ 886              		.loc 1 145 0 is_stmt 0 discriminator 1
+ 887 05fc D7F88430 		ldr	r3, [r7, #132]
+ 888 0600 B72B     		cmp	r3, #183
+ 889 0602 0DDC     		bgt	.L36
+ 146:SpO2.c        ****     n_spo2_calc= uch_spo2_table[n_ratio_average] ;
+ 890              		.loc 1 146 0 is_stmt 1
+ 891 0604 0D4A     		ldr	r2, .L40+8
+ 892 0606 D7F88430 		ldr	r3, [r7, #132]
+ 893 060a 1344     		add	r3, r3, r2
+ 894 060c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 895 060e BB66     		str	r3, [r7, #104]
+ 147:SpO2.c        ****     *pn_spo2 = n_spo2_calc ;
+ 896              		.loc 1 147 0
+ 897 0610 3B68     		ldr	r3, [r7]
+ 898 0612 BA6E     		ldr	r2, [r7, #104]
+ 899 0614 1A60     		str	r2, [r3]
+ 148:SpO2.c        ****     *pch_spo2_valid  = 1;//  float_SPO2 =  -45.060*n_ratio_average* n_ratio_average/10000 + 30.354 
+ 900              		.loc 1 148 0
+ 901 0616 D7F8B830 		ldr	r3, [r7, #184]
+ 902 061a 0122     		movs	r2, #1
+ 903 061c 1A70     		strb	r2, [r3]
+ 904 061e 06E0     		b	.L1
+ 905              	.L36:
+ 149:SpO2.c        ****   }
+ 150:SpO2.c        ****   else{
+ 151:SpO2.c        ****     *pn_spo2 =  -999 ; // do not use SPO2 since signal an_ratio is out of range
+ 906              		.loc 1 151 0
+ 907 0620 3B68     		ldr	r3, [r7]
+ 908 0622 074A     		ldr	r2, .L40+12
+ 909 0624 1A60     		str	r2, [r3]
+ 152:SpO2.c        ****     *pch_spo2_valid  = 0; 
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 20
+
+
+ 910              		.loc 1 152 0
+ 911 0626 D7F8B830 		ldr	r3, [r7, #184]
+ 912 062a 0022     		movs	r2, #0
+ 913 062c 1A70     		strb	r2, [r3]
+ 914              	.L1:
+ 153:SpO2.c        ****   }
+ 154:SpO2.c        **** }
+ 915              		.loc 1 154 0
+ 916 062e B037     		adds	r7, r7, #176
+ 917              		.cfi_def_cfa_offset 8
+ 918 0630 BD46     		mov	sp, r7
+ 919              		.cfi_def_cfa_register 13
+ 920              		@ sp needed
+ 921 0632 80BD     		pop	{r7, pc}
+ 922              	.L41:
+ 923              		.align	2
+ 924              	.L40:
+ 925 0634 00000000 		.word	an_x
+ 926 0638 20030000 		.word	an_y
+ 927 063c 00000000 		.word	uch_spo2_table
+ 928 0640 19FCFFFF 		.word	-999
+ 929              		.cfi_endproc
+ 930              	.LFE63:
+ 931              		.size	maxim_heart_rate_and_oxygen_saturation, .-maxim_heart_rate_and_oxygen_saturation
+ 932              		.section	.text.maxim_find_peaks,"ax",%progbits
+ 933              		.align	2
+ 934              		.global	maxim_find_peaks
+ 935              		.thumb
+ 936              		.thumb_func
+ 937              		.type	maxim_find_peaks, %function
+ 938              	maxim_find_peaks:
+ 939              	.LFB64:
+ 155:SpO2.c        **** 
+ 156:SpO2.c        **** 
+ 157:SpO2.c        **** void maxim_find_peaks( int32_t *pn_locs, int32_t *n_npks,  int32_t  *pn_x, int32_t n_size, int32_t 
+ 158:SpO2.c        **** /**
+ 159:SpO2.c        **** * \brief        Find peaks
+ 160:SpO2.c        **** * \par          Details
+ 161:SpO2.c        **** *               Find at most MAX_NUM peaks above MIN_HEIGHT separated by at least MIN_DISTANCE
+ 162:SpO2.c        **** *
+ 163:SpO2.c        **** * \retval       None
+ 164:SpO2.c        **** */
+ 165:SpO2.c        **** {
+ 940              		.loc 1 165 0
+ 941              		.cfi_startproc
+ 942              		@ args = 12, pretend = 0, frame = 16
+ 943              		@ frame_needed = 1, uses_anonymous_args = 0
+ 944 0000 80B5     		push	{r7, lr}
+ 945              		.cfi_def_cfa_offset 8
+ 946              		.cfi_offset 7, -8
+ 947              		.cfi_offset 14, -4
+ 948 0002 86B0     		sub	sp, sp, #24
+ 949              		.cfi_def_cfa_offset 32
+ 950 0004 02AF     		add	r7, sp, #8
+ 951              		.cfi_def_cfa 7, 24
+ 952 0006 F860     		str	r0, [r7, #12]
+ 953 0008 B960     		str	r1, [r7, #8]
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 21
+
+
+ 954 000a 7A60     		str	r2, [r7, #4]
+ 955 000c 3B60     		str	r3, [r7]
+ 166:SpO2.c        ****   maxim_peaks_above_min_height( pn_locs, n_npks, pn_x, n_size, n_min_height );
+ 956              		.loc 1 166 0
+ 957 000e BB69     		ldr	r3, [r7, #24]
+ 958 0010 0093     		str	r3, [sp]
+ 959 0012 3B68     		ldr	r3, [r7]
+ 960 0014 7A68     		ldr	r2, [r7, #4]
+ 961 0016 B968     		ldr	r1, [r7, #8]
+ 962 0018 F868     		ldr	r0, [r7, #12]
+ 963 001a FFF7FEFF 		bl	maxim_peaks_above_min_height
+ 167:SpO2.c        ****   maxim_remove_close_peaks( pn_locs, n_npks, pn_x, n_min_distance );
+ 964              		.loc 1 167 0
+ 965 001e FB69     		ldr	r3, [r7, #28]
+ 966 0020 7A68     		ldr	r2, [r7, #4]
+ 967 0022 B968     		ldr	r1, [r7, #8]
+ 968 0024 F868     		ldr	r0, [r7, #12]
+ 969 0026 FFF7FEFF 		bl	maxim_remove_close_peaks
+ 168:SpO2.c        ****   *n_npks = min( *n_npks, n_max_num );
+ 970              		.loc 1 168 0
+ 971 002a BB68     		ldr	r3, [r7, #8]
+ 972 002c 1A68     		ldr	r2, [r3]
+ 973 002e 3B6A     		ldr	r3, [r7, #32]
+ 974 0030 9A42     		cmp	r2, r3
+ 975 0032 A8BF     		it	ge
+ 976 0034 1A46     		movge	r2, r3
+ 977 0036 BB68     		ldr	r3, [r7, #8]
+ 978 0038 1A60     		str	r2, [r3]
+ 169:SpO2.c        **** }
+ 979              		.loc 1 169 0
+ 980 003a 00BF     		nop
+ 981 003c 1037     		adds	r7, r7, #16
+ 982              		.cfi_def_cfa_offset 8
+ 983 003e BD46     		mov	sp, r7
+ 984              		.cfi_def_cfa_register 13
+ 985              		@ sp needed
+ 986 0040 80BD     		pop	{r7, pc}
+ 987              		.cfi_endproc
+ 988              	.LFE64:
+ 989              		.size	maxim_find_peaks, .-maxim_find_peaks
+ 990 0042 00BF     		.section	.text.maxim_peaks_above_min_height,"ax",%progbits
+ 991              		.align	2
+ 992              		.global	maxim_peaks_above_min_height
+ 993              		.thumb
+ 994              		.thumb_func
+ 995              		.type	maxim_peaks_above_min_height, %function
+ 996              	maxim_peaks_above_min_height:
+ 997              	.LFB65:
+ 170:SpO2.c        **** 
+ 171:SpO2.c        **** void maxim_peaks_above_min_height( int32_t *pn_locs, int32_t *n_npks,  int32_t  *pn_x, int32_t n_si
+ 172:SpO2.c        **** /**
+ 173:SpO2.c        **** * \brief        Find peaks above n_min_height
+ 174:SpO2.c        **** * \par          Details
+ 175:SpO2.c        **** *               Find all peaks above MIN_HEIGHT
+ 176:SpO2.c        **** *
+ 177:SpO2.c        **** * \retval       None
+ 178:SpO2.c        **** */
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 22
+
+
+ 179:SpO2.c        **** {
+ 998              		.loc 1 179 0
+ 999              		.cfi_startproc
+ 1000              		@ args = 4, pretend = 0, frame = 24
+ 1001              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1002              		@ link register save eliminated.
+ 1003 0000 80B4     		push	{r7}
+ 1004              		.cfi_def_cfa_offset 4
+ 1005              		.cfi_offset 7, -4
+ 1006 0002 87B0     		sub	sp, sp, #28
+ 1007              		.cfi_def_cfa_offset 32
+ 1008 0004 00AF     		add	r7, sp, #0
+ 1009              		.cfi_def_cfa_register 7
+ 1010 0006 F860     		str	r0, [r7, #12]
+ 1011 0008 B960     		str	r1, [r7, #8]
+ 1012 000a 7A60     		str	r2, [r7, #4]
+ 1013 000c 3B60     		str	r3, [r7]
+ 180:SpO2.c        ****   int32_t i = 1, n_width;
+ 1014              		.loc 1 180 0
+ 1015 000e 0123     		movs	r3, #1
+ 1016 0010 7B61     		str	r3, [r7, #20]
+ 181:SpO2.c        ****   *n_npks = 0;
+ 1017              		.loc 1 181 0
+ 1018 0012 BB68     		ldr	r3, [r7, #8]
+ 1019 0014 0022     		movs	r2, #0
+ 1020 0016 1A60     		str	r2, [r3]
+ 182:SpO2.c        ****   
+ 183:SpO2.c        ****   while (i < n_size-1){
+ 1021              		.loc 1 183 0
+ 1022 0018 5AE0     		b	.L44
+ 1023              	.L51:
+ 184:SpO2.c        ****     if (pn_x[i] > n_min_height && pn_x[i] > pn_x[i-1]){      // find left edge of potential peaks
+ 1024              		.loc 1 184 0
+ 1025 001a 7B69     		ldr	r3, [r7, #20]
+ 1026 001c 9B00     		lsls	r3, r3, #2
+ 1027 001e 7A68     		ldr	r2, [r7, #4]
+ 1028 0020 1344     		add	r3, r3, r2
+ 1029 0022 1A68     		ldr	r2, [r3]
+ 1030 0024 3B6A     		ldr	r3, [r7, #32]
+ 1031 0026 9A42     		cmp	r2, r3
+ 1032 0028 4FDD     		ble	.L45
+ 1033              		.loc 1 184 0 is_stmt 0 discriminator 1
+ 1034 002a 7B69     		ldr	r3, [r7, #20]
+ 1035 002c 9B00     		lsls	r3, r3, #2
+ 1036 002e 7A68     		ldr	r2, [r7, #4]
+ 1037 0030 1344     		add	r3, r3, r2
+ 1038 0032 1A68     		ldr	r2, [r3]
+ 1039 0034 7B69     		ldr	r3, [r7, #20]
+ 1040 0036 03F18043 		add	r3, r3, #1073741824
+ 1041 003a 013B     		subs	r3, r3, #1
+ 1042 003c 9B00     		lsls	r3, r3, #2
+ 1043 003e 7968     		ldr	r1, [r7, #4]
+ 1044 0040 0B44     		add	r3, r3, r1
+ 1045 0042 1B68     		ldr	r3, [r3]
+ 1046 0044 9A42     		cmp	r2, r3
+ 1047 0046 40DD     		ble	.L45
+ 185:SpO2.c        ****       n_width = 1;
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 23
+
+
+ 1048              		.loc 1 185 0 is_stmt 1
+ 1049 0048 0123     		movs	r3, #1
+ 1050 004a 3B61     		str	r3, [r7, #16]
+ 186:SpO2.c        ****       while (i+n_width < n_size && pn_x[i] == pn_x[i+n_width])  // find flat peaks
+ 1051              		.loc 1 186 0
+ 1052 004c 02E0     		b	.L46
+ 1053              	.L48:
+ 187:SpO2.c        ****         n_width++;
+ 1054              		.loc 1 187 0
+ 1055 004e 3B69     		ldr	r3, [r7, #16]
+ 1056 0050 0133     		adds	r3, r3, #1
+ 1057 0052 3B61     		str	r3, [r7, #16]
+ 1058              	.L46:
+ 186:SpO2.c        ****       while (i+n_width < n_size && pn_x[i] == pn_x[i+n_width])  // find flat peaks
+ 1059              		.loc 1 186 0
+ 1060 0054 7A69     		ldr	r2, [r7, #20]
+ 1061 0056 3B69     		ldr	r3, [r7, #16]
+ 1062 0058 1A44     		add	r2, r2, r3
+ 1063 005a 3B68     		ldr	r3, [r7]
+ 1064 005c 9A42     		cmp	r2, r3
+ 1065 005e 0DDA     		bge	.L47
+ 186:SpO2.c        ****       while (i+n_width < n_size && pn_x[i] == pn_x[i+n_width])  // find flat peaks
+ 1066              		.loc 1 186 0 is_stmt 0 discriminator 1
+ 1067 0060 7B69     		ldr	r3, [r7, #20]
+ 1068 0062 9B00     		lsls	r3, r3, #2
+ 1069 0064 7A68     		ldr	r2, [r7, #4]
+ 1070 0066 1344     		add	r3, r3, r2
+ 1071 0068 1A68     		ldr	r2, [r3]
+ 1072 006a 7969     		ldr	r1, [r7, #20]
+ 1073 006c 3B69     		ldr	r3, [r7, #16]
+ 1074 006e 0B44     		add	r3, r3, r1
+ 1075 0070 9B00     		lsls	r3, r3, #2
+ 1076 0072 7968     		ldr	r1, [r7, #4]
+ 1077 0074 0B44     		add	r3, r3, r1
+ 1078 0076 1B68     		ldr	r3, [r3]
+ 1079 0078 9A42     		cmp	r2, r3
+ 1080 007a E8D0     		beq	.L48
+ 1081              	.L47:
+ 188:SpO2.c        ****       if (pn_x[i] > pn_x[i+n_width] && (*n_npks) < 15 ){      // find right edge of peaks
+ 1082              		.loc 1 188 0 is_stmt 1
+ 1083 007c 7B69     		ldr	r3, [r7, #20]
+ 1084 007e 9B00     		lsls	r3, r3, #2
+ 1085 0080 7A68     		ldr	r2, [r7, #4]
+ 1086 0082 1344     		add	r3, r3, r2
+ 1087 0084 1A68     		ldr	r2, [r3]
+ 1088 0086 7969     		ldr	r1, [r7, #20]
+ 1089 0088 3B69     		ldr	r3, [r7, #16]
+ 1090 008a 0B44     		add	r3, r3, r1
+ 1091 008c 9B00     		lsls	r3, r3, #2
+ 1092 008e 7968     		ldr	r1, [r7, #4]
+ 1093 0090 0B44     		add	r3, r3, r1
+ 1094 0092 1B68     		ldr	r3, [r3]
+ 1095 0094 9A42     		cmp	r2, r3
+ 1096 0096 13DD     		ble	.L49
+ 1097              		.loc 1 188 0 is_stmt 0 discriminator 1
+ 1098 0098 BB68     		ldr	r3, [r7, #8]
+ 1099 009a 1B68     		ldr	r3, [r3]
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 24
+
+
+ 1100 009c 0E2B     		cmp	r3, #14
+ 1101 009e 0FDC     		bgt	.L49
+ 189:SpO2.c        ****         pn_locs[(*n_npks)++] = i;    
+ 1102              		.loc 1 189 0 is_stmt 1
+ 1103 00a0 BB68     		ldr	r3, [r7, #8]
+ 1104 00a2 1B68     		ldr	r3, [r3]
+ 1105 00a4 591C     		adds	r1, r3, #1
+ 1106 00a6 BA68     		ldr	r2, [r7, #8]
+ 1107 00a8 1160     		str	r1, [r2]
+ 1108 00aa 9B00     		lsls	r3, r3, #2
+ 1109 00ac FA68     		ldr	r2, [r7, #12]
+ 1110 00ae 1344     		add	r3, r3, r2
+ 1111 00b0 7A69     		ldr	r2, [r7, #20]
+ 1112 00b2 1A60     		str	r2, [r3]
+ 190:SpO2.c        ****         // for flat peaks, peak location is left edge
+ 191:SpO2.c        ****         i += n_width+1;
+ 1113              		.loc 1 191 0
+ 1114 00b4 3B69     		ldr	r3, [r7, #16]
+ 1115 00b6 0133     		adds	r3, r3, #1
+ 1116 00b8 7A69     		ldr	r2, [r7, #20]
+ 1117 00ba 1344     		add	r3, r3, r2
+ 1118 00bc 7B61     		str	r3, [r7, #20]
+ 1119 00be 03E0     		b	.L50
+ 1120              	.L49:
+ 192:SpO2.c        ****       }
+ 193:SpO2.c        ****       else
+ 194:SpO2.c        ****         i += n_width;
+ 1121              		.loc 1 194 0
+ 1122 00c0 7A69     		ldr	r2, [r7, #20]
+ 1123 00c2 3B69     		ldr	r3, [r7, #16]
+ 1124 00c4 1344     		add	r3, r3, r2
+ 1125 00c6 7B61     		str	r3, [r7, #20]
+ 1126              	.L50:
+ 188:SpO2.c        ****         pn_locs[(*n_npks)++] = i;    
+ 1127              		.loc 1 188 0
+ 1128 00c8 02E0     		b	.L44
+ 1129              	.L45:
+ 195:SpO2.c        ****     }
+ 196:SpO2.c        ****     else
+ 197:SpO2.c        ****       i++;
+ 1130              		.loc 1 197 0
+ 1131 00ca 7B69     		ldr	r3, [r7, #20]
+ 1132 00cc 0133     		adds	r3, r3, #1
+ 1133 00ce 7B61     		str	r3, [r7, #20]
+ 1134              	.L44:
+ 183:SpO2.c        ****     if (pn_x[i] > n_min_height && pn_x[i] > pn_x[i-1]){      // find left edge of potential peaks
+ 1135              		.loc 1 183 0
+ 1136 00d0 3B68     		ldr	r3, [r7]
+ 1137 00d2 5A1E     		subs	r2, r3, #1
+ 1138 00d4 7B69     		ldr	r3, [r7, #20]
+ 1139 00d6 9A42     		cmp	r2, r3
+ 1140 00d8 9FDC     		bgt	.L51
+ 198:SpO2.c        ****   }
+ 199:SpO2.c        **** }
+ 1141              		.loc 1 199 0
+ 1142 00da 00BF     		nop
+ 1143 00dc 1C37     		adds	r7, r7, #28
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 25
+
+
+ 1144              		.cfi_def_cfa_offset 4
+ 1145 00de BD46     		mov	sp, r7
+ 1146              		.cfi_def_cfa_register 13
+ 1147              		@ sp needed
+ 1148 00e0 80BC     		pop	{r7}
+ 1149              		.cfi_restore 7
+ 1150              		.cfi_def_cfa_offset 0
+ 1151 00e2 7047     		bx	lr
+ 1152              		.cfi_endproc
+ 1153              	.LFE65:
+ 1154              		.size	maxim_peaks_above_min_height, .-maxim_peaks_above_min_height
+ 1155              		.section	.text.maxim_remove_close_peaks,"ax",%progbits
+ 1156              		.align	2
+ 1157              		.global	maxim_remove_close_peaks
+ 1158              		.thumb
+ 1159              		.thumb_func
+ 1160              		.type	maxim_remove_close_peaks, %function
+ 1161              	maxim_remove_close_peaks:
+ 1162              	.LFB66:
+ 200:SpO2.c        **** 
+ 201:SpO2.c        **** void maxim_remove_close_peaks(int32_t *pn_locs, int32_t *pn_npks, int32_t *pn_x, int32_t n_min_dist
+ 202:SpO2.c        **** /**
+ 203:SpO2.c        **** * \brief        Remove peaks
+ 204:SpO2.c        **** * \par          Details
+ 205:SpO2.c        **** *               Remove peaks separated by less than MIN_DISTANCE
+ 206:SpO2.c        **** *
+ 207:SpO2.c        **** * \retval       None
+ 208:SpO2.c        **** */
+ 209:SpO2.c        **** {
+ 1163              		.loc 1 209 0
+ 1164              		.cfi_startproc
+ 1165              		@ args = 0, pretend = 0, frame = 32
+ 1166              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1167 0000 80B5     		push	{r7, lr}
+ 1168              		.cfi_def_cfa_offset 8
+ 1169              		.cfi_offset 7, -8
+ 1170              		.cfi_offset 14, -4
+ 1171 0002 88B0     		sub	sp, sp, #32
+ 1172              		.cfi_def_cfa_offset 40
+ 1173 0004 00AF     		add	r7, sp, #0
+ 1174              		.cfi_def_cfa_register 7
+ 1175 0006 F860     		str	r0, [r7, #12]
+ 1176 0008 B960     		str	r1, [r7, #8]
+ 1177 000a 7A60     		str	r2, [r7, #4]
+ 1178 000c 3B60     		str	r3, [r7]
+ 210:SpO2.c        ****     
+ 211:SpO2.c        ****   int32_t i, j, n_old_npks, n_dist;
+ 212:SpO2.c        ****     
+ 213:SpO2.c        ****   /* Order peaks from large to small */
+ 214:SpO2.c        ****   maxim_sort_indices_descend( pn_x, pn_locs, *pn_npks );
+ 1179              		.loc 1 214 0
+ 1180 000e BB68     		ldr	r3, [r7, #8]
+ 1181 0010 1B68     		ldr	r3, [r3]
+ 1182 0012 1A46     		mov	r2, r3
+ 1183 0014 F968     		ldr	r1, [r7, #12]
+ 1184 0016 7868     		ldr	r0, [r7, #4]
+ 1185 0018 FFF7FEFF 		bl	maxim_sort_indices_descend
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 26
+
+
+ 215:SpO2.c        **** 
+ 216:SpO2.c        ****   for ( i = -1; i < *pn_npks; i++ ){
+ 1186              		.loc 1 216 0
+ 1187 001c 4FF0FF33 		mov	r3, #-1
+ 1188 0020 FB61     		str	r3, [r7, #28]
+ 1189 0022 3EE0     		b	.L53
+ 1190              	.L60:
+ 217:SpO2.c        ****     n_old_npks = *pn_npks;
+ 1191              		.loc 1 217 0
+ 1192 0024 BB68     		ldr	r3, [r7, #8]
+ 1193 0026 1B68     		ldr	r3, [r3]
+ 1194 0028 7B61     		str	r3, [r7, #20]
+ 218:SpO2.c        ****     *pn_npks = i+1;
+ 1195              		.loc 1 218 0
+ 1196 002a FB69     		ldr	r3, [r7, #28]
+ 1197 002c 5A1C     		adds	r2, r3, #1
+ 1198 002e BB68     		ldr	r3, [r7, #8]
+ 1199 0030 1A60     		str	r2, [r3]
+ 219:SpO2.c        ****     for ( j = i+1; j < n_old_npks; j++ ){
+ 1200              		.loc 1 219 0
+ 1201 0032 FB69     		ldr	r3, [r7, #28]
+ 1202 0034 0133     		adds	r3, r3, #1
+ 1203 0036 BB61     		str	r3, [r7, #24]
+ 1204 0038 2CE0     		b	.L54
+ 1205              	.L59:
+ 220:SpO2.c        ****       n_dist =  pn_locs[j] - ( i == -1 ? -1 : pn_locs[i] ); // lag-zero peak of autocorr is at inde
+ 1206              		.loc 1 220 0
+ 1207 003a BB69     		ldr	r3, [r7, #24]
+ 1208 003c 9B00     		lsls	r3, r3, #2
+ 1209 003e FA68     		ldr	r2, [r7, #12]
+ 1210 0040 1344     		add	r3, r3, r2
+ 1211 0042 1A68     		ldr	r2, [r3]
+ 1212 0044 FB69     		ldr	r3, [r7, #28]
+ 1213 0046 B3F1FF3F 		cmp	r3, #-1
+ 1214 004a 05D0     		beq	.L55
+ 1215              		.loc 1 220 0 is_stmt 0 discriminator 1
+ 1216 004c FB69     		ldr	r3, [r7, #28]
+ 1217 004e 9B00     		lsls	r3, r3, #2
+ 1218 0050 F968     		ldr	r1, [r7, #12]
+ 1219 0052 0B44     		add	r3, r3, r1
+ 1220 0054 1B68     		ldr	r3, [r3]
+ 1221 0056 01E0     		b	.L56
+ 1222              	.L55:
+ 1223              		.loc 1 220 0 discriminator 2
+ 1224 0058 4FF0FF33 		mov	r3, #-1
+ 1225              	.L56:
+ 1226              		.loc 1 220 0 discriminator 4
+ 1227 005c D31A     		subs	r3, r2, r3
+ 1228 005e 3B61     		str	r3, [r7, #16]
+ 221:SpO2.c        ****       if ( n_dist > n_min_distance || n_dist < -n_min_distance )
+ 1229              		.loc 1 221 0 is_stmt 1 discriminator 4
+ 1230 0060 3A69     		ldr	r2, [r7, #16]
+ 1231 0062 3B68     		ldr	r3, [r7]
+ 1232 0064 9A42     		cmp	r2, r3
+ 1233 0066 04DC     		bgt	.L57
+ 1234              		.loc 1 221 0 is_stmt 0 discriminator 1
+ 1235 0068 3B68     		ldr	r3, [r7]
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 27
+
+
+ 1236 006a 5A42     		negs	r2, r3
+ 1237 006c 3B69     		ldr	r3, [r7, #16]
+ 1238 006e 9A42     		cmp	r2, r3
+ 1239 0070 0DDD     		ble	.L58
+ 1240              	.L57:
+ 222:SpO2.c        ****         pn_locs[(*pn_npks)++] = pn_locs[j];
+ 1241              		.loc 1 222 0 is_stmt 1
+ 1242 0072 BB68     		ldr	r3, [r7, #8]
+ 1243 0074 1B68     		ldr	r3, [r3]
+ 1244 0076 591C     		adds	r1, r3, #1
+ 1245 0078 BA68     		ldr	r2, [r7, #8]
+ 1246 007a 1160     		str	r1, [r2]
+ 1247 007c 9B00     		lsls	r3, r3, #2
+ 1248 007e FA68     		ldr	r2, [r7, #12]
+ 1249 0080 1344     		add	r3, r3, r2
+ 1250 0082 BA69     		ldr	r2, [r7, #24]
+ 1251 0084 9200     		lsls	r2, r2, #2
+ 1252 0086 F968     		ldr	r1, [r7, #12]
+ 1253 0088 0A44     		add	r2, r2, r1
+ 1254 008a 1268     		ldr	r2, [r2]
+ 1255 008c 1A60     		str	r2, [r3]
+ 1256              	.L58:
+ 219:SpO2.c        ****       n_dist =  pn_locs[j] - ( i == -1 ? -1 : pn_locs[i] ); // lag-zero peak of autocorr is at inde
+ 1257              		.loc 1 219 0 discriminator 2
+ 1258 008e BB69     		ldr	r3, [r7, #24]
+ 1259 0090 0133     		adds	r3, r3, #1
+ 1260 0092 BB61     		str	r3, [r7, #24]
+ 1261              	.L54:
+ 219:SpO2.c        ****       n_dist =  pn_locs[j] - ( i == -1 ? -1 : pn_locs[i] ); // lag-zero peak of autocorr is at inde
+ 1262              		.loc 1 219 0 is_stmt 0 discriminator 1
+ 1263 0094 BA69     		ldr	r2, [r7, #24]
+ 1264 0096 7B69     		ldr	r3, [r7, #20]
+ 1265 0098 9A42     		cmp	r2, r3
+ 1266 009a CEDB     		blt	.L59
+ 216:SpO2.c        ****     n_old_npks = *pn_npks;
+ 1267              		.loc 1 216 0 is_stmt 1 discriminator 2
+ 1268 009c FB69     		ldr	r3, [r7, #28]
+ 1269 009e 0133     		adds	r3, r3, #1
+ 1270 00a0 FB61     		str	r3, [r7, #28]
+ 1271              	.L53:
+ 216:SpO2.c        ****     n_old_npks = *pn_npks;
+ 1272              		.loc 1 216 0 is_stmt 0 discriminator 1
+ 1273 00a2 BB68     		ldr	r3, [r7, #8]
+ 1274 00a4 1A68     		ldr	r2, [r3]
+ 1275 00a6 FB69     		ldr	r3, [r7, #28]
+ 1276 00a8 9A42     		cmp	r2, r3
+ 1277 00aa BBDC     		bgt	.L60
+ 223:SpO2.c        ****     }
+ 224:SpO2.c        ****   }
+ 225:SpO2.c        **** 
+ 226:SpO2.c        ****   // Resort indices int32_to ascending order
+ 227:SpO2.c        ****   maxim_sort_ascend( pn_locs, *pn_npks );
+ 1278              		.loc 1 227 0 is_stmt 1
+ 1279 00ac BB68     		ldr	r3, [r7, #8]
+ 1280 00ae 1B68     		ldr	r3, [r3]
+ 1281 00b0 1946     		mov	r1, r3
+ 1282 00b2 F868     		ldr	r0, [r7, #12]
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 28
+
+
+ 1283 00b4 FFF7FEFF 		bl	maxim_sort_ascend
+ 228:SpO2.c        **** }
+ 1284              		.loc 1 228 0
+ 1285 00b8 00BF     		nop
+ 1286 00ba 2037     		adds	r7, r7, #32
+ 1287              		.cfi_def_cfa_offset 8
+ 1288 00bc BD46     		mov	sp, r7
+ 1289              		.cfi_def_cfa_register 13
+ 1290              		@ sp needed
+ 1291 00be 80BD     		pop	{r7, pc}
+ 1292              		.cfi_endproc
+ 1293              	.LFE66:
+ 1294              		.size	maxim_remove_close_peaks, .-maxim_remove_close_peaks
+ 1295              		.section	.text.maxim_sort_ascend,"ax",%progbits
+ 1296              		.align	2
+ 1297              		.global	maxim_sort_ascend
+ 1298              		.thumb
+ 1299              		.thumb_func
+ 1300              		.type	maxim_sort_ascend, %function
+ 1301              	maxim_sort_ascend:
+ 1302              	.LFB67:
+ 229:SpO2.c        **** 
+ 230:SpO2.c        **** void maxim_sort_ascend(int32_t  *pn_x, int32_t n_size) 
+ 231:SpO2.c        **** /**
+ 232:SpO2.c        **** * \brief        Sort array
+ 233:SpO2.c        **** * \par          Details
+ 234:SpO2.c        **** *               Sort array in ascending order (insertion sort algorithm)
+ 235:SpO2.c        **** *
+ 236:SpO2.c        **** * \retval       None
+ 237:SpO2.c        **** */
+ 238:SpO2.c        **** {
+ 1303              		.loc 1 238 0
+ 1304              		.cfi_startproc
+ 1305              		@ args = 0, pretend = 0, frame = 24
+ 1306              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1307              		@ link register save eliminated.
+ 1308 0000 80B4     		push	{r7}
+ 1309              		.cfi_def_cfa_offset 4
+ 1310              		.cfi_offset 7, -4
+ 1311 0002 87B0     		sub	sp, sp, #28
+ 1312              		.cfi_def_cfa_offset 32
+ 1313 0004 00AF     		add	r7, sp, #0
+ 1314              		.cfi_def_cfa_register 7
+ 1315 0006 7860     		str	r0, [r7, #4]
+ 1316 0008 3960     		str	r1, [r7]
+ 239:SpO2.c        ****   int32_t i, j, n_temp;
+ 240:SpO2.c        ****   for (i = 1; i < n_size; i++) {
+ 1317              		.loc 1 240 0
+ 1318 000a 0123     		movs	r3, #1
+ 1319 000c 7B61     		str	r3, [r7, #20]
+ 1320 000e 2FE0     		b	.L62
+ 1321              	.L66:
+ 241:SpO2.c        ****     n_temp = pn_x[i];
+ 1322              		.loc 1 241 0
+ 1323 0010 7B69     		ldr	r3, [r7, #20]
+ 1324 0012 9B00     		lsls	r3, r3, #2
+ 1325 0014 7A68     		ldr	r2, [r7, #4]
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 29
+
+
+ 1326 0016 1344     		add	r3, r3, r2
+ 1327 0018 1B68     		ldr	r3, [r3]
+ 1328 001a FB60     		str	r3, [r7, #12]
+ 242:SpO2.c        ****     for (j = i; j > 0 && n_temp < pn_x[j-1]; j--)
+ 1329              		.loc 1 242 0
+ 1330 001c 7B69     		ldr	r3, [r7, #20]
+ 1331 001e 3B61     		str	r3, [r7, #16]
+ 1332 0020 0FE0     		b	.L63
+ 1333              	.L65:
+ 243:SpO2.c        ****         pn_x[j] = pn_x[j-1];
+ 1334              		.loc 1 243 0 discriminator 4
+ 1335 0022 3B69     		ldr	r3, [r7, #16]
+ 1336 0024 9B00     		lsls	r3, r3, #2
+ 1337 0026 7A68     		ldr	r2, [r7, #4]
+ 1338 0028 1A44     		add	r2, r2, r3
+ 1339 002a 3B69     		ldr	r3, [r7, #16]
+ 1340 002c 03F18043 		add	r3, r3, #1073741824
+ 1341 0030 013B     		subs	r3, r3, #1
+ 1342 0032 9B00     		lsls	r3, r3, #2
+ 1343 0034 7968     		ldr	r1, [r7, #4]
+ 1344 0036 0B44     		add	r3, r3, r1
+ 1345 0038 1B68     		ldr	r3, [r3]
+ 1346 003a 1360     		str	r3, [r2]
+ 242:SpO2.c        ****     for (j = i; j > 0 && n_temp < pn_x[j-1]; j--)
+ 1347              		.loc 1 242 0 discriminator 4
+ 1348 003c 3B69     		ldr	r3, [r7, #16]
+ 1349 003e 013B     		subs	r3, r3, #1
+ 1350 0040 3B61     		str	r3, [r7, #16]
+ 1351              	.L63:
+ 242:SpO2.c        ****     for (j = i; j > 0 && n_temp < pn_x[j-1]; j--)
+ 1352              		.loc 1 242 0 is_stmt 0 discriminator 1
+ 1353 0042 3B69     		ldr	r3, [r7, #16]
+ 1354 0044 002B     		cmp	r3, #0
+ 1355 0046 0ADD     		ble	.L64
+ 242:SpO2.c        ****     for (j = i; j > 0 && n_temp < pn_x[j-1]; j--)
+ 1356              		.loc 1 242 0 discriminator 3
+ 1357 0048 3B69     		ldr	r3, [r7, #16]
+ 1358 004a 03F18043 		add	r3, r3, #1073741824
+ 1359 004e 013B     		subs	r3, r3, #1
+ 1360 0050 9B00     		lsls	r3, r3, #2
+ 1361 0052 7A68     		ldr	r2, [r7, #4]
+ 1362 0054 1344     		add	r3, r3, r2
+ 1363 0056 1A68     		ldr	r2, [r3]
+ 1364 0058 FB68     		ldr	r3, [r7, #12]
+ 1365 005a 9A42     		cmp	r2, r3
+ 1366 005c E1DC     		bgt	.L65
+ 1367              	.L64:
+ 244:SpO2.c        ****     pn_x[j] = n_temp;
+ 1368              		.loc 1 244 0 is_stmt 1 discriminator 2
+ 1369 005e 3B69     		ldr	r3, [r7, #16]
+ 1370 0060 9B00     		lsls	r3, r3, #2
+ 1371 0062 7A68     		ldr	r2, [r7, #4]
+ 1372 0064 1344     		add	r3, r3, r2
+ 1373 0066 FA68     		ldr	r2, [r7, #12]
+ 1374 0068 1A60     		str	r2, [r3]
+ 240:SpO2.c        ****     n_temp = pn_x[i];
+ 1375              		.loc 1 240 0 discriminator 2
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 30
+
+
+ 1376 006a 7B69     		ldr	r3, [r7, #20]
+ 1377 006c 0133     		adds	r3, r3, #1
+ 1378 006e 7B61     		str	r3, [r7, #20]
+ 1379              	.L62:
+ 240:SpO2.c        ****     n_temp = pn_x[i];
+ 1380              		.loc 1 240 0 is_stmt 0 discriminator 1
+ 1381 0070 7A69     		ldr	r2, [r7, #20]
+ 1382 0072 3B68     		ldr	r3, [r7]
+ 1383 0074 9A42     		cmp	r2, r3
+ 1384 0076 CBDB     		blt	.L66
+ 245:SpO2.c        ****   }
+ 246:SpO2.c        **** }
+ 1385              		.loc 1 246 0 is_stmt 1
+ 1386 0078 00BF     		nop
+ 1387 007a 1C37     		adds	r7, r7, #28
+ 1388              		.cfi_def_cfa_offset 4
+ 1389 007c BD46     		mov	sp, r7
+ 1390              		.cfi_def_cfa_register 13
+ 1391              		@ sp needed
+ 1392 007e 80BC     		pop	{r7}
+ 1393              		.cfi_restore 7
+ 1394              		.cfi_def_cfa_offset 0
+ 1395 0080 7047     		bx	lr
+ 1396              		.cfi_endproc
+ 1397              	.LFE67:
+ 1398              		.size	maxim_sort_ascend, .-maxim_sort_ascend
+ 1399 0082 00BF     		.section	.text.maxim_sort_indices_descend,"ax",%progbits
+ 1400              		.align	2
+ 1401              		.global	maxim_sort_indices_descend
+ 1402              		.thumb
+ 1403              		.thumb_func
+ 1404              		.type	maxim_sort_indices_descend, %function
+ 1405              	maxim_sort_indices_descend:
+ 1406              	.LFB68:
+ 247:SpO2.c        **** 
+ 248:SpO2.c        **** void maxim_sort_indices_descend(  int32_t  *pn_x, int32_t *pn_indx, int32_t n_size)
+ 249:SpO2.c        **** /**
+ 250:SpO2.c        **** * \brief        Sort indices
+ 251:SpO2.c        **** * \par          Details
+ 252:SpO2.c        **** *               Sort indices according to descending order (insertion sort algorithm)
+ 253:SpO2.c        **** *
+ 254:SpO2.c        **** * \retval       None
+ 255:SpO2.c        **** */ 
+ 256:SpO2.c        **** {
+ 1407              		.loc 1 256 0
+ 1408              		.cfi_startproc
+ 1409              		@ args = 0, pretend = 0, frame = 32
+ 1410              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1411              		@ link register save eliminated.
+ 1412 0000 80B4     		push	{r7}
+ 1413              		.cfi_def_cfa_offset 4
+ 1414              		.cfi_offset 7, -4
+ 1415 0002 89B0     		sub	sp, sp, #36
+ 1416              		.cfi_def_cfa_offset 40
+ 1417 0004 00AF     		add	r7, sp, #0
+ 1418              		.cfi_def_cfa_register 7
+ 1419 0006 F860     		str	r0, [r7, #12]
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 31
+
+
+ 1420 0008 B960     		str	r1, [r7, #8]
+ 1421 000a 7A60     		str	r2, [r7, #4]
+ 257:SpO2.c        ****   int32_t i, j, n_temp;
+ 258:SpO2.c        ****   for (i = 1; i < n_size; i++) {
+ 1422              		.loc 1 258 0
+ 1423 000c 0123     		movs	r3, #1
+ 1424 000e FB61     		str	r3, [r7, #28]
+ 1425 0010 37E0     		b	.L68
+ 1426              	.L72:
+ 259:SpO2.c        ****     n_temp = pn_indx[i];
+ 1427              		.loc 1 259 0
+ 1428 0012 FB69     		ldr	r3, [r7, #28]
+ 1429 0014 9B00     		lsls	r3, r3, #2
+ 1430 0016 BA68     		ldr	r2, [r7, #8]
+ 1431 0018 1344     		add	r3, r3, r2
+ 1432 001a 1B68     		ldr	r3, [r3]
+ 1433 001c 7B61     		str	r3, [r7, #20]
+ 260:SpO2.c        ****     for (j = i; j > 0 && pn_x[n_temp] > pn_x[pn_indx[j-1]]; j--)
+ 1434              		.loc 1 260 0
+ 1435 001e FB69     		ldr	r3, [r7, #28]
+ 1436 0020 BB61     		str	r3, [r7, #24]
+ 1437 0022 0FE0     		b	.L69
+ 1438              	.L71:
+ 261:SpO2.c        ****       pn_indx[j] = pn_indx[j-1];
+ 1439              		.loc 1 261 0 discriminator 4
+ 1440 0024 BB69     		ldr	r3, [r7, #24]
+ 1441 0026 9B00     		lsls	r3, r3, #2
+ 1442 0028 BA68     		ldr	r2, [r7, #8]
+ 1443 002a 1A44     		add	r2, r2, r3
+ 1444 002c BB69     		ldr	r3, [r7, #24]
+ 1445 002e 03F18043 		add	r3, r3, #1073741824
+ 1446 0032 013B     		subs	r3, r3, #1
+ 1447 0034 9B00     		lsls	r3, r3, #2
+ 1448 0036 B968     		ldr	r1, [r7, #8]
+ 1449 0038 0B44     		add	r3, r3, r1
+ 1450 003a 1B68     		ldr	r3, [r3]
+ 1451 003c 1360     		str	r3, [r2]
+ 260:SpO2.c        ****     for (j = i; j > 0 && pn_x[n_temp] > pn_x[pn_indx[j-1]]; j--)
+ 1452              		.loc 1 260 0 discriminator 4
+ 1453 003e BB69     		ldr	r3, [r7, #24]
+ 1454 0040 013B     		subs	r3, r3, #1
+ 1455 0042 BB61     		str	r3, [r7, #24]
+ 1456              	.L69:
+ 260:SpO2.c        ****     for (j = i; j > 0 && pn_x[n_temp] > pn_x[pn_indx[j-1]]; j--)
+ 1457              		.loc 1 260 0 is_stmt 0 discriminator 1
+ 1458 0044 BB69     		ldr	r3, [r7, #24]
+ 1459 0046 002B     		cmp	r3, #0
+ 1460 0048 12DD     		ble	.L70
+ 260:SpO2.c        ****     for (j = i; j > 0 && pn_x[n_temp] > pn_x[pn_indx[j-1]]; j--)
+ 1461              		.loc 1 260 0 discriminator 3
+ 1462 004a 7B69     		ldr	r3, [r7, #20]
+ 1463 004c 9B00     		lsls	r3, r3, #2
+ 1464 004e FA68     		ldr	r2, [r7, #12]
+ 1465 0050 1344     		add	r3, r3, r2
+ 1466 0052 1A68     		ldr	r2, [r3]
+ 1467 0054 BB69     		ldr	r3, [r7, #24]
+ 1468 0056 03F18043 		add	r3, r3, #1073741824
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 32
+
+
+ 1469 005a 013B     		subs	r3, r3, #1
+ 1470 005c 9B00     		lsls	r3, r3, #2
+ 1471 005e B968     		ldr	r1, [r7, #8]
+ 1472 0060 0B44     		add	r3, r3, r1
+ 1473 0062 1B68     		ldr	r3, [r3]
+ 1474 0064 9B00     		lsls	r3, r3, #2
+ 1475 0066 F968     		ldr	r1, [r7, #12]
+ 1476 0068 0B44     		add	r3, r3, r1
+ 1477 006a 1B68     		ldr	r3, [r3]
+ 1478 006c 9A42     		cmp	r2, r3
+ 1479 006e D9DC     		bgt	.L71
+ 1480              	.L70:
+ 262:SpO2.c        ****     pn_indx[j] = n_temp;
+ 1481              		.loc 1 262 0 is_stmt 1 discriminator 2
+ 1482 0070 BB69     		ldr	r3, [r7, #24]
+ 1483 0072 9B00     		lsls	r3, r3, #2
+ 1484 0074 BA68     		ldr	r2, [r7, #8]
+ 1485 0076 1344     		add	r3, r3, r2
+ 1486 0078 7A69     		ldr	r2, [r7, #20]
+ 1487 007a 1A60     		str	r2, [r3]
+ 258:SpO2.c        ****     n_temp = pn_indx[i];
+ 1488              		.loc 1 258 0 discriminator 2
+ 1489 007c FB69     		ldr	r3, [r7, #28]
+ 1490 007e 0133     		adds	r3, r3, #1
+ 1491 0080 FB61     		str	r3, [r7, #28]
+ 1492              	.L68:
+ 258:SpO2.c        ****     n_temp = pn_indx[i];
+ 1493              		.loc 1 258 0 is_stmt 0 discriminator 1
+ 1494 0082 FA69     		ldr	r2, [r7, #28]
+ 1495 0084 7B68     		ldr	r3, [r7, #4]
+ 1496 0086 9A42     		cmp	r2, r3
+ 1497 0088 C3DB     		blt	.L72
+ 263:SpO2.c        ****   }
+ 264:SpO2.c        **** }
+ 1498              		.loc 1 264 0 is_stmt 1
+ 1499 008a 00BF     		nop
+ 1500 008c 2437     		adds	r7, r7, #36
+ 1501              		.cfi_def_cfa_offset 4
+ 1502 008e BD46     		mov	sp, r7
+ 1503              		.cfi_def_cfa_register 13
+ 1504              		@ sp needed
+ 1505 0090 80BC     		pop	{r7}
+ 1506              		.cfi_restore 7
+ 1507              		.cfi_def_cfa_offset 0
+ 1508 0092 7047     		bx	lr
+ 1509              		.cfi_endproc
+ 1510              	.LFE68:
+ 1511              		.size	maxim_sort_indices_descend, .-maxim_sort_indices_descend
+ 1512              		.text
+ 1513              	.Letext0:
+ 1514              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1515              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1516              		.file 4 "SpO2.h"
+ 1517              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 1518              		.section	.debug_info,"",%progbits
+ 1519              	.Ldebug_info0:
+ 1520 0000 59050000 		.4byte	0x559
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 33
+
+
+ 1521 0004 0400     		.2byte	0x4
+ 1522 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1523 000a 04       		.byte	0x4
+ 1524 000b 01       		.uleb128 0x1
+ 1525 000c 5E000000 		.4byte	.LASF70
+ 1526 0010 0C       		.byte	0xc
+ 1527 0011 5E020000 		.4byte	.LASF71
+ 1528 0015 E4010000 		.4byte	.LASF72
+ 1529 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 1530 001d 00000000 		.4byte	0
+ 1531 0021 00000000 		.4byte	.Ldebug_line0
+ 1532 0025 02       		.uleb128 0x2
+ 1533 0026 2F030000 		.4byte	.LASF0
+ 1534 002a 02       		.byte	0x2
+ 1535 002b 1B       		.byte	0x1b
+ 1536 002c 30000000 		.4byte	0x30
+ 1537 0030 03       		.uleb128 0x3
+ 1538 0031 01       		.byte	0x1
+ 1539 0032 06       		.byte	0x6
+ 1540 0033 BE030000 		.4byte	.LASF2
+ 1541 0037 02       		.uleb128 0x2
+ 1542 0038 44040000 		.4byte	.LASF1
+ 1543 003c 02       		.byte	0x2
+ 1544 003d 1D       		.byte	0x1d
+ 1545 003e 42000000 		.4byte	0x42
+ 1546 0042 03       		.uleb128 0x3
+ 1547 0043 01       		.byte	0x1
+ 1548 0044 08       		.byte	0x8
+ 1549 0045 A7020000 		.4byte	.LASF3
+ 1550 0049 03       		.uleb128 0x3
+ 1551 004a 02       		.byte	0x2
+ 1552 004b 05       		.byte	0x5
+ 1553 004c 2D000000 		.4byte	.LASF4
+ 1554 0050 03       		.uleb128 0x3
+ 1555 0051 02       		.byte	0x2
+ 1556 0052 07       		.byte	0x7
+ 1557 0053 1C030000 		.4byte	.LASF5
+ 1558 0057 02       		.uleb128 0x2
+ 1559 0058 AA030000 		.4byte	.LASF6
+ 1560 005c 02       		.byte	0x2
+ 1561 005d 3F       		.byte	0x3f
+ 1562 005e 62000000 		.4byte	0x62
+ 1563 0062 03       		.uleb128 0x3
+ 1564 0063 04       		.byte	0x4
+ 1565 0064 05       		.byte	0x5
+ 1566 0065 46020000 		.4byte	.LASF7
+ 1567 0069 02       		.uleb128 0x2
+ 1568 006a 11010000 		.4byte	.LASF8
+ 1569 006e 02       		.byte	0x2
+ 1570 006f 41       		.byte	0x41
+ 1571 0070 74000000 		.4byte	0x74
+ 1572 0074 03       		.uleb128 0x3
+ 1573 0075 04       		.byte	0x4
+ 1574 0076 07       		.byte	0x7
+ 1575 0077 0A030000 		.4byte	.LASF9
+ 1576 007b 03       		.uleb128 0x3
+ 1577 007c 08       		.byte	0x8
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 34
+
+
+ 1578 007d 05       		.byte	0x5
+ 1579 007e 38020000 		.4byte	.LASF10
+ 1580 0082 03       		.uleb128 0x3
+ 1581 0083 08       		.byte	0x8
+ 1582 0084 07       		.byte	0x7
+ 1583 0085 DD020000 		.4byte	.LASF11
+ 1584 0089 04       		.uleb128 0x4
+ 1585 008a 04       		.byte	0x4
+ 1586 008b 05       		.byte	0x5
+ 1587 008c 696E7400 		.ascii	"int\000"
+ 1588 0090 03       		.uleb128 0x3
+ 1589 0091 04       		.byte	0x4
+ 1590 0092 07       		.byte	0x7
+ 1591 0093 FD020000 		.4byte	.LASF12
+ 1592 0097 02       		.uleb128 0x2
+ 1593 0098 26000000 		.4byte	.LASF13
+ 1594 009c 03       		.byte	0x3
+ 1595 009d 14       		.byte	0x14
+ 1596 009e 25000000 		.4byte	0x25
+ 1597 00a2 02       		.uleb128 0x2
+ 1598 00a3 49010000 		.4byte	.LASF14
+ 1599 00a7 03       		.byte	0x3
+ 1600 00a8 18       		.byte	0x18
+ 1601 00a9 37000000 		.4byte	0x37
+ 1602 00ad 02       		.uleb128 0x2
+ 1603 00ae 45030000 		.4byte	.LASF15
+ 1604 00b2 03       		.byte	0x3
+ 1605 00b3 2C       		.byte	0x2c
+ 1606 00b4 57000000 		.4byte	0x57
+ 1607 00b8 02       		.uleb128 0x2
+ 1608 00b9 F4020000 		.4byte	.LASF16
+ 1609 00bd 03       		.byte	0x3
+ 1610 00be 30       		.byte	0x30
+ 1611 00bf 69000000 		.4byte	0x69
+ 1612 00c3 03       		.uleb128 0x3
+ 1613 00c4 04       		.byte	0x4
+ 1614 00c5 04       		.byte	0x4
+ 1615 00c6 19000000 		.4byte	.LASF17
+ 1616 00ca 03       		.uleb128 0x3
+ 1617 00cb 08       		.byte	0x8
+ 1618 00cc 04       		.byte	0x4
+ 1619 00cd F9030000 		.4byte	.LASF18
+ 1620 00d1 03       		.uleb128 0x3
+ 1621 00d2 01       		.byte	0x1
+ 1622 00d3 08       		.byte	0x8
+ 1623 00d4 40030000 		.4byte	.LASF19
+ 1624 00d8 03       		.uleb128 0x3
+ 1625 00d9 08       		.byte	0x8
+ 1626 00da 04       		.byte	0x4
+ 1627 00db 05010000 		.4byte	.LASF20
+ 1628 00df 03       		.uleb128 0x3
+ 1629 00e0 04       		.byte	0x4
+ 1630 00e1 07       		.byte	0x7
+ 1631 00e2 37000000 		.4byte	.LASF21
+ 1632 00e6 05       		.uleb128 0x5
+ 1633 00e7 97010000 		.4byte	.LASF48
+ 1634 00eb 01       		.byte	0x1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 35
+
+
+ 1635 00ec 11       		.byte	0x11
+ 1636 00ed 00000000 		.4byte	.LFB63
+ 1637 00f1 44060000 		.4byte	.LFE63-.LFB63
+ 1638 00f5 01       		.uleb128 0x1
+ 1639 00f6 9C       		.byte	0x9c
+ 1640 00f7 8B020000 		.4byte	0x28b
+ 1641 00fb 06       		.uleb128 0x6
+ 1642 00fc 82010000 		.4byte	.LASF22
+ 1643 0100 01       		.byte	0x1
+ 1644 0101 11       		.byte	0x11
+ 1645 0102 8B020000 		.4byte	0x28b
+ 1646 0106 03       		.uleb128 0x3
+ 1647 0107 91       		.byte	0x91
+ 1648 0108 D47E     		.sleb128 -172
+ 1649 010a 06       		.uleb128 0x6
+ 1650 010b 70030000 		.4byte	.LASF23
+ 1651 010f 01       		.byte	0x1
+ 1652 0110 11       		.byte	0x11
+ 1653 0111 AD000000 		.4byte	0xad
+ 1654 0115 03       		.uleb128 0x3
+ 1655 0116 91       		.byte	0x91
+ 1656 0117 D07E     		.sleb128 -176
+ 1657 0119 06       		.uleb128 0x6
+ 1658 011a D5010000 		.4byte	.LASF24
+ 1659 011e 01       		.byte	0x1
+ 1660 011f 11       		.byte	0x11
+ 1661 0120 8B020000 		.4byte	0x28b
+ 1662 0124 03       		.uleb128 0x3
+ 1663 0125 91       		.byte	0x91
+ 1664 0126 CC7E     		.sleb128 -180
+ 1665 0128 06       		.uleb128 0x6
+ 1666 0129 CA020000 		.4byte	.LASF25
+ 1667 012d 01       		.byte	0x1
+ 1668 012e 11       		.byte	0x11
+ 1669 012f 91020000 		.4byte	0x291
+ 1670 0133 03       		.uleb128 0x3
+ 1671 0134 91       		.byte	0x91
+ 1672 0135 C87E     		.sleb128 -184
+ 1673 0137 06       		.uleb128 0x6
+ 1674 0138 4F020000 		.4byte	.LASF26
+ 1675 013c 01       		.byte	0x1
+ 1676 013d 11       		.byte	0x11
+ 1677 013e 97020000 		.4byte	0x297
+ 1678 0142 02       		.uleb128 0x2
+ 1679 0143 91       		.byte	0x91
+ 1680 0144 00       		.sleb128 0
+ 1681 0145 06       		.uleb128 0x6
+ 1682 0146 65020000 		.4byte	.LASF27
+ 1683 014a 01       		.byte	0x1
+ 1684 014b 11       		.byte	0x11
+ 1685 014c 91020000 		.4byte	0x291
+ 1686 0150 02       		.uleb128 0x2
+ 1687 0151 91       		.byte	0x91
+ 1688 0152 04       		.sleb128 4
+ 1689 0153 06       		.uleb128 0x6
+ 1690 0154 40000000 		.4byte	.LASF28
+ 1691 0158 01       		.byte	0x1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 36
+
+
+ 1692 0159 11       		.byte	0x11
+ 1693 015a 97020000 		.4byte	0x297
+ 1694 015e 02       		.uleb128 0x2
+ 1695 015f 91       		.byte	0x91
+ 1696 0160 08       		.sleb128 8
+ 1697 0161 07       		.uleb128 0x7
+ 1698 0162 65030000 		.4byte	.LASF29
+ 1699 0166 01       		.byte	0x1
+ 1700 0167 25       		.byte	0x25
+ 1701 0168 B8000000 		.4byte	0xb8
+ 1702 016c 02       		.uleb128 0x2
+ 1703 016d 91       		.byte	0x91
+ 1704 016e 74       		.sleb128 -12
+ 1705 016f 08       		.uleb128 0x8
+ 1706 0170 6B00     		.ascii	"k\000"
+ 1707 0172 01       		.byte	0x1
+ 1708 0173 26       		.byte	0x26
+ 1709 0174 AD000000 		.4byte	0xad
+ 1710 0178 02       		.uleb128 0x2
+ 1711 0179 91       		.byte	0x91
+ 1712 017a 70       		.sleb128 -16
+ 1713 017b 07       		.uleb128 0x7
+ 1714 017c C5010000 		.4byte	.LASF30
+ 1715 0180 01       		.byte	0x1
+ 1716 0181 26       		.byte	0x26
+ 1717 0182 AD000000 		.4byte	0xad
+ 1718 0186 02       		.uleb128 0x2
+ 1719 0187 91       		.byte	0x91
+ 1720 0188 6C       		.sleb128 -20
+ 1721 0189 08       		.uleb128 0x8
+ 1722 018a 6900     		.ascii	"i\000"
+ 1723 018c 01       		.byte	0x1
+ 1724 018d 27       		.byte	0x27
+ 1725 018e AD000000 		.4byte	0xad
+ 1726 0192 02       		.uleb128 0x2
+ 1727 0193 91       		.byte	0x91
+ 1728 0194 68       		.sleb128 -24
+ 1729 0195 07       		.uleb128 0x7
+ 1730 0196 7B020000 		.4byte	.LASF31
+ 1731 019a 01       		.byte	0x1
+ 1732 019b 27       		.byte	0x27
+ 1733 019c AD000000 		.4byte	0xad
+ 1734 01a0 02       		.uleb128 0x2
+ 1735 01a1 91       		.byte	0x91
+ 1736 01a2 48       		.sleb128 -56
+ 1737 01a3 07       		.uleb128 0x7
+ 1738 01a4 EC000000 		.4byte	.LASF32
+ 1739 01a8 01       		.byte	0x1
+ 1740 01a9 27       		.byte	0x27
+ 1741 01aa AD000000 		.4byte	0xad
+ 1742 01ae 03       		.uleb128 0x3
+ 1743 01af 91       		.byte	0x91
+ 1744 01b0 B47F     		.sleb128 -76
+ 1745 01b2 07       		.uleb128 0x7
+ 1746 01b3 87030000 		.4byte	.LASF33
+ 1747 01b7 01       		.byte	0x1
+ 1748 01b8 28       		.byte	0x28
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 37
+
+
+ 1749 01b9 AD000000 		.4byte	0xad
+ 1750 01bd 02       		.uleb128 0x2
+ 1751 01be 91       		.byte	0x91
+ 1752 01bf 64       		.sleb128 -28
+ 1753 01c0 07       		.uleb128 0x7
+ 1754 01c1 2E040000 		.4byte	.LASF34
+ 1755 01c5 01       		.byte	0x1
+ 1756 01c6 28       		.byte	0x28
+ 1757 01c7 AD000000 		.4byte	0xad
+ 1758 01cb 03       		.uleb128 0x3
+ 1759 01cc 91       		.byte	0x91
+ 1760 01cd AC7F     		.sleb128 -84
+ 1761 01cf 07       		.uleb128 0x7
+ 1762 01d0 70010000 		.4byte	.LASF35
+ 1763 01d4 01       		.byte	0x1
+ 1764 01d5 29       		.byte	0x29
+ 1765 01d6 9D020000 		.4byte	0x29d
+ 1766 01da 03       		.uleb128 0x3
+ 1767 01db 91       		.byte	0x91
+ 1768 01dc F07E     		.sleb128 -144
+ 1769 01de 07       		.uleb128 0x7
+ 1770 01df 51010000 		.4byte	.LASF36
+ 1771 01e3 01       		.byte	0x1
+ 1772 01e4 2A       		.byte	0x2a
+ 1773 01e5 AD000000 		.4byte	0xad
+ 1774 01e9 02       		.uleb128 0x2
+ 1775 01ea 91       		.byte	0x91
+ 1776 01eb 60       		.sleb128 -32
+ 1777 01ec 07       		.uleb128 0x7
+ 1778 01ed 1F000000 		.4byte	.LASF37
+ 1779 01f1 01       		.byte	0x1
+ 1780 01f2 2C       		.byte	0x2c
+ 1781 01f3 AD000000 		.4byte	0xad
+ 1782 01f7 02       		.uleb128 0x2
+ 1783 01f8 91       		.byte	0x91
+ 1784 01f9 44       		.sleb128 -60
+ 1785 01fa 07       		.uleb128 0x7
+ 1786 01fb 80030000 		.4byte	.LASF38
+ 1787 01ff 01       		.byte	0x1
+ 1788 0200 2C       		.byte	0x2c
+ 1789 0201 AD000000 		.4byte	0xad
+ 1790 0205 02       		.uleb128 0x2
+ 1791 0206 91       		.byte	0x91
+ 1792 0207 40       		.sleb128 -64
+ 1793 0208 07       		.uleb128 0x7
+ 1794 0209 F9000000 		.4byte	.LASF39
+ 1795 020d 01       		.byte	0x1
+ 1796 020e 2D       		.byte	0x2d
+ 1797 020f AD000000 		.4byte	0xad
+ 1798 0213 03       		.uleb128 0x3
+ 1799 0214 91       		.byte	0x91
+ 1800 0215 B07F     		.sleb128 -80
+ 1801 0217 07       		.uleb128 0x7
+ 1802 0218 D1030000 		.4byte	.LASF40
+ 1803 021c 01       		.byte	0x1
+ 1804 021d 2E       		.byte	0x2e
+ 1805 021e AD000000 		.4byte	0xad
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 38
+
+
+ 1806 0222 02       		.uleb128 0x2
+ 1807 0223 91       		.byte	0x91
+ 1808 0224 5C       		.sleb128 -36
+ 1809 0225 07       		.uleb128 0x7
+ 1810 0226 D2020000 		.4byte	.LASF41
+ 1811 022a 01       		.byte	0x1
+ 1812 022b 2E       		.byte	0x2e
+ 1813 022c AD000000 		.4byte	0xad
+ 1814 0230 02       		.uleb128 0x2
+ 1815 0231 91       		.byte	0x91
+ 1816 0232 58       		.sleb128 -40
+ 1817 0233 07       		.uleb128 0x7
+ 1818 0234 98020000 		.4byte	.LASF42
+ 1819 0238 01       		.byte	0x1
+ 1820 0239 2F       		.byte	0x2f
+ 1821 023a AD000000 		.4byte	0xad
+ 1822 023e 02       		.uleb128 0x2
+ 1823 023f 91       		.byte	0x91
+ 1824 0240 54       		.sleb128 -44
+ 1825 0241 07       		.uleb128 0x7
+ 1826 0242 00040000 		.4byte	.LASF43
+ 1827 0246 01       		.byte	0x1
+ 1828 0247 30       		.byte	0x30
+ 1829 0248 AD000000 		.4byte	0xad
+ 1830 024c 02       		.uleb128 0x2
+ 1831 024d 91       		.byte	0x91
+ 1832 024e 50       		.sleb128 -48
+ 1833 024f 07       		.uleb128 0x7
+ 1834 0250 5C030000 		.4byte	.LASF44
+ 1835 0254 01       		.byte	0x1
+ 1836 0255 31       		.byte	0x31
+ 1837 0256 AD020000 		.4byte	0x2ad
+ 1838 025a 03       		.uleb128 0x3
+ 1839 025b 91       		.byte	0x91
+ 1840 025c DC7E     		.sleb128 -164
+ 1841 025e 07       		.uleb128 0x7
+ 1842 025f 8D030000 		.4byte	.LASF45
+ 1843 0263 01       		.byte	0x1
+ 1844 0264 31       		.byte	0x31
+ 1845 0265 AD000000 		.4byte	0xad
+ 1846 0269 02       		.uleb128 0x2
+ 1847 026a 91       		.byte	0x91
+ 1848 026b 4C       		.sleb128 -52
+ 1849 026c 07       		.uleb128 0x7
+ 1850 026d CA030000 		.4byte	.LASF46
+ 1851 0271 01       		.byte	0x1
+ 1852 0272 32       		.byte	0x32
+ 1853 0273 AD000000 		.4byte	0xad
+ 1854 0277 03       		.uleb128 0x3
+ 1855 0278 91       		.byte	0x91
+ 1856 0279 BC7F     		.sleb128 -68
+ 1857 027b 07       		.uleb128 0x7
+ 1858 027c 38030000 		.4byte	.LASF47
+ 1859 0280 01       		.byte	0x1
+ 1860 0281 32       		.byte	0x32
+ 1861 0282 AD000000 		.4byte	0xad
+ 1862 0286 03       		.uleb128 0x3
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 39
+
+
+ 1863 0287 91       		.byte	0x91
+ 1864 0288 B87F     		.sleb128 -72
+ 1865 028a 00       		.byte	0
+ 1866 028b 09       		.uleb128 0x9
+ 1867 028c 04       		.byte	0x4
+ 1868 028d B8000000 		.4byte	0xb8
+ 1869 0291 09       		.uleb128 0x9
+ 1870 0292 04       		.byte	0x4
+ 1871 0293 AD000000 		.4byte	0xad
+ 1872 0297 09       		.uleb128 0x9
+ 1873 0298 04       		.byte	0x4
+ 1874 0299 97000000 		.4byte	0x97
+ 1875 029d 0A       		.uleb128 0xa
+ 1876 029e AD000000 		.4byte	0xad
+ 1877 02a2 AD020000 		.4byte	0x2ad
+ 1878 02a6 0B       		.uleb128 0xb
+ 1879 02a7 DF000000 		.4byte	0xdf
+ 1880 02ab 0E       		.byte	0xe
+ 1881 02ac 00       		.byte	0
+ 1882 02ad 0A       		.uleb128 0xa
+ 1883 02ae AD000000 		.4byte	0xad
+ 1884 02b2 BD020000 		.4byte	0x2bd
+ 1885 02b6 0B       		.uleb128 0xb
+ 1886 02b7 DF000000 		.4byte	0xdf
+ 1887 02bb 04       		.byte	0x4
+ 1888 02bc 00       		.byte	0
+ 1889 02bd 05       		.uleb128 0x5
+ 1890 02be 4D000000 		.4byte	.LASF49
+ 1891 02c2 01       		.byte	0x1
+ 1892 02c3 9D       		.byte	0x9d
+ 1893 02c4 00000000 		.4byte	.LFB64
+ 1894 02c8 42000000 		.4byte	.LFE64-.LFB64
+ 1895 02cc 01       		.uleb128 0x1
+ 1896 02cd 9C       		.byte	0x9c
+ 1897 02ce 35030000 		.4byte	0x335
+ 1898 02d2 06       		.uleb128 0x6
+ 1899 02d3 26040000 		.4byte	.LASF50
+ 1900 02d7 01       		.byte	0x1
+ 1901 02d8 9D       		.byte	0x9d
+ 1902 02d9 91020000 		.4byte	0x291
+ 1903 02dd 02       		.uleb128 0x2
+ 1904 02de 91       		.byte	0x91
+ 1905 02df 74       		.sleb128 -12
+ 1906 02e0 06       		.uleb128 0x6
+ 1907 02e1 2E040000 		.4byte	.LASF34
+ 1908 02e5 01       		.byte	0x1
+ 1909 02e6 9D       		.byte	0x9d
+ 1910 02e7 91020000 		.4byte	0x291
+ 1911 02eb 02       		.uleb128 0x2
+ 1912 02ec 91       		.byte	0x91
+ 1913 02ed 70       		.sleb128 -16
+ 1914 02ee 06       		.uleb128 0x6
+ 1915 02ef A5030000 		.4byte	.LASF51
+ 1916 02f3 01       		.byte	0x1
+ 1917 02f4 9D       		.byte	0x9d
+ 1918 02f5 91020000 		.4byte	0x291
+ 1919 02f9 02       		.uleb128 0x2
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 40
+
+
+ 1920 02fa 91       		.byte	0x91
+ 1921 02fb 6C       		.sleb128 -20
+ 1922 02fc 06       		.uleb128 0x6
+ 1923 02fd 4E040000 		.4byte	.LASF52
+ 1924 0301 01       		.byte	0x1
+ 1925 0302 9D       		.byte	0x9d
+ 1926 0303 AD000000 		.4byte	0xad
+ 1927 0307 02       		.uleb128 0x2
+ 1928 0308 91       		.byte	0x91
+ 1929 0309 68       		.sleb128 -24
+ 1930 030a 06       		.uleb128 0x6
+ 1931 030b BD020000 		.4byte	.LASF53
+ 1932 030f 01       		.byte	0x1
+ 1933 0310 9D       		.byte	0x9d
+ 1934 0311 AD000000 		.4byte	0xad
+ 1935 0315 02       		.uleb128 0x2
+ 1936 0316 91       		.byte	0x91
+ 1937 0317 00       		.sleb128 0
+ 1938 0318 06       		.uleb128 0x6
+ 1939 0319 35040000 		.4byte	.LASF54
+ 1940 031d 01       		.byte	0x1
+ 1941 031e 9D       		.byte	0x9d
+ 1942 031f AD000000 		.4byte	0xad
+ 1943 0323 02       		.uleb128 0x2
+ 1944 0324 91       		.byte	0x91
+ 1945 0325 04       		.sleb128 4
+ 1946 0326 06       		.uleb128 0x6
+ 1947 0327 B4030000 		.4byte	.LASF55
+ 1948 032b 01       		.byte	0x1
+ 1949 032c 9D       		.byte	0x9d
+ 1950 032d AD000000 		.4byte	0xad
+ 1951 0331 02       		.uleb128 0x2
+ 1952 0332 91       		.byte	0x91
+ 1953 0333 08       		.sleb128 8
+ 1954 0334 00       		.byte	0
+ 1955 0335 0C       		.uleb128 0xc
+ 1956 0336 DC030000 		.4byte	.LASF56
+ 1957 033a 01       		.byte	0x1
+ 1958 033b AB       		.byte	0xab
+ 1959 033c 00000000 		.4byte	.LFB65
+ 1960 0340 E4000000 		.4byte	.LFE65-.LFB65
+ 1961 0344 01       		.uleb128 0x1
+ 1962 0345 9C       		.byte	0x9c
+ 1963 0346 AB030000 		.4byte	0x3ab
+ 1964 034a 06       		.uleb128 0x6
+ 1965 034b 26040000 		.4byte	.LASF50
+ 1966 034f 01       		.byte	0x1
+ 1967 0350 AB       		.byte	0xab
+ 1968 0351 91020000 		.4byte	0x291
+ 1969 0355 02       		.uleb128 0x2
+ 1970 0356 91       		.byte	0x91
+ 1971 0357 6C       		.sleb128 -20
+ 1972 0358 06       		.uleb128 0x6
+ 1973 0359 2E040000 		.4byte	.LASF34
+ 1974 035d 01       		.byte	0x1
+ 1975 035e AB       		.byte	0xab
+ 1976 035f 91020000 		.4byte	0x291
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 41
+
+
+ 1977 0363 02       		.uleb128 0x2
+ 1978 0364 91       		.byte	0x91
+ 1979 0365 68       		.sleb128 -24
+ 1980 0366 06       		.uleb128 0x6
+ 1981 0367 A5030000 		.4byte	.LASF51
+ 1982 036b 01       		.byte	0x1
+ 1983 036c AB       		.byte	0xab
+ 1984 036d 91020000 		.4byte	0x291
+ 1985 0371 02       		.uleb128 0x2
+ 1986 0372 91       		.byte	0x91
+ 1987 0373 64       		.sleb128 -28
+ 1988 0374 06       		.uleb128 0x6
+ 1989 0375 4E040000 		.4byte	.LASF52
+ 1990 0379 01       		.byte	0x1
+ 1991 037a AB       		.byte	0xab
+ 1992 037b AD000000 		.4byte	0xad
+ 1993 037f 02       		.uleb128 0x2
+ 1994 0380 91       		.byte	0x91
+ 1995 0381 60       		.sleb128 -32
+ 1996 0382 06       		.uleb128 0x6
+ 1997 0383 BD020000 		.4byte	.LASF53
+ 1998 0387 01       		.byte	0x1
+ 1999 0388 AB       		.byte	0xab
+ 2000 0389 AD000000 		.4byte	0xad
+ 2001 038d 02       		.uleb128 0x2
+ 2002 038e 91       		.byte	0x91
+ 2003 038f 00       		.sleb128 0
+ 2004 0390 08       		.uleb128 0x8
+ 2005 0391 6900     		.ascii	"i\000"
+ 2006 0393 01       		.byte	0x1
+ 2007 0394 B4       		.byte	0xb4
+ 2008 0395 AD000000 		.4byte	0xad
+ 2009 0399 02       		.uleb128 0x2
+ 2010 039a 91       		.byte	0x91
+ 2011 039b 74       		.sleb128 -12
+ 2012 039c 07       		.uleb128 0x7
+ 2013 039d 9D030000 		.4byte	.LASF57
+ 2014 03a1 01       		.byte	0x1
+ 2015 03a2 B4       		.byte	0xb4
+ 2016 03a3 AD000000 		.4byte	0xad
+ 2017 03a7 02       		.uleb128 0x2
+ 2018 03a8 91       		.byte	0x91
+ 2019 03a9 70       		.sleb128 -16
+ 2020 03aa 00       		.byte	0
+ 2021 03ab 05       		.uleb128 0x5
+ 2022 03ac 00000000 		.4byte	.LASF58
+ 2023 03b0 01       		.byte	0x1
+ 2024 03b1 C9       		.byte	0xc9
+ 2025 03b2 00000000 		.4byte	.LFB66
+ 2026 03b6 C0000000 		.4byte	.LFE66-.LFB66
+ 2027 03ba 01       		.uleb128 0x1
+ 2028 03bb 9C       		.byte	0x9c
+ 2029 03bc 2D040000 		.4byte	0x42d
+ 2030 03c0 06       		.uleb128 0x6
+ 2031 03c1 26040000 		.4byte	.LASF50
+ 2032 03c5 01       		.byte	0x1
+ 2033 03c6 C9       		.byte	0xc9
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 42
+
+
+ 2034 03c7 91020000 		.4byte	0x291
+ 2035 03cb 02       		.uleb128 0x2
+ 2036 03cc 91       		.byte	0x91
+ 2037 03cd 64       		.sleb128 -28
+ 2038 03ce 06       		.uleb128 0x6
+ 2039 03cf 73020000 		.4byte	.LASF59
+ 2040 03d3 01       		.byte	0x1
+ 2041 03d4 C9       		.byte	0xc9
+ 2042 03d5 91020000 		.4byte	0x291
+ 2043 03d9 02       		.uleb128 0x2
+ 2044 03da 91       		.byte	0x91
+ 2045 03db 60       		.sleb128 -32
+ 2046 03dc 06       		.uleb128 0x6
+ 2047 03dd A5030000 		.4byte	.LASF51
+ 2048 03e1 01       		.byte	0x1
+ 2049 03e2 C9       		.byte	0xc9
+ 2050 03e3 91020000 		.4byte	0x291
+ 2051 03e7 02       		.uleb128 0x2
+ 2052 03e8 91       		.byte	0x91
+ 2053 03e9 5C       		.sleb128 -36
+ 2054 03ea 06       		.uleb128 0x6
+ 2055 03eb 35040000 		.4byte	.LASF54
+ 2056 03ef 01       		.byte	0x1
+ 2057 03f0 C9       		.byte	0xc9
+ 2058 03f1 AD000000 		.4byte	0xad
+ 2059 03f5 02       		.uleb128 0x2
+ 2060 03f6 91       		.byte	0x91
+ 2061 03f7 58       		.sleb128 -40
+ 2062 03f8 08       		.uleb128 0x8
+ 2063 03f9 6900     		.ascii	"i\000"
+ 2064 03fb 01       		.byte	0x1
+ 2065 03fc D3       		.byte	0xd3
+ 2066 03fd AD000000 		.4byte	0xad
+ 2067 0401 02       		.uleb128 0x2
+ 2068 0402 91       		.byte	0x91
+ 2069 0403 74       		.sleb128 -12
+ 2070 0404 08       		.uleb128 0x8
+ 2071 0405 6A00     		.ascii	"j\000"
+ 2072 0407 01       		.byte	0x1
+ 2073 0408 D3       		.byte	0xd3
+ 2074 0409 AD000000 		.4byte	0xad
+ 2075 040d 02       		.uleb128 0x2
+ 2076 040e 91       		.byte	0x91
+ 2077 040f 70       		.sleb128 -16
+ 2078 0410 07       		.uleb128 0x7
+ 2079 0411 65010000 		.4byte	.LASF60
+ 2080 0415 01       		.byte	0x1
+ 2081 0416 D3       		.byte	0xd3
+ 2082 0417 AD000000 		.4byte	0xad
+ 2083 041b 02       		.uleb128 0x2
+ 2084 041c 91       		.byte	0x91
+ 2085 041d 6C       		.sleb128 -20
+ 2086 041e 07       		.uleb128 0x7
+ 2087 041f BE010000 		.4byte	.LASF61
+ 2088 0423 01       		.byte	0x1
+ 2089 0424 D3       		.byte	0xd3
+ 2090 0425 AD000000 		.4byte	0xad
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 43
+
+
+ 2091 0429 02       		.uleb128 0x2
+ 2092 042a 91       		.byte	0x91
+ 2093 042b 68       		.sleb128 -24
+ 2094 042c 00       		.byte	0
+ 2095 042d 0C       		.uleb128 0xc
+ 2096 042e 1C010000 		.4byte	.LASF62
+ 2097 0432 01       		.byte	0x1
+ 2098 0433 E6       		.byte	0xe6
+ 2099 0434 00000000 		.4byte	.LFB67
+ 2100 0438 82000000 		.4byte	.LFE67-.LFB67
+ 2101 043c 01       		.uleb128 0x1
+ 2102 043d 9C       		.byte	0x9c
+ 2103 043e 85040000 		.4byte	0x485
+ 2104 0442 06       		.uleb128 0x6
+ 2105 0443 A5030000 		.4byte	.LASF51
+ 2106 0447 01       		.byte	0x1
+ 2107 0448 E6       		.byte	0xe6
+ 2108 0449 91020000 		.4byte	0x291
+ 2109 044d 02       		.uleb128 0x2
+ 2110 044e 91       		.byte	0x91
+ 2111 044f 64       		.sleb128 -28
+ 2112 0450 06       		.uleb128 0x6
+ 2113 0451 4E040000 		.4byte	.LASF52
+ 2114 0455 01       		.byte	0x1
+ 2115 0456 E6       		.byte	0xe6
+ 2116 0457 AD000000 		.4byte	0xad
+ 2117 045b 02       		.uleb128 0x2
+ 2118 045c 91       		.byte	0x91
+ 2119 045d 60       		.sleb128 -32
+ 2120 045e 08       		.uleb128 0x8
+ 2121 045f 6900     		.ascii	"i\000"
+ 2122 0461 01       		.byte	0x1
+ 2123 0462 EF       		.byte	0xef
+ 2124 0463 AD000000 		.4byte	0xad
+ 2125 0467 02       		.uleb128 0x2
+ 2126 0468 91       		.byte	0x91
+ 2127 0469 74       		.sleb128 -12
+ 2128 046a 08       		.uleb128 0x8
+ 2129 046b 6A00     		.ascii	"j\000"
+ 2130 046d 01       		.byte	0x1
+ 2131 046e EF       		.byte	0xef
+ 2132 046f AD000000 		.4byte	0xad
+ 2133 0473 02       		.uleb128 0x2
+ 2134 0474 91       		.byte	0x91
+ 2135 0475 70       		.sleb128 -16
+ 2136 0476 07       		.uleb128 0x7
+ 2137 0477 90010000 		.4byte	.LASF63
+ 2138 047b 01       		.byte	0x1
+ 2139 047c EF       		.byte	0xef
+ 2140 047d AD000000 		.4byte	0xad
+ 2141 0481 02       		.uleb128 0x2
+ 2142 0482 91       		.byte	0x91
+ 2143 0483 6C       		.sleb128 -20
+ 2144 0484 00       		.byte	0
+ 2145 0485 0C       		.uleb128 0xc
+ 2146 0486 2E010000 		.4byte	.LASF64
+ 2147 048a 01       		.byte	0x1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 44
+
+
+ 2148 048b F8       		.byte	0xf8
+ 2149 048c 00000000 		.4byte	.LFB68
+ 2150 0490 94000000 		.4byte	.LFE68-.LFB68
+ 2151 0494 01       		.uleb128 0x1
+ 2152 0495 9C       		.byte	0x9c
+ 2153 0496 EE040000 		.4byte	0x4ee
+ 2154 049a 06       		.uleb128 0x6
+ 2155 049b A5030000 		.4byte	.LASF51
+ 2156 049f 01       		.byte	0x1
+ 2157 04a0 F8       		.byte	0xf8
+ 2158 04a1 91020000 		.4byte	0x291
+ 2159 04a5 02       		.uleb128 0x2
+ 2160 04a6 91       		.byte	0x91
+ 2161 04a7 64       		.sleb128 -28
+ 2162 04a8 06       		.uleb128 0x6
+ 2163 04a9 B5020000 		.4byte	.LASF65
+ 2164 04ad 01       		.byte	0x1
+ 2165 04ae F8       		.byte	0xf8
+ 2166 04af 91020000 		.4byte	0x291
+ 2167 04b3 02       		.uleb128 0x2
+ 2168 04b4 91       		.byte	0x91
+ 2169 04b5 60       		.sleb128 -32
+ 2170 04b6 06       		.uleb128 0x6
+ 2171 04b7 4E040000 		.4byte	.LASF52
+ 2172 04bb 01       		.byte	0x1
+ 2173 04bc F8       		.byte	0xf8
+ 2174 04bd AD000000 		.4byte	0xad
+ 2175 04c1 02       		.uleb128 0x2
+ 2176 04c2 91       		.byte	0x91
+ 2177 04c3 5C       		.sleb128 -36
+ 2178 04c4 0D       		.uleb128 0xd
+ 2179 04c5 6900     		.ascii	"i\000"
+ 2180 04c7 01       		.byte	0x1
+ 2181 04c8 0101     		.2byte	0x101
+ 2182 04ca AD000000 		.4byte	0xad
+ 2183 04ce 02       		.uleb128 0x2
+ 2184 04cf 91       		.byte	0x91
+ 2185 04d0 74       		.sleb128 -12
+ 2186 04d1 0D       		.uleb128 0xd
+ 2187 04d2 6A00     		.ascii	"j\000"
+ 2188 04d4 01       		.byte	0x1
+ 2189 04d5 0101     		.2byte	0x101
+ 2190 04d7 AD000000 		.4byte	0xad
+ 2191 04db 02       		.uleb128 0x2
+ 2192 04dc 91       		.byte	0x91
+ 2193 04dd 70       		.sleb128 -16
+ 2194 04de 0E       		.uleb128 0xe
+ 2195 04df 90010000 		.4byte	.LASF63
+ 2196 04e3 01       		.byte	0x1
+ 2197 04e4 0101     		.2byte	0x101
+ 2198 04e6 AD000000 		.4byte	0xad
+ 2199 04ea 02       		.uleb128 0x2
+ 2200 04eb 91       		.byte	0x91
+ 2201 04ec 6C       		.sleb128 -20
+ 2202 04ed 00       		.byte	0
+ 2203 04ee 0A       		.uleb128 0xa
+ 2204 04ef AD000000 		.4byte	0xad
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 45
+
+
+ 2205 04f3 FE040000 		.4byte	0x4fe
+ 2206 04f7 0B       		.uleb128 0xb
+ 2207 04f8 DF000000 		.4byte	0xdf
+ 2208 04fc C7       		.byte	0xc7
+ 2209 04fd 00       		.byte	0
+ 2210 04fe 07       		.uleb128 0x7
+ 2211 04ff 0F040000 		.4byte	.LASF66
+ 2212 0503 04       		.byte	0x4
+ 2213 0504 20       		.byte	0x20
+ 2214 0505 EE040000 		.4byte	0x4ee
+ 2215 0509 05       		.uleb128 0x5
+ 2216 050a 03       		.byte	0x3
+ 2217 050b 00000000 		.4byte	an_x
+ 2218 050f 07       		.uleb128 0x7
+ 2219 0510 14040000 		.4byte	.LASF67
+ 2220 0514 04       		.byte	0x4
+ 2221 0515 21       		.byte	0x21
+ 2222 0516 EE040000 		.4byte	0x4ee
+ 2223 051a 05       		.uleb128 0x5
+ 2224 051b 03       		.byte	0x3
+ 2225 051c 20030000 		.4byte	an_y
+ 2226 0520 0F       		.uleb128 0xf
+ 2227 0521 19040000 		.4byte	.LASF68
+ 2228 0525 05       		.byte	0x5
+ 2229 0526 1207     		.2byte	0x712
+ 2230 0528 2C050000 		.4byte	0x52c
+ 2231 052c 10       		.uleb128 0x10
+ 2232 052d AD000000 		.4byte	0xad
+ 2233 0531 0A       		.uleb128 0xa
+ 2234 0532 41050000 		.4byte	0x541
+ 2235 0536 41050000 		.4byte	0x541
+ 2236 053a 0B       		.uleb128 0xb
+ 2237 053b DF000000 		.4byte	0xdf
+ 2238 053f B7       		.byte	0xb7
+ 2239 0540 00       		.byte	0
+ 2240 0541 11       		.uleb128 0x11
+ 2241 0542 A2000000 		.4byte	0xa2
+ 2242 0546 12       		.uleb128 0x12
+ 2243 0547 4D030000 		.4byte	.LASF69
+ 2244 054b 04       		.byte	0x4
+ 2245 054c 16       		.byte	0x16
+ 2246 054d 57050000 		.4byte	0x557
+ 2247 0551 05       		.uleb128 0x5
+ 2248 0552 03       		.byte	0x3
+ 2249 0553 00000000 		.4byte	uch_spo2_table
+ 2250 0557 11       		.uleb128 0x11
+ 2251 0558 31050000 		.4byte	0x531
+ 2252 055c 00       		.byte	0
+ 2253              		.section	.debug_abbrev,"",%progbits
+ 2254              	.Ldebug_abbrev0:
+ 2255 0000 01       		.uleb128 0x1
+ 2256 0001 11       		.uleb128 0x11
+ 2257 0002 01       		.byte	0x1
+ 2258 0003 25       		.uleb128 0x25
+ 2259 0004 0E       		.uleb128 0xe
+ 2260 0005 13       		.uleb128 0x13
+ 2261 0006 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 46
+
+
+ 2262 0007 03       		.uleb128 0x3
+ 2263 0008 0E       		.uleb128 0xe
+ 2264 0009 1B       		.uleb128 0x1b
+ 2265 000a 0E       		.uleb128 0xe
+ 2266 000b 55       		.uleb128 0x55
+ 2267 000c 17       		.uleb128 0x17
+ 2268 000d 11       		.uleb128 0x11
+ 2269 000e 01       		.uleb128 0x1
+ 2270 000f 10       		.uleb128 0x10
+ 2271 0010 17       		.uleb128 0x17
+ 2272 0011 00       		.byte	0
+ 2273 0012 00       		.byte	0
+ 2274 0013 02       		.uleb128 0x2
+ 2275 0014 16       		.uleb128 0x16
+ 2276 0015 00       		.byte	0
+ 2277 0016 03       		.uleb128 0x3
+ 2278 0017 0E       		.uleb128 0xe
+ 2279 0018 3A       		.uleb128 0x3a
+ 2280 0019 0B       		.uleb128 0xb
+ 2281 001a 3B       		.uleb128 0x3b
+ 2282 001b 0B       		.uleb128 0xb
+ 2283 001c 49       		.uleb128 0x49
+ 2284 001d 13       		.uleb128 0x13
+ 2285 001e 00       		.byte	0
+ 2286 001f 00       		.byte	0
+ 2287 0020 03       		.uleb128 0x3
+ 2288 0021 24       		.uleb128 0x24
+ 2289 0022 00       		.byte	0
+ 2290 0023 0B       		.uleb128 0xb
+ 2291 0024 0B       		.uleb128 0xb
+ 2292 0025 3E       		.uleb128 0x3e
+ 2293 0026 0B       		.uleb128 0xb
+ 2294 0027 03       		.uleb128 0x3
+ 2295 0028 0E       		.uleb128 0xe
+ 2296 0029 00       		.byte	0
+ 2297 002a 00       		.byte	0
+ 2298 002b 04       		.uleb128 0x4
+ 2299 002c 24       		.uleb128 0x24
+ 2300 002d 00       		.byte	0
+ 2301 002e 0B       		.uleb128 0xb
+ 2302 002f 0B       		.uleb128 0xb
+ 2303 0030 3E       		.uleb128 0x3e
+ 2304 0031 0B       		.uleb128 0xb
+ 2305 0032 03       		.uleb128 0x3
+ 2306 0033 08       		.uleb128 0x8
+ 2307 0034 00       		.byte	0
+ 2308 0035 00       		.byte	0
+ 2309 0036 05       		.uleb128 0x5
+ 2310 0037 2E       		.uleb128 0x2e
+ 2311 0038 01       		.byte	0x1
+ 2312 0039 3F       		.uleb128 0x3f
+ 2313 003a 19       		.uleb128 0x19
+ 2314 003b 03       		.uleb128 0x3
+ 2315 003c 0E       		.uleb128 0xe
+ 2316 003d 3A       		.uleb128 0x3a
+ 2317 003e 0B       		.uleb128 0xb
+ 2318 003f 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 47
+
+
+ 2319 0040 0B       		.uleb128 0xb
+ 2320 0041 27       		.uleb128 0x27
+ 2321 0042 19       		.uleb128 0x19
+ 2322 0043 11       		.uleb128 0x11
+ 2323 0044 01       		.uleb128 0x1
+ 2324 0045 12       		.uleb128 0x12
+ 2325 0046 06       		.uleb128 0x6
+ 2326 0047 40       		.uleb128 0x40
+ 2327 0048 18       		.uleb128 0x18
+ 2328 0049 9642     		.uleb128 0x2116
+ 2329 004b 19       		.uleb128 0x19
+ 2330 004c 01       		.uleb128 0x1
+ 2331 004d 13       		.uleb128 0x13
+ 2332 004e 00       		.byte	0
+ 2333 004f 00       		.byte	0
+ 2334 0050 06       		.uleb128 0x6
+ 2335 0051 05       		.uleb128 0x5
+ 2336 0052 00       		.byte	0
+ 2337 0053 03       		.uleb128 0x3
+ 2338 0054 0E       		.uleb128 0xe
+ 2339 0055 3A       		.uleb128 0x3a
+ 2340 0056 0B       		.uleb128 0xb
+ 2341 0057 3B       		.uleb128 0x3b
+ 2342 0058 0B       		.uleb128 0xb
+ 2343 0059 49       		.uleb128 0x49
+ 2344 005a 13       		.uleb128 0x13
+ 2345 005b 02       		.uleb128 0x2
+ 2346 005c 18       		.uleb128 0x18
+ 2347 005d 00       		.byte	0
+ 2348 005e 00       		.byte	0
+ 2349 005f 07       		.uleb128 0x7
+ 2350 0060 34       		.uleb128 0x34
+ 2351 0061 00       		.byte	0
+ 2352 0062 03       		.uleb128 0x3
+ 2353 0063 0E       		.uleb128 0xe
+ 2354 0064 3A       		.uleb128 0x3a
+ 2355 0065 0B       		.uleb128 0xb
+ 2356 0066 3B       		.uleb128 0x3b
+ 2357 0067 0B       		.uleb128 0xb
+ 2358 0068 49       		.uleb128 0x49
+ 2359 0069 13       		.uleb128 0x13
+ 2360 006a 02       		.uleb128 0x2
+ 2361 006b 18       		.uleb128 0x18
+ 2362 006c 00       		.byte	0
+ 2363 006d 00       		.byte	0
+ 2364 006e 08       		.uleb128 0x8
+ 2365 006f 34       		.uleb128 0x34
+ 2366 0070 00       		.byte	0
+ 2367 0071 03       		.uleb128 0x3
+ 2368 0072 08       		.uleb128 0x8
+ 2369 0073 3A       		.uleb128 0x3a
+ 2370 0074 0B       		.uleb128 0xb
+ 2371 0075 3B       		.uleb128 0x3b
+ 2372 0076 0B       		.uleb128 0xb
+ 2373 0077 49       		.uleb128 0x49
+ 2374 0078 13       		.uleb128 0x13
+ 2375 0079 02       		.uleb128 0x2
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 48
+
+
+ 2376 007a 18       		.uleb128 0x18
+ 2377 007b 00       		.byte	0
+ 2378 007c 00       		.byte	0
+ 2379 007d 09       		.uleb128 0x9
+ 2380 007e 0F       		.uleb128 0xf
+ 2381 007f 00       		.byte	0
+ 2382 0080 0B       		.uleb128 0xb
+ 2383 0081 0B       		.uleb128 0xb
+ 2384 0082 49       		.uleb128 0x49
+ 2385 0083 13       		.uleb128 0x13
+ 2386 0084 00       		.byte	0
+ 2387 0085 00       		.byte	0
+ 2388 0086 0A       		.uleb128 0xa
+ 2389 0087 01       		.uleb128 0x1
+ 2390 0088 01       		.byte	0x1
+ 2391 0089 49       		.uleb128 0x49
+ 2392 008a 13       		.uleb128 0x13
+ 2393 008b 01       		.uleb128 0x1
+ 2394 008c 13       		.uleb128 0x13
+ 2395 008d 00       		.byte	0
+ 2396 008e 00       		.byte	0
+ 2397 008f 0B       		.uleb128 0xb
+ 2398 0090 21       		.uleb128 0x21
+ 2399 0091 00       		.byte	0
+ 2400 0092 49       		.uleb128 0x49
+ 2401 0093 13       		.uleb128 0x13
+ 2402 0094 2F       		.uleb128 0x2f
+ 2403 0095 0B       		.uleb128 0xb
+ 2404 0096 00       		.byte	0
+ 2405 0097 00       		.byte	0
+ 2406 0098 0C       		.uleb128 0xc
+ 2407 0099 2E       		.uleb128 0x2e
+ 2408 009a 01       		.byte	0x1
+ 2409 009b 3F       		.uleb128 0x3f
+ 2410 009c 19       		.uleb128 0x19
+ 2411 009d 03       		.uleb128 0x3
+ 2412 009e 0E       		.uleb128 0xe
+ 2413 009f 3A       		.uleb128 0x3a
+ 2414 00a0 0B       		.uleb128 0xb
+ 2415 00a1 3B       		.uleb128 0x3b
+ 2416 00a2 0B       		.uleb128 0xb
+ 2417 00a3 27       		.uleb128 0x27
+ 2418 00a4 19       		.uleb128 0x19
+ 2419 00a5 11       		.uleb128 0x11
+ 2420 00a6 01       		.uleb128 0x1
+ 2421 00a7 12       		.uleb128 0x12
+ 2422 00a8 06       		.uleb128 0x6
+ 2423 00a9 40       		.uleb128 0x40
+ 2424 00aa 18       		.uleb128 0x18
+ 2425 00ab 9742     		.uleb128 0x2117
+ 2426 00ad 19       		.uleb128 0x19
+ 2427 00ae 01       		.uleb128 0x1
+ 2428 00af 13       		.uleb128 0x13
+ 2429 00b0 00       		.byte	0
+ 2430 00b1 00       		.byte	0
+ 2431 00b2 0D       		.uleb128 0xd
+ 2432 00b3 34       		.uleb128 0x34
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 49
+
+
+ 2433 00b4 00       		.byte	0
+ 2434 00b5 03       		.uleb128 0x3
+ 2435 00b6 08       		.uleb128 0x8
+ 2436 00b7 3A       		.uleb128 0x3a
+ 2437 00b8 0B       		.uleb128 0xb
+ 2438 00b9 3B       		.uleb128 0x3b
+ 2439 00ba 05       		.uleb128 0x5
+ 2440 00bb 49       		.uleb128 0x49
+ 2441 00bc 13       		.uleb128 0x13
+ 2442 00bd 02       		.uleb128 0x2
+ 2443 00be 18       		.uleb128 0x18
+ 2444 00bf 00       		.byte	0
+ 2445 00c0 00       		.byte	0
+ 2446 00c1 0E       		.uleb128 0xe
+ 2447 00c2 34       		.uleb128 0x34
+ 2448 00c3 00       		.byte	0
+ 2449 00c4 03       		.uleb128 0x3
+ 2450 00c5 0E       		.uleb128 0xe
+ 2451 00c6 3A       		.uleb128 0x3a
+ 2452 00c7 0B       		.uleb128 0xb
+ 2453 00c8 3B       		.uleb128 0x3b
+ 2454 00c9 05       		.uleb128 0x5
+ 2455 00ca 49       		.uleb128 0x49
+ 2456 00cb 13       		.uleb128 0x13
+ 2457 00cc 02       		.uleb128 0x2
+ 2458 00cd 18       		.uleb128 0x18
+ 2459 00ce 00       		.byte	0
+ 2460 00cf 00       		.byte	0
+ 2461 00d0 0F       		.uleb128 0xf
+ 2462 00d1 34       		.uleb128 0x34
+ 2463 00d2 00       		.byte	0
+ 2464 00d3 03       		.uleb128 0x3
+ 2465 00d4 0E       		.uleb128 0xe
+ 2466 00d5 3A       		.uleb128 0x3a
+ 2467 00d6 0B       		.uleb128 0xb
+ 2468 00d7 3B       		.uleb128 0x3b
+ 2469 00d8 05       		.uleb128 0x5
+ 2470 00d9 49       		.uleb128 0x49
+ 2471 00da 13       		.uleb128 0x13
+ 2472 00db 3F       		.uleb128 0x3f
+ 2473 00dc 19       		.uleb128 0x19
+ 2474 00dd 3C       		.uleb128 0x3c
+ 2475 00de 19       		.uleb128 0x19
+ 2476 00df 00       		.byte	0
+ 2477 00e0 00       		.byte	0
+ 2478 00e1 10       		.uleb128 0x10
+ 2479 00e2 35       		.uleb128 0x35
+ 2480 00e3 00       		.byte	0
+ 2481 00e4 49       		.uleb128 0x49
+ 2482 00e5 13       		.uleb128 0x13
+ 2483 00e6 00       		.byte	0
+ 2484 00e7 00       		.byte	0
+ 2485 00e8 11       		.uleb128 0x11
+ 2486 00e9 26       		.uleb128 0x26
+ 2487 00ea 00       		.byte	0
+ 2488 00eb 49       		.uleb128 0x49
+ 2489 00ec 13       		.uleb128 0x13
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 50
+
+
+ 2490 00ed 00       		.byte	0
+ 2491 00ee 00       		.byte	0
+ 2492 00ef 12       		.uleb128 0x12
+ 2493 00f0 34       		.uleb128 0x34
+ 2494 00f1 00       		.byte	0
+ 2495 00f2 03       		.uleb128 0x3
+ 2496 00f3 0E       		.uleb128 0xe
+ 2497 00f4 3A       		.uleb128 0x3a
+ 2498 00f5 0B       		.uleb128 0xb
+ 2499 00f6 3B       		.uleb128 0x3b
+ 2500 00f7 0B       		.uleb128 0xb
+ 2501 00f8 49       		.uleb128 0x49
+ 2502 00f9 13       		.uleb128 0x13
+ 2503 00fa 3F       		.uleb128 0x3f
+ 2504 00fb 19       		.uleb128 0x19
+ 2505 00fc 02       		.uleb128 0x2
+ 2506 00fd 18       		.uleb128 0x18
+ 2507 00fe 00       		.byte	0
+ 2508 00ff 00       		.byte	0
+ 2509 0100 00       		.byte	0
+ 2510              		.section	.debug_aranges,"",%progbits
+ 2511 0000 44000000 		.4byte	0x44
+ 2512 0004 0200     		.2byte	0x2
+ 2513 0006 00000000 		.4byte	.Ldebug_info0
+ 2514 000a 04       		.byte	0x4
+ 2515 000b 00       		.byte	0
+ 2516 000c 0000     		.2byte	0
+ 2517 000e 0000     		.2byte	0
+ 2518 0010 00000000 		.4byte	.LFB63
+ 2519 0014 44060000 		.4byte	.LFE63-.LFB63
+ 2520 0018 00000000 		.4byte	.LFB64
+ 2521 001c 42000000 		.4byte	.LFE64-.LFB64
+ 2522 0020 00000000 		.4byte	.LFB65
+ 2523 0024 E4000000 		.4byte	.LFE65-.LFB65
+ 2524 0028 00000000 		.4byte	.LFB66
+ 2525 002c C0000000 		.4byte	.LFE66-.LFB66
+ 2526 0030 00000000 		.4byte	.LFB67
+ 2527 0034 82000000 		.4byte	.LFE67-.LFB67
+ 2528 0038 00000000 		.4byte	.LFB68
+ 2529 003c 94000000 		.4byte	.LFE68-.LFB68
+ 2530 0040 00000000 		.4byte	0
+ 2531 0044 00000000 		.4byte	0
+ 2532              		.section	.debug_ranges,"",%progbits
+ 2533              	.Ldebug_ranges0:
+ 2534 0000 00000000 		.4byte	.LFB63
+ 2535 0004 44060000 		.4byte	.LFE63
+ 2536 0008 00000000 		.4byte	.LFB64
+ 2537 000c 42000000 		.4byte	.LFE64
+ 2538 0010 00000000 		.4byte	.LFB65
+ 2539 0014 E4000000 		.4byte	.LFE65
+ 2540 0018 00000000 		.4byte	.LFB66
+ 2541 001c C0000000 		.4byte	.LFE66
+ 2542 0020 00000000 		.4byte	.LFB67
+ 2543 0024 82000000 		.4byte	.LFE67
+ 2544 0028 00000000 		.4byte	.LFB68
+ 2545 002c 94000000 		.4byte	.LFE68
+ 2546 0030 00000000 		.4byte	0
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 51
+
+
+ 2547 0034 00000000 		.4byte	0
+ 2548              		.section	.debug_line,"",%progbits
+ 2549              	.Ldebug_line0:
+ 2550 0000 95030000 		.section	.debug_str,"MS",%progbits,1
+ 2550      02004901 
+ 2550      00000201 
+ 2550      FB0E0D00 
+ 2550      01010101 
+ 2551              	.LASF58:
+ 2552 0000 6D617869 		.ascii	"maxim_remove_close_peaks\000"
+ 2552      6D5F7265 
+ 2552      6D6F7665 
+ 2552      5F636C6F 
+ 2552      73655F70 
+ 2553              	.LASF17:
+ 2554 0019 666C6F61 		.ascii	"float\000"
+ 2554      7400
+ 2555              	.LASF37:
+ 2556 001f 6E5F795F 		.ascii	"n_y_ac\000"
+ 2556      616300
+ 2557              	.LASF13:
+ 2558 0026 696E7438 		.ascii	"int8_t\000"
+ 2558      5F7400
+ 2559              	.LASF4:
+ 2560 002d 73686F72 		.ascii	"short int\000"
+ 2560      7420696E 
+ 2560      7400
+ 2561              	.LASF21:
+ 2562 0037 73697A65 		.ascii	"sizetype\000"
+ 2562      74797065 
+ 2562      00
+ 2563              	.LASF28:
+ 2564 0040 7063685F 		.ascii	"pch_hr_valid\000"
+ 2564      68725F76 
+ 2564      616C6964 
+ 2564      00
+ 2565              	.LASF49:
+ 2566 004d 6D617869 		.ascii	"maxim_find_peaks\000"
+ 2566      6D5F6669 
+ 2566      6E645F70 
+ 2566      65616B73 
+ 2566      00
+ 2567              	.LASF70:
+ 2568 005e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2568      43313120 
+ 2568      352E342E 
+ 2568      31203230 
+ 2568      31363036 
+ 2569 0091 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2569      20726576 
+ 2569      6973696F 
+ 2569      6E203233 
+ 2569      37373135 
+ 2570 00c4 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 2570      66756E63 
+ 2570      74696F6E 
+ 2570      2D736563 
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 52
+
+
+ 2570      74696F6E 
+ 2571              	.LASF32:
+ 2572 00ec 6E5F6D69 		.ascii	"n_middle_idx\000"
+ 2572      64646C65 
+ 2572      5F696478 
+ 2572      00
+ 2573              	.LASF39:
+ 2574 00f9 6E5F7370 		.ascii	"n_spo2_calc\000"
+ 2574      6F325F63 
+ 2574      616C6300 
+ 2575              	.LASF20:
+ 2576 0105 6C6F6E67 		.ascii	"long double\000"
+ 2576      20646F75 
+ 2576      626C6500 
+ 2577              	.LASF8:
+ 2578 0111 5F5F7569 		.ascii	"__uint32_t\000"
+ 2578      6E743332 
+ 2578      5F7400
+ 2579              	.LASF62:
+ 2580 011c 6D617869 		.ascii	"maxim_sort_ascend\000"
+ 2580      6D5F736F 
+ 2580      72745F61 
+ 2580      7363656E 
+ 2580      6400
+ 2581              	.LASF64:
+ 2582 012e 6D617869 		.ascii	"maxim_sort_indices_descend\000"
+ 2582      6D5F736F 
+ 2582      72745F69 
+ 2582      6E646963 
+ 2582      65735F64 
+ 2583              	.LASF14:
+ 2584 0149 75696E74 		.ascii	"uint8_t\000"
+ 2584      385F7400 
+ 2585              	.LASF36:
+ 2586 0151 6E5F7065 		.ascii	"n_peak_interval_sum\000"
+ 2586      616B5F69 
+ 2586      6E746572 
+ 2586      76616C5F 
+ 2586      73756D00 
+ 2587              	.LASF60:
+ 2588 0165 6E5F6F6C 		.ascii	"n_old_npks\000"
+ 2588      645F6E70 
+ 2588      6B7300
+ 2589              	.LASF35:
+ 2590 0170 616E5F69 		.ascii	"an_ir_valley_locs\000"
+ 2590      725F7661 
+ 2590      6C6C6579 
+ 2590      5F6C6F63 
+ 2590      7300
+ 2591              	.LASF22:
+ 2592 0182 70756E5F 		.ascii	"pun_ir_buffer\000"
+ 2592      69725F62 
+ 2592      75666665 
+ 2592      7200
+ 2593              	.LASF63:
+ 2594 0190 6E5F7465 		.ascii	"n_temp\000"
+ 2594      6D7000
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 53
+
+
+ 2595              	.LASF48:
+ 2596 0197 6D617869 		.ascii	"maxim_heart_rate_and_oxygen_saturation\000"
+ 2596      6D5F6865 
+ 2596      6172745F 
+ 2596      72617465 
+ 2596      5F616E64 
+ 2597              	.LASF61:
+ 2598 01be 6E5F6469 		.ascii	"n_dist\000"
+ 2598      737400
+ 2599              	.LASF30:
+ 2600 01c5 6E5F695F 		.ascii	"n_i_ratio_count\000"
+ 2600      72617469 
+ 2600      6F5F636F 
+ 2600      756E7400 
+ 2601              	.LASF24:
+ 2602 01d5 70756E5F 		.ascii	"pun_red_buffer\000"
+ 2602      7265645F 
+ 2602      62756666 
+ 2602      657200
+ 2603              	.LASF72:
+ 2604 01e4 433A5C55 		.ascii	"C:\\Users\\Perro\\Documents\\PSoC Creator\\Pulseoxi"
+ 2604      73657273 
+ 2604      5C506572 
+ 2604      726F5C44 
+ 2604      6F63756D 
+ 2605 0212 6D657465 		.ascii	"meter\\Project_LTEBS\\Saturimetro.cydsn\000"
+ 2605      725C5072 
+ 2605      6F6A6563 
+ 2605      745F4C54 
+ 2605      4542535C 
+ 2606              	.LASF10:
+ 2607 0238 6C6F6E67 		.ascii	"long long int\000"
+ 2607      206C6F6E 
+ 2607      6720696E 
+ 2607      7400
+ 2608              	.LASF7:
+ 2609 0246 6C6F6E67 		.ascii	"long int\000"
+ 2609      20696E74 
+ 2609      00
+ 2610              	.LASF26:
+ 2611 024f 7063685F 		.ascii	"pch_spo2_valid\000"
+ 2611      73706F32 
+ 2611      5F76616C 
+ 2611      696400
+ 2612              	.LASF71:
+ 2613 025e 53704F32 		.ascii	"SpO2.c\000"
+ 2613      2E6300
+ 2614              	.LASF27:
+ 2615 0265 706E5F68 		.ascii	"pn_heart_rate\000"
+ 2615      65617274 
+ 2615      5F726174 
+ 2615      6500
+ 2616              	.LASF59:
+ 2617 0273 706E5F6E 		.ascii	"pn_npks\000"
+ 2617      706B7300 
+ 2618              	.LASF31:
+ 2619 027b 6E5F6578 		.ascii	"n_exact_ir_valley_locs_count\000"
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 54
+
+
+ 2619      6163745F 
+ 2619      69725F76 
+ 2619      616C6C65 
+ 2619      795F6C6F 
+ 2620              	.LASF42:
+ 2621 0298 6E5F795F 		.ascii	"n_y_dc_max_idx\000"
+ 2621      64635F6D 
+ 2621      61785F69 
+ 2621      647800
+ 2622              	.LASF3:
+ 2623 02a7 756E7369 		.ascii	"unsigned char\000"
+ 2623      676E6564 
+ 2623      20636861 
+ 2623      7200
+ 2624              	.LASF65:
+ 2625 02b5 706E5F69 		.ascii	"pn_indx\000"
+ 2625      6E647800 
+ 2626              	.LASF53:
+ 2627 02bd 6E5F6D69 		.ascii	"n_min_height\000"
+ 2627      6E5F6865 
+ 2627      69676874 
+ 2627      00
+ 2628              	.LASF25:
+ 2629 02ca 706E5F73 		.ascii	"pn_spo2\000"
+ 2629      706F3200 
+ 2630              	.LASF41:
+ 2631 02d2 6E5F785F 		.ascii	"n_x_dc_max\000"
+ 2631      64635F6D 
+ 2631      617800
+ 2632              	.LASF11:
+ 2633 02dd 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2633      206C6F6E 
+ 2633      6720756E 
+ 2633      7369676E 
+ 2633      65642069 
+ 2634              	.LASF16:
+ 2635 02f4 75696E74 		.ascii	"uint32_t\000"
+ 2635      33325F74 
+ 2635      00
+ 2636              	.LASF12:
+ 2637 02fd 756E7369 		.ascii	"unsigned int\000"
+ 2637      676E6564 
+ 2637      20696E74 
+ 2637      00
+ 2638              	.LASF9:
+ 2639 030a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2639      20756E73 
+ 2639      69676E65 
+ 2639      6420696E 
+ 2639      7400
+ 2640              	.LASF5:
+ 2641 031c 73686F72 		.ascii	"short unsigned int\000"
+ 2641      7420756E 
+ 2641      7369676E 
+ 2641      65642069 
+ 2641      6E7400
+ 2642              	.LASF0:
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 55
+
+
+ 2643 032f 5F5F696E 		.ascii	"__int8_t\000"
+ 2643      74385F74 
+ 2643      00
+ 2644              	.LASF47:
+ 2645 0338 6E5F6465 		.ascii	"n_denom\000"
+ 2645      6E6F6D00 
+ 2646              	.LASF19:
+ 2647 0340 63686172 		.ascii	"char\000"
+ 2647      00
+ 2648              	.LASF15:
+ 2649 0345 696E7433 		.ascii	"int32_t\000"
+ 2649      325F7400 
+ 2650              	.LASF69:
+ 2651 034d 7563685F 		.ascii	"uch_spo2_table\000"
+ 2651      73706F32 
+ 2651      5F746162 
+ 2651      6C6500
+ 2652              	.LASF44:
+ 2653 035c 616E5F72 		.ascii	"an_ratio\000"
+ 2653      6174696F 
+ 2653      00
+ 2654              	.LASF29:
+ 2655 0365 756E5F69 		.ascii	"un_ir_mean\000"
+ 2655      725F6D65 
+ 2655      616E00
+ 2656              	.LASF23:
+ 2657 0370 6E5F6275 		.ascii	"n_buffer_length\000"
+ 2657      66666572 
+ 2657      5F6C656E 
+ 2657      67746800 
+ 2658              	.LASF38:
+ 2659 0380 6E5F785F 		.ascii	"n_x_ac\000"
+ 2659      616300
+ 2660              	.LASF33:
+ 2661 0387 6E5F7468 		.ascii	"n_th1\000"
+ 2661      3100
+ 2662              	.LASF45:
+ 2663 038d 6E5F7261 		.ascii	"n_ratio_average\000"
+ 2663      74696F5F 
+ 2663      61766572 
+ 2663      61676500 
+ 2664              	.LASF57:
+ 2665 039d 6E5F7769 		.ascii	"n_width\000"
+ 2665      64746800 
+ 2666              	.LASF51:
+ 2667 03a5 706E5F78 		.ascii	"pn_x\000"
+ 2667      00
+ 2668              	.LASF6:
+ 2669 03aa 5F5F696E 		.ascii	"__int32_t\000"
+ 2669      7433325F 
+ 2669      7400
+ 2670              	.LASF55:
+ 2671 03b4 6E5F6D61 		.ascii	"n_max_num\000"
+ 2671      785F6E75 
+ 2671      6D00
+ 2672              	.LASF2:
+ 2673 03be 7369676E 		.ascii	"signed char\000"
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccyvOOGk.s 			page 56
+
+
+ 2673      65642063 
+ 2673      68617200 
+ 2674              	.LASF46:
+ 2675 03ca 6E5F6E75 		.ascii	"n_nume\000"
+ 2675      6D6500
+ 2676              	.LASF40:
+ 2677 03d1 6E5F795F 		.ascii	"n_y_dc_max\000"
+ 2677      64635F6D 
+ 2677      617800
+ 2678              	.LASF56:
+ 2679 03dc 6D617869 		.ascii	"maxim_peaks_above_min_height\000"
+ 2679      6D5F7065 
+ 2679      616B735F 
+ 2679      61626F76 
+ 2679      655F6D69 
+ 2680              	.LASF18:
+ 2681 03f9 646F7562 		.ascii	"double\000"
+ 2681      6C6500
+ 2682              	.LASF43:
+ 2683 0400 6E5F785F 		.ascii	"n_x_dc_max_idx\000"
+ 2683      64635F6D 
+ 2683      61785F69 
+ 2683      647800
+ 2684              	.LASF66:
+ 2685 040f 616E5F78 		.ascii	"an_x\000"
+ 2685      00
+ 2686              	.LASF67:
+ 2687 0414 616E5F79 		.ascii	"an_y\000"
+ 2687      00
+ 2688              	.LASF68:
+ 2689 0419 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2689      52784275 
+ 2689      66666572 
+ 2689      00
+ 2690              	.LASF50:
+ 2691 0426 706E5F6C 		.ascii	"pn_locs\000"
+ 2691      6F637300 
+ 2692              	.LASF34:
+ 2693 042e 6E5F6E70 		.ascii	"n_npks\000"
+ 2693      6B7300
+ 2694              	.LASF54:
+ 2695 0435 6E5F6D69 		.ascii	"n_min_distance\000"
+ 2695      6E5F6469 
+ 2695      7374616E 
+ 2695      636500
+ 2696              	.LASF1:
+ 2697 0444 5F5F7569 		.ascii	"__uint8_t\000"
+ 2697      6E74385F 
+ 2697      7400
+ 2698              	.LASF52:
+ 2699 044e 6E5F7369 		.ascii	"n_size\000"
+ 2699      7A6500
+ 2700              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

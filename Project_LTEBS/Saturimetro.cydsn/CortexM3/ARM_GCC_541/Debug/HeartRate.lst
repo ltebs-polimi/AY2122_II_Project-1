@@ -1,0 +1,1660 @@
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"HeartRate.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	IR_AC_Max
+  20              		.data
+  21              		.align	1
+  22              		.type	IR_AC_Max, %object
+  23              		.size	IR_AC_Max, 2
+  24              	IR_AC_Max:
+  25 0000 1400     		.short	20
+  26              		.global	IR_AC_Min
+  27              		.align	1
+  28              		.type	IR_AC_Min, %object
+  29              		.size	IR_AC_Min, 2
+  30              	IR_AC_Min:
+  31 0002 ECFF     		.short	-20
+  32              		.global	IR_AC_Signal_Current
+  33              		.bss
+  34              		.align	1
+  35              		.type	IR_AC_Signal_Current, %object
+  36              		.size	IR_AC_Signal_Current, 2
+  37              	IR_AC_Signal_Current:
+  38 0000 0000     		.space	2
+  39              		.comm	IR_AC_Signal_Previous,2,2
+  40              		.global	IR_AC_Signal_min
+  41              		.align	1
+  42              		.type	IR_AC_Signal_min, %object
+  43              		.size	IR_AC_Signal_min, 2
+  44              	IR_AC_Signal_min:
+  45 0002 0000     		.space	2
+  46              		.global	IR_AC_Signal_max
+  47              		.align	1
+  48              		.type	IR_AC_Signal_max, %object
+  49              		.size	IR_AC_Signal_max, 2
+  50              	IR_AC_Signal_max:
+  51 0004 0000     		.space	2
+  52              		.comm	IR_Average_Estimated,2,2
+  53              		.global	positiveEdge
+  54              		.align	1
+  55              		.type	positiveEdge, %object
+  56              		.size	positiveEdge, 2
+  57              	positiveEdge:
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 2
+
+
+  58 0006 0000     		.space	2
+  59              		.global	negativeEdge
+  60              		.align	1
+  61              		.type	negativeEdge, %object
+  62              		.size	negativeEdge, 2
+  63              	negativeEdge:
+  64 0008 0000     		.space	2
+  65              		.global	ir_avg_reg
+  66 000a 0000     		.align	2
+  67              		.type	ir_avg_reg, %object
+  68              		.size	ir_avg_reg, 4
+  69              	ir_avg_reg:
+  70 000c 00000000 		.space	4
+  71              		.comm	cbuf,64,4
+  72              		.global	offset
+  73              		.type	offset, %object
+  74              		.size	offset, 1
+  75              	offset:
+  76 0010 00       		.space	1
+  77              		.section	.rodata
+  78              		.align	2
+  79              		.type	FIRCoeffs, %object
+  80              		.size	FIRCoeffs, 24
+  81              	FIRCoeffs:
+  82 0000 AC00     		.short	172
+  83 0002 4101     		.short	321
+  84 0004 4302     		.short	579
+  85 0006 9F03     		.short	927
+  86 0008 5005     		.short	1360
+  87 000a 4207     		.short	1858
+  88 000c 5609     		.short	2390
+  89 000e 640B     		.short	2916
+  90 0010 3F0D     		.short	3391
+  91 0012 B80E     		.short	3768
+  92 0014 AC0F     		.short	4012
+  93 0016 0010     		.short	4096
+  94              		.section	.text.checkForBeat,"ax",%progbits
+  95              		.align	2
+  96              		.global	checkForBeat
+  97              		.thumb
+  98              		.thumb_func
+  99              		.type	checkForBeat, %function
+ 100              	checkForBeat:
+ 101              	.LFB63:
+ 102              		.file 1 "HeartRate.c"
+   1:HeartRate.c   **** /* ========================================
+   2:HeartRate.c   ****  *
+   3:HeartRate.c   ****  * Copyright YOUR COMPANY, THE YEAR
+   4:HeartRate.c   ****  * All Rights Reserved
+   5:HeartRate.c   ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:HeartRate.c   ****  *
+   7:HeartRate.c   ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:HeartRate.c   ****  * WHICH IS THE PROPERTY OF your company.
+   9:HeartRate.c   ****  *
+  10:HeartRate.c   ****  * ========================================
+  11:HeartRate.c   **** */
+  12:HeartRate.c   **** 
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 3
+
+
+  13:HeartRate.c   **** #include "HeartRate.h"
+  14:HeartRate.c   **** 
+  15:HeartRate.c   **** int16 IR_AC_Max = 20;
+  16:HeartRate.c   **** int16 IR_AC_Min = -20;
+  17:HeartRate.c   **** 
+  18:HeartRate.c   **** int16 IR_AC_Signal_Current = 0;
+  19:HeartRate.c   **** int16 IR_AC_Signal_Previous;
+  20:HeartRate.c   **** int16 IR_AC_Signal_min = 0;
+  21:HeartRate.c   **** int16 IR_AC_Signal_max = 0;
+  22:HeartRate.c   **** int16 IR_Average_Estimated;
+  23:HeartRate.c   **** 
+  24:HeartRate.c   **** int16 positiveEdge = 0;
+  25:HeartRate.c   **** int16 negativeEdge = 0;
+  26:HeartRate.c   **** int32 ir_avg_reg = 0;
+  27:HeartRate.c   **** 
+  28:HeartRate.c   **** int16 cbuf[32];
+  29:HeartRate.c   **** uint8 offset = 0;
+  30:HeartRate.c   **** 
+  31:HeartRate.c   **** static const uint16_t FIRCoeffs[12] = {172, 321, 579, 927, 1360, 1858, 2390, 2916, 3391, 3768, 4012
+  32:HeartRate.c   **** 
+  33:HeartRate.c   **** //  Heart Rate Monitor functions takes a sample value and the sample number
+  34:HeartRate.c   **** //  Returns true if a beat is detected
+  35:HeartRate.c   **** //  A running average of four samples is recommended for display on the screen.
+  36:HeartRate.c   **** bool checkForBeat(int32 sample)
+  37:HeartRate.c   **** 
+  38:HeartRate.c   **** {
+ 103              		.loc 1 38 0
+ 104              		.cfi_startproc
+ 105              		@ args = 0, pretend = 0, frame = 16
+ 106              		@ frame_needed = 1, uses_anonymous_args = 0
+ 107 0000 80B5     		push	{r7, lr}
+ 108              		.cfi_def_cfa_offset 8
+ 109              		.cfi_offset 7, -8
+ 110              		.cfi_offset 14, -4
+ 111 0002 84B0     		sub	sp, sp, #16
+ 112              		.cfi_def_cfa_offset 24
+ 113 0004 00AF     		add	r7, sp, #0
+ 114              		.cfi_def_cfa_register 7
+ 115 0006 7860     		str	r0, [r7, #4]
+  39:HeartRate.c   ****   bool beatDetected = false;
+ 116              		.loc 1 39 0
+ 117 0008 0023     		movs	r3, #0
+ 118 000a FB73     		strb	r3, [r7, #15]
+  40:HeartRate.c   **** 
+  41:HeartRate.c   ****   //  Save current state
+  42:HeartRate.c   ****   IR_AC_Signal_Previous = IR_AC_Signal_Current;
+ 119              		.loc 1 42 0
+ 120 000c 5A4B     		ldr	r3, .L7
+ 121 000e B3F90020 		ldrsh	r2, [r3]
+ 122 0012 5A4B     		ldr	r3, .L7+4
+ 123 0014 1A80     		strh	r2, [r3]	@ movhi
+  43:HeartRate.c   ****   
+  44:HeartRate.c   ****   //This is good to view for debugging
+  45:HeartRate.c   ****   //Serial.print("Signal_Current: ");
+  46:HeartRate.c   ****   //Serial.println(IR_AC_Signal_Current);
+  47:HeartRate.c   **** 
+  48:HeartRate.c   ****   //  Process next data sample
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 4
+
+
+  49:HeartRate.c   ****   IR_Average_Estimated = averageDCEstimator(&ir_avg_reg, sample);
+ 124              		.loc 1 49 0
+ 125 0016 7B68     		ldr	r3, [r7, #4]
+ 126 0018 9BB2     		uxth	r3, r3
+ 127 001a 1946     		mov	r1, r3
+ 128 001c 5848     		ldr	r0, .L7+8
+ 129 001e FFF7FEFF 		bl	averageDCEstimator
+ 130 0022 0346     		mov	r3, r0
+ 131 0024 1A46     		mov	r2, r3
+ 132 0026 574B     		ldr	r3, .L7+12
+ 133 0028 1A80     		strh	r2, [r3]	@ movhi
+  50:HeartRate.c   ****   IR_AC_Signal_Current = lowPassFIRFilter(sample - IR_Average_Estimated);
+ 134              		.loc 1 50 0
+ 135 002a 7B68     		ldr	r3, [r7, #4]
+ 136 002c 9AB2     		uxth	r2, r3
+ 137 002e 554B     		ldr	r3, .L7+12
+ 138 0030 B3F90030 		ldrsh	r3, [r3]
+ 139 0034 9BB2     		uxth	r3, r3
+ 140 0036 D31A     		subs	r3, r2, r3
+ 141 0038 9BB2     		uxth	r3, r3
+ 142 003a 1BB2     		sxth	r3, r3
+ 143 003c 1846     		mov	r0, r3
+ 144 003e FFF7FEFF 		bl	lowPassFIRFilter
+ 145 0042 0346     		mov	r3, r0
+ 146 0044 1A46     		mov	r2, r3
+ 147 0046 4C4B     		ldr	r3, .L7
+ 148 0048 1A80     		strh	r2, [r3]	@ movhi
+  51:HeartRate.c   **** 
+  52:HeartRate.c   ****   //  Detect positive zero crossing (rising edge)
+  53:HeartRate.c   ****   if ((IR_AC_Signal_Previous < 0) & (IR_AC_Signal_Current >= 0))
+ 149              		.loc 1 53 0
+ 150 004a 4C4B     		ldr	r3, .L7+4
+ 151 004c B3F90030 		ldrsh	r3, [r3]
+ 152 0050 9BB2     		uxth	r3, r3
+ 153 0052 DB0B     		lsrs	r3, r3, #15
+ 154 0054 DAB2     		uxtb	r2, r3
+ 155 0056 484B     		ldr	r3, .L7
+ 156 0058 B3F90030 		ldrsh	r3, [r3]
+ 157 005c DB43     		mvns	r3, r3
+ 158 005e 9BB2     		uxth	r3, r3
+ 159 0060 DB0B     		lsrs	r3, r3, #15
+ 160 0062 DBB2     		uxtb	r3, r3
+ 161 0064 1340     		ands	r3, r3, r2
+ 162 0066 DBB2     		uxtb	r3, r3
+ 163 0068 002B     		cmp	r3, #0
+ 164 006a 34D0     		beq	.L2
+  54:HeartRate.c   ****   {
+  55:HeartRate.c   ****   
+  56:HeartRate.c   ****     IR_AC_Max = IR_AC_Signal_max; //Adjust our AC max and min
+ 165              		.loc 1 56 0
+ 166 006c 464B     		ldr	r3, .L7+16
+ 167 006e B3F90020 		ldrsh	r2, [r3]
+ 168 0072 464B     		ldr	r3, .L7+20
+ 169 0074 1A80     		strh	r2, [r3]	@ movhi
+  57:HeartRate.c   ****     IR_AC_Min = IR_AC_Signal_min;
+ 170              		.loc 1 57 0
+ 171 0076 464B     		ldr	r3, .L7+24
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 5
+
+
+ 172 0078 B3F90020 		ldrsh	r2, [r3]
+ 173 007c 454B     		ldr	r3, .L7+28
+ 174 007e 1A80     		strh	r2, [r3]	@ movhi
+  58:HeartRate.c   **** 
+  59:HeartRate.c   ****     positiveEdge = 1;
+ 175              		.loc 1 59 0
+ 176 0080 454B     		ldr	r3, .L7+32
+ 177 0082 0122     		movs	r2, #1
+ 178 0084 1A80     		strh	r2, [r3]	@ movhi
+  60:HeartRate.c   ****     negativeEdge = 0;
+ 179              		.loc 1 60 0
+ 180 0086 454B     		ldr	r3, .L7+36
+ 181 0088 0022     		movs	r2, #0
+ 182 008a 1A80     		strh	r2, [r3]	@ movhi
+  61:HeartRate.c   ****     IR_AC_Signal_max = 0;
+ 183              		.loc 1 61 0
+ 184 008c 3E4B     		ldr	r3, .L7+16
+ 185 008e 0022     		movs	r2, #0
+ 186 0090 1A80     		strh	r2, [r3]	@ movhi
+  62:HeartRate.c   **** 
+  63:HeartRate.c   ****     //if ((IR_AC_Max - IR_AC_Min) > 100 & (IR_AC_Max - IR_AC_Min) < 1000)
+  64:HeartRate.c   ****     if (((IR_AC_Max - IR_AC_Min) > 20) & ((IR_AC_Max - IR_AC_Min) < 1000))
+ 187              		.loc 1 64 0
+ 188 0092 3E4B     		ldr	r3, .L7+20
+ 189 0094 B3F90030 		ldrsh	r3, [r3]
+ 190 0098 1A46     		mov	r2, r3
+ 191 009a 3E4B     		ldr	r3, .L7+28
+ 192 009c B3F90030 		ldrsh	r3, [r3]
+ 193 00a0 D31A     		subs	r3, r2, r3
+ 194 00a2 142B     		cmp	r3, #20
+ 195 00a4 CCBF     		ite	gt
+ 196 00a6 0123     		movgt	r3, #1
+ 197 00a8 0023     		movle	r3, #0
+ 198 00aa DAB2     		uxtb	r2, r3
+ 199 00ac 374B     		ldr	r3, .L7+20
+ 200 00ae B3F90030 		ldrsh	r3, [r3]
+ 201 00b2 1946     		mov	r1, r3
+ 202 00b4 374B     		ldr	r3, .L7+28
+ 203 00b6 B3F90030 		ldrsh	r3, [r3]
+ 204 00ba CB1A     		subs	r3, r1, r3
+ 205 00bc 40F2E731 		movw	r1, #999
+ 206 00c0 8B42     		cmp	r3, r1
+ 207 00c2 D4BF     		ite	le
+ 208 00c4 0123     		movle	r3, #1
+ 209 00c6 0023     		movgt	r3, #0
+ 210 00c8 DBB2     		uxtb	r3, r3
+ 211 00ca 1340     		ands	r3, r3, r2
+ 212 00cc DBB2     		uxtb	r3, r3
+ 213 00ce 002B     		cmp	r3, #0
+ 214 00d0 01D0     		beq	.L2
+  65:HeartRate.c   ****     {
+  66:HeartRate.c   ****       //Heart beat!!!
+  67:HeartRate.c   ****       beatDetected = true;
+ 215              		.loc 1 67 0
+ 216 00d2 0123     		movs	r3, #1
+ 217 00d4 FB73     		strb	r3, [r7, #15]
+ 218              	.L2:
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 6
+
+
+  68:HeartRate.c   ****     }
+  69:HeartRate.c   ****   }
+  70:HeartRate.c   **** 
+  71:HeartRate.c   ****   //  Detect negative zero crossing (falling edge)
+  72:HeartRate.c   ****   if ((IR_AC_Signal_Previous > 0) & (IR_AC_Signal_Current <= 0))
+ 219              		.loc 1 72 0
+ 220 00d6 294B     		ldr	r3, .L7+4
+ 221 00d8 B3F90030 		ldrsh	r3, [r3]
+ 222 00dc 002B     		cmp	r3, #0
+ 223 00de CCBF     		ite	gt
+ 224 00e0 0123     		movgt	r3, #1
+ 225 00e2 0023     		movle	r3, #0
+ 226 00e4 DAB2     		uxtb	r2, r3
+ 227 00e6 244B     		ldr	r3, .L7
+ 228 00e8 B3F90030 		ldrsh	r3, [r3]
+ 229 00ec 002B     		cmp	r3, #0
+ 230 00ee D4BF     		ite	le
+ 231 00f0 0123     		movle	r3, #1
+ 232 00f2 0023     		movgt	r3, #0
+ 233 00f4 DBB2     		uxtb	r3, r3
+ 234 00f6 1340     		ands	r3, r3, r2
+ 235 00f8 DBB2     		uxtb	r3, r3
+ 236 00fa 002B     		cmp	r3, #0
+ 237 00fc 08D0     		beq	.L3
+  73:HeartRate.c   ****   {
+  74:HeartRate.c   ****     positiveEdge = 0;
+ 238              		.loc 1 74 0
+ 239 00fe 264B     		ldr	r3, .L7+32
+ 240 0100 0022     		movs	r2, #0
+ 241 0102 1A80     		strh	r2, [r3]	@ movhi
+  75:HeartRate.c   ****     negativeEdge = 1;
+ 242              		.loc 1 75 0
+ 243 0104 254B     		ldr	r3, .L7+36
+ 244 0106 0122     		movs	r2, #1
+ 245 0108 1A80     		strh	r2, [r3]	@ movhi
+  76:HeartRate.c   ****     IR_AC_Signal_min = 0;
+ 246              		.loc 1 76 0
+ 247 010a 214B     		ldr	r3, .L7+24
+ 248 010c 0022     		movs	r2, #0
+ 249 010e 1A80     		strh	r2, [r3]	@ movhi
+ 250              	.L3:
+  77:HeartRate.c   ****   }
+  78:HeartRate.c   **** 
+  79:HeartRate.c   ****   //  Find Maximum value in positive cycle
+  80:HeartRate.c   ****   if (positiveEdge & (IR_AC_Signal_Current > IR_AC_Signal_Previous))
+ 251              		.loc 1 80 0
+ 252 0110 214B     		ldr	r3, .L7+32
+ 253 0112 B3F90030 		ldrsh	r3, [r3]
+ 254 0116 1946     		mov	r1, r3
+ 255 0118 174B     		ldr	r3, .L7
+ 256 011a B3F90020 		ldrsh	r2, [r3]
+ 257 011e 174B     		ldr	r3, .L7+4
+ 258 0120 B3F90030 		ldrsh	r3, [r3]
+ 259 0124 9A42     		cmp	r2, r3
+ 260 0126 CCBF     		ite	gt
+ 261 0128 0123     		movgt	r3, #1
+ 262 012a 0023     		movle	r3, #0
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 7
+
+
+ 263 012c DBB2     		uxtb	r3, r3
+ 264 012e 0B40     		ands	r3, r3, r1
+ 265 0130 002B     		cmp	r3, #0
+ 266 0132 04D0     		beq	.L4
+  81:HeartRate.c   ****   {
+  82:HeartRate.c   ****     IR_AC_Signal_max = IR_AC_Signal_Current;
+ 267              		.loc 1 82 0
+ 268 0134 104B     		ldr	r3, .L7
+ 269 0136 B3F90020 		ldrsh	r2, [r3]
+ 270 013a 134B     		ldr	r3, .L7+16
+ 271 013c 1A80     		strh	r2, [r3]	@ movhi
+ 272              	.L4:
+  83:HeartRate.c   ****   }
+  84:HeartRate.c   **** 
+  85:HeartRate.c   ****   //  Find Minimum value in negative cycle
+  86:HeartRate.c   ****   if (negativeEdge & (IR_AC_Signal_Current < IR_AC_Signal_Previous))
+ 273              		.loc 1 86 0
+ 274 013e 174B     		ldr	r3, .L7+36
+ 275 0140 B3F90030 		ldrsh	r3, [r3]
+ 276 0144 1946     		mov	r1, r3
+ 277 0146 0C4B     		ldr	r3, .L7
+ 278 0148 B3F90020 		ldrsh	r2, [r3]
+ 279 014c 0B4B     		ldr	r3, .L7+4
+ 280 014e B3F90030 		ldrsh	r3, [r3]
+ 281 0152 9A42     		cmp	r2, r3
+ 282 0154 B4BF     		ite	lt
+ 283 0156 0123     		movlt	r3, #1
+ 284 0158 0023     		movge	r3, #0
+ 285 015a DBB2     		uxtb	r3, r3
+ 286 015c 0B40     		ands	r3, r3, r1
+ 287 015e 002B     		cmp	r3, #0
+ 288 0160 04D0     		beq	.L5
+  87:HeartRate.c   ****   {
+  88:HeartRate.c   ****     IR_AC_Signal_min = IR_AC_Signal_Current;
+ 289              		.loc 1 88 0
+ 290 0162 054B     		ldr	r3, .L7
+ 291 0164 B3F90020 		ldrsh	r2, [r3]
+ 292 0168 094B     		ldr	r3, .L7+24
+ 293 016a 1A80     		strh	r2, [r3]	@ movhi
+ 294              	.L5:
+  89:HeartRate.c   ****   }
+  90:HeartRate.c   ****   
+  91:HeartRate.c   ****   return(beatDetected);
+ 295              		.loc 1 91 0
+ 296 016c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+  92:HeartRate.c   **** }
+ 297              		.loc 1 92 0
+ 298 016e 1846     		mov	r0, r3
+ 299 0170 1037     		adds	r7, r7, #16
+ 300              		.cfi_def_cfa_offset 8
+ 301 0172 BD46     		mov	sp, r7
+ 302              		.cfi_def_cfa_register 13
+ 303              		@ sp needed
+ 304 0174 80BD     		pop	{r7, pc}
+ 305              	.L8:
+ 306 0176 00BF     		.align	2
+ 307              	.L7:
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 8
+
+
+ 308 0178 00000000 		.word	IR_AC_Signal_Current
+ 309 017c 00000000 		.word	IR_AC_Signal_Previous
+ 310 0180 00000000 		.word	ir_avg_reg
+ 311 0184 00000000 		.word	IR_Average_Estimated
+ 312 0188 00000000 		.word	IR_AC_Signal_max
+ 313 018c 00000000 		.word	IR_AC_Max
+ 314 0190 00000000 		.word	IR_AC_Signal_min
+ 315 0194 00000000 		.word	IR_AC_Min
+ 316 0198 00000000 		.word	positiveEdge
+ 317 019c 00000000 		.word	negativeEdge
+ 318              		.cfi_endproc
+ 319              	.LFE63:
+ 320              		.size	checkForBeat, .-checkForBeat
+ 321              		.section	.text.averageDCEstimator,"ax",%progbits
+ 322              		.align	2
+ 323              		.global	averageDCEstimator
+ 324              		.thumb
+ 325              		.thumb_func
+ 326              		.type	averageDCEstimator, %function
+ 327              	averageDCEstimator:
+ 328              	.LFB64:
+  93:HeartRate.c   **** 
+  94:HeartRate.c   **** //  Average DC Estimator
+  95:HeartRate.c   **** int16_t averageDCEstimator(int32 *p, uint16_t x)
+  96:HeartRate.c   **** {
+ 329              		.loc 1 96 0
+ 330              		.cfi_startproc
+ 331              		@ args = 0, pretend = 0, frame = 8
+ 332              		@ frame_needed = 1, uses_anonymous_args = 0
+ 333              		@ link register save eliminated.
+ 334 0000 80B4     		push	{r7}
+ 335              		.cfi_def_cfa_offset 4
+ 336              		.cfi_offset 7, -4
+ 337 0002 83B0     		sub	sp, sp, #12
+ 338              		.cfi_def_cfa_offset 16
+ 339 0004 00AF     		add	r7, sp, #0
+ 340              		.cfi_def_cfa_register 7
+ 341 0006 7860     		str	r0, [r7, #4]
+ 342 0008 0B46     		mov	r3, r1
+ 343 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+  97:HeartRate.c   ****   *p += ((((long) x << 15) - *p) >> 4);
+ 344              		.loc 1 97 0
+ 345 000c 7B68     		ldr	r3, [r7, #4]
+ 346 000e 1A68     		ldr	r2, [r3]
+ 347 0010 7B88     		ldrh	r3, [r7, #2]
+ 348 0012 D903     		lsls	r1, r3, #15
+ 349 0014 7B68     		ldr	r3, [r7, #4]
+ 350 0016 1B68     		ldr	r3, [r3]
+ 351 0018 CB1A     		subs	r3, r1, r3
+ 352 001a 1B11     		asrs	r3, r3, #4
+ 353 001c 1A44     		add	r2, r2, r3
+ 354 001e 7B68     		ldr	r3, [r7, #4]
+ 355 0020 1A60     		str	r2, [r3]
+  98:HeartRate.c   ****   return (*p >> 15);
+ 356              		.loc 1 98 0
+ 357 0022 7B68     		ldr	r3, [r7, #4]
+ 358 0024 1B68     		ldr	r3, [r3]
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 9
+
+
+ 359 0026 DB13     		asrs	r3, r3, #15
+ 360 0028 1BB2     		sxth	r3, r3
+  99:HeartRate.c   **** }
+ 361              		.loc 1 99 0
+ 362 002a 1846     		mov	r0, r3
+ 363 002c 0C37     		adds	r7, r7, #12
+ 364              		.cfi_def_cfa_offset 4
+ 365 002e BD46     		mov	sp, r7
+ 366              		.cfi_def_cfa_register 13
+ 367              		@ sp needed
+ 368 0030 80BC     		pop	{r7}
+ 369              		.cfi_restore 7
+ 370              		.cfi_def_cfa_offset 0
+ 371 0032 7047     		bx	lr
+ 372              		.cfi_endproc
+ 373              	.LFE64:
+ 374              		.size	averageDCEstimator, .-averageDCEstimator
+ 375              		.section	.text.lowPassFIRFilter,"ax",%progbits
+ 376              		.align	2
+ 377              		.global	lowPassFIRFilter
+ 378              		.thumb
+ 379              		.thumb_func
+ 380              		.type	lowPassFIRFilter, %function
+ 381              	lowPassFIRFilter:
+ 382              	.LFB65:
+ 100:HeartRate.c   **** 
+ 101:HeartRate.c   **** //  Low Pass FIR Filter
+ 102:HeartRate.c   **** int16_t lowPassFIRFilter(int16 din)
+ 103:HeartRate.c   **** {  
+ 383              		.loc 1 103 0
+ 384              		.cfi_startproc
+ 385              		@ args = 0, pretend = 0, frame = 16
+ 386              		@ frame_needed = 1, uses_anonymous_args = 0
+ 387 0000 80B5     		push	{r7, lr}
+ 388              		.cfi_def_cfa_offset 8
+ 389              		.cfi_offset 7, -8
+ 390              		.cfi_offset 14, -4
+ 391 0002 84B0     		sub	sp, sp, #16
+ 392              		.cfi_def_cfa_offset 24
+ 393 0004 00AF     		add	r7, sp, #0
+ 394              		.cfi_def_cfa_register 7
+ 395 0006 0346     		mov	r3, r0
+ 396 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 104:HeartRate.c   ****   cbuf[offset] = din;
+ 397              		.loc 1 104 0
+ 398 000a 2C4B     		ldr	r3, .L15
+ 399 000c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 400 000e 1946     		mov	r1, r3
+ 401 0010 2B4A     		ldr	r2, .L15+4
+ 402 0012 FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 403 0014 22F81130 		strh	r3, [r2, r1, lsl #1]	@ movhi
+ 105:HeartRate.c   **** 
+ 106:HeartRate.c   ****   int32_t z = mul16(FIRCoeffs[11], cbuf[(offset - 11) & 0x1F]);
+ 404              		.loc 1 106 0
+ 405 0018 4FF48053 		mov	r3, #4096
+ 406 001c 18B2     		sxth	r0, r3
+ 407 001e 274B     		ldr	r3, .L15
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 10
+
+
+ 408 0020 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 409 0022 0B3B     		subs	r3, r3, #11
+ 410 0024 03F01F03 		and	r3, r3, #31
+ 411 0028 254A     		ldr	r2, .L15+4
+ 412 002a 32F91330 		ldrsh	r3, [r2, r3, lsl #1]
+ 413 002e 1946     		mov	r1, r3
+ 414 0030 FFF7FEFF 		bl	mul16
+ 415 0034 F860     		str	r0, [r7, #12]
+ 416              	.LBB2:
+ 107:HeartRate.c   ****   
+ 108:HeartRate.c   ****   for (uint8 i = 0 ; i < 11 ; i++)
+ 417              		.loc 1 108 0
+ 418 0036 0023     		movs	r3, #0
+ 419 0038 FB72     		strb	r3, [r7, #11]
+ 420 003a 28E0     		b	.L12
+ 421              	.L13:
+ 109:HeartRate.c   ****   {
+ 110:HeartRate.c   ****     z += mul16(FIRCoeffs[i], cbuf[(offset - i) & 0x1F] + cbuf[(offset - 22 + i) & 0x1F]);
+ 422              		.loc 1 110 0 discriminator 3
+ 423 003c FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 424 003e 214A     		ldr	r2, .L15+8
+ 425 0040 32F81330 		ldrh	r3, [r2, r3, lsl #1]
+ 426 0044 18B2     		sxth	r0, r3
+ 427 0046 1D4B     		ldr	r3, .L15
+ 428 0048 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 429 004a 1A46     		mov	r2, r3
+ 430 004c FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 431 004e D31A     		subs	r3, r2, r3
+ 432 0050 03F01F03 		and	r3, r3, #31
+ 433 0054 1A4A     		ldr	r2, .L15+4
+ 434 0056 32F91330 		ldrsh	r3, [r2, r3, lsl #1]
+ 435 005a 9AB2     		uxth	r2, r3
+ 436 005c 174B     		ldr	r3, .L15
+ 437 005e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 438 0060 A3F11601 		sub	r1, r3, #22
+ 439 0064 FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 440 0066 0B44     		add	r3, r3, r1
+ 441 0068 03F01F03 		and	r3, r3, #31
+ 442 006c 1449     		ldr	r1, .L15+4
+ 443 006e 31F91330 		ldrsh	r3, [r1, r3, lsl #1]
+ 444 0072 9BB2     		uxth	r3, r3
+ 445 0074 1344     		add	r3, r3, r2
+ 446 0076 9BB2     		uxth	r3, r3
+ 447 0078 1BB2     		sxth	r3, r3
+ 448 007a 1946     		mov	r1, r3
+ 449 007c FFF7FEFF 		bl	mul16
+ 450 0080 0246     		mov	r2, r0
+ 451 0082 FB68     		ldr	r3, [r7, #12]
+ 452 0084 1344     		add	r3, r3, r2
+ 453 0086 FB60     		str	r3, [r7, #12]
+ 108:HeartRate.c   ****   {
+ 454              		.loc 1 108 0 discriminator 3
+ 455 0088 FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 456 008a 0133     		adds	r3, r3, #1
+ 457 008c FB72     		strb	r3, [r7, #11]
+ 458              	.L12:
+ 108:HeartRate.c   ****   {
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 11
+
+
+ 459              		.loc 1 108 0 is_stmt 0 discriminator 1
+ 460 008e FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 461 0090 0A2B     		cmp	r3, #10
+ 462 0092 D3D9     		bls	.L13
+ 463              	.LBE2:
+ 111:HeartRate.c   ****   }
+ 112:HeartRate.c   **** 
+ 113:HeartRate.c   ****   offset++;
+ 464              		.loc 1 113 0 is_stmt 1
+ 465 0094 094B     		ldr	r3, .L15
+ 466 0096 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 467 0098 0133     		adds	r3, r3, #1
+ 468 009a DAB2     		uxtb	r2, r3
+ 469 009c 074B     		ldr	r3, .L15
+ 470 009e 1A70     		strb	r2, [r3]
+ 114:HeartRate.c   ****   offset %= 32; //Wrap condition
+ 471              		.loc 1 114 0
+ 472 00a0 064B     		ldr	r3, .L15
+ 473 00a2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 474 00a4 03F01F03 		and	r3, r3, #31
+ 475 00a8 DAB2     		uxtb	r2, r3
+ 476 00aa 044B     		ldr	r3, .L15
+ 477 00ac 1A70     		strb	r2, [r3]
+ 115:HeartRate.c   **** 
+ 116:HeartRate.c   ****   return(z >> 15);
+ 478              		.loc 1 116 0
+ 479 00ae FB68     		ldr	r3, [r7, #12]
+ 480 00b0 DB13     		asrs	r3, r3, #15
+ 481 00b2 1BB2     		sxth	r3, r3
+ 117:HeartRate.c   **** }
+ 482              		.loc 1 117 0
+ 483 00b4 1846     		mov	r0, r3
+ 484 00b6 1037     		adds	r7, r7, #16
+ 485              		.cfi_def_cfa_offset 8
+ 486 00b8 BD46     		mov	sp, r7
+ 487              		.cfi_def_cfa_register 13
+ 488              		@ sp needed
+ 489 00ba 80BD     		pop	{r7, pc}
+ 490              	.L16:
+ 491              		.align	2
+ 492              	.L15:
+ 493 00bc 00000000 		.word	offset
+ 494 00c0 00000000 		.word	cbuf
+ 495 00c4 00000000 		.word	FIRCoeffs
+ 496              		.cfi_endproc
+ 497              	.LFE65:
+ 498              		.size	lowPassFIRFilter, .-lowPassFIRFilter
+ 499              		.section	.text.mul16,"ax",%progbits
+ 500              		.align	2
+ 501              		.global	mul16
+ 502              		.thumb
+ 503              		.thumb_func
+ 504              		.type	mul16, %function
+ 505              	mul16:
+ 506              	.LFB66:
+ 118:HeartRate.c   **** 
+ 119:HeartRate.c   **** //  Integer multiplier
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 12
+
+
+ 120:HeartRate.c   **** int32 mul16(int16 x, int16 y)
+ 121:HeartRate.c   **** {
+ 507              		.loc 1 121 0
+ 508              		.cfi_startproc
+ 509              		@ args = 0, pretend = 0, frame = 8
+ 510              		@ frame_needed = 1, uses_anonymous_args = 0
+ 511              		@ link register save eliminated.
+ 512 0000 80B4     		push	{r7}
+ 513              		.cfi_def_cfa_offset 4
+ 514              		.cfi_offset 7, -4
+ 515 0002 83B0     		sub	sp, sp, #12
+ 516              		.cfi_def_cfa_offset 16
+ 517 0004 00AF     		add	r7, sp, #0
+ 518              		.cfi_def_cfa_register 7
+ 519 0006 0346     		mov	r3, r0
+ 520 0008 0A46     		mov	r2, r1
+ 521 000a FB80     		strh	r3, [r7, #6]	@ movhi
+ 522 000c 1346     		mov	r3, r2	@ movhi
+ 523 000e BB80     		strh	r3, [r7, #4]	@ movhi
+ 122:HeartRate.c   ****   return((long)x * (long)y);
+ 524              		.loc 1 122 0
+ 525 0010 B7F90630 		ldrsh	r3, [r7, #6]
+ 526 0014 B7F90420 		ldrsh	r2, [r7, #4]
+ 527 0018 02FB03F3 		mul	r3, r2, r3
+ 123:HeartRate.c   **** }
+ 528              		.loc 1 123 0
+ 529 001c 1846     		mov	r0, r3
+ 530 001e 0C37     		adds	r7, r7, #12
+ 531              		.cfi_def_cfa_offset 4
+ 532 0020 BD46     		mov	sp, r7
+ 533              		.cfi_def_cfa_register 13
+ 534              		@ sp needed
+ 535 0022 80BC     		pop	{r7}
+ 536              		.cfi_restore 7
+ 537              		.cfi_def_cfa_offset 0
+ 538 0024 7047     		bx	lr
+ 539              		.cfi_endproc
+ 540              	.LFE66:
+ 541              		.size	mul16, .-mul16
+ 542 0026 00BF     		.text
+ 543              	.Letext0:
+ 544              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 545              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 546              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 547              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 548              		.section	.debug_info,"",%progbits
+ 549              	.Ldebug_info0:
+ 550 0000 FA020000 		.4byte	0x2fa
+ 551 0004 0400     		.2byte	0x4
+ 552 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 553 000a 04       		.byte	0x4
+ 554 000b 01       		.uleb128 0x1
+ 555 000c 0D000000 		.4byte	.LASF44
+ 556 0010 0C       		.byte	0xc
+ 557 0011 FA010000 		.4byte	.LASF45
+ 558 0015 02010000 		.4byte	.LASF46
+ 559 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 13
+
+
+ 560 001d 00000000 		.4byte	0
+ 561 0021 00000000 		.4byte	.Ldebug_line0
+ 562 0025 02       		.uleb128 0x2
+ 563 0026 01       		.byte	0x1
+ 564 0027 06       		.byte	0x6
+ 565 0028 0E020000 		.4byte	.LASF0
+ 566 002c 02       		.uleb128 0x2
+ 567 002d 01       		.byte	0x1
+ 568 002e 08       		.byte	0x8
+ 569 002f 9F010000 		.4byte	.LASF1
+ 570 0033 03       		.uleb128 0x3
+ 571 0034 BF010000 		.4byte	.LASF3
+ 572 0038 02       		.byte	0x2
+ 573 0039 29       		.byte	0x29
+ 574 003a 3E000000 		.4byte	0x3e
+ 575 003e 02       		.uleb128 0x2
+ 576 003f 02       		.byte	0x2
+ 577 0040 05       		.byte	0x5
+ 578 0041 75020000 		.4byte	.LASF2
+ 579 0045 03       		.uleb128 0x3
+ 580 0046 AD010000 		.4byte	.LASF4
+ 581 004a 02       		.byte	0x2
+ 582 004b 2B       		.byte	0x2b
+ 583 004c 50000000 		.4byte	0x50
+ 584 0050 02       		.uleb128 0x2
+ 585 0051 02       		.byte	0x2
+ 586 0052 07       		.byte	0x7
+ 587 0053 AF000000 		.4byte	.LASF5
+ 588 0057 03       		.uleb128 0x3
+ 589 0058 A5000000 		.4byte	.LASF6
+ 590 005c 02       		.byte	0x2
+ 591 005d 3F       		.byte	0x3f
+ 592 005e 62000000 		.4byte	0x62
+ 593 0062 02       		.uleb128 0x2
+ 594 0063 04       		.byte	0x4
+ 595 0064 05       		.byte	0x5
+ 596 0065 94020000 		.4byte	.LASF7
+ 597 0069 02       		.uleb128 0x2
+ 598 006a 04       		.byte	0x4
+ 599 006b 07       		.byte	0x7
+ 600 006c 80010000 		.4byte	.LASF8
+ 601 0070 02       		.uleb128 0x2
+ 602 0071 08       		.byte	0x8
+ 603 0072 05       		.byte	0x5
+ 604 0073 3A020000 		.4byte	.LASF9
+ 605 0077 02       		.uleb128 0x2
+ 606 0078 08       		.byte	0x8
+ 607 0079 07       		.byte	0x7
+ 608 007a E3010000 		.4byte	.LASF10
+ 609 007e 04       		.uleb128 0x4
+ 610 007f 04       		.byte	0x4
+ 611 0080 05       		.byte	0x5
+ 612 0081 696E7400 		.ascii	"int\000"
+ 613 0085 02       		.uleb128 0x2
+ 614 0086 04       		.byte	0x4
+ 615 0087 07       		.byte	0x7
+ 616 0088 D6010000 		.4byte	.LASF11
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 14
+
+
+ 617 008c 03       		.uleb128 0x3
+ 618 008d 06020000 		.4byte	.LASF12
+ 619 0091 03       		.byte	0x3
+ 620 0092 20       		.byte	0x20
+ 621 0093 33000000 		.4byte	0x33
+ 622 0097 03       		.uleb128 0x3
+ 623 0098 6C020000 		.4byte	.LASF13
+ 624 009c 03       		.byte	0x3
+ 625 009d 24       		.byte	0x24
+ 626 009e 45000000 		.4byte	0x45
+ 627 00a2 03       		.uleb128 0x3
+ 628 00a3 C8000000 		.4byte	.LASF14
+ 629 00a7 03       		.byte	0x3
+ 630 00a8 2C       		.byte	0x2c
+ 631 00a9 57000000 		.4byte	0x57
+ 632 00ad 05       		.uleb128 0x5
+ 633 00ae C2000000 		.4byte	.LASF15
+ 634 00b2 04       		.byte	0x4
+ 635 00b3 E801     		.2byte	0x1e8
+ 636 00b5 2C000000 		.4byte	0x2c
+ 637 00b9 05       		.uleb128 0x5
+ 638 00ba 7A010000 		.4byte	.LASF16
+ 639 00be 04       		.byte	0x4
+ 640 00bf EC01     		.2byte	0x1ec
+ 641 00c1 3E000000 		.4byte	0x3e
+ 642 00c5 05       		.uleb128 0x5
+ 643 00c6 2B020000 		.4byte	.LASF17
+ 644 00ca 04       		.byte	0x4
+ 645 00cb ED01     		.2byte	0x1ed
+ 646 00cd 62000000 		.4byte	0x62
+ 647 00d1 02       		.uleb128 0x2
+ 648 00d2 04       		.byte	0x4
+ 649 00d3 04       		.byte	0x4
+ 650 00d4 EF000000 		.4byte	.LASF18
+ 651 00d8 02       		.uleb128 0x2
+ 652 00d9 08       		.byte	0x8
+ 653 00da 04       		.byte	0x4
+ 654 00db B8010000 		.4byte	.LASF19
+ 655 00df 02       		.uleb128 0x2
+ 656 00e0 01       		.byte	0x1
+ 657 00e1 08       		.byte	0x8
+ 658 00e2 48020000 		.4byte	.LASF20
+ 659 00e6 02       		.uleb128 0x2
+ 660 00e7 08       		.byte	0x8
+ 661 00e8 04       		.byte	0x4
+ 662 00e9 9D020000 		.4byte	.LASF21
+ 663 00ed 02       		.uleb128 0x2
+ 664 00ee 04       		.byte	0x4
+ 665 00ef 07       		.byte	0x7
+ 666 00f0 31020000 		.4byte	.LASF22
+ 667 00f4 06       		.uleb128 0x6
+ 668 00f5 F5000000 		.4byte	.LASF24
+ 669 00f9 01       		.byte	0x1
+ 670 00fa 24       		.byte	0x24
+ 671 00fb 2A010000 		.4byte	0x12a
+ 672 00ff 00000000 		.4byte	.LFB63
+ 673 0103 A0010000 		.4byte	.LFE63-.LFB63
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 15
+
+
+ 674 0107 01       		.uleb128 0x1
+ 675 0108 9C       		.byte	0x9c
+ 676 0109 2A010000 		.4byte	0x12a
+ 677 010d 07       		.uleb128 0x7
+ 678 010e 00000000 		.4byte	.LASF26
+ 679 0112 01       		.byte	0x1
+ 680 0113 24       		.byte	0x24
+ 681 0114 C5000000 		.4byte	0xc5
+ 682 0118 02       		.uleb128 0x2
+ 683 0119 91       		.byte	0x91
+ 684 011a 6C       		.sleb128 -20
+ 685 011b 08       		.uleb128 0x8
+ 686 011c C9010000 		.4byte	.LASF28
+ 687 0120 01       		.byte	0x1
+ 688 0121 27       		.byte	0x27
+ 689 0122 2A010000 		.4byte	0x12a
+ 690 0126 02       		.uleb128 0x2
+ 691 0127 91       		.byte	0x91
+ 692 0128 77       		.sleb128 -9
+ 693 0129 00       		.byte	0
+ 694 012a 02       		.uleb128 0x2
+ 695 012b 01       		.byte	0x1
+ 696 012c 02       		.byte	0x2
+ 697 012d B6020000 		.4byte	.LASF23
+ 698 0131 09       		.uleb128 0x9
+ 699 0132 67010000 		.4byte	.LASF25
+ 700 0136 01       		.byte	0x1
+ 701 0137 5F       		.byte	0x5f
+ 702 0138 8C000000 		.4byte	0x8c
+ 703 013c 00000000 		.4byte	.LFB64
+ 704 0140 34000000 		.4byte	.LFE64-.LFB64
+ 705 0144 01       		.uleb128 0x1
+ 706 0145 9C       		.byte	0x9c
+ 707 0146 63010000 		.4byte	0x163
+ 708 014a 0A       		.uleb128 0xa
+ 709 014b 7000     		.ascii	"p\000"
+ 710 014d 01       		.byte	0x1
+ 711 014e 5F       		.byte	0x5f
+ 712 014f 63010000 		.4byte	0x163
+ 713 0153 02       		.uleb128 0x2
+ 714 0154 91       		.byte	0x91
+ 715 0155 74       		.sleb128 -12
+ 716 0156 0A       		.uleb128 0xa
+ 717 0157 7800     		.ascii	"x\000"
+ 718 0159 01       		.byte	0x1
+ 719 015a 5F       		.byte	0x5f
+ 720 015b 97000000 		.4byte	0x97
+ 721 015f 02       		.uleb128 0x2
+ 722 0160 91       		.byte	0x91
+ 723 0161 72       		.sleb128 -14
+ 724 0162 00       		.byte	0
+ 725 0163 0B       		.uleb128 0xb
+ 726 0164 04       		.byte	0x4
+ 727 0165 C5000000 		.4byte	0xc5
+ 728 0169 06       		.uleb128 0x6
+ 729 016a E1020000 		.4byte	.LASF27
+ 730 016e 01       		.byte	0x1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 16
+
+
+ 731 016f 66       		.byte	0x66
+ 732 0170 8C000000 		.4byte	0x8c
+ 733 0174 00000000 		.4byte	.LFB65
+ 734 0178 C8000000 		.4byte	.LFE65-.LFB65
+ 735 017c 01       		.uleb128 0x1
+ 736 017d 9C       		.byte	0x9c
+ 737 017e B3010000 		.4byte	0x1b3
+ 738 0182 0A       		.uleb128 0xa
+ 739 0183 64696E00 		.ascii	"din\000"
+ 740 0187 01       		.byte	0x1
+ 741 0188 66       		.byte	0x66
+ 742 0189 B9000000 		.4byte	0xb9
+ 743 018d 02       		.uleb128 0x2
+ 744 018e 91       		.byte	0x91
+ 745 018f 6E       		.sleb128 -18
+ 746 0190 0C       		.uleb128 0xc
+ 747 0191 7A00     		.ascii	"z\000"
+ 748 0193 01       		.byte	0x1
+ 749 0194 6A       		.byte	0x6a
+ 750 0195 A2000000 		.4byte	0xa2
+ 751 0199 02       		.uleb128 0x2
+ 752 019a 91       		.byte	0x91
+ 753 019b 74       		.sleb128 -12
+ 754 019c 0D       		.uleb128 0xd
+ 755 019d 36000000 		.4byte	.LBB2
+ 756 01a1 5E000000 		.4byte	.LBE2-.LBB2
+ 757 01a5 0C       		.uleb128 0xc
+ 758 01a6 6900     		.ascii	"i\000"
+ 759 01a8 01       		.byte	0x1
+ 760 01a9 6C       		.byte	0x6c
+ 761 01aa AD000000 		.4byte	0xad
+ 762 01ae 02       		.uleb128 0x2
+ 763 01af 91       		.byte	0x91
+ 764 01b0 73       		.sleb128 -13
+ 765 01b1 00       		.byte	0
+ 766 01b2 00       		.byte	0
+ 767 01b3 09       		.uleb128 0x9
+ 768 01b4 07000000 		.4byte	.LASF29
+ 769 01b8 01       		.byte	0x1
+ 770 01b9 78       		.byte	0x78
+ 771 01ba C5000000 		.4byte	0xc5
+ 772 01be 00000000 		.4byte	.LFB66
+ 773 01c2 26000000 		.4byte	.LFE66-.LFB66
+ 774 01c6 01       		.uleb128 0x1
+ 775 01c7 9C       		.byte	0x9c
+ 776 01c8 E5010000 		.4byte	0x1e5
+ 777 01cc 0A       		.uleb128 0xa
+ 778 01cd 7800     		.ascii	"x\000"
+ 779 01cf 01       		.byte	0x1
+ 780 01d0 78       		.byte	0x78
+ 781 01d1 B9000000 		.4byte	0xb9
+ 782 01d5 02       		.uleb128 0x2
+ 783 01d6 91       		.byte	0x91
+ 784 01d7 76       		.sleb128 -10
+ 785 01d8 0A       		.uleb128 0xa
+ 786 01d9 7900     		.ascii	"y\000"
+ 787 01db 01       		.byte	0x1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 17
+
+
+ 788 01dc 78       		.byte	0x78
+ 789 01dd B9000000 		.4byte	0xb9
+ 790 01e1 02       		.uleb128 0x2
+ 791 01e2 91       		.byte	0x91
+ 792 01e3 74       		.sleb128 -12
+ 793 01e4 00       		.byte	0
+ 794 01e5 0E       		.uleb128 0xe
+ 795 01e6 F5010000 		.4byte	0x1f5
+ 796 01ea F5010000 		.4byte	0x1f5
+ 797 01ee 0F       		.uleb128 0xf
+ 798 01ef ED000000 		.4byte	0xed
+ 799 01f3 0B       		.byte	0xb
+ 800 01f4 00       		.byte	0
+ 801 01f5 10       		.uleb128 0x10
+ 802 01f6 97000000 		.4byte	0x97
+ 803 01fa 08       		.uleb128 0x8
+ 804 01fb D0000000 		.4byte	.LASF30
+ 805 01ff 01       		.byte	0x1
+ 806 0200 1F       		.byte	0x1f
+ 807 0201 0B020000 		.4byte	0x20b
+ 808 0205 05       		.uleb128 0x5
+ 809 0206 03       		.byte	0x3
+ 810 0207 00000000 		.4byte	FIRCoeffs
+ 811 020b 10       		.uleb128 0x10
+ 812 020c E5010000 		.4byte	0x1e5
+ 813 0210 11       		.uleb128 0x11
+ 814 0211 92010000 		.4byte	.LASF31
+ 815 0215 05       		.byte	0x5
+ 816 0216 1207     		.2byte	0x712
+ 817 0218 1C020000 		.4byte	0x21c
+ 818 021c 12       		.uleb128 0x12
+ 819 021d A2000000 		.4byte	0xa2
+ 820 0221 13       		.uleb128 0x13
+ 821 0222 BC020000 		.4byte	.LASF32
+ 822 0226 01       		.byte	0x1
+ 823 0227 0F       		.byte	0xf
+ 824 0228 B9000000 		.4byte	0xb9
+ 825 022c 05       		.uleb128 0x5
+ 826 022d 03       		.byte	0x3
+ 827 022e 00000000 		.4byte	IR_AC_Max
+ 828 0232 13       		.uleb128 0x13
+ 829 0233 9B000000 		.4byte	.LASF33
+ 830 0237 01       		.byte	0x1
+ 831 0238 10       		.byte	0x10
+ 832 0239 B9000000 		.4byte	0xb9
+ 833 023d 05       		.uleb128 0x5
+ 834 023e 03       		.byte	0x3
+ 835 023f 00000000 		.4byte	IR_AC_Min
+ 836 0243 13       		.uleb128 0x13
+ 837 0244 7F020000 		.4byte	.LASF34
+ 838 0248 01       		.byte	0x1
+ 839 0249 12       		.byte	0x12
+ 840 024a B9000000 		.4byte	0xb9
+ 841 024e 05       		.uleb128 0x5
+ 842 024f 03       		.byte	0x3
+ 843 0250 00000000 		.4byte	IR_AC_Signal_Current
+ 844 0254 13       		.uleb128 0x13
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 18
+
+
+ 845 0255 C6020000 		.4byte	.LASF35
+ 846 0259 01       		.byte	0x1
+ 847 025a 13       		.byte	0x13
+ 848 025b B9000000 		.4byte	0xb9
+ 849 025f 05       		.uleb128 0x5
+ 850 0260 03       		.byte	0x3
+ 851 0261 00000000 		.4byte	IR_AC_Signal_Previous
+ 852 0265 13       		.uleb128 0x13
+ 853 0266 1A020000 		.4byte	.LASF36
+ 854 026a 01       		.byte	0x1
+ 855 026b 14       		.byte	0x14
+ 856 026c B9000000 		.4byte	0xb9
+ 857 0270 05       		.uleb128 0x5
+ 858 0271 03       		.byte	0x3
+ 859 0272 00000000 		.4byte	IR_AC_Signal_min
+ 860 0276 13       		.uleb128 0x13
+ 861 0277 56010000 		.4byte	.LASF37
+ 862 027b 01       		.byte	0x1
+ 863 027c 15       		.byte	0x15
+ 864 027d B9000000 		.4byte	0xb9
+ 865 0281 05       		.uleb128 0x5
+ 866 0282 03       		.byte	0x3
+ 867 0283 00000000 		.4byte	IR_AC_Signal_max
+ 868 0287 13       		.uleb128 0x13
+ 869 0288 DA000000 		.4byte	.LASF38
+ 870 028c 01       		.byte	0x1
+ 871 028d 16       		.byte	0x16
+ 872 028e B9000000 		.4byte	0xb9
+ 873 0292 05       		.uleb128 0x5
+ 874 0293 03       		.byte	0x3
+ 875 0294 00000000 		.4byte	IR_Average_Estimated
+ 876 0298 13       		.uleb128 0x13
+ 877 0299 A9020000 		.4byte	.LASF39
+ 878 029d 01       		.byte	0x1
+ 879 029e 18       		.byte	0x18
+ 880 029f B9000000 		.4byte	0xb9
+ 881 02a3 05       		.uleb128 0x5
+ 882 02a4 03       		.byte	0x3
+ 883 02a5 00000000 		.4byte	positiveEdge
+ 884 02a9 13       		.uleb128 0x13
+ 885 02aa 4D020000 		.4byte	.LASF40
+ 886 02ae 01       		.byte	0x1
+ 887 02af 19       		.byte	0x19
+ 888 02b0 B9000000 		.4byte	0xb9
+ 889 02b4 05       		.uleb128 0x5
+ 890 02b5 03       		.byte	0x3
+ 891 02b6 00000000 		.4byte	negativeEdge
+ 892 02ba 13       		.uleb128 0x13
+ 893 02bb 5A020000 		.4byte	.LASF41
+ 894 02bf 01       		.byte	0x1
+ 895 02c0 1A       		.byte	0x1a
+ 896 02c1 C5000000 		.4byte	0xc5
+ 897 02c5 05       		.uleb128 0x5
+ 898 02c6 03       		.byte	0x3
+ 899 02c7 00000000 		.4byte	ir_avg_reg
+ 900 02cb 0E       		.uleb128 0xe
+ 901 02cc B9000000 		.4byte	0xb9
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 19
+
+
+ 902 02d0 DB020000 		.4byte	0x2db
+ 903 02d4 0F       		.uleb128 0xf
+ 904 02d5 ED000000 		.4byte	0xed
+ 905 02d9 1F       		.byte	0x1f
+ 906 02da 00       		.byte	0
+ 907 02db 13       		.uleb128 0x13
+ 908 02dc DC020000 		.4byte	.LASF42
+ 909 02e0 01       		.byte	0x1
+ 910 02e1 1C       		.byte	0x1c
+ 911 02e2 CB020000 		.4byte	0x2cb
+ 912 02e6 05       		.uleb128 0x5
+ 913 02e7 03       		.byte	0x3
+ 914 02e8 00000000 		.4byte	cbuf
+ 915 02ec 13       		.uleb128 0x13
+ 916 02ed 65020000 		.4byte	.LASF43
+ 917 02f1 01       		.byte	0x1
+ 918 02f2 1D       		.byte	0x1d
+ 919 02f3 AD000000 		.4byte	0xad
+ 920 02f7 05       		.uleb128 0x5
+ 921 02f8 03       		.byte	0x3
+ 922 02f9 00000000 		.4byte	offset
+ 923 02fd 00       		.byte	0
+ 924              		.section	.debug_abbrev,"",%progbits
+ 925              	.Ldebug_abbrev0:
+ 926 0000 01       		.uleb128 0x1
+ 927 0001 11       		.uleb128 0x11
+ 928 0002 01       		.byte	0x1
+ 929 0003 25       		.uleb128 0x25
+ 930 0004 0E       		.uleb128 0xe
+ 931 0005 13       		.uleb128 0x13
+ 932 0006 0B       		.uleb128 0xb
+ 933 0007 03       		.uleb128 0x3
+ 934 0008 0E       		.uleb128 0xe
+ 935 0009 1B       		.uleb128 0x1b
+ 936 000a 0E       		.uleb128 0xe
+ 937 000b 55       		.uleb128 0x55
+ 938 000c 17       		.uleb128 0x17
+ 939 000d 11       		.uleb128 0x11
+ 940 000e 01       		.uleb128 0x1
+ 941 000f 10       		.uleb128 0x10
+ 942 0010 17       		.uleb128 0x17
+ 943 0011 00       		.byte	0
+ 944 0012 00       		.byte	0
+ 945 0013 02       		.uleb128 0x2
+ 946 0014 24       		.uleb128 0x24
+ 947 0015 00       		.byte	0
+ 948 0016 0B       		.uleb128 0xb
+ 949 0017 0B       		.uleb128 0xb
+ 950 0018 3E       		.uleb128 0x3e
+ 951 0019 0B       		.uleb128 0xb
+ 952 001a 03       		.uleb128 0x3
+ 953 001b 0E       		.uleb128 0xe
+ 954 001c 00       		.byte	0
+ 955 001d 00       		.byte	0
+ 956 001e 03       		.uleb128 0x3
+ 957 001f 16       		.uleb128 0x16
+ 958 0020 00       		.byte	0
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 20
+
+
+ 959 0021 03       		.uleb128 0x3
+ 960 0022 0E       		.uleb128 0xe
+ 961 0023 3A       		.uleb128 0x3a
+ 962 0024 0B       		.uleb128 0xb
+ 963 0025 3B       		.uleb128 0x3b
+ 964 0026 0B       		.uleb128 0xb
+ 965 0027 49       		.uleb128 0x49
+ 966 0028 13       		.uleb128 0x13
+ 967 0029 00       		.byte	0
+ 968 002a 00       		.byte	0
+ 969 002b 04       		.uleb128 0x4
+ 970 002c 24       		.uleb128 0x24
+ 971 002d 00       		.byte	0
+ 972 002e 0B       		.uleb128 0xb
+ 973 002f 0B       		.uleb128 0xb
+ 974 0030 3E       		.uleb128 0x3e
+ 975 0031 0B       		.uleb128 0xb
+ 976 0032 03       		.uleb128 0x3
+ 977 0033 08       		.uleb128 0x8
+ 978 0034 00       		.byte	0
+ 979 0035 00       		.byte	0
+ 980 0036 05       		.uleb128 0x5
+ 981 0037 16       		.uleb128 0x16
+ 982 0038 00       		.byte	0
+ 983 0039 03       		.uleb128 0x3
+ 984 003a 0E       		.uleb128 0xe
+ 985 003b 3A       		.uleb128 0x3a
+ 986 003c 0B       		.uleb128 0xb
+ 987 003d 3B       		.uleb128 0x3b
+ 988 003e 05       		.uleb128 0x5
+ 989 003f 49       		.uleb128 0x49
+ 990 0040 13       		.uleb128 0x13
+ 991 0041 00       		.byte	0
+ 992 0042 00       		.byte	0
+ 993 0043 06       		.uleb128 0x6
+ 994 0044 2E       		.uleb128 0x2e
+ 995 0045 01       		.byte	0x1
+ 996 0046 3F       		.uleb128 0x3f
+ 997 0047 19       		.uleb128 0x19
+ 998 0048 03       		.uleb128 0x3
+ 999 0049 0E       		.uleb128 0xe
+ 1000 004a 3A       		.uleb128 0x3a
+ 1001 004b 0B       		.uleb128 0xb
+ 1002 004c 3B       		.uleb128 0x3b
+ 1003 004d 0B       		.uleb128 0xb
+ 1004 004e 27       		.uleb128 0x27
+ 1005 004f 19       		.uleb128 0x19
+ 1006 0050 49       		.uleb128 0x49
+ 1007 0051 13       		.uleb128 0x13
+ 1008 0052 11       		.uleb128 0x11
+ 1009 0053 01       		.uleb128 0x1
+ 1010 0054 12       		.uleb128 0x12
+ 1011 0055 06       		.uleb128 0x6
+ 1012 0056 40       		.uleb128 0x40
+ 1013 0057 18       		.uleb128 0x18
+ 1014 0058 9642     		.uleb128 0x2116
+ 1015 005a 19       		.uleb128 0x19
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 21
+
+
+ 1016 005b 01       		.uleb128 0x1
+ 1017 005c 13       		.uleb128 0x13
+ 1018 005d 00       		.byte	0
+ 1019 005e 00       		.byte	0
+ 1020 005f 07       		.uleb128 0x7
+ 1021 0060 05       		.uleb128 0x5
+ 1022 0061 00       		.byte	0
+ 1023 0062 03       		.uleb128 0x3
+ 1024 0063 0E       		.uleb128 0xe
+ 1025 0064 3A       		.uleb128 0x3a
+ 1026 0065 0B       		.uleb128 0xb
+ 1027 0066 3B       		.uleb128 0x3b
+ 1028 0067 0B       		.uleb128 0xb
+ 1029 0068 49       		.uleb128 0x49
+ 1030 0069 13       		.uleb128 0x13
+ 1031 006a 02       		.uleb128 0x2
+ 1032 006b 18       		.uleb128 0x18
+ 1033 006c 00       		.byte	0
+ 1034 006d 00       		.byte	0
+ 1035 006e 08       		.uleb128 0x8
+ 1036 006f 34       		.uleb128 0x34
+ 1037 0070 00       		.byte	0
+ 1038 0071 03       		.uleb128 0x3
+ 1039 0072 0E       		.uleb128 0xe
+ 1040 0073 3A       		.uleb128 0x3a
+ 1041 0074 0B       		.uleb128 0xb
+ 1042 0075 3B       		.uleb128 0x3b
+ 1043 0076 0B       		.uleb128 0xb
+ 1044 0077 49       		.uleb128 0x49
+ 1045 0078 13       		.uleb128 0x13
+ 1046 0079 02       		.uleb128 0x2
+ 1047 007a 18       		.uleb128 0x18
+ 1048 007b 00       		.byte	0
+ 1049 007c 00       		.byte	0
+ 1050 007d 09       		.uleb128 0x9
+ 1051 007e 2E       		.uleb128 0x2e
+ 1052 007f 01       		.byte	0x1
+ 1053 0080 3F       		.uleb128 0x3f
+ 1054 0081 19       		.uleb128 0x19
+ 1055 0082 03       		.uleb128 0x3
+ 1056 0083 0E       		.uleb128 0xe
+ 1057 0084 3A       		.uleb128 0x3a
+ 1058 0085 0B       		.uleb128 0xb
+ 1059 0086 3B       		.uleb128 0x3b
+ 1060 0087 0B       		.uleb128 0xb
+ 1061 0088 27       		.uleb128 0x27
+ 1062 0089 19       		.uleb128 0x19
+ 1063 008a 49       		.uleb128 0x49
+ 1064 008b 13       		.uleb128 0x13
+ 1065 008c 11       		.uleb128 0x11
+ 1066 008d 01       		.uleb128 0x1
+ 1067 008e 12       		.uleb128 0x12
+ 1068 008f 06       		.uleb128 0x6
+ 1069 0090 40       		.uleb128 0x40
+ 1070 0091 18       		.uleb128 0x18
+ 1071 0092 9742     		.uleb128 0x2117
+ 1072 0094 19       		.uleb128 0x19
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 22
+
+
+ 1073 0095 01       		.uleb128 0x1
+ 1074 0096 13       		.uleb128 0x13
+ 1075 0097 00       		.byte	0
+ 1076 0098 00       		.byte	0
+ 1077 0099 0A       		.uleb128 0xa
+ 1078 009a 05       		.uleb128 0x5
+ 1079 009b 00       		.byte	0
+ 1080 009c 03       		.uleb128 0x3
+ 1081 009d 08       		.uleb128 0x8
+ 1082 009e 3A       		.uleb128 0x3a
+ 1083 009f 0B       		.uleb128 0xb
+ 1084 00a0 3B       		.uleb128 0x3b
+ 1085 00a1 0B       		.uleb128 0xb
+ 1086 00a2 49       		.uleb128 0x49
+ 1087 00a3 13       		.uleb128 0x13
+ 1088 00a4 02       		.uleb128 0x2
+ 1089 00a5 18       		.uleb128 0x18
+ 1090 00a6 00       		.byte	0
+ 1091 00a7 00       		.byte	0
+ 1092 00a8 0B       		.uleb128 0xb
+ 1093 00a9 0F       		.uleb128 0xf
+ 1094 00aa 00       		.byte	0
+ 1095 00ab 0B       		.uleb128 0xb
+ 1096 00ac 0B       		.uleb128 0xb
+ 1097 00ad 49       		.uleb128 0x49
+ 1098 00ae 13       		.uleb128 0x13
+ 1099 00af 00       		.byte	0
+ 1100 00b0 00       		.byte	0
+ 1101 00b1 0C       		.uleb128 0xc
+ 1102 00b2 34       		.uleb128 0x34
+ 1103 00b3 00       		.byte	0
+ 1104 00b4 03       		.uleb128 0x3
+ 1105 00b5 08       		.uleb128 0x8
+ 1106 00b6 3A       		.uleb128 0x3a
+ 1107 00b7 0B       		.uleb128 0xb
+ 1108 00b8 3B       		.uleb128 0x3b
+ 1109 00b9 0B       		.uleb128 0xb
+ 1110 00ba 49       		.uleb128 0x49
+ 1111 00bb 13       		.uleb128 0x13
+ 1112 00bc 02       		.uleb128 0x2
+ 1113 00bd 18       		.uleb128 0x18
+ 1114 00be 00       		.byte	0
+ 1115 00bf 00       		.byte	0
+ 1116 00c0 0D       		.uleb128 0xd
+ 1117 00c1 0B       		.uleb128 0xb
+ 1118 00c2 01       		.byte	0x1
+ 1119 00c3 11       		.uleb128 0x11
+ 1120 00c4 01       		.uleb128 0x1
+ 1121 00c5 12       		.uleb128 0x12
+ 1122 00c6 06       		.uleb128 0x6
+ 1123 00c7 00       		.byte	0
+ 1124 00c8 00       		.byte	0
+ 1125 00c9 0E       		.uleb128 0xe
+ 1126 00ca 01       		.uleb128 0x1
+ 1127 00cb 01       		.byte	0x1
+ 1128 00cc 49       		.uleb128 0x49
+ 1129 00cd 13       		.uleb128 0x13
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 23
+
+
+ 1130 00ce 01       		.uleb128 0x1
+ 1131 00cf 13       		.uleb128 0x13
+ 1132 00d0 00       		.byte	0
+ 1133 00d1 00       		.byte	0
+ 1134 00d2 0F       		.uleb128 0xf
+ 1135 00d3 21       		.uleb128 0x21
+ 1136 00d4 00       		.byte	0
+ 1137 00d5 49       		.uleb128 0x49
+ 1138 00d6 13       		.uleb128 0x13
+ 1139 00d7 2F       		.uleb128 0x2f
+ 1140 00d8 0B       		.uleb128 0xb
+ 1141 00d9 00       		.byte	0
+ 1142 00da 00       		.byte	0
+ 1143 00db 10       		.uleb128 0x10
+ 1144 00dc 26       		.uleb128 0x26
+ 1145 00dd 00       		.byte	0
+ 1146 00de 49       		.uleb128 0x49
+ 1147 00df 13       		.uleb128 0x13
+ 1148 00e0 00       		.byte	0
+ 1149 00e1 00       		.byte	0
+ 1150 00e2 11       		.uleb128 0x11
+ 1151 00e3 34       		.uleb128 0x34
+ 1152 00e4 00       		.byte	0
+ 1153 00e5 03       		.uleb128 0x3
+ 1154 00e6 0E       		.uleb128 0xe
+ 1155 00e7 3A       		.uleb128 0x3a
+ 1156 00e8 0B       		.uleb128 0xb
+ 1157 00e9 3B       		.uleb128 0x3b
+ 1158 00ea 05       		.uleb128 0x5
+ 1159 00eb 49       		.uleb128 0x49
+ 1160 00ec 13       		.uleb128 0x13
+ 1161 00ed 3F       		.uleb128 0x3f
+ 1162 00ee 19       		.uleb128 0x19
+ 1163 00ef 3C       		.uleb128 0x3c
+ 1164 00f0 19       		.uleb128 0x19
+ 1165 00f1 00       		.byte	0
+ 1166 00f2 00       		.byte	0
+ 1167 00f3 12       		.uleb128 0x12
+ 1168 00f4 35       		.uleb128 0x35
+ 1169 00f5 00       		.byte	0
+ 1170 00f6 49       		.uleb128 0x49
+ 1171 00f7 13       		.uleb128 0x13
+ 1172 00f8 00       		.byte	0
+ 1173 00f9 00       		.byte	0
+ 1174 00fa 13       		.uleb128 0x13
+ 1175 00fb 34       		.uleb128 0x34
+ 1176 00fc 00       		.byte	0
+ 1177 00fd 03       		.uleb128 0x3
+ 1178 00fe 0E       		.uleb128 0xe
+ 1179 00ff 3A       		.uleb128 0x3a
+ 1180 0100 0B       		.uleb128 0xb
+ 1181 0101 3B       		.uleb128 0x3b
+ 1182 0102 0B       		.uleb128 0xb
+ 1183 0103 49       		.uleb128 0x49
+ 1184 0104 13       		.uleb128 0x13
+ 1185 0105 3F       		.uleb128 0x3f
+ 1186 0106 19       		.uleb128 0x19
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 24
+
+
+ 1187 0107 02       		.uleb128 0x2
+ 1188 0108 18       		.uleb128 0x18
+ 1189 0109 00       		.byte	0
+ 1190 010a 00       		.byte	0
+ 1191 010b 00       		.byte	0
+ 1192              		.section	.debug_aranges,"",%progbits
+ 1193 0000 34000000 		.4byte	0x34
+ 1194 0004 0200     		.2byte	0x2
+ 1195 0006 00000000 		.4byte	.Ldebug_info0
+ 1196 000a 04       		.byte	0x4
+ 1197 000b 00       		.byte	0
+ 1198 000c 0000     		.2byte	0
+ 1199 000e 0000     		.2byte	0
+ 1200 0010 00000000 		.4byte	.LFB63
+ 1201 0014 A0010000 		.4byte	.LFE63-.LFB63
+ 1202 0018 00000000 		.4byte	.LFB64
+ 1203 001c 34000000 		.4byte	.LFE64-.LFB64
+ 1204 0020 00000000 		.4byte	.LFB65
+ 1205 0024 C8000000 		.4byte	.LFE65-.LFB65
+ 1206 0028 00000000 		.4byte	.LFB66
+ 1207 002c 26000000 		.4byte	.LFE66-.LFB66
+ 1208 0030 00000000 		.4byte	0
+ 1209 0034 00000000 		.4byte	0
+ 1210              		.section	.debug_ranges,"",%progbits
+ 1211              	.Ldebug_ranges0:
+ 1212 0000 00000000 		.4byte	.LFB63
+ 1213 0004 A0010000 		.4byte	.LFE63
+ 1214 0008 00000000 		.4byte	.LFB64
+ 1215 000c 34000000 		.4byte	.LFE64
+ 1216 0010 00000000 		.4byte	.LFB65
+ 1217 0014 C8000000 		.4byte	.LFE65
+ 1218 0018 00000000 		.4byte	.LFB66
+ 1219 001c 26000000 		.4byte	.LFE66
+ 1220 0020 00000000 		.4byte	0
+ 1221 0024 00000000 		.4byte	0
+ 1222              		.section	.debug_line,"",%progbits
+ 1223              	.Ldebug_line0:
+ 1224 0000 D0010000 		.section	.debug_str,"MS",%progbits,1
+ 1224      02005101 
+ 1224      00000201 
+ 1224      FB0E0D00 
+ 1224      01010101 
+ 1225              	.LASF26:
+ 1226 0000 73616D70 		.ascii	"sample\000"
+ 1226      6C6500
+ 1227              	.LASF29:
+ 1228 0007 6D756C31 		.ascii	"mul16\000"
+ 1228      3600
+ 1229              	.LASF44:
+ 1230 000d 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1230      43313120 
+ 1230      352E342E 
+ 1230      31203230 
+ 1230      31363036 
+ 1231 0040 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1231      20726576 
+ 1231      6973696F 
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 25
+
+
+ 1231      6E203233 
+ 1231      37373135 
+ 1232 0073 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1232      66756E63 
+ 1232      74696F6E 
+ 1232      2D736563 
+ 1232      74696F6E 
+ 1233              	.LASF33:
+ 1234 009b 49525F41 		.ascii	"IR_AC_Min\000"
+ 1234      435F4D69 
+ 1234      6E00
+ 1235              	.LASF6:
+ 1236 00a5 5F5F696E 		.ascii	"__int32_t\000"
+ 1236      7433325F 
+ 1236      7400
+ 1237              	.LASF5:
+ 1238 00af 73686F72 		.ascii	"short unsigned int\000"
+ 1238      7420756E 
+ 1238      7369676E 
+ 1238      65642069 
+ 1238      6E7400
+ 1239              	.LASF15:
+ 1240 00c2 75696E74 		.ascii	"uint8\000"
+ 1240      3800
+ 1241              	.LASF14:
+ 1242 00c8 696E7433 		.ascii	"int32_t\000"
+ 1242      325F7400 
+ 1243              	.LASF30:
+ 1244 00d0 46495243 		.ascii	"FIRCoeffs\000"
+ 1244      6F656666 
+ 1244      7300
+ 1245              	.LASF38:
+ 1246 00da 49525F41 		.ascii	"IR_Average_Estimated\000"
+ 1246      76657261 
+ 1246      67655F45 
+ 1246      7374696D 
+ 1246      61746564 
+ 1247              	.LASF18:
+ 1248 00ef 666C6F61 		.ascii	"float\000"
+ 1248      7400
+ 1249              	.LASF24:
+ 1250 00f5 63686563 		.ascii	"checkForBeat\000"
+ 1250      6B466F72 
+ 1250      42656174 
+ 1250      00
+ 1251              	.LASF46:
+ 1252 0102 433A5C55 		.ascii	"C:\\Users\\Perro\\Documents\\PSoC Creator\\Pulseoxi"
+ 1252      73657273 
+ 1252      5C506572 
+ 1252      726F5C44 
+ 1252      6F63756D 
+ 1253 0130 6D657465 		.ascii	"meter\\Project_LTEBS\\Saturimetro.cydsn\000"
+ 1253      725C5072 
+ 1253      6F6A6563 
+ 1253      745F4C54 
+ 1253      4542535C 
+ 1254              	.LASF37:
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 26
+
+
+ 1255 0156 49525F41 		.ascii	"IR_AC_Signal_max\000"
+ 1255      435F5369 
+ 1255      676E616C 
+ 1255      5F6D6178 
+ 1255      00
+ 1256              	.LASF25:
+ 1257 0167 61766572 		.ascii	"averageDCEstimator\000"
+ 1257      61676544 
+ 1257      43457374 
+ 1257      696D6174 
+ 1257      6F7200
+ 1258              	.LASF16:
+ 1259 017a 696E7431 		.ascii	"int16\000"
+ 1259      3600
+ 1260              	.LASF8:
+ 1261 0180 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1261      20756E73 
+ 1261      69676E65 
+ 1261      6420696E 
+ 1261      7400
+ 1262              	.LASF31:
+ 1263 0192 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1263      52784275 
+ 1263      66666572 
+ 1263      00
+ 1264              	.LASF1:
+ 1265 019f 756E7369 		.ascii	"unsigned char\000"
+ 1265      676E6564 
+ 1265      20636861 
+ 1265      7200
+ 1266              	.LASF4:
+ 1267 01ad 5F5F7569 		.ascii	"__uint16_t\000"
+ 1267      6E743136 
+ 1267      5F7400
+ 1268              	.LASF19:
+ 1269 01b8 646F7562 		.ascii	"double\000"
+ 1269      6C6500
+ 1270              	.LASF3:
+ 1271 01bf 5F5F696E 		.ascii	"__int16_t\000"
+ 1271      7431365F 
+ 1271      7400
+ 1272              	.LASF28:
+ 1273 01c9 62656174 		.ascii	"beatDetected\000"
+ 1273      44657465 
+ 1273      63746564 
+ 1273      00
+ 1274              	.LASF11:
+ 1275 01d6 756E7369 		.ascii	"unsigned int\000"
+ 1275      676E6564 
+ 1275      20696E74 
+ 1275      00
+ 1276              	.LASF10:
+ 1277 01e3 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1277      206C6F6E 
+ 1277      6720756E 
+ 1277      7369676E 
+ 1277      65642069 
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 27
+
+
+ 1278              	.LASF45:
+ 1279 01fa 48656172 		.ascii	"HeartRate.c\000"
+ 1279      74526174 
+ 1279      652E6300 
+ 1280              	.LASF12:
+ 1281 0206 696E7431 		.ascii	"int16_t\000"
+ 1281      365F7400 
+ 1282              	.LASF0:
+ 1283 020e 7369676E 		.ascii	"signed char\000"
+ 1283      65642063 
+ 1283      68617200 
+ 1284              	.LASF36:
+ 1285 021a 49525F41 		.ascii	"IR_AC_Signal_min\000"
+ 1285      435F5369 
+ 1285      676E616C 
+ 1285      5F6D696E 
+ 1285      00
+ 1286              	.LASF17:
+ 1287 022b 696E7433 		.ascii	"int32\000"
+ 1287      3200
+ 1288              	.LASF22:
+ 1289 0231 73697A65 		.ascii	"sizetype\000"
+ 1289      74797065 
+ 1289      00
+ 1290              	.LASF9:
+ 1291 023a 6C6F6E67 		.ascii	"long long int\000"
+ 1291      206C6F6E 
+ 1291      6720696E 
+ 1291      7400
+ 1292              	.LASF20:
+ 1293 0248 63686172 		.ascii	"char\000"
+ 1293      00
+ 1294              	.LASF40:
+ 1295 024d 6E656761 		.ascii	"negativeEdge\000"
+ 1295      74697665 
+ 1295      45646765 
+ 1295      00
+ 1296              	.LASF41:
+ 1297 025a 69725F61 		.ascii	"ir_avg_reg\000"
+ 1297      76675F72 
+ 1297      656700
+ 1298              	.LASF43:
+ 1299 0265 6F666673 		.ascii	"offset\000"
+ 1299      657400
+ 1300              	.LASF13:
+ 1301 026c 75696E74 		.ascii	"uint16_t\000"
+ 1301      31365F74 
+ 1301      00
+ 1302              	.LASF2:
+ 1303 0275 73686F72 		.ascii	"short int\000"
+ 1303      7420696E 
+ 1303      7400
+ 1304              	.LASF34:
+ 1305 027f 49525F41 		.ascii	"IR_AC_Signal_Current\000"
+ 1305      435F5369 
+ 1305      676E616C 
+ 1305      5F437572 
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQ5wJVt.s 			page 28
+
+
+ 1305      72656E74 
+ 1306              	.LASF7:
+ 1307 0294 6C6F6E67 		.ascii	"long int\000"
+ 1307      20696E74 
+ 1307      00
+ 1308              	.LASF21:
+ 1309 029d 6C6F6E67 		.ascii	"long double\000"
+ 1309      20646F75 
+ 1309      626C6500 
+ 1310              	.LASF39:
+ 1311 02a9 706F7369 		.ascii	"positiveEdge\000"
+ 1311      74697665 
+ 1311      45646765 
+ 1311      00
+ 1312              	.LASF23:
+ 1313 02b6 5F426F6F 		.ascii	"_Bool\000"
+ 1313      6C00
+ 1314              	.LASF32:
+ 1315 02bc 49525F41 		.ascii	"IR_AC_Max\000"
+ 1315      435F4D61 
+ 1315      7800
+ 1316              	.LASF35:
+ 1317 02c6 49525F41 		.ascii	"IR_AC_Signal_Previous\000"
+ 1317      435F5369 
+ 1317      676E616C 
+ 1317      5F507265 
+ 1317      76696F75 
+ 1318              	.LASF42:
+ 1319 02dc 63627566 		.ascii	"cbuf\000"
+ 1319      00
+ 1320              	.LASF27:
+ 1321 02e1 6C6F7750 		.ascii	"lowPassFIRFilter\000"
+ 1321      61737346 
+ 1321      49524669 
+ 1321      6C746572 
+ 1321      00
+ 1322              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

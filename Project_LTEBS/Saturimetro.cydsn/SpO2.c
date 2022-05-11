@@ -14,8 +14,7 @@
 #include "project.h"
 #include <stdbool.h>
 
-void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32 n_ir_buffer_length, uint32_t *pun_red_buffer, int32 *pn_spo2, int8 *pch_spo2_valid, 
-                int32 *pn_heart_rate, int8 *pch_hr_valid)
+void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_buffer_length, uint32_t *pun_red_buffer, int32_t *pn_spo2, int8_t *pch_spo2_valid, int32_t *pn_heart_rate, int8_t *pch_hr_valid)
 
 /**
 * \brief        Calculate the heart rate and SpO2 level
@@ -25,7 +24,7 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32 n_ir_
 *               Thus, accurate SPO2 is precalculated and save longo uch_spo2_table[] per each an_ratio.
 *
 * \param[in]    *pun_ir_buffer           - IR sensor data buffer
-* \param[in]    n_ir_buffer_length      - IR sensor data buffer length
+* \param[in]    n_buffer_length      - sensor data buffer length
 * \param[in]    *pun_red_buffer          - Red sensor data buffer
 * \param[out]    *pn_spo2                - Calculated SpO2 value
 * \param[out]    *pch_spo2_valid         - 1 if the calculated SpO2 value is valid
@@ -52,11 +51,11 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32 n_ir_
 
   // calculates DC mean and subtract DC from ir
   un_ir_mean =0; 
-  for (k=0 ; k<n_ir_buffer_length ; k++ ) un_ir_mean += pun_ir_buffer[k] ;
-  un_ir_mean =un_ir_mean/n_ir_buffer_length ;
+  for (k=0 ; k<n_buffer_length ; k++ ) un_ir_mean += pun_ir_buffer[k] ;
+  un_ir_mean =un_ir_mean/n_buffer_length ;
     
   // remove DC and invert signal so that we can use peak detector as valley detector
-  for (k=0 ; k<n_ir_buffer_length ; k++ )  
+  for (k=0 ; k<n_buffer_length ; k++ )  
     an_x[k] = -1*(pun_ir_buffer[k] - un_ir_mean) ; 
     
   // 4 pt Moving Average
@@ -88,7 +87,7 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32 n_ir_
   }
 
   //  load raw value again for SPO2 calculation : RED(=y) and IR(=X)
-  for (k=0 ; k<n_ir_buffer_length ; k++ )  {
+  for (k=0 ; k<n_buffer_length ; k++ )  {
       an_x[k] =  pun_ir_buffer[k] ; 
       an_y[k] =  pun_red_buffer[k] ; 
   }

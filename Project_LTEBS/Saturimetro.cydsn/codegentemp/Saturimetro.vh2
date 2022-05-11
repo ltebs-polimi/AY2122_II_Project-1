@@ -2,7 +2,7 @@
 --	Conversion of Saturimetro.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Sat May 07 19:55:36 2022
+--	Wed May 11 10:04:07 2022
 --
 
 USE cypress.cypress.all;

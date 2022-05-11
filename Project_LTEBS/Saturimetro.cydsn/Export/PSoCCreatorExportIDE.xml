@@ -39,10 +39,14 @@
           <File BuildType="BUILD" Toolchain="">main.c</File>
           <File BuildType="BUILD" Toolchain="">I2C_Interface.c</File>
           <File BuildType="BUILD" Toolchain="">MAX30101.c</File>
+          <File BuildType="BUILD" Toolchain="">HeartRate.c</File>
+          <File BuildType="BUILD" Toolchain="">SpO2.c</File>
           <File BuildType="BUILD" Toolchain="">cyapicallbacks.h</File>
           <File BuildType="BUILD" Toolchain="">I2C_Interface.h</File>
           <File BuildType="BUILD" Toolchain="">MAX30101_Defs.h</File>
           <File BuildType="BUILD" Toolchain="">MAX30101.h</File>
+          <File BuildType="BUILD" Toolchain="">SpO2.h</File>
+          <File BuildType="BUILD" Toolchain="">HeartRate.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\Perro\Documents\PSoC Creator\Pulseoximeter\Project_LTEBS\Saturimetro.cydsn\Generated_Source\PSoC5">

@@ -821,4 +821,10 @@ uint32_t getFIFOIR(MAX30101_Data* data)
   return (data->IR[data->tail]);
 }
 
+void MAX30101_shutDown(void) {
+  // Put IC into low power mode (datasheet pg. 19)
+  // During shutdown the IC will continue to respond to I2C commands but will
+  // not update with new readings (such as temperature)
+  MAX30101_BitMask(MAX30101_MODE_CONF, MAX30101_SHUTDOWN_MASK, MAX30101_SHUTDOWN_ENABLE);
+}
 /* [] END OF FILE */
