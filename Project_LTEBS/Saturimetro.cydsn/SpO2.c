@@ -142,9 +142,9 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_b
   else
     n_ratio_average = an_ratio[n_middle_idx ];
 
-  if( n_ratio_average>2 && n_ratio_average <184){
-    n_spo2_calc= uch_spo2_table[n_ratio_average] ;
-    *pn_spo2 = n_spo2_calc ;
+  if( n_ratio_average>2 && n_ratio_average <101){
+    //n_spo2_calc= uch_spo2_table[n_ratio_average] ;
+    *pn_spo2 = n_ratio_average ;
     *pch_spo2_valid  = 1;//  float_SPO2 =  -45.060*n_ratio_average* n_ratio_average/10000 + 30.354 *n_ratio_average/100 + 94.845 ;  // for comparison with table
   }
   else{

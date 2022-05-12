@@ -208,7 +208,6 @@ uint8_t MAX30101_IsFIFOAFull(uint8_t* flag)
     uint8_t error = MAX30101_ReadRegister(MAX30101_INT_ST_1, &temp);
     *flag = temp & (~MAX30101_INT_FIFO_A_FULL_MASK);
     return error;
-    
 }
 
 uint8_t MAX30101_IsPPGReady(uint8_t* flag)
@@ -406,32 +405,12 @@ uint8_t MAX30101_ReadRawFIFO(uint8_t num_samples, uint8_t active_leds, uint32_t*
                 sample_counter += 1;
                 data[sample_counter] = tempLong;
             }
-            if (active_leds > 2)
-            {
-                I2C_Peripheral_ReadRegisterMulti(MAX30101_I2C_ADDRESS, MAX30101_FIFO_DATA,3, temp_bytes);
-                
-                //Burst read three bytes - GREEN
-                temp[3] = 0;
-                temp[2] = temp_bytes[0];
-                temp[1] = temp_bytes[1];
-                temp[0] = temp_bytes[2];
-
-                //Convert array to long
-                memcpy(&tempLong, temp, sizeof(tempLong));
-        		
-                //Zero out all but 18 bits
-        		tempLong &= 0x3FFFF; 
-                sample_counter += 1;
-                data[sample_counter] = tempLong;
-            }
             sample_counter += 1;
-            
         }
     //}
     return error;
 }
 
-// Print FIFO Data
 
 // Read FIFO Data
 uint8_t MAX30101_ReadFIFO(uint8_t num_samples, uint8_t active_leds, MAX30101_Data* data)
@@ -481,7 +460,7 @@ uint8_t MAX30101_ReadFIFO(uint8_t num_samples, uint8_t active_leds, MAX30101_Dat
         // Shift according to resolution
         tempLong = tempLong >> (MAX30101_SHIFT(resolution));
         
-        data->red[data->head] = tempLong; //Store this reading into the sense array
+        data->red[data->head] = tempLong; //Store this reading into the data array
         
         if (active_leds > 1)
         {
@@ -501,26 +480,6 @@ uint8_t MAX30101_ReadFIFO(uint8_t num_samples, uint8_t active_leds, MAX30101_Dat
             tempLong = tempLong >> (MAX30101_SHIFT(resolution));
             
             data->IR[data->head] = tempLong; //Store this reading into the sense array
-        }
-        if (active_leds > 2)
-        {
-            //error = I2C_Peripheral_ReadBytes(temp_bytes, 3);
-            
-            //Burst read three bytes - GREEN
-            temp[3] = 0;
-            temp[2] = I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
-            temp[1] = I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
-            temp[0] = I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
-
-            //Convert array to long
-            memcpy(&tempLong, temp, sizeof(tempLong));
-    		
-            //Zero out all but 18 bits
-    		tempLong &= 0x3FFFF; 
-            
-            tempLong = tempLong >> (MAX30101_SHIFT(resolution));
-            
-            data->green[data->head] = tempLong; //Store this reading into the sense array
         }
     }
     
@@ -809,22 +768,25 @@ static uint8_t MAX30101_BitMask(uint8_t reg_addr, uint8_t mask, uint8_t thing)
     return error;
 }
 
-//Report the next Red value in the FIFO
+//Report the first Red value in the FIFO pointed by the tail
 uint32_t getFIFORed(MAX30101_Data* data)
 {
   return (data->red[data->tail]);
 }
 
-//Report the next IR value in the FIFO
+//Report the first IR value in the FIFO pointed by the tail
 uint32_t getFIFOIR(MAX30101_Data* data)
 {
   return (data->IR[data->tail]);
 }
 
-void MAX30101_shutDown(void) {
-  // Put IC into low power mode (datasheet pg. 19)
-  // During shutdown the IC will continue to respond to I2C commands but will
-  // not update with new readings (such as temperature)
-  MAX30101_BitMask(MAX30101_MODE_CONF, MAX30101_SHUTDOWN_MASK, MAX30101_SHUTDOWN_ENABLE);
+uint8_t MAX30105_available(void)
+{
+  uint8_t samples_FIFO = data.head - data.tail;
+  if (samples_FIFO < 0) samples_FIFO += 32;
+
+  return (samples_FIFO);
 }
+
+
 /* [] END OF FILE */

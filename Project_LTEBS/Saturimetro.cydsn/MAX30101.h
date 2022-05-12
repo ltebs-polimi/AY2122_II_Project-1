@@ -19,7 +19,7 @@
     *   enough RAM, you can increase it as long as you 
     *   have memory available.
     */
-    #define BUFFER_STORAGE_SIZE 8
+    #define BUFFER_STORAGE_SIZE 32
     
     /**
     *   \brief Circular buffer for MAX30101 data.
@@ -33,7 +33,7 @@
         uint8_t tail;   ///< Current tail of the circular buffer.
     } MAX30101_Data; //This is our circular buffer of readings from the sensor
 
-    
+    MAX30101_Data data;
     //==============================================
     //           MAX30101 FUNCTIONS
     //==============================================
@@ -50,6 +50,8 @@
     *   \retval #MAX30101_DEV_NOT_FOUND if device is not present.
     */
     uint8_t MAX30101_IsDevicePresent(void);
+    
+    uint8_t MAX30105_available(void);
     
     //==============================================
     //          MAX30101 INTERRUPT FUNCTIONS
@@ -253,6 +255,9 @@
     *   \retval #MAX30101_DEV_NOT_FOUND if device is not present.  
     */
     uint8_t MAX30101_ReadFIFO(uint8_t num_samples, uint8_t active_leds, MAX30101_Data* data);
+    
+    uint32_t getFIFORed(MAX30101_Data* data);
+    uint32_t getFIFOIR(MAX30101_Data* data);
     
     //==============================================
     //     MAX30101 FIFO CONFIGURATION FUNCTIONS
