@@ -109,10 +109,10 @@ int main(void)
         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_4, 0x1F);
         
         // Set ADC Range
-        MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_4096);
+        MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_2048);
         
         // Pulse width
-        MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_69);
+        MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
         
         // Set Sample Rate
         MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_400);
