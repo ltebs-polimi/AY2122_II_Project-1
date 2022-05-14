@@ -77,13 +77,13 @@ int main(void)
         MAX30101_EnableFIFOAFullInt();
      
         // set 28 samples to trigger interrupt
-        MAX30101_SetFIFOAlmostFull(28);
+        MAX30101_SetFIFOAlmostFull(25);
 
         // enable fifo rollover
         MAX30101_EnableFIFORollover();
         
         // 8 samples averaged
-        MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_2);
+        MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_4);
         
         // Set LED Power level
         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x1F);
@@ -95,13 +95,13 @@ int main(void)
         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_4, 0x1F);
         
         // Set ADC Range
-        MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_4096);
+        MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_2048);
         
         // Pulse width
         MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_69);
         
         // Set Sample Rate
-        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_400);
+        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_200);
         
         // Set mode
         MAX30101_SetMode(MAX30101_SPO2_MODE);
