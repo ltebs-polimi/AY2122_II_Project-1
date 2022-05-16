@@ -49,6 +49,7 @@ int main(void)
     int32_t bufferLength = 200;
     int num_samples;
     int k=0;
+    int FIFO_max_size = 25;
     
     // Initialization
     MAX30101_Start();
@@ -91,7 +92,7 @@ int main(void)
         MAX30101_EnableFIFOAFullInt();
      
         // set 28 samples to trigger interrupt
-        MAX30101_SetFIFOAlmostFull(25);
+        MAX30101_SetFIFOAlmostFull(FIFO_max_size);
 
         // enable fifo rollover
         MAX30101_EnableFIFORollover();
@@ -115,7 +116,7 @@ int main(void)
         MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
         
         // Set Sample Rate
-        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_400);
+        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_100);
         
         // Set mode
         MAX30101_SetMode(MAX30101_SPO2_MODE);
@@ -152,20 +153,22 @@ int main(void)
                 sprintf(msg, "%d\r\n", num_samples);
                 debug_print(msg);
                 // Read FIFO
-                MAX30101_ReadFIFO(num_samples, active_leds, &data);
+                MAX30101_ReadFIFO(num_samples, active_leds, &data, k);
                 //int samples = data.head - data.tail;
                 //sprintf(msg, "%d\r\n", samples);
                 //debug_print(msg);
                 for (int i=0;i<num_samples;i++){
-                    sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
+                    /*sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
                     debug_print(msg);
                     sprintf(msg, "ir: %lu\r", data.IR[data.tail+i]);
-                    debug_print(msg);
+                    debug_print(msg);*/
                     //data.tail++;
-                    redBuffer[k] = data.red[data.tail];
-                    irBuffer[k] = data.IR[data.tail];
+                    redBuffer[k] = data.red[data.tail+i];
+                    irBuffer[k] = data.IR[data.tail+i];
                     k++;
-                    if(flag_1s) {
+                    sprintf(msg, "K: %d\r", k);
+                    debug_print(msg);
+                    /*if(flag_1s) {
                         sprintf(msg, "spo2: %ld\r", spo2);
                         debug_print(msg);
                         sprintf(msg, "validspo2: %d\r", validSPO2);
@@ -175,20 +178,28 @@ int main(void)
                         sprintf(msg, "validHR: %d\r\n", validHeartRate);
                         debug_print(msg);   
                         flag_1s = 0;
-                    }
+                    }*/
                 }
                 //data.tail = 0;
                 //data.head = 0;
             }
             flag_temp = 0;
-            if(k==200) {
+            if(k>=bufferLength) {
                 maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
-                flag_1s = 1;
-                k=150;
-                for (int i=50; i<200; i++) {
+                //flag_1s = 1;
+                k=bufferLength - 50;
+                for (int i=50; i<bufferLength; i++) {
                     redBuffer[i-50] = redBuffer[i];
                     irBuffer[i-50] = irBuffer[i];
                 }
+                sprintf(msg, "spo2: %ld\r", spo2);
+                debug_print(msg);
+                sprintf(msg, "validspo2: %d\r", validSPO2);
+                debug_print(msg);
+                sprintf(msg, "HR: %ld\r", heartRate);
+                debug_print(msg);
+                sprintf(msg, "validHR: %d\r\n", validHeartRate);
+                debug_print(msg); 
             }
         }
     }

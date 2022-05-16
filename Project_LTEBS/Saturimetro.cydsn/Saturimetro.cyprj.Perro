@@ -47,6 +47,7 @@
 <dep name=".\I2C_Interface.h" />
 <dep name=".\MAX30101.h" />
 <dep name=".\MAX30101_Defs.h" />
+<dep name=".\SpO2.h" />
 <dep name=".\main.c" />
 </file>
 <file name=".\Generated_Source\PSoC5\Connection_LED.h" />
@@ -84,6 +85,7 @@
 <file name=".\I2C_Interface.h" />
 <file name=".\MAX30101.h" />
 <file name=".\MAX30101_Defs.h" />
+<file name=".\SpO2.h" />
 <file name=".\main.c" />
 <file name=".\CortexM3\ARM_GCC_541\Debug\MAX30101.o">
 <dep name=".\Generated_Source\PSoC5\CyFlash.h" />
@@ -101,8 +103,6 @@
 <dep name=".\MAX30101_Defs.h" />
 </file>
 <file name=".\MAX30101.c" />
-<file name=".\HeartRate.h" />
-<file name=".\SpO2.h" />
 <file name=".\CortexM3\ARM_GCC_541\Debug\SpO2.o">
 <dep name=".\Generated_Source\PSoC5\Connection_LED.h" />
 <dep name=".\Generated_Source\PSoC5\Connection_LED_aliases.h" />
@@ -140,6 +140,7 @@
 <dep name=".\SpO2.h" />
 </file>
 <file name=".\SpO2.c" />
+<file name=".\HeartRate.h" />
 <file name=".\CortexM3\ARM_GCC_541\Debug\Cm3Start.o">
 <dep name=".\Generated_Source\PSoC5\Cm3Start.c" />
 <dep name=".\Generated_Source\PSoC5\CyDmac.h" />
@@ -895,7 +896,7 @@
 <dataGuid v="769d31ea-68b1-4f0c-b90a-7c10a43ee563">
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
 <link_deps_times>
-<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM3" v="132968483828345074" />
+<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM3" v="132971699166502761" />
 </link_deps_times>
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>

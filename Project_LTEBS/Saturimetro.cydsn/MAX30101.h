@@ -254,7 +254,7 @@
     *   \retval #MAX30101_OK if device is present.
     *   \retval #MAX30101_DEV_NOT_FOUND if device is not present.  
     */
-    uint8_t MAX30101_ReadFIFO(uint8_t num_samples, uint8_t active_leds, MAX30101_Data* data);
+    uint8_t MAX30101_ReadFIFO(uint8_t num_samples, uint8_t active_leds, MAX30101_Data* data, int k);
     
     uint32_t getFIFORed(MAX30101_Data* data);
     uint32_t getFIFOIR(MAX30101_Data* data);

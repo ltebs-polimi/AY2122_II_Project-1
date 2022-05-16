@@ -42,7 +42,7 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_b
   int32_t n_peak_interval_sum;
   
   int32_t n_y_ac, n_x_ac;
-  int32_t n_spo2_calc; 
+  //int32_t n_spo2_calc; 
   int32_t n_y_dc_max, n_x_dc_max; 
   int32_t n_y_dc_max_idx = 0;
   int32_t n_x_dc_max_idx = 0; 
