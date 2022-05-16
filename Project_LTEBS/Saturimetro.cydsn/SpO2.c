@@ -9,7 +9,7 @@
  *
  * ========================================
 */
-
+/*
 #include "SpO2.h"
 #include "project.h"
 #include <stdbool.h>
@@ -33,6 +33,7 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_b
 *
 * \retval       None
 */
+/*
 {
   uint32_t un_ir_mean;
   int32_t k, n_i_ratio_count;
@@ -163,6 +164,7 @@ void maxim_find_peaks( int32_t *pn_locs, int32_t *n_npks,  int32_t  *pn_x, int32
 *
 * \retval       None
 */
+/*
 {
   maxim_peaks_above_min_height( pn_locs, n_npks, pn_x, n_size, n_min_height );
   maxim_remove_close_peaks( pn_locs, n_npks, pn_x, n_min_distance );
@@ -177,6 +179,7 @@ void maxim_peaks_above_min_height( int32_t *pn_locs, int32_t *n_npks,  int32_t  
 *
 * \retval       None
 */
+/*
 {
   int32_t i = 1, n_width;
   *n_npks = 0;
@@ -207,11 +210,12 @@ void maxim_remove_close_peaks(int32_t *pn_locs, int32_t *pn_npks, int32_t *pn_x,
 *
 * \retval       None
 */
+/*
 {
     
   int32_t i, j, n_old_npks, n_dist;
     
-  /* Order peaks from large to small */
+  /* Order peaks from large to small 
   maxim_sort_indices_descend( pn_x, pn_locs, *pn_npks );
 
   for ( i = -1; i < *pn_npks; i++ ){
@@ -235,7 +239,7 @@ void maxim_sort_ascend(int32_t  *pn_x, int32_t n_size)
 *               Sort array in ascending order (insertion sort algorithm)
 *
 * \retval       None
-*/
+
 {
   int32_t i, j, n_temp;
   for (i = 1; i < n_size; i++) {
@@ -253,7 +257,7 @@ void maxim_sort_indices_descend(  int32_t  *pn_x, int32_t *pn_indx, int32_t n_si
 *               Sort indices according to descending order (insertion sort algorithm)
 *
 * \retval       None
-*/ 
+
 {
   int32_t i, j, n_temp;
   for (i = 1; i < n_size; i++) {
@@ -265,5 +269,4 @@ void maxim_sort_indices_descend(  int32_t  *pn_x, int32_t *pn_indx, int32_t n_si
 }
 
 
-
-/* [] END OF FILE */
+ [] END OF FILE */

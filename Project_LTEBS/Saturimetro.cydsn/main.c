@@ -1,8 +1,11 @@
 /**
 *   Main file for testing MAX30101 Library.
-    Last update: il codice printa 25 samples però il calcolo della spo2 e hr non funzionano, sul monitor viene restituito -999 quindi c'è un errore nel calcolo.
-    ho anche notato che se si cambia la risoluzione dai 15 attuali ai 18 bit il codice vede 32 samples come fullFifo e non 25 come gli ho impostato. molto strano non capisco perchè succeda
-    anche se nel codice è impostato il FIFOAFull a 25 
+    Last update: il codice funziona con la spo2 anche per FIFO bits diversi da 25, per come ho scritto il codice la prima misurazione 
+    non è da considerare perchè vengono superati i 200 samples però dalla successiva sono giuste.
+    Questo branch serve a provare una nuova funzione, che prende 5 secondi di misura e introduce un Hamming window per cercare di migliorare
+    l'heart rate ma sembra essere troppo variabile così come nell'altro branch. Non so se è dovuto alla mancanza di pressione ma sembra strano
+    perchè la variabilità è davvero alta. Proverò con l'elastico per capire se migliora un minimo, altrimenti c'è da cambiare il codice per l'HR.
+    Emanuele 16.05 18:07
 */
 
 #include "project.h"
@@ -10,6 +13,7 @@
 #include "stdio.h"
 #include "I2C_Interface.h"
 #include "SpO2.h"
+#include "algorithm.h"
 
 #define UART_DEBUG
 
@@ -44,9 +48,9 @@ int main(void)
     int8_t validSPO2; //indicator to show if the SPO2 calculation is valid
     int32_t heartRate; //heart rate value
     int8_t validHeartRate; //indicator to show if the heart rate calculation is valid
-    uint32_t irBuffer[200]; //infrared LED sensor data
-    uint32_t redBuffer[200];  //red LED sensor data
-    int32_t bufferLength = 200;
+    uint32_t irBuffer[250]; //infrared LED sensor data
+    uint32_t redBuffer[250];  //red LED sensor data
+    int32_t bufferLength = 250;
     int num_samples;
     int j=0;
     int FIFO_max_size = 25;
