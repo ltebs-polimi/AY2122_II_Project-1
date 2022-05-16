@@ -413,10 +413,10 @@ uint8_t MAX30101_ReadRawFIFO(uint8_t num_samples, uint8_t active_leds, uint32_t*
 
 
 // Read FIFO Data
-uint8_t MAX30101_ReadFIFO(uint8_t num_samples, uint8_t active_leds, MAX30101_Data* data, int k)
+uint8_t MAX30101_ReadFIFO(uint8_t num_samples, uint8_t active_leds, MAX30101_Data* data, int j)
 {
-    if((num_samples + k) > 200) {
-        num_samples = 200 % k;   
+    if((num_samples + j) > 200) {
+        num_samples = 200 % j;   
     }
     // We need to read a number of bytes equal to num_samples + 3 * active_leds
     uint16_t bytes_left_ro_read = num_samples * 3 * active_leds;

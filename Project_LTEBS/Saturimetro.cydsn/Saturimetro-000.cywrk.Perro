@@ -80,26 +80,6 @@
 <v>Saturimetro-000\Saturimetro\Source Files\SpO2.c</v>
 <v>Saturimetro-000\Saturimetro\Generated_Source</v>
 <v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\Connection_LED</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cy_boot</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\I2C_Master</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\isr_MAX30101</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\MAX30101_INT</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\SCL_1</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\SDA_1</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\UART_Debug</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\UART_Debug\UART_Debug.c</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\UART_Debug\UART_Debug.h</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\UART_Debug\UART_Debug_BOOT.c</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\UART_Debug\UART_Debug_INT.c</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\UART_Debug\UART_Debug_PM.c</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\UART_Debug_IntClock</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cycodeshareexport.ld</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cycodeshareimport.ld</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cycodeshareimport.scat</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cydevice.h</v>
-<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cydevice_trm.h</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -192,22 +172,6 @@
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Master_SLAVE.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_MAX30101.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\MAX30101.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\MAX30101_INT.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\SCL_1.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\SDA_1.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\SpO2.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_Debug.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_Debug_BOOT.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_Debug_INT.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_Debug_IntClock.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_Debug_PM.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Saturimetro.elf</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Saturimetro.hex</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Saturimetro.map</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.gpdsc</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.rpt</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro_timing.html</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>

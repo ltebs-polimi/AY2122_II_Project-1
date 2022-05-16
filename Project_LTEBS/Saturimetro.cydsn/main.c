@@ -48,7 +48,7 @@ int main(void)
     uint32_t redBuffer[200];  //red LED sensor data
     int32_t bufferLength = 200;
     int num_samples;
-    int k=0;
+    int j=0;
     int FIFO_max_size = 25;
     
     // Initialization
@@ -101,9 +101,9 @@ int main(void)
         MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_2);
         
         // Set LED Power level
-        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x1F);
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x05);
         
-        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x1F);
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x05);
         
         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_3, 0x1F);
         
@@ -153,7 +153,7 @@ int main(void)
                 sprintf(msg, "%d\r\n", num_samples);
                 debug_print(msg);
                 // Read FIFO
-                MAX30101_ReadFIFO(num_samples, active_leds, &data, k);
+                MAX30101_ReadFIFO(num_samples, active_leds, &data, j);
                 //int samples = data.head - data.tail;
                 //sprintf(msg, "%d\r\n", samples);
                 //debug_print(msg);
@@ -163,10 +163,10 @@ int main(void)
                     sprintf(msg, "ir: %lu\r", data.IR[data.tail+i]);
                     debug_print(msg);*/
                     //data.tail++;
-                    redBuffer[k] = data.red[data.tail+i];
-                    irBuffer[k] = data.IR[data.tail+i];
-                    k++;
-                    sprintf(msg, "K: %d\r", k);
+                    redBuffer[j] = data.red[data.tail+i];
+                    irBuffer[j] = data.IR[data.tail+i];
+                    j++;
+                    sprintf(msg, "number of samples taken: %d\r", j);
                     debug_print(msg);
                     /*if(flag_1s) {
                         sprintf(msg, "spo2: %ld\r", spo2);
@@ -184,10 +184,10 @@ int main(void)
                 //data.head = 0;
             }
             flag_temp = 0;
-            if(k>=bufferLength) {
+            if(j>=bufferLength) {
                 maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
                 //flag_1s = 1;
-                k=bufferLength - 50;
+                j=bufferLength - 50;
                 for (int i=50; i<bufferLength; i++) {
                     redBuffer[i-50] = redBuffer[i];
                     irBuffer[i-50] = irBuffer[i];

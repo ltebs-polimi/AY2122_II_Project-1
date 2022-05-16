@@ -59,7 +59,7 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_b
     an_x[k] = -1*(pun_ir_buffer[k] - un_ir_mean) ; 
     
   // 4 pt Moving Average
-  for(k=0; k< BUFFER_SIZE-MA4_SIZE; k++){
+  for(k=0; k< BUFFER_SIZE-MA4_SIZE+1; k++){
     an_x[k]=( an_x[k]+an_x[k+1]+ an_x[k+2]+ an_x[k+3])/(int)4;        
   }
   // calculate threshold  
@@ -144,7 +144,8 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_b
 
   if( n_ratio_average>2 && n_ratio_average <101){
     //n_spo2_calc= uch_spo2_table[n_ratio_average] ;
-    *pn_spo2 = n_ratio_average ;
+    //*pn_spo2 = n_ratio_average ;
+    *pn_spo2 = -45.060*n_ratio_average* n_ratio_average/10000 + 30.354 *n_ratio_average/100 + 94.845;
     *pch_spo2_valid  = 1;//  float_SPO2 =  -45.060*n_ratio_average* n_ratio_average/10000 + 30.354 *n_ratio_average/100 + 94.845 ;  // for comparison with table
   }
   else{
