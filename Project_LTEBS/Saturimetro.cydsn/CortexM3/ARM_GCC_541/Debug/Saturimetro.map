@@ -1366,7 +1366,7 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x5769
+.debug_info     0x00000000     0x5760
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x346 .\CortexM3\ARM_GCC_541\Debug\main.o
  .debug_info    0x00000346      0x3ee .\CortexM3\ARM_GCC_541\Debug\I2C_Interface.o
@@ -1387,9 +1387,9 @@ END GROUP
  .debug_info    0x00003826      0x25d .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(UART_Debug_IntClock.o)
  .debug_info    0x00003a83      0xe51 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(CyLib.o)
  .debug_info    0x000048d4      0x57a .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(cyPm.o)
- .debug_info    0x00004e4e       0xa2 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(CyBootAsmGnu.o)
- .debug_info    0x00004ef0      0x3b9 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(CyFlash.o)
- .debug_info    0x000052a9      0x4c0 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(CySpc.o)
+ .debug_info    0x00004e4e       0x99 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(CyBootAsmGnu.o)
+ .debug_info    0x00004ee7      0x3b9 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(CyFlash.o)
+ .debug_info    0x000052a0      0x4c0 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(CySpc.o)
 
 .debug_abbrev   0x00000000     0x18ad
  *(.debug_abbrev)
@@ -1482,52 +1482,52 @@ END GROUP
  .debug_frame   0x00003004       0x20 c:/program files (x86)/cypress/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-msizer.o)
  .debug_frame   0x00003024       0x5c c:/program files (x86)/cypress/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-reent.o)
 
-.debug_str      0x00000000     0x2a57
+.debug_str      0x00000000     0x2a4e
  *(.debug_str)
- .debug_str     0x00000000      0x252 .\CortexM3\ARM_GCC_541\Debug\main.o
-                                0x2bc (size before relaxing)
- .debug_str     0x00000252      0x1b6 .\CortexM3\ARM_GCC_541\Debug\I2C_Interface.o
-                                0x36b (size before relaxing)
- .debug_str     0x00000408      0x562 .\CortexM3\ARM_GCC_541\Debug\MAX30101.o
-                                0x7b9 (size before relaxing)
- .debug_str     0x0000096a      0x11e .\CortexM3\ARM_GCC_541\Debug\HeartRate.o
-                                0x2f2 (size before relaxing)
- .debug_str     0x00000a88        0x7 .\CortexM3\ARM_GCC_541\Debug\SpO2.o
-                                 0xe9 (size before relaxing)
- .debug_str     0x00000a8f      0x2c0 .\CortexM3\ARM_GCC_541\Debug\algorithm.o
-                                0x4bd (size before relaxing)
- .debug_str     0x00000d4f      0x197 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
-                                0x34a (size before relaxing)
- .debug_str     0x00000ee6       0x75 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
-                                0x1f6 (size before relaxing)
- .debug_str     0x00000f5b      0x123 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+ .debug_str     0x00000000      0x249 .\CortexM3\ARM_GCC_541\Debug\main.o
+                                0x2b3 (size before relaxing)
+ .debug_str     0x00000249      0x1b6 .\CortexM3\ARM_GCC_541\Debug\I2C_Interface.o
+                                0x362 (size before relaxing)
+ .debug_str     0x000003ff      0x562 .\CortexM3\ARM_GCC_541\Debug\MAX30101.o
+                                0x7b0 (size before relaxing)
+ .debug_str     0x00000961      0x11e .\CortexM3\ARM_GCC_541\Debug\HeartRate.o
                                 0x2e9 (size before relaxing)
- .debug_str     0x0000107e      0x13b .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(I2C_Master.o)
-                                0x2ec (size before relaxing)
- .debug_str     0x000011b9       0xb7 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(I2C_Master_INT.o)
-                                0x2b7 (size before relaxing)
- .debug_str     0x00001270       0x79 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(I2C_Master_PM.o)
-                                0x27f (size before relaxing)
- .debug_str     0x000012e9      0x1d2 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(I2C_Master_MASTER.o)
-                                0x457 (size before relaxing)
- .debug_str     0x000014bb      0x32e .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(UART_Debug.o)
-                                0x4e1 (size before relaxing)
- .debug_str     0x000017e9       0x93 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(Connection_LED.o)
-                                0x221 (size before relaxing)
- .debug_str     0x0000187c      0x160 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(isr_MAX30101.o)
-                                0x31a (size before relaxing)
- .debug_str     0x000019dc       0xc1 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(MAX30101_INT.o)
-                                0x261 (size before relaxing)
- .debug_str     0x00001a9d      0x1f2 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(UART_Debug_IntClock.o)
-                                0x390 (size before relaxing)
- .debug_str     0x00001c8f      0x7db .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(CyLib.o)
-                                0x9fc (size before relaxing)
- .debug_str     0x0000246a      0x371 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(cyPm.o)
-                                0x555 (size before relaxing)
- .debug_str     0x000027db      0x14f .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(CyFlash.o)
-                                0x319 (size before relaxing)
- .debug_str     0x0000292a      0x12d .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(CySpc.o)
-                                0x313 (size before relaxing)
+ .debug_str     0x00000a7f        0x7 .\CortexM3\ARM_GCC_541\Debug\SpO2.o
+                                 0xe0 (size before relaxing)
+ .debug_str     0x00000a86      0x2c0 .\CortexM3\ARM_GCC_541\Debug\algorithm.o
+                                0x4b4 (size before relaxing)
+ .debug_str     0x00000d46      0x197 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                                0x341 (size before relaxing)
+ .debug_str     0x00000edd       0x75 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
+                                0x1ed (size before relaxing)
+ .debug_str     0x00000f52      0x123 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                                0x2e0 (size before relaxing)
+ .debug_str     0x00001075      0x13b .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(I2C_Master.o)
+                                0x2e3 (size before relaxing)
+ .debug_str     0x000011b0       0xb7 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(I2C_Master_INT.o)
+                                0x2ae (size before relaxing)
+ .debug_str     0x00001267       0x79 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(I2C_Master_PM.o)
+                                0x276 (size before relaxing)
+ .debug_str     0x000012e0      0x1d2 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(I2C_Master_MASTER.o)
+                                0x44e (size before relaxing)
+ .debug_str     0x000014b2      0x32e .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(UART_Debug.o)
+                                0x4d8 (size before relaxing)
+ .debug_str     0x000017e0       0x93 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(Connection_LED.o)
+                                0x218 (size before relaxing)
+ .debug_str     0x00001873      0x160 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(isr_MAX30101.o)
+                                0x311 (size before relaxing)
+ .debug_str     0x000019d3       0xc1 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(MAX30101_INT.o)
+                                0x258 (size before relaxing)
+ .debug_str     0x00001a94      0x1f2 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(UART_Debug_IntClock.o)
+                                0x387 (size before relaxing)
+ .debug_str     0x00001c86      0x7db .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(CyLib.o)
+                                0x9f3 (size before relaxing)
+ .debug_str     0x00002461      0x371 .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(cyPm.o)
+                                0x54c (size before relaxing)
+ .debug_str     0x000027d2      0x14f .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(CyFlash.o)
+                                0x310 (size before relaxing)
+ .debug_str     0x00002921      0x12d .\CortexM3\ARM_GCC_541\Debug\Saturimetro.a(CySpc.o)
+                                0x30a (size before relaxing)
 
 .debug_loc
  *(.debug_loc)
@@ -1704,4 +1704,4 @@ END GROUP
 
 /DISCARD/
  *(.note.GNU-stack)
-OUTPUT(C:\Users\Perro\Documents\PSoC Creator\Pulseoximeter\Project_LTEBS\Saturimetro.cydsn\CortexM3\ARM_GCC_541\Debug\Saturimetro.elf elf32-littlearm)
+OUTPUT(C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\CortexM3\ARM_GCC_541\Debug\Saturimetro.elf elf32-littlearm)

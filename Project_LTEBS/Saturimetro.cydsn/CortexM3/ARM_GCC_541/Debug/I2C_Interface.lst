@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
   16:I2C_Interface.c ****         return I2C_NO_ERROR;
   40              		.loc 1 16 0
   41 0008 0023     		movs	r3, #0
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 2
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 2
 
 
   17:I2C_Interface.c ****     }
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
   29:I2C_Interface.c ****     {
   84              		.loc 1 29 0
   85              		.cfi_startproc
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 3
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 3
 
 
   86              		@ args = 0, pretend = 0, frame = 0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  130 0010 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
  131 0012 0021     		movs	r1, #0
  132 0014 1846     		mov	r0, r3
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 4
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 4
 
 
  133 0016 FFF7FEFF 		bl	I2C_Master_MasterSendStart
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  172 005e 02E0     		b	.L9
  173              	.L8:
   55:I2C_Interface.c ****                 }
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 5
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 5
 
 
   56:I2C_Interface.c ****             }
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  215 000e BB71     		strb	r3, [r7, #6]
  216 0010 1346     		mov	r3, r2	@ movhi
  217 0012 BB80     		strh	r3, [r7, #4]	@ movhi
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 6
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 6
 
 
   69:I2C_Interface.c ****         // Send start condition
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  256              	.L13:
   85:I2C_Interface.c ****                     {
   86:I2C_Interface.c ****                         data[register_count-counter] =
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 7
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 7
 
 
  257              		.loc 1 86 0
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  100:I2C_Interface.c ****         I2C_Master_MasterSendStop();
  296              		.loc 1 100 0
  297 0090 FFF7FEFF 		bl	I2C_Master_MasterSendStop
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 8
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 8
 
 
  101:I2C_Interface.c ****         // Return error code
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  342 0016 FFF7FEFF 		bl	I2C_Master_MasterSendStart
  343 001a 0346     		mov	r3, r0
  344 001c 7B73     		strb	r3, [r7, #13]
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 9
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 9
 
 
  111:I2C_Interface.c ****         if (error == I2C_Master_MSTR_NO_ERROR)
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  385 005a 0346     		mov	r3, r0
  386 005c 2370     		strb	r3, [r4]
  123:I2C_Interface.c ****             // Send stop condition and return no error
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 10
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 10
 
 
  124:I2C_Interface.c ****             I2C_Master_MasterSendStop();
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  430 0006 0346     		mov	r3, r0
  431 0008 FB71     		strb	r3, [r7, #7]
  135:I2C_Interface.c ****         // Send restart condition
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 11
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 11
 
 
  136:I2C_Interface.c ****         uint8_t error = I2C_Master_MasterSendStart(device_address, I2C_Master_READ_XFER_MODE);
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  475              		.cfi_offset 4, -12
  476              		.cfi_offset 7, -8
  477              		.cfi_offset 14, -4
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 12
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 12
 
 
  478 0002 85B0     		sub	sp, sp, #20
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  521              		.cfi_endproc
  522              	.LFE7:
  523              		.size	I2C_Peripheral_ReadBytes, .-I2C_Peripheral_ReadBytes
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 13
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 13
 
 
  524 003e 00BF     		.section	.text.I2C_Peripheral_WriteRegister,"ax",%progbits
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  168:I2C_Interface.c ****             if (error == I2C_Master_MSTR_NO_ERROR)
  567              		.loc 1 168 0
  568 0032 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 14
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 14
 
 
  569 0034 002B     		cmp	r3, #0
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  606              		.thumb
  607              		.thumb_func
  608              		.type	I2C_Peripheral_WriteRegisterNoData, %function
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 15
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 15
 
 
  609              	I2C_Peripheral_WriteRegisterNoData:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  649              		.loc 1 199 0
  650 0036 FFF7FEFF 		bl	I2C_Master_MasterSendStop
  200:I2C_Interface.c ****                 // Return with no error
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 16
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 16
 
 
  201:I2C_Interface.c ****                 return I2C_NO_ERROR;
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  690              		.cfi_def_cfa_register 7
  691 0006 3B60     		str	r3, [r7]
  692 0008 0346     		mov	r3, r0
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 17
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 17
 
 
  693 000a FB71     		strb	r3, [r7, #7]
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  734 004e 1846     		mov	r0, r3
  735 0050 FFF7FEFF 		bl	I2C_Master_MasterWriteByte
  736 0054 0346     		mov	r3, r0
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 18
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 18
 
 
  737 0056 BB73     		strb	r3, [r7, #14]
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  771 0082 1037     		adds	r7, r7, #16
  772              		.cfi_def_cfa_offset 8
  773 0084 BD46     		mov	sp, r7
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 19
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 19
 
 
  774              		.cfi_def_cfa_register 13
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  817 0024 00E0     		b	.L41
  818              	.L40:
  259:I2C_Interface.c ****         }
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 20
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 20
 
 
  260:I2C_Interface.c ****         else
@@ -1175,14 +1175,14 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  844 000c 22000000 		.4byte	.LASF35
  845 0010 0C       		.byte	0xc
  846 0011 BF000000 		.4byte	.LASF36
- 847 0015 CF000000 		.4byte	.LASF37
+ 847 0015 3C010000 		.4byte	.LASF37
  848 0019 00000000 		.4byte	.Ldebug_ranges0+0
  849 001d 00000000 		.4byte	0
  850 0021 00000000 		.4byte	.Ldebug_line0
  851 0025 02       		.uleb128 0x2
  852 0026 01       		.byte	0x1
  853 0027 06       		.byte	0x6
- 854 0028 27030000 		.4byte	.LASF0
+ 854 0028 1E030000 		.4byte	.LASF0
  855 002c 03       		.uleb128 0x3
  856 002d 18000000 		.4byte	.LASF3
  857 0031 02       		.byte	0x2
@@ -1191,14 +1191,14 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  860 0037 02       		.uleb128 0x2
  861 0038 01       		.byte	0x1
  862 0039 08       		.byte	0x8
- 863 003a 9B010000 		.4byte	.LASF1
+ 863 003a 92010000 		.4byte	.LASF1
  864 003e 02       		.uleb128 0x2
  865 003f 02       		.byte	0x2
  866 0040 05       		.byte	0x5
- 867 0041 F0020000 		.4byte	.LASF2
+ 867 0041 E7020000 		.4byte	.LASF2
  868 0045 03       		.uleb128 0x3
- 869 0046 10020000 		.4byte	.LASF4
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 21
+ 869 0046 07020000 		.4byte	.LASF4
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 21
 
 
  870 004a 02       		.byte	0x2
@@ -1207,23 +1207,23 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  873 0050 02       		.uleb128 0x2
  874 0051 02       		.byte	0x2
  875 0052 07       		.byte	0x7
- 876 0053 CB010000 		.4byte	.LASF5
+ 876 0053 C2010000 		.4byte	.LASF5
  877 0057 02       		.uleb128 0x2
  878 0058 04       		.byte	0x4
  879 0059 05       		.byte	0x5
- 880 005a 12030000 		.4byte	.LASF6
+ 880 005a 09030000 		.4byte	.LASF6
  881 005e 02       		.uleb128 0x2
  882 005f 04       		.byte	0x4
  883 0060 07       		.byte	0x7
- 884 0061 60020000 		.4byte	.LASF7
+ 884 0061 57020000 		.4byte	.LASF7
  885 0065 02       		.uleb128 0x2
  886 0066 08       		.byte	0x8
  887 0067 05       		.byte	0x5
- 888 0068 AD020000 		.4byte	.LASF8
+ 888 0068 A4020000 		.4byte	.LASF8
  889 006c 02       		.uleb128 0x2
  890 006d 08       		.byte	0x8
  891 006e 07       		.byte	0x7
- 892 006f 7F020000 		.4byte	.LASF9
+ 892 006f 76020000 		.4byte	.LASF9
  893 0073 04       		.uleb128 0x4
  894 0074 04       		.byte	0x4
  895 0075 05       		.byte	0x5
@@ -1231,42 +1231,42 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  897 007a 02       		.uleb128 0x2
  898 007b 04       		.byte	0x4
  899 007c 07       		.byte	0x7
- 900 007d 72020000 		.4byte	.LASF10
+ 900 007d 69020000 		.4byte	.LASF10
  901 0081 03       		.uleb128 0x3
- 902 0082 96020000 		.4byte	.LASF11
+ 902 0082 8D020000 		.4byte	.LASF11
  903 0086 03       		.byte	0x3
  904 0087 18       		.byte	0x18
  905 0088 2C000000 		.4byte	0x2c
  906 008c 03       		.uleb128 0x3
- 907 008d 09030000 		.4byte	.LASF12
+ 907 008d 00030000 		.4byte	.LASF12
  908 0091 03       		.byte	0x3
  909 0092 24       		.byte	0x24
  910 0093 45000000 		.4byte	0x45
  911 0097 02       		.uleb128 0x2
  912 0098 04       		.byte	0x4
  913 0099 04       		.byte	0x4
- 914 009a 90010000 		.4byte	.LASF13
+ 914 009a 87010000 		.4byte	.LASF13
  915 009e 02       		.uleb128 0x2
  916 009f 08       		.byte	0x8
  917 00a0 04       		.byte	0x4
- 918 00a1 1B020000 		.4byte	.LASF14
+ 918 00a1 12020000 		.4byte	.LASF14
  919 00a5 02       		.uleb128 0x2
  920 00a6 01       		.byte	0x1
  921 00a7 08       		.byte	0x8
- 922 00a8 BB020000 		.4byte	.LASF15
+ 922 00a8 B2020000 		.4byte	.LASF15
  923 00ac 02       		.uleb128 0x2
  924 00ad 08       		.byte	0x8
  925 00ae 04       		.byte	0x4
- 926 00af 1B030000 		.4byte	.LASF16
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 22
+ 926 00af 12030000 		.4byte	.LASF16
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 22
 
 
  927 00b3 02       		.uleb128 0x2
  928 00b4 04       		.byte	0x4
  929 00b5 07       		.byte	0x7
- 930 00b6 9E020000 		.4byte	.LASF17
+ 930 00b6 95020000 		.4byte	.LASF17
  931 00ba 05       		.uleb128 0x5
- 932 00bb 56030000 		.4byte	.LASF18
+ 932 00bb 4D030000 		.4byte	.LASF18
  933 00bf 01       		.byte	0x1
  934 00c0 0A       		.byte	0xa
  935 00c1 81000000 		.4byte	0x81
@@ -1275,7 +1275,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  938 00cd 01       		.uleb128 0x1
  939 00ce 9C       		.byte	0x9c
  940 00cf 05       		.uleb128 0x5
- 941 00d0 C0020000 		.4byte	.LASF19
+ 941 00d0 B7020000 		.4byte	.LASF19
  942 00d4 01       		.byte	0x1
  943 00d5 14       		.byte	0x14
  944 00d6 81000000 		.4byte	0x81
@@ -1293,7 +1293,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  956 00f7 01       		.uleb128 0x1
  957 00f8 9C       		.byte	0x9c
  958 00f9 06       		.uleb128 0x6
- 959 00fa D4020000 		.4byte	.LASF24
+ 959 00fa CB020000 		.4byte	.LASF24
  960 00fe 01       		.byte	0x1
  961 00ff 22       		.byte	0x22
  962 0100 81000000 		.4byte	0x81
@@ -1303,7 +1303,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  966 010d 9C       		.byte	0x9c
  967 010e 4B010000 		.4byte	0x14b
  968 0112 07       		.uleb128 0x7
- 969 0113 FA020000 		.4byte	.LASF21
+ 969 0113 F1020000 		.4byte	.LASF21
  970 0117 01       		.byte	0x1
  971 0118 22       		.byte	0x22
  972 0119 81000000 		.4byte	0x81
@@ -1311,18 +1311,18 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  974 011e 91       		.byte	0x91
  975 011f 6F       		.sleb128 -17
  976 0120 07       		.uleb128 0x7
- 977 0121 DE010000 		.4byte	.LASF22
+ 977 0121 D5010000 		.4byte	.LASF22
  978 0125 01       		.byte	0x1
  979 0126 23       		.byte	0x23
  980 0127 81000000 		.4byte	0x81
  981 012b 02       		.uleb128 0x2
  982 012c 91       		.byte	0x91
  983 012d 6E       		.sleb128 -18
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 23
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 23
 
 
  984 012e 07       		.uleb128 0x7
- 985 012f 96010000 		.4byte	.LASF23
+ 985 012f 8D010000 		.4byte	.LASF23
  986 0133 01       		.byte	0x1
  987 0134 24       		.byte	0x24
  988 0135 4B010000 		.4byte	0x14b
@@ -1330,7 +1330,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  990 013a 91       		.byte	0x91
  991 013b 68       		.sleb128 -24
  992 013c 08       		.uleb128 0x8
- 993 013d A7020000 		.4byte	.LASF27
+ 993 013d 9E020000 		.4byte	.LASF27
  994 0141 01       		.byte	0x1
  995 0142 27       		.byte	0x27
  996 0143 81000000 		.4byte	0x81
@@ -1342,7 +1342,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1002 014c 04       		.byte	0x4
  1003 014d 81000000 		.4byte	0x81
  1004 0151 06       		.uleb128 0x6
- 1005 0152 22020000 		.4byte	.LASF25
+ 1005 0152 19020000 		.4byte	.LASF25
  1006 0156 01       		.byte	0x1
  1007 0157 40       		.byte	0x40
  1008 0158 81000000 		.4byte	0x81
@@ -1352,7 +1352,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1012 0165 9C       		.byte	0x9c
  1013 0166 C9010000 		.4byte	0x1c9
  1014 016a 07       		.uleb128 0x7
- 1015 016b FA020000 		.4byte	.LASF21
+ 1015 016b F1020000 		.4byte	.LASF21
  1016 016f 01       		.byte	0x1
  1017 0170 40       		.byte	0x40
  1018 0171 81000000 		.4byte	0x81
@@ -1360,7 +1360,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1020 0176 91       		.byte	0x91
  1021 0177 67       		.sleb128 -25
  1022 0178 07       		.uleb128 0x7
- 1023 0179 DE010000 		.4byte	.LASF22
+ 1023 0179 D5010000 		.4byte	.LASF22
  1024 017d 01       		.byte	0x1
  1025 017e 41       		.byte	0x41
  1026 017f 81000000 		.4byte	0x81
@@ -1376,9 +1376,9 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1036 0192 91       		.byte	0x91
  1037 0193 64       		.sleb128 -28
  1038 0194 07       		.uleb128 0x7
- 1039 0195 96010000 		.4byte	.LASF23
+ 1039 0195 8D010000 		.4byte	.LASF23
  1040 0199 01       		.byte	0x1
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 24
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 24
 
 
  1041 019a 43       		.byte	0x43
@@ -1387,7 +1387,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1044 01a0 91       		.byte	0x91
  1045 01a1 60       		.sleb128 -32
  1046 01a2 08       		.uleb128 0x8
- 1047 01a3 A7020000 		.4byte	.LASF27
+ 1047 01a3 9E020000 		.4byte	.LASF27
  1048 01a7 01       		.byte	0x1
  1049 01a8 46       		.byte	0x46
  1050 01a9 81000000 		.4byte	0x81
@@ -1398,7 +1398,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1055 01b1 4E000000 		.4byte	.LBB2
  1056 01b5 42000000 		.4byte	.LBE2-.LBB2
  1057 01b9 08       		.uleb128 0x8
- 1058 01ba 08020000 		.4byte	.LASF28
+ 1058 01ba FF010000 		.4byte	.LASF28
  1059 01be 01       		.byte	0x1
  1060 01bf 53       		.byte	0x53
  1061 01c0 8C000000 		.4byte	0x8c
@@ -1408,7 +1408,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1065 01c7 00       		.byte	0
  1066 01c8 00       		.byte	0
  1067 01c9 06       		.uleb128 0x6
- 1068 01ca 23010000 		.4byte	.LASF29
+ 1068 01ca CF000000 		.4byte	.LASF29
  1069 01ce 01       		.byte	0x1
  1070 01cf 69       		.byte	0x69
  1071 01d0 81000000 		.4byte	0x81
@@ -1418,7 +1418,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1075 01dd 9C       		.byte	0x9c
  1076 01de 33020000 		.4byte	0x233
  1077 01e2 07       		.uleb128 0x7
- 1078 01e3 FA020000 		.4byte	.LASF21
+ 1078 01e3 F1020000 		.4byte	.LASF21
  1079 01e7 01       		.byte	0x1
  1080 01e8 69       		.byte	0x69
  1081 01e9 81000000 		.4byte	0x81
@@ -1434,18 +1434,18 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1091 01fc 91       		.byte	0x91
  1092 01fd 64       		.sleb128 -28
  1093 01fe 07       		.uleb128 0x7
- 1094 01ff 96010000 		.4byte	.LASF23
+ 1094 01ff 8D010000 		.4byte	.LASF23
  1095 0203 01       		.byte	0x1
  1096 0204 6B       		.byte	0x6b
  1097 0205 4B010000 		.4byte	0x14b
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 25
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 25
 
 
  1098 0209 02       		.uleb128 0x2
  1099 020a 91       		.byte	0x91
  1100 020b 60       		.sleb128 -32
  1101 020c 08       		.uleb128 0x8
- 1102 020d A7020000 		.4byte	.LASF27
+ 1102 020d 9E020000 		.4byte	.LASF27
  1103 0211 01       		.byte	0x1
  1104 0212 6E       		.byte	0x6e
  1105 0213 81000000 		.4byte	0x81
@@ -1456,7 +1456,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1110 021b 24000000 		.4byte	.LBB3
  1111 021f 42000000 		.4byte	.LBE3-.LBB3
  1112 0223 08       		.uleb128 0x8
- 1113 0224 08020000 		.4byte	.LASF28
+ 1113 0224 FF010000 		.4byte	.LASF28
  1114 0228 01       		.byte	0x1
  1115 0229 72       		.byte	0x72
  1116 022a 8C000000 		.4byte	0x8c
@@ -1466,7 +1466,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1120 0231 00       		.byte	0
  1121 0232 00       		.byte	0
  1122 0233 06       		.uleb128 0x6
- 1123 0234 6E010000 		.4byte	.LASF30
+ 1123 0234 1A010000 		.4byte	.LASF30
  1124 0238 01       		.byte	0x1
  1125 0239 85       		.byte	0x85
  1126 023a 81000000 		.4byte	0x81
@@ -1476,7 +1476,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1130 0247 9C       		.byte	0x9c
  1131 0248 69020000 		.4byte	0x269
  1132 024c 07       		.uleb128 0x7
- 1133 024d FA020000 		.4byte	.LASF21
+ 1133 024d F1020000 		.4byte	.LASF21
  1134 0251 01       		.byte	0x1
  1135 0252 85       		.byte	0x85
  1136 0253 81000000 		.4byte	0x81
@@ -1484,7 +1484,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1138 0258 91       		.byte	0x91
  1139 0259 6F       		.sleb128 -17
  1140 025a 08       		.uleb128 0x8
- 1141 025b A7020000 		.4byte	.LASF27
+ 1141 025b 9E020000 		.4byte	.LASF27
  1142 025f 01       		.byte	0x1
  1143 0260 88       		.byte	0x88
  1144 0261 81000000 		.4byte	0x81
@@ -1493,12 +1493,12 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1147 0267 77       		.sleb128 -9
  1148 0268 00       		.byte	0
  1149 0269 06       		.uleb128 0x6
- 1150 026a EF010000 		.4byte	.LASF31
+ 1150 026a E6010000 		.4byte	.LASF31
  1151 026e 01       		.byte	0x1
  1152 026f 91       		.byte	0x91
  1153 0270 81000000 		.4byte	0x81
  1154 0274 00000000 		.4byte	.LFB7
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 26
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 26
 
 
  1155 0278 3E000000 		.4byte	.LFE7-.LFB7
@@ -1506,7 +1506,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1157 027d 9C       		.byte	0x9c
  1158 027e AD020000 		.4byte	0x2ad
  1159 0282 07       		.uleb128 0x7
- 1160 0283 96010000 		.4byte	.LASF23
+ 1160 0283 8D010000 		.4byte	.LASF23
  1161 0287 01       		.byte	0x1
  1162 0288 91       		.byte	0x91
  1163 0289 4B010000 		.4byte	0x14b
@@ -1522,7 +1522,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1173 029c 91       		.byte	0x91
  1174 029d 63       		.sleb128 -29
  1175 029e 08       		.uleb128 0x8
- 1176 029f 08020000 		.4byte	.LASF28
+ 1176 029f FF010000 		.4byte	.LASF28
  1177 02a3 01       		.byte	0x1
  1178 02a4 94       		.byte	0x94
  1179 02a5 8C000000 		.4byte	0x8c
@@ -1531,7 +1531,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1182 02ab 6E       		.sleb128 -18
  1183 02ac 00       		.byte	0
  1184 02ad 06       		.uleb128 0x6
- 1185 02ae 43020000 		.4byte	.LASF32
+ 1185 02ae 3A020000 		.4byte	.LASF32
  1186 02b2 01       		.byte	0x1
  1187 02b3 9E       		.byte	0x9e
  1188 02b4 81000000 		.4byte	0x81
@@ -1541,7 +1541,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1192 02c1 9C       		.byte	0x9c
  1193 02c2 FF020000 		.4byte	0x2ff
  1194 02c6 07       		.uleb128 0x7
- 1195 02c7 FA020000 		.4byte	.LASF21
+ 1195 02c7 F1020000 		.4byte	.LASF21
  1196 02cb 01       		.byte	0x1
  1197 02cc 9E       		.byte	0x9e
  1198 02cd 81000000 		.4byte	0x81
@@ -1549,7 +1549,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1200 02d2 91       		.byte	0x91
  1201 02d3 6F       		.sleb128 -17
  1202 02d4 07       		.uleb128 0x7
- 1203 02d5 DE010000 		.4byte	.LASF22
+ 1203 02d5 D5010000 		.4byte	.LASF22
  1204 02d9 01       		.byte	0x1
  1205 02da 9F       		.byte	0x9f
  1206 02db 81000000 		.4byte	0x81
@@ -1557,8 +1557,8 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1208 02e0 91       		.byte	0x91
  1209 02e1 6E       		.sleb128 -18
  1210 02e2 07       		.uleb128 0x7
- 1211 02e3 96010000 		.4byte	.LASF23
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 27
+ 1211 02e3 8D010000 		.4byte	.LASF23
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 27
 
 
  1212 02e7 01       		.byte	0x1
@@ -1568,7 +1568,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1216 02ee 91       		.byte	0x91
  1217 02ef 6D       		.sleb128 -19
  1218 02f0 08       		.uleb128 0x8
- 1219 02f1 A7020000 		.4byte	.LASF27
+ 1219 02f1 9E020000 		.4byte	.LASF27
  1220 02f5 01       		.byte	0x1
  1221 02f6 A3       		.byte	0xa3
  1222 02f7 81000000 		.4byte	0x81
@@ -1577,7 +1577,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1225 02fd 77       		.sleb128 -9
  1226 02fe 00       		.byte	0
  1227 02ff 06       		.uleb128 0x6
- 1228 0300 33030000 		.4byte	.LASF33
+ 1228 0300 2A030000 		.4byte	.LASF33
  1229 0304 01       		.byte	0x1
  1230 0305 BB       		.byte	0xbb
  1231 0306 81000000 		.4byte	0x81
@@ -1587,7 +1587,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1235 0313 9C       		.byte	0x9c
  1236 0314 43030000 		.4byte	0x343
  1237 0318 07       		.uleb128 0x7
- 1238 0319 FA020000 		.4byte	.LASF21
+ 1238 0319 F1020000 		.4byte	.LASF21
  1239 031d 01       		.byte	0x1
  1240 031e BB       		.byte	0xbb
  1241 031f 81000000 		.4byte	0x81
@@ -1595,7 +1595,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1243 0324 91       		.byte	0x91
  1244 0325 6F       		.sleb128 -17
  1245 0326 07       		.uleb128 0x7
- 1246 0327 DE010000 		.4byte	.LASF22
+ 1246 0327 D5010000 		.4byte	.LASF22
  1247 032b 01       		.byte	0x1
  1248 032c BC       		.byte	0xbc
  1249 032d 81000000 		.4byte	0x81
@@ -1603,7 +1603,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1251 0332 91       		.byte	0x91
  1252 0333 6E       		.sleb128 -18
  1253 0334 08       		.uleb128 0x8
- 1254 0335 A7020000 		.4byte	.LASF27
+ 1254 0335 9E020000 		.4byte	.LASF27
  1255 0339 01       		.byte	0x1
  1256 033a BF       		.byte	0xbf
  1257 033b 81000000 		.4byte	0x81
@@ -1612,20 +1612,20 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1260 0341 77       		.sleb128 -9
  1261 0342 00       		.byte	0
  1262 0343 06       		.uleb128 0x6
- 1263 0344 A9010000 		.4byte	.LASF34
+ 1263 0344 A0010000 		.4byte	.LASF34
  1264 0348 01       		.byte	0x1
  1265 0349 D3       		.byte	0xd3
  1266 034a 81000000 		.4byte	0x81
  1267 034e 00000000 		.4byte	.LFB10
  1268 0352 88000000 		.4byte	.LFE10-.LFB10
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 28
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 28
 
 
  1269 0356 01       		.uleb128 0x1
  1270 0357 9C       		.byte	0x9c
  1271 0358 BB030000 		.4byte	0x3bb
  1272 035c 07       		.uleb128 0x7
- 1273 035d FA020000 		.4byte	.LASF21
+ 1273 035d F1020000 		.4byte	.LASF21
  1274 0361 01       		.byte	0x1
  1275 0362 D3       		.byte	0xd3
  1276 0363 81000000 		.4byte	0x81
@@ -1633,7 +1633,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1278 0368 91       		.byte	0x91
  1279 0369 6F       		.sleb128 -17
  1280 036a 07       		.uleb128 0x7
- 1281 036b DE010000 		.4byte	.LASF22
+ 1281 036b D5010000 		.4byte	.LASF22
  1282 036f 01       		.byte	0x1
  1283 0370 D4       		.byte	0xd4
  1284 0371 81000000 		.4byte	0x81
@@ -1649,7 +1649,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1294 0384 91       		.byte	0x91
  1295 0385 6D       		.sleb128 -19
  1296 0386 07       		.uleb128 0x7
- 1297 0387 96010000 		.4byte	.LASF23
+ 1297 0387 8D010000 		.4byte	.LASF23
  1298 038b 01       		.byte	0x1
  1299 038c D6       		.byte	0xd6
  1300 038d 4B010000 		.4byte	0x14b
@@ -1657,7 +1657,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1302 0392 91       		.byte	0x91
  1303 0393 68       		.sleb128 -24
  1304 0394 08       		.uleb128 0x8
- 1305 0395 A7020000 		.4byte	.LASF27
+ 1305 0395 9E020000 		.4byte	.LASF27
  1306 0399 01       		.byte	0x1
  1307 039a D9       		.byte	0xd9
  1308 039b 81000000 		.4byte	0x81
@@ -1668,7 +1668,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1313 03a3 3A000000 		.4byte	.LBB4
  1314 03a7 40000000 		.4byte	.LBE4-.LBB4
  1315 03ab 08       		.uleb128 0x8
- 1316 03ac 08020000 		.4byte	.LASF28
+ 1316 03ac FF010000 		.4byte	.LASF28
  1317 03b0 01       		.byte	0x1
  1318 03b1 E1       		.byte	0xe1
  1319 03b2 81000000 		.4byte	0x81
@@ -1678,10 +1678,10 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1323 03b9 00       		.byte	0
  1324 03ba 00       		.byte	0
  1325 03bb 0C       		.uleb128 0xc
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 29
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 29
 
 
- 1326 03bc 4D010000 		.4byte	.LASF38
+ 1326 03bc F9000000 		.4byte	.LASF38
  1327 03c0 01       		.byte	0x1
  1328 03c1 FA       		.byte	0xfa
  1329 03c2 81000000 		.4byte	0x81
@@ -1690,7 +1690,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1332 03ce 01       		.uleb128 0x1
  1333 03cf 9C       		.byte	0x9c
  1334 03d0 07       		.uleb128 0x7
- 1335 03d1 FA020000 		.4byte	.LASF21
+ 1335 03d1 F1020000 		.4byte	.LASF21
  1336 03d5 01       		.byte	0x1
  1337 03d6 FA       		.byte	0xfa
  1338 03d7 81000000 		.4byte	0x81
@@ -1698,7 +1698,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1340 03dc 91       		.byte	0x91
  1341 03dd 6F       		.sleb128 -17
  1342 03de 08       		.uleb128 0x8
- 1343 03df A7020000 		.4byte	.LASF27
+ 1343 03df 9E020000 		.4byte	.LASF27
  1344 03e3 01       		.byte	0x1
  1345 03e4 FD       		.byte	0xfd
  1346 03e5 81000000 		.4byte	0x81
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1380 001a 03       		.uleb128 0x3
  1381 001b 0E       		.uleb128 0xe
  1382 001c 00       		.byte	0
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 30
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 30
 
 
  1383 001d 00       		.byte	0
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1437 0054 19       		.uleb128 0x19
  1438 0055 03       		.uleb128 0x3
  1439 0056 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 31
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 31
 
 
  1440 0057 3A       		.uleb128 0x3a
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1494 008e 0B       		.uleb128 0xb
  1495 008f 49       		.uleb128 0x49
  1496 0090 13       		.uleb128 0x13
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 32
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 32
 
 
  1497 0091 00       		.byte	0
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1551 0004 0200     		.2byte	0x2
  1552 0006 00000000 		.4byte	.Ldebug_info0
  1553 000a 04       		.byte	0x4
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 33
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 33
 
 
  1554 000b 00       		.byte	0
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1608 005c 30000000 		.4byte	.LFE11
  1609 0060 00000000 		.4byte	0
  1610 0064 00000000 		.4byte	0
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 34
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 34
 
 
  1611              		.section	.debug_line,"",%progbits
@@ -2024,181 +2024,181 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 1
  1625      496E7465 
  1625      72666163 
  1625      652E6300 
- 1626              	.LASF37:
- 1627 00cf 433A5C55 		.ascii	"C:\\Users\\Perro\\Documents\\PSoC Creator\\Pulseoxi"
- 1627      73657273 
- 1627      5C506572 
- 1627      726F5C44 
- 1627      6F63756D 
- 1628 00fd 6D657465 		.ascii	"meter\\Project_LTEBS\\Saturimetro.cydsn\000"
- 1628      725C5072 
- 1628      6F6A6563 
- 1628      745F4C54 
- 1628      4542535C 
- 1629              	.LASF29:
- 1630 0123 4932435F 		.ascii	"I2C_Peripheral_ReadRegisterMultiNoAddress\000"
- 1630      50657269 
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 35
+ 1626              	.LASF29:
+ 1627 00cf 4932435F 		.ascii	"I2C_Peripheral_ReadRegisterMultiNoAddress\000"
+ 1627      50657269 
+ 1627      70686572 
+ 1627      616C5F52 
+ 1627      65616452 
+ 1628              	.LASF38:
+ 1629 00f9 4932435F 		.ascii	"I2C_Peripheral_IsDeviceConnected\000"
+ 1629      50657269 
+ 1629      70686572 
+ 1629      616C5F49 
+ 1629      73446576 
+ 1630              	.LASF30:
+ 1631 011a 4932435F 		.ascii	"I2C_Peripheral_StartReadNoAddress\000"
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 35
 
 
- 1630      70686572 
- 1630      616C5F52 
- 1630      65616452 
- 1631              	.LASF38:
- 1632 014d 4932435F 		.ascii	"I2C_Peripheral_IsDeviceConnected\000"
- 1632      50657269 
- 1632      70686572 
- 1632      616C5F49 
- 1632      73446576 
- 1633              	.LASF30:
- 1634 016e 4932435F 		.ascii	"I2C_Peripheral_StartReadNoAddress\000"
- 1634      50657269 
- 1634      70686572 
- 1634      616C5F53 
- 1634      74617274 
+ 1631      50657269 
+ 1631      70686572 
+ 1631      616C5F53 
+ 1631      74617274 
+ 1632              	.LASF37:
+ 1633 013c 433A5C55 		.ascii	"C:\\Users\\Perro\\Desktop\\AY2122_II_Project-1\\Pro"
+ 1633      73657273 
+ 1633      5C506572 
+ 1633      726F5C44 
+ 1633      65736B74 
+ 1634 016a 6A656374 		.ascii	"ject_LTEBS\\Saturimetro.cydsn\000"
+ 1634      5F4C5445 
+ 1634      42535C53 
+ 1634      61747572 
+ 1634      696D6574 
  1635              	.LASF13:
- 1636 0190 666C6F61 		.ascii	"float\000"
+ 1636 0187 666C6F61 		.ascii	"float\000"
  1636      7400
  1637              	.LASF23:
- 1638 0196 64617461 		.ascii	"data\000"
+ 1638 018d 64617461 		.ascii	"data\000"
  1638      00
  1639              	.LASF1:
- 1640 019b 756E7369 		.ascii	"unsigned char\000"
+ 1640 0192 756E7369 		.ascii	"unsigned char\000"
  1640      676E6564 
  1640      20636861 
  1640      7200
  1641              	.LASF34:
- 1642 01a9 4932435F 		.ascii	"I2C_Peripheral_WriteRegisterMulti\000"
+ 1642 01a0 4932435F 		.ascii	"I2C_Peripheral_WriteRegisterMulti\000"
  1642      50657269 
  1642      70686572 
  1642      616C5F57 
  1642      72697465 
  1643              	.LASF5:
- 1644 01cb 73686F72 		.ascii	"short unsigned int\000"
+ 1644 01c2 73686F72 		.ascii	"short unsigned int\000"
  1644      7420756E 
  1644      7369676E 
  1644      65642069 
  1644      6E7400
  1645              	.LASF22:
- 1646 01de 72656769 		.ascii	"register_address\000"
+ 1646 01d5 72656769 		.ascii	"register_address\000"
  1646      73746572 
  1646      5F616464 
  1646      72657373 
  1646      00
  1647              	.LASF31:
- 1648 01ef 4932435F 		.ascii	"I2C_Peripheral_ReadBytes\000"
+ 1648 01e6 4932435F 		.ascii	"I2C_Peripheral_ReadBytes\000"
  1648      50657269 
  1648      70686572 
  1648      616C5F52 
  1648      65616442 
  1649              	.LASF28:
- 1650 0208 636F756E 		.ascii	"counter\000"
+ 1650 01ff 636F756E 		.ascii	"counter\000"
  1650      74657200 
  1651              	.LASF4:
- 1652 0210 5F5F7569 		.ascii	"__uint16_t\000"
+ 1652 0207 5F5F7569 		.ascii	"__uint16_t\000"
  1652      6E743136 
  1652      5F7400
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 36
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 36
 
 
  1653              	.LASF14:
- 1654 021b 646F7562 		.ascii	"double\000"
+ 1654 0212 646F7562 		.ascii	"double\000"
  1654      6C6500
  1655              	.LASF25:
- 1656 0222 4932435F 		.ascii	"I2C_Peripheral_ReadRegisterMulti\000"
+ 1656 0219 4932435F 		.ascii	"I2C_Peripheral_ReadRegisterMulti\000"
  1656      50657269 
  1656      70686572 
  1656      616C5F52 
  1656      65616452 
  1657              	.LASF32:
- 1658 0243 4932435F 		.ascii	"I2C_Peripheral_WriteRegister\000"
+ 1658 023a 4932435F 		.ascii	"I2C_Peripheral_WriteRegister\000"
  1658      50657269 
  1658      70686572 
  1658      616C5F57 
  1658      72697465 
  1659              	.LASF7:
- 1660 0260 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1660 0257 6C6F6E67 		.ascii	"long unsigned int\000"
  1660      20756E73 
  1660      69676E65 
  1660      6420696E 
  1660      7400
  1661              	.LASF10:
- 1662 0272 756E7369 		.ascii	"unsigned int\000"
+ 1662 0269 756E7369 		.ascii	"unsigned int\000"
  1662      676E6564 
  1662      20696E74 
  1662      00
  1663              	.LASF9:
- 1664 027f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1664 0276 6C6F6E67 		.ascii	"long long unsigned int\000"
  1664      206C6F6E 
  1664      6720756E 
  1664      7369676E 
  1664      65642069 
  1665              	.LASF11:
- 1666 0296 75696E74 		.ascii	"uint8_t\000"
+ 1666 028d 75696E74 		.ascii	"uint8_t\000"
  1666      385F7400 
  1667              	.LASF17:
- 1668 029e 73697A65 		.ascii	"sizetype\000"
+ 1668 0295 73697A65 		.ascii	"sizetype\000"
  1668      74797065 
  1668      00
  1669              	.LASF27:
- 1670 02a7 6572726F 		.ascii	"error\000"
+ 1670 029e 6572726F 		.ascii	"error\000"
  1670      7200
  1671              	.LASF8:
- 1672 02ad 6C6F6E67 		.ascii	"long long int\000"
+ 1672 02a4 6C6F6E67 		.ascii	"long long int\000"
  1672      206C6F6E 
  1672      6720696E 
  1672      7400
  1673              	.LASF15:
- 1674 02bb 63686172 		.ascii	"char\000"
+ 1674 02b2 63686172 		.ascii	"char\000"
  1674      00
  1675              	.LASF19:
- 1676 02c0 4932435F 		.ascii	"I2C_Peripheral_Stop\000"
+ 1676 02b7 4932435F 		.ascii	"I2C_Peripheral_Stop\000"
  1676      50657269 
  1676      70686572 
  1676      616C5F53 
  1676      746F7000 
  1677              	.LASF24:
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccJuLEqk.s 			page 37
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccUeHQQ0.s 			page 37
 
 
- 1678 02d4 4932435F 		.ascii	"I2C_Peripheral_ReadRegister\000"
+ 1678 02cb 4932435F 		.ascii	"I2C_Peripheral_ReadRegister\000"
  1678      50657269 
  1678      70686572 
  1678      616C5F52 
  1678      65616452 
  1679              	.LASF2:
- 1680 02f0 73686F72 		.ascii	"short int\000"
+ 1680 02e7 73686F72 		.ascii	"short int\000"
  1680      7420696E 
  1680      7400
  1681              	.LASF21:
- 1682 02fa 64657669 		.ascii	"device_address\000"
+ 1682 02f1 64657669 		.ascii	"device_address\000"
  1682      63655F61 
  1682      64647265 
  1682      737300
  1683              	.LASF12:
- 1684 0309 75696E74 		.ascii	"uint16_t\000"
+ 1684 0300 75696E74 		.ascii	"uint16_t\000"
  1684      31365F74 
  1684      00
  1685              	.LASF6:
- 1686 0312 6C6F6E67 		.ascii	"long int\000"
+ 1686 0309 6C6F6E67 		.ascii	"long int\000"
  1686      20696E74 
  1686      00
  1687              	.LASF16:
- 1688 031b 6C6F6E67 		.ascii	"long double\000"
+ 1688 0312 6C6F6E67 		.ascii	"long double\000"
  1688      20646F75 
  1688      626C6500 
  1689              	.LASF0:
- 1690 0327 7369676E 		.ascii	"signed char\000"
+ 1690 031e 7369676E 		.ascii	"signed char\000"
  1690      65642063 
  1690      68617200 
  1691              	.LASF33:
- 1692 0333 4932435F 		.ascii	"I2C_Peripheral_WriteRegisterNoData\000"
+ 1692 032a 4932435F 		.ascii	"I2C_Peripheral_WriteRegisterNoData\000"
  1692      50657269 
  1692      70686572 
  1692      616C5F57 
  1692      72697465 
  1693              	.LASF18:
- 1694 0356 4932435F 		.ascii	"I2C_Peripheral_Start\000"
+ 1694 034d 4932435F 		.ascii	"I2C_Peripheral_Start\000"
  1694      50657269 
  1694      70686572 
  1694      616C5F53 

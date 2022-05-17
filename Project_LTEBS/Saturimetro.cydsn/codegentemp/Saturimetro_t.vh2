@@ -1,5 +1,5 @@
--- Project:   C:\Users\Perro\Documents\PSoC Creator\Pulseoximeter\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cyprj
--- Generated: 05/11/2022 10:04:09
+-- Project:   C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cyprj
+-- Generated: 05/17/2022 12:06:10
 -- PSoC Creator  4.4
 
 ENTITY Saturimetro IS

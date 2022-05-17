@@ -792,5 +792,9 @@ uint8_t MAX30105_available(void)
   return (samples_FIFO);
 }
 
+uint32_t getIR(void)
+{
+  return (data.IR[data.head]);
+}
 
 /* [] END OF FILE */

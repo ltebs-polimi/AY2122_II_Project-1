@@ -572,7 +572,7 @@
 
       uint32_t getFIFORed(MAX30101_Data* data); //Returns the FIFO sample pointed to by tail
       uint32_t getFIFOIR(MAX30101_Data* data); //Returns the FIFO sample pointed to by tail
-    
+    uint32_t getIR(void); //Returns immediate IR value
     
 #endif
 /* [] END OF FILE */

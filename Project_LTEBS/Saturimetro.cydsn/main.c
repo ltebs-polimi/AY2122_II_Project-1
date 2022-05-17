@@ -13,6 +13,7 @@
 #include "stdio.h"
 #include "I2C_Interface.h"
 #include "SpO2.h"
+#include "HeartRate.h"
 #include "algorithm.h"
 
 #define UART_DEBUG
@@ -54,6 +55,13 @@ int main(void)
     int num_samples;
     int j=0;
     int FIFO_max_size = 25;
+    const uint8_t RATE_SIZE = 4; //Increase this for more averaging. 4 is good.
+    uint8_t rates[RATE_SIZE]; //Array of heart rates
+    uint8_t rateSpot = 0;
+    long lastBeat = 0; //Time at which the last beat occurred
+
+    float beatsPerMinute;
+    int beatAvg;
     
     // Initialization
     MAX30101_Start();
@@ -143,7 +151,29 @@ int main(void)
     for(;;)
     {
         if (flag_temp == 1)
-        {
+        {   
+            long irValue = getIR();
+
+              if (checkForBeat(irValue) == true)
+              {
+                //We sensed a beat!
+                long delta = millis() - lastBeat;
+                lastBeat = millis();
+
+                beatsPerMinute = 60 / (delta / 1000.0);
+
+                if (beatsPerMinute < 255 && beatsPerMinute > 20)
+                {
+                  rates[rateSpot++] = (uint8_t)beatsPerMinute; //Store this reading in the array
+                  rateSpot %= RATE_SIZE; //Wrap variable
+
+                  //Take average of readings
+                  beatAvg = 0;
+                  for (uint8_t x = 0 ; x < RATE_SIZE ; x++)
+                    beatAvg += rates[x];
+                  beatAvg /= RATE_SIZE;
+                }
+              }
             MAX30101_IsFIFOAFull(&flag);
             if (flag > 0)
             {   

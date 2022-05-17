@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQvRVMe.s 			page 1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccfDoCyr.s 			page 1
 
 
    1              		.syntax unified
@@ -24,31 +24,31 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccQvRVMe.s 			page 1
   21              	.Ldebug_line0:
   22              		.section	.debug_str,"MS",%progbits,1
   23              	.LASF0:
-  24 0000 433A5C55 		.ascii	"C:\\Users\\Perro\\Documents\\PSoC Creator\\Pulseoxi"
-  24      73657273 
-  24      5C506572 
-  24      726F5C44 
-  24      6F63756D 
-  25 002e 6D657465 		.ascii	"meter\\Project_LTEBS\\Saturimetro.cydsn\000"
-  25      725C5072 
-  25      6F6A6563 
-  25      745F4C54 
-  25      4542535C 
-  26              	.LASF1:
-  27 0054 53704F32 		.ascii	"SpO2.c\000"
-  27      2E6300
+  24 0000 53704F32 		.ascii	"SpO2.c\000"
+  24      2E6300
+  25              	.LASF1:
+  26 0007 433A5C55 		.ascii	"C:\\Users\\Perro\\Desktop\\AY2122_II_Project-1\\Pro"
+  26      73657273 
+  26      5C506572 
+  26      726F5C44 
+  26      65736B74 
+  27 0035 6A656374 		.ascii	"ject_LTEBS\\Saturimetro.cydsn\000"
+  27      5F4C5445 
+  27      42535C53 
+  27      61747572 
+  27      696D6574 
   28              	.LASF2:
-  29 005b 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+  29 0052 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
   29      43313120 
   29      352E342E 
   29      31203230 
   29      31363036 
-  30 008e 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+  30 0085 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
   30      20726576 
   30      6973696F 
   30      6E203233 
   30      37373135 
-  31 00c1 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+  31 00b8 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
   31      66756E63 
   31      74696F6E 
   31      2D736563 
