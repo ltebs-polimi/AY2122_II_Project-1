@@ -13,8 +13,6 @@
 #include "stdio.h"
 #include "I2C_Interface.h"
 #include "SpO2.h"
-#include "HeartRate.h"
-#include "algorithm.h"
 
 #define UART_DEBUG
 
@@ -49,9 +47,9 @@ int main(void)
     int8_t validSPO2; //indicator to show if the SPO2 calculation is valid
     int32_t heartRate; //heart rate value
     int8_t validHeartRate; //indicator to show if the heart rate calculation is valid
-    uint32_t irBuffer[250]; //infrared LED sensor data
-    uint32_t redBuffer[250];  //red LED sensor data
-    int32_t bufferLength = 250;
+    uint32_t irBuffer[200]; //infrared LED sensor data
+    uint32_t redBuffer[200];  //red LED sensor data
+    int32_t bufferLength = 200;
     int num_samples;
     int j=0;
     int FIFO_max_size = 25;
@@ -128,7 +126,7 @@ int main(void)
         MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
         
         // Set Sample Rate
-        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_100);
+        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_50);
         
         // Set mode
         MAX30101_SetMode(MAX30101_SPO2_MODE);
@@ -152,7 +150,7 @@ int main(void)
     {
         if (flag_temp == 1)
         {   
-            long irValue = getIR();
+            /*long irValue = getIR();
 
               if (checkForBeat(irValue) == true)
               {
@@ -173,7 +171,8 @@ int main(void)
                     beatAvg += rates[x];
                   beatAvg /= RATE_SIZE;
                 }
-              }
+              }*/
+            
             MAX30101_IsFIFOAFull(&flag);
             if (flag > 0)
             {   
@@ -192,10 +191,10 @@ int main(void)
                 //sprintf(msg, "%d\r\n", samples);
                 //debug_print(msg);
                 for (int i=0;i<num_samples;i++){
-                    /*sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
+                    sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
                     debug_print(msg);
                     sprintf(msg, "ir: %lu\r", data.IR[data.tail+i]);
-                    debug_print(msg);*/
+                    debug_print(msg);
                     //data.tail++;
                     redBuffer[j] = data.red[data.tail+i];
                     irBuffer[j] = data.IR[data.tail+i];

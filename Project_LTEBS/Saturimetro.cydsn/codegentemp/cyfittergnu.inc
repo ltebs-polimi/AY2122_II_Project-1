@@ -151,6 +151,16 @@
 .set SDA_1__SIO_REG_HIFREQ, CYREG_PRT12_SIO_REG_HIFREQ
 .set SDA_1__SLW, CYREG_PRT12_SLW
 
+/* isr_1 */
+.set isr_1__INTC_CLR_EN_REG, CYREG_NVIC_CLRENA0
+.set isr_1__INTC_CLR_PD_REG, CYREG_NVIC_CLRPEND0
+.set isr_1__INTC_MASK, 0x20000
+.set isr_1__INTC_NUMBER, 17
+.set isr_1__INTC_PRIOR_NUM, 7
+.set isr_1__INTC_PRIOR_REG, CYREG_NVIC_PRI_17
+.set isr_1__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
+.set isr_1__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0
+
 /* I2C_Master */
 .set I2C_Master_I2C_FF__ADR, CYREG_I2C_ADR
 .set I2C_Master_I2C_FF__CFG, CYREG_I2C_CFG
@@ -284,6 +294,17 @@
 .set UART_Debug_IntClock__PM_STBY_CFG, CYREG_PM_STBY_CFG2
 .set UART_Debug_IntClock__PM_STBY_MSK, 0x01
 
+/* timer_clock */
+.set timer_clock__CFG0, CYREG_CLKDIST_DCFG1_CFG0
+.set timer_clock__CFG1, CYREG_CLKDIST_DCFG1_CFG1
+.set timer_clock__CFG2, CYREG_CLKDIST_DCFG1_CFG2
+.set timer_clock__CFG2_SRC_SEL_MASK, 0x07
+.set timer_clock__INDEX, 0x01
+.set timer_clock__PM_ACT_CFG, CYREG_PM_ACT_CFG2
+.set timer_clock__PM_ACT_MSK, 0x02
+.set timer_clock__PM_STBY_CFG, CYREG_PM_STBY_CFG2
+.set timer_clock__PM_STBY_MSK, 0x02
+
 /* MAX30101_INT */
 .set MAX30101_INT__0__INTTYPE, CYREG_PICU12_INTTYPE4
 .set MAX30101_INT__0__MASK, 0x10
@@ -328,6 +349,24 @@
 .set isr_MAX30101__INTC_PRIOR_REG, CYREG_NVIC_PRI_11
 .set isr_MAX30101__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
 .set isr_MAX30101__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0
+
+/* Timer_TimerHW */
+.set Timer_TimerHW__CAP0, CYREG_TMR0_CAP0
+.set Timer_TimerHW__CAP1, CYREG_TMR0_CAP1
+.set Timer_TimerHW__CFG0, CYREG_TMR0_CFG0
+.set Timer_TimerHW__CFG1, CYREG_TMR0_CFG1
+.set Timer_TimerHW__CFG2, CYREG_TMR0_CFG2
+.set Timer_TimerHW__CNT_CMP0, CYREG_TMR0_CNT_CMP0
+.set Timer_TimerHW__CNT_CMP1, CYREG_TMR0_CNT_CMP1
+.set Timer_TimerHW__PER0, CYREG_TMR0_PER0
+.set Timer_TimerHW__PER1, CYREG_TMR0_PER1
+.set Timer_TimerHW__PM_ACT_CFG, CYREG_PM_ACT_CFG3
+.set Timer_TimerHW__PM_ACT_MSK, 0x01
+.set Timer_TimerHW__PM_STBY_CFG, CYREG_PM_STBY_CFG3
+.set Timer_TimerHW__PM_STBY_MSK, 0x01
+.set Timer_TimerHW__RT0, CYREG_TMR0_RT0
+.set Timer_TimerHW__RT1, CYREG_TMR0_RT1
+.set Timer_TimerHW__SR0, CYREG_TMR0_SR0
 
 /* Connection_LED */
 .set Connection_LED__0__INTTYPE, CYREG_PICU2_INTTYPE1

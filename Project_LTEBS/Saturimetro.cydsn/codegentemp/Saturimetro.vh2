@@ -2,7 +2,7 @@
 --	Conversion of Saturimetro.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Tue May 17 12:06:06 2022
+--	Wed May 18 16:23:16 2022
 --
 
 USE cypress.cypress.all;
@@ -406,6 +406,16 @@ SIGNAL tmpOE__MAX30101_INT_net_0 : bit;
 SIGNAL Net_26 : bit;
 SIGNAL tmpIO_0__MAX30101_INT_net_0 : bit;
 TERMINAL tmpSIOVREF__MAX30101_INT_net_0 : bit;
+SIGNAL Net_27 : bit;
+SIGNAL Net_29 : bit;
+SIGNAL \Timer:Net_260\ : bit;
+SIGNAL \Timer:Net_266\ : bit;
+SIGNAL \Timer:Net_51\ : bit;
+SIGNAL \Timer:Net_261\ : bit;
+SIGNAL \Timer:Net_57\ : bit;
+SIGNAL Net_33 : bit;
+SIGNAL Net_34 : bit;
+SIGNAL \Timer:Net_102\ : bit;
 SIGNAL \UART_Debug:BUART:reset_reg\\D\ : bit;
 SIGNAL \UART_Debug:BUART:txn\\D\ : bit;
 SIGNAL \UART_Debug:BUART:tx_state_1\\D\ : bit;
@@ -1311,6 +1321,30 @@ MAX30101_INT:cy_psoc3_pins_v1_10
 		out_clock_en=>tmpOE__SDA_1_net_0,
 		out_reset=>zero,
 		interrupt=>Net_38);
+timer_clock:cy_clock_v1_0
+	GENERIC MAP(cy_registers=>"",
+		id=>"c0fb34bd-1044-4931-9788-16b01ce89812",
+		source_clock_id=>"",
+		divisor=>0,
+		period=>"1000000000000",
+		is_direct=>'0',
+		is_digital=>'1')
+	PORT MAP(clock_out=>Net_27,
+		dig_domain_out=>open);
+\Timer:TimerHW\:cy_psoc3_timer_v1_0
+	GENERIC MAP(cy_registers=>"")
+	PORT MAP(clock=>Net_27,
+		kill=>zero,
+		enable=>tmpOE__SDA_1_net_0,
+		capture=>zero,
+		timer_reset=>zero,
+		tc=>\Timer:Net_51\,
+		compare=>\Timer:Net_261\,
+		interrupt=>Net_33);
+isr_1:cy_isr_v1_0
+	GENERIC MAP(int_type=>"10",
+		is_nmi=>'0')
+	PORT MAP(int_signal=>Net_33);
 \UART_Debug:BUART:reset_reg\:cy_dff
 	PORT MAP(d=>zero,
 		clk=>\UART_Debug:BUART:clock_op\,
