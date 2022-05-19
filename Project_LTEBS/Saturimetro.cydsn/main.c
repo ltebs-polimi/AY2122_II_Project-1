@@ -13,6 +13,8 @@
 #include "stdio.h"
 #include "I2C_Interface.h"
 #include "SpO2.h"
+#include "isr.h"
+#include "HeartRate.h"
 
 #define UART_DEBUG
 
@@ -29,8 +31,7 @@
 #define debug_print(msg) do { if (DEBUG_TEST) UART_Debug_PutString(msg);} while (0)
 
 CY_ISR_PROTO(MAX30101_ISR);
-    Timer_Init();
-    isr_1_StartEx(Count);
+
 
 uint8_t flag_temp = 0;
 uint8_t flag_1s = 0;
@@ -39,6 +40,8 @@ extern uint8 count;
 int main(void)
 {
     // Variables
+    
+    
     MAX30101_Data data;
     data.head = 0;
     data.tail = 0;
@@ -67,6 +70,7 @@ int main(void)
     // Initialization
     MAX30101_Start();
     UART_Debug_Start();
+    Timer_Start();
 
     CyDelay(100);
     
@@ -111,12 +115,12 @@ int main(void)
         MAX30101_EnableFIFORollover();
         
         // 8 samples averaged
-        MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_2);
+        MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_4);
         
         // Set LED Power level
-        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x05);
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x1F);
         
-        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x05);
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x1F);
         
         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_3, 0x1F);
         
@@ -126,10 +130,10 @@ int main(void)
         MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_2048);
         
         // Pulse width
-        MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
+        MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_69); //PW di 69 non funziona con una pulse amplitude bassa (ad esempio 0x05 o 0x0A) ma funziona con 0x1A o 0x1F, PW più alte non danno questi problemi
         
         // Set Sample Rate
-        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_50);
+        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_200);
         
         // Set mode
         MAX30101_SetMode(MAX30101_SPO2_MODE);
@@ -144,6 +148,7 @@ int main(void)
     debug_print("\r\n\r\n");
     
     isr_MAX30101_StartEx(MAX30101_ISR);
+    isr_1_StartEx(Count);
     // Clear FIFO
     MAX30101_ClearFIFO();
     
@@ -153,7 +158,6 @@ int main(void)
     {
         if (flag_temp == 1)
         {   
-            
             
             MAX30101_IsFIFOAFull(&flag);
             if (flag > 0)
@@ -165,38 +169,61 @@ int main(void)
                 if (num_samples <= 0) 
                     num_samples += 32; //Wrap condition
                 // Print out number of samples
-                sprintf(msg, "%d\r\n", num_samples);
-                debug_print(msg);
+                //sprintf(msg, "%d\r\n", num_samples);
+                //debug_print(msg);
                 // Read FIFO
                 MAX30101_ReadFIFO(num_samples, active_leds, &data, j);
                 //int samples = data.head - data.tail;
                 //sprintf(msg, "%d\r\n", samples);
                 //debug_print(msg);
                 for (int i=0;i<num_samples;i++){
-                    sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
+                    /*sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
                     debug_print(msg);
                     sprintf(msg, "ir: %lu\r", data.IR[data.tail+i]);
-                    debug_print(msg);
+                    debug_print(msg);*/
                     //data.tail++;
                     redBuffer[j] = data.red[data.tail+i];
                     irBuffer[j] = data.IR[data.tail+i];
                     j++;
-                    sprintf(msg, "number of samples taken: %d\r", j);
-                    debug_print(msg);
-                    /*if(flag_1s) {
-                        sprintf(msg, "spo2: %ld\r", spo2);
-                        debug_print(msg);
-                        sprintf(msg, "validspo2: %d\r", validSPO2);
-                        debug_print(msg);
-                        sprintf(msg, "HR: %ld\r", heartRate);
-                        debug_print(msg);
-                        sprintf(msg, "validHR: %d\r\n", validHeartRate);
-                        debug_print(msg);   
-                        flag_1s = 0;
-                    }*/
+                    //sprintf(msg, "number of samples taken: %d\r", j);
+                    //debug_print(msg);
                 }
                 //data.tail = 0;
                 //data.head = 0;
+                uint32_t irValue = getIR(&data);
+
+                if (checkForBeat(irValue) == true)
+                {
+                    //We sensed a beat!
+                    //ogni ms incremento la variabile di 1.
+                    long delta = count - lastBeat;
+                    lastBeat = count;
+
+                    beatsPerMinute = 60 / (delta / 1000.0);
+
+                    if (beatsPerMinute < 255 && beatsPerMinute > 20)
+                    {
+                        rates[rateSpot++] = beatsPerMinute; //Store this reading in the array
+                        rateSpot %= RATE_SIZE; //Wrap variable
+
+                        //Take average of readings
+                        beatAvg = 0;
+                        for ( x = 0 ; x < RATE_SIZE ; x++)
+                            beatAvg += rates[x];
+                        beatAvg /= RATE_SIZE;
+                    }
+                }
+
+                sprintf(msg, "IR=%lu\r", irValue);
+                debug_print(msg);
+                sprintf(msg, "BPM=%u\r", beatsPerMinute);
+                debug_print(msg);
+                sprintf(msg, "Avg BPM=%u\r\n", beatAvg);
+                debug_print(msg);
+                  
+
+                if (irValue < 1000)
+                    debug_print("no finger\r\n");
             }
             flag_temp = 0;
             if(j>=bufferLength) {
@@ -211,10 +238,10 @@ int main(void)
                 debug_print(msg);
                 sprintf(msg, "validspo2: %d\r", validSPO2);
                 debug_print(msg);
-                sprintf(msg, "HR: %ld\r", heartRate);
+                /*sprintf(msg, "HR: %ld\r", heartRate);
                 debug_print(msg);
                 sprintf(msg, "validHR: %d\r\n", validHeartRate);
-                debug_print(msg); 
+                debug_print(msg);*/ 
             }
         }
     }

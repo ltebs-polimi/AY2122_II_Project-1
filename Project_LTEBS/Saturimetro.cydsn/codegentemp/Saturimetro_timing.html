@@ -539,7 +539,7 @@ function getElementsByClass(rootNode, elemName, className)
 <tr> <td class="prop"> Project :</td>
 <td class="proptext"> Saturimetro</td></tr>
 <tr> <td class="prop"> Build Time :</td>
-<td class="proptext"> 05/18/22 18:10:28</td></tr>
+<td class="proptext"> 05/19/22 10:58:18</td></tr>
 <tr> <td class="prop"> Device :</td>
 <td class="proptext"> CY8C5888LTQ-LP097</td></tr>
 <tr> <td class="prop"> Temperature :</td>
@@ -1284,9 +1284,9 @@ Destination Clock : UART_Debug_IntClock : Positive edge(Required Frequency 923.0
 <tr> 
  <td class = "text_info">\UART_Debug:BUART:pollcount_0\/q</td>
  <td class = "text_info">\UART_Debug:BUART:sRX:RxShifter:u0\/route_si</td>
- <td class = "number">56.536&nbsp;MHz</td>
- <td class = "number">17.688</td>
- <td class = "number">1065.645</td>
+ <td class = "number">55.791&nbsp;MHz</td>
+ <td class = "number">17.924</td>
+ <td class = "number">1065.409</td>
  <td class = "text_info"></td>
 </tr>
 <tr class="sta_path">
@@ -1320,7 +1320,7 @@ Destination Clock : UART_Debug_IntClock : Positive edge(Required Frequency 923.0
  <td class = "text_info">\UART_Debug:BUART:pollcount_0\</td>
  <td class = "text_info">\UART_Debug:BUART:pollcount_0\/q</td>
  <td class = "text_info">\UART_Debug:BUART:rx_postpoll\/main_2</td>
- <td class = "number">7.309</td>
+ <td class = "number">7.545</td>
 </tr>
 <tr> 
  <td class = "text_info">macrocell6</td>
@@ -3161,78 +3161,9 @@ ClockBlock/clk_bus_glb_ff</span>
 </thead> 
 <tbody>
 <tr> 
- <td class = "text_info">\I2C_Master:I2C_FF\/scl_out</td>
- <td class = "text_info">SCL_1(0)_PAD:out</td>
- <td class = "number">24.742</td>
-</tr>
-<tr class="sta_path">
-<td class="sta_path"  colspan="3">
-<table class="sta_path">
- <thead> 
-<tr> 
-<th>Type</th>
-<th>Location</th>
-<th>Fanout</th>
-<th>Instance/Net</th>
-<th>Source</th>
-<th>Dest</th>
-<th>Delay (ns)</th>
-</tr>
-</thead> 
-<tbody>
-<tr> 
- <td class = "text_info">i2ccell</td>
- <td class = "text_info">F(I2C,0)</td>
- <td class = "number">1</td>
- <td class = "text_info">\I2C_Master:I2C_FF\</td>
- <td class = "text_info">\I2C_Master:I2C_FF\/clock</td>
- <td class = "text_info">\I2C_Master:I2C_FF\/scl_out</td>
- <td class = "number">1.000</td>
-</tr>
-<tr> 
- <td class = "text_info">Route</td>
- <td class = "text_info"></td>
- <td class = "number">1</td>
- <td class = "text_info">\I2C_Master:Net_643_0\</td>
- <td class = "text_info">\I2C_Master:I2C_FF\/scl_out</td>
- <td class = "text_info">SCL_1(0)/pin_input</td>
- <td class = "number">7.887</td>
-</tr>
-<tr> 
- <td class = "text_info">iocell2</td>
- <td class = "text_info">P12[0]</td>
- <td class = "number">1</td>
- <td class = "text_info">SCL_1(0)</td>
- <td class = "text_info">SCL_1(0)/pin_input</td>
- <td class = "text_info">SCL_1(0)/pad_out</td>
- <td class = "number">15.855</td>
-</tr>
-<tr> 
- <td class = "text_info">Route</td>
- <td class = "text_info"></td>
- <td class = "number">1</td>
- <td class = "text_info">SCL_1(0)_PAD</td>
- <td class = "text_info">SCL_1(0)/pad_out</td>
- <td class = "text_info">SCL_1(0)_PAD:out</td>
- <td class = "number">0.000</td>
-</tr>
-<tr> 
- <td class = "text_info">Clock</td>
- <td class = "text_info"> </td>
- <td class = "text_info"></td>
- <td class = "text_info"></td>
- <td class = "text_info"></td>
- <td class = "text_info">Clock path delay</td>
- <td class = "number">0.000</td>
-</tr>
-</tbody>
- </table> 
-</td>
-</tr>
-<tr> 
  <td class = "text_info">\I2C_Master:I2C_FF\/sda_out</td>
  <td class = "text_info">SDA_1(0)_PAD:out</td>
- <td class = "number">24.498</td>
+ <td class = "number">24.740</td>
 </tr>
 <tr class="sta_path">
 <td class="sta_path"  colspan="3">
@@ -3265,7 +3196,7 @@ ClockBlock/clk_bus_glb_ff</span>
  <td class = "text_info">\I2C_Master:sda_x_wire\</td>
  <td class = "text_info">\I2C_Master:I2C_FF\/sda_out</td>
  <td class = "text_info">SDA_1(0)/pin_input</td>
- <td class = "number">7.565</td>
+ <td class = "number">7.807</td>
 </tr>
 <tr> 
  <td class = "text_info">iocell1</td>
@@ -3283,6 +3214,75 @@ ClockBlock/clk_bus_glb_ff</span>
  <td class = "text_info">SDA_1(0)_PAD</td>
  <td class = "text_info">SDA_1(0)/pad_out</td>
  <td class = "text_info">SDA_1(0)_PAD:out</td>
+ <td class = "number">0.000</td>
+</tr>
+<tr> 
+ <td class = "text_info">Clock</td>
+ <td class = "text_info"> </td>
+ <td class = "text_info"></td>
+ <td class = "text_info"></td>
+ <td class = "text_info"></td>
+ <td class = "text_info">Clock path delay</td>
+ <td class = "number">0.000</td>
+</tr>
+</tbody>
+ </table> 
+</td>
+</tr>
+<tr> 
+ <td class = "text_info">\I2C_Master:I2C_FF\/scl_out</td>
+ <td class = "text_info">SCL_1(0)_PAD:out</td>
+ <td class = "number">24.669</td>
+</tr>
+<tr class="sta_path">
+<td class="sta_path"  colspan="3">
+<table class="sta_path">
+ <thead> 
+<tr> 
+<th>Type</th>
+<th>Location</th>
+<th>Fanout</th>
+<th>Instance/Net</th>
+<th>Source</th>
+<th>Dest</th>
+<th>Delay (ns)</th>
+</tr>
+</thead> 
+<tbody>
+<tr> 
+ <td class = "text_info">i2ccell</td>
+ <td class = "text_info">F(I2C,0)</td>
+ <td class = "number">1</td>
+ <td class = "text_info">\I2C_Master:I2C_FF\</td>
+ <td class = "text_info">\I2C_Master:I2C_FF\/clock</td>
+ <td class = "text_info">\I2C_Master:I2C_FF\/scl_out</td>
+ <td class = "number">1.000</td>
+</tr>
+<tr> 
+ <td class = "text_info">Route</td>
+ <td class = "text_info"></td>
+ <td class = "number">1</td>
+ <td class = "text_info">\I2C_Master:Net_643_0\</td>
+ <td class = "text_info">\I2C_Master:I2C_FF\/scl_out</td>
+ <td class = "text_info">SCL_1(0)/pin_input</td>
+ <td class = "number">7.814</td>
+</tr>
+<tr> 
+ <td class = "text_info">iocell2</td>
+ <td class = "text_info">P12[0]</td>
+ <td class = "number">1</td>
+ <td class = "text_info">SCL_1(0)</td>
+ <td class = "text_info">SCL_1(0)/pin_input</td>
+ <td class = "text_info">SCL_1(0)/pad_out</td>
+ <td class = "number">15.855</td>
+</tr>
+<tr> 
+ <td class = "text_info">Route</td>
+ <td class = "text_info"></td>
+ <td class = "number">1</td>
+ <td class = "text_info">SCL_1(0)_PAD</td>
+ <td class = "text_info">SCL_1(0)/pad_out</td>
+ <td class = "text_info">SCL_1(0)_PAD:out</td>
  <td class = "number">0.000</td>
 </tr>
 <tr> 

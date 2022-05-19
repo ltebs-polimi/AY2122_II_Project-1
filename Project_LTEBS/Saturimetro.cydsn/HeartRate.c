@@ -133,43 +133,5 @@ int32 mul16(int16 x, int16 y)
 
 
 
-void loop()
-{
-    
-    
-    long irValue = getIR();
 
-  if (checkForBeat(irValue) == true)
-  {
-    //We sensed a beat!
-    //ogni ms incremento la variabile di 1.
-    long delta = count - lastBeat;
-    lastBeat = count;
 
-    beatsPerMinute = 60 / (delta / 1000.0);
-
-    if (beatsPerMinute < 255 && beatsPerMinute > 20)
-    {
-      rates[rateSpot++] = beatsPerMinute; //Store this reading in the array
-      rateSpot %= RATE_SIZE; //Wrap variable
-
-      //Take average of readings
-      beatAvg = 0;
-      for ( x = 0 ; x < RATE_SIZE ; x++)
-        beatAvg += rates[x];
-      beatAvg /= RATE_SIZE;
-    }
-  }
-
-  sprintf(msg, "IR=%ld", irValue);
-  debug_print(msg);
-  sprintf(msg, "BPM=%u", beatsPerMinute);
-  debug_print(msg);
-  sprintf(msg, "Avg BPM=%ld", beatAvg);
-  debug_print(msg);
-  
-
-  if (irValue < 5000)
-    debug_print("no finger");
-}
-*/

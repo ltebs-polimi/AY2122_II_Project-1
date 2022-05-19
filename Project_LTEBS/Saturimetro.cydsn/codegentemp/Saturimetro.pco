@@ -1,5 +1,5 @@
 # Saturimetro
-# 2022-05-18 16:10:26Z
+# 2022-05-19 08:58:16Z
 
 # IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
 dont_use_io iocell 1 0
@@ -34,7 +34,7 @@ set_location "\UART_Debug:BUART:sRX:RxBitCounter\" 1 1 7
 set_location "\UART_Debug:BUART:sRX:RxSts\" 0 1 4
 set_location "isr_MAX30101" interrupt -1 -1 11
 set_location "\Timer:TimerHW\" timercell -1 -1 0
-set_location "isr_1" interrupt -1 -1 17
+set_location "isr_1" interrupt -1 -1 0
 set_location "\UART_Debug:BUART:txn\" 0 0 0 0
 set_location "\UART_Debug:BUART:tx_state_1\" 0 0 0 1
 set_location "\UART_Debug:BUART:tx_state_0\" 1 0 0 0

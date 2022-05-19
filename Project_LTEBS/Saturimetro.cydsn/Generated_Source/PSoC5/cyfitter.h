@@ -154,10 +154,10 @@
 /* isr_1 */
 #define isr_1__INTC_CLR_EN_REG CYREG_NVIC_CLRENA0
 #define isr_1__INTC_CLR_PD_REG CYREG_NVIC_CLRPEND0
-#define isr_1__INTC_MASK 0x20000u
-#define isr_1__INTC_NUMBER 17u
+#define isr_1__INTC_MASK 0x01u
+#define isr_1__INTC_NUMBER 0u
 #define isr_1__INTC_PRIOR_NUM 7u
-#define isr_1__INTC_PRIOR_REG CYREG_NVIC_PRI_17
+#define isr_1__INTC_PRIOR_REG CYREG_NVIC_PRI_0
 #define isr_1__INTC_SET_EN_REG CYREG_NVIC_SETENA0
 #define isr_1__INTC_SET_PD_REG CYREG_NVIC_SETPEND0
 

@@ -1,5 +1,5 @@
 -- Project:   C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cyprj
--- Generated: 05/18/2022 18:10:28
+-- Generated: 05/19/2022 10:58:17
 -- PSoC Creator  4.4
 
 ENTITY Saturimetro IS
@@ -41,7 +41,7 @@ ARCHITECTURE __DEFAULT__ OF Saturimetro IS
     SIGNAL Net_27 : bit;
     ATTRIBUTE global_signal OF Net_27 : SIGNAL IS true;
     SIGNAL Net_27_local : bit;
-    SIGNAL Net_33 : bit;
+    SIGNAL Net_34 : bit;
     SIGNAL Net_38 : bit;
     SIGNAL Rx_1(0)__PA : bit;
     SIGNAL SCL_1(0)__PA : bit;
@@ -53,7 +53,7 @@ ARCHITECTURE __DEFAULT__ OF Saturimetro IS
     SIGNAL \I2C_Master:Net_697\ : bit;
     SIGNAL \I2C_Master:sda_x_wire\ : bit;
     SIGNAL \Timer:Net_261\ : bit;
-    SIGNAL \Timer:Net_51\ : bit;
+    SIGNAL \Timer:Net_57\ : bit;
     SIGNAL \UART_Debug:BUART:counter_load_not\ : bit;
     ATTRIBUTE placement_force OF \UART_Debug:BUART:counter_load_not\ : SIGNAL IS "U(0,0,B)1";
     SIGNAL \UART_Debug:BUART:pollcount_0\ : bit;
@@ -177,7 +177,7 @@ ARCHITECTURE __DEFAULT__ OF Saturimetro IS
     ATTRIBUTE Location OF \UART_Debug:BUART:sRX:RxSts\ : LABEL IS "U(0,1)";
     ATTRIBUTE Location OF isr_MAX30101 : LABEL IS "[IntrContainer=(0)][IntrId=(11)]";
     ATTRIBUTE Location OF \Timer:TimerHW\ : LABEL IS "F(Timer,0)";
-    ATTRIBUTE Location OF isr_1 : LABEL IS "[IntrContainer=(0)][IntrId=(17)]";
+    ATTRIBUTE Location OF isr_1 : LABEL IS "[IntrContainer=(0)][IntrId=(0)]";
     ATTRIBUTE lib_model OF \UART_Debug:BUART:txn\ : LABEL IS "macrocell10";
     ATTRIBUTE Location OF \UART_Debug:BUART:txn\ : LABEL IS "U(0,0)";
     ATTRIBUTE lib_model OF \UART_Debug:BUART:tx_state_1\ : LABEL IS "macrocell11";
@@ -1396,16 +1396,16 @@ BEGIN
             enable => __ONE__,
             capture => open,
             timer_reset => open,
-            tc => \Timer:Net_51\,
+            tc => Net_34,
             cmp => \Timer:Net_261\,
-            irq => Net_33);
+            irq => \Timer:Net_57\);
 
     isr_1:interrupt
         GENERIC MAP(
             int_type => "10",
             is_nmi => 0)
         PORT MAP(
-            interrupt => Net_33,
+            interrupt => Net_34,
             clock => ClockBlock_BUS_CLK);
 
     \UART_Debug:BUART:txn\:macrocell

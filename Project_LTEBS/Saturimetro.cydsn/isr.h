@@ -17,7 +17,7 @@
     #include "cytypes.h"
     #include "stdio.h"
     
-    CY_ISR(Count);
+    CY_ISR_PROTO(Count);
     
 #endif
 /* [] END OF FILE */

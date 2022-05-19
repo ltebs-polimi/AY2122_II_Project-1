@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 1
   43 005a 0000     		.align	2
   44              	.LC3:
   45 005c 52657669 		.ascii	"Revision ID: 0x%02X\015\012\000"
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 2
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 2
 
 
   45      73696F6E 
@@ -90,61 +90,51 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 1
   56              	.LC7:
   57 00cc 0D0A0D0A 		.ascii	"\015\012\015\012\000"
   57      00
-  58 00d1 000000   		.align	2
-  59              	.LC8:
-  60 00d4 25640D0A 		.ascii	"%d\015\012\000"
-  60      00
-  61 00d9 000000   		.align	2
-  62              	.LC9:
-  63 00dc 7265643A 		.ascii	"red: %lu\015\000"
-  63      20256C75 
-  63      0D00
-  64 00e6 0000     		.align	2
-  65              	.LC10:
-  66 00e8 69723A20 		.ascii	"ir: %lu\015\000"
-  66      256C750D 
-  66      00
-  67 00f1 000000   		.align	2
-  68              	.LC11:
-  69 00f4 6E756D62 		.ascii	"number of samples taken: %d\015\000"
-  69      6572206F 
-  69      66207361 
-  69      6D706C65 
-  69      73207461 
-  70 0111 000000   		.align	2
-  71              	.LC12:
-  72 0114 73706F32 		.ascii	"spo2: %ld\015\000"
-  72      3A20256C 
-  72      640D00
-  73 011f 00       		.align	2
-  74              	.LC13:
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 3
-
-
-  75 0120 76616C69 		.ascii	"validspo2: %d\015\000"
-  75      6473706F 
-  75      323A2025 
+  58              		.global	__aeabi_i2d
+  59              		.global	__aeabi_ddiv
+  60              		.global	__aeabi_d2uiz
+  61 00d1 000000   		.align	2
+  62              	.LC8:
+  63 00d4 49523D25 		.ascii	"IR=%lu\015\000"
+  63      6C750D00 
+  64              		.align	2
+  65              	.LC9:
+  66 00dc 42504D3D 		.ascii	"BPM=%u\015\000"
+  66      25750D00 
+  67              		.align	2
+  68              	.LC10:
+  69 00e4 41766720 		.ascii	"Avg BPM=%u\015\012\000"
+  69      42504D3D 
+  69      25750D0A 
+  69      00
+  70 00f1 000000   		.align	2
+  71              	.LC11:
+  72 00f4 6E6F2066 		.ascii	"no finger\015\012\000"
+  72      696E6765 
+  72      720D0A00 
+  73              		.align	2
+  74              	.LC12:
+  75 0100 73706F32 		.ascii	"spo2: %ld\015\000"
+  75      3A20256C 
   75      640D00
-  76 012f 00       		.align	2
-  77              	.LC14:
-  78 0130 48523A20 		.ascii	"HR: %ld\015\000"
-  78      256C640D 
-  78      00
-  79 0139 000000   		.align	2
-  80              	.LC15:
-  81 013c 76616C69 		.ascii	"validHR: %d\015\012\000"
-  81      6448523A 
-  81      2025640D 
-  81      0A00
-  82              		.section	.text.main,"ax",%progbits
-  83              		.align	2
-  84              		.global	main
-  85              		.thumb
-  86              		.thumb_func
-  87              		.type	main, %function
-  88              	main:
-  89              	.LFB64:
-  90              		.file 1 "main.c"
+  76 010b 00       		.align	2
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 3
+
+
+  77              	.LC13:
+  78 010c 76616C69 		.ascii	"validspo2: %d\015\000"
+  78      6473706F 
+  78      323A2025 
+  78      640D00
+  79              		.section	.text.main,"ax",%progbits
+  80              		.align	2
+  81              		.global	main
+  82              		.thumb
+  83              		.thumb_func
+  84              		.type	main, %function
+  85              	main:
+  86              	.LFB64:
+  87              		.file 1 "main.c"
    1:main.c        **** /**
    2:main.c        **** *   Main file for testing MAX30101 Library.
    3:main.c        ****     Last update: il codice funziona con la spo2 anche per FIFO bits diversi da 25, per come ho scri
@@ -160,1973 +150,2143 @@ ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 1
   13:main.c        **** #include "stdio.h"
   14:main.c        **** #include "I2C_Interface.h"
   15:main.c        **** #include "SpO2.h"
-  16:main.c        **** 
-  17:main.c        **** #define UART_DEBUG
+  16:main.c        **** #include "isr.h"
+  17:main.c        **** #include "HeartRate.h"
   18:main.c        **** 
-  19:main.c        **** #ifdef UART_DEBUG
-  20:main.c        ****     
-  21:main.c        ****     #define DEBUG_TEST 1
+  19:main.c        **** #define UART_DEBUG
+  20:main.c        **** 
+  21:main.c        **** #ifdef UART_DEBUG
   22:main.c        ****     
-  23:main.c        **** #else
+  23:main.c        ****     #define DEBUG_TEST 1
   24:main.c        ****     
-  25:main.c        ****     #define DEBUG_TEST 0
+  25:main.c        **** #else
   26:main.c        ****     
-  27:main.c        **** #endif
-  28:main.c        **** 
-  29:main.c        **** #define debug_print(msg) do { if (DEBUG_TEST) UART_Debug_PutString(msg);} while (0)
+  27:main.c        ****     #define DEBUG_TEST 0
+  28:main.c        ****     
+  29:main.c        **** #endif
   30:main.c        **** 
-  31:main.c        **** CY_ISR_PROTO(MAX30101_ISR);
+  31:main.c        **** #define debug_print(msg) do { if (DEBUG_TEST) UART_Debug_PutString(msg);} while (0)
   32:main.c        **** 
-  33:main.c        **** uint8_t flag_temp = 0;
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 4
-
-
-  34:main.c        **** uint8_t flag_1s = 0;
+  33:main.c        **** CY_ISR_PROTO(MAX30101_ISR);
+  34:main.c        **** 
   35:main.c        **** 
-  36:main.c        **** int main(void)
-  37:main.c        **** {
-  91              		.loc 1 37 0
-  92              		.cfi_startproc
-  93              		@ args = 0, pretend = 0, frame = 2120
-  94              		@ frame_needed = 1, uses_anonymous_args = 0
-  95 0000 F0B5     		push	{r4, r5, r6, r7, lr}
-  96              		.cfi_def_cfa_offset 20
-  97              		.cfi_offset 4, -20
-  98              		.cfi_offset 5, -16
-  99              		.cfi_offset 6, -12
- 100              		.cfi_offset 7, -8
- 101              		.cfi_offset 14, -4
- 102 0002 ADF65C0D 		subw	sp, sp, #2140
- 103              		.cfi_def_cfa_offset 2160
- 104 0006 04AF     		add	r7, sp, #16
- 105              		.cfi_def_cfa 7, 2144
-  38:main.c        ****     // Variables
-  39:main.c        ****     MAX30101_Data data;
-  40:main.c        ****     data.head = 0;
- 106              		.loc 1 40 0
- 107 0008 07F5D260 		add	r0, r7, #1680
- 108 000c 0025     		movs	r5, #0
- 109 000e 80F88051 		strb	r5, [r0, #384]
-  41:main.c        ****     data.tail = 0;
- 110              		.loc 1 41 0
- 111 0012 07F5D260 		add	r0, r7, #1680
- 112 0016 0025     		movs	r5, #0
- 113 0018 80F88151 		strb	r5, [r0, #385]
-  42:main.c        ****     char msg[50];
-  43:main.c        ****     void (*print_ptr)(const char*) = &(UART_Debug_PutString);
- 114              		.loc 1 43 0
- 115 001c D648     		ldr	r0, .L12
- 116 001e C7F83408 		str	r0, [r7, #2100]
-  44:main.c        ****     uint8_t active_leds = 2;
- 117              		.loc 1 44 0
- 118 0022 0220     		movs	r0, #2
- 119 0024 87F83308 		strb	r0, [r7, #2099]
-  45:main.c        ****     uint8_t rp, wp, flag = 0;
- 120              		.loc 1 45 0
- 121 0028 07F25960 		addw	r0, r7, #1625
- 122 002c 0025     		movs	r5, #0
- 123 002e 0570     		strb	r5, [r0]
-  46:main.c        ****     int32_t spo2; //SPO2 value
-  47:main.c        ****     int8_t validSPO2; //indicator to show if the SPO2 calculation is valid
-  48:main.c        ****     int32_t heartRate; //heart rate value
-  49:main.c        ****     int8_t validHeartRate; //indicator to show if the heart rate calculation is valid
-  50:main.c        ****     uint32_t irBuffer[200]; //infrared LED sensor data
-  51:main.c        ****     uint32_t redBuffer[200];  //red LED sensor data
-  52:main.c        ****     int32_t bufferLength = 200;
- 124              		.loc 1 52 0
- 125 0030 C820     		movs	r0, #200
- 126 0032 C7F82C08 		str	r0, [r7, #2092]
-  53:main.c        ****     int num_samples;
-  54:main.c        ****     int j=0;
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 5
+  36:main.c        **** uint8_t flag_temp = 0;
+  37:main.c        **** uint8_t flag_1s = 0;
+  38:main.c        **** extern uint8 count;
+  39:main.c        **** 
+  40:main.c        **** int main(void)
+  41:main.c        **** {
+  88              		.loc 1 41 0
+  89              		.cfi_startproc
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 4
 
 
- 127              		.loc 1 54 0
- 128 0036 0020     		movs	r0, #0
- 129 0038 C7F84008 		str	r0, [r7, #2112]
-  55:main.c        ****     int FIFO_max_size = 25;
- 130              		.loc 1 55 0
- 131 003c 1920     		movs	r0, #25
- 132 003e C7F82808 		str	r0, [r7, #2088]
-  56:main.c        ****     const uint8_t RATE_SIZE = 4; //Increase this for more averaging. 4 is good.
- 133              		.loc 1 56 0
- 134 0042 0420     		movs	r0, #4
- 135 0044 87F82708 		strb	r0, [r7, #2087]
-  57:main.c        ****     uint8_t rates[RATE_SIZE]; //Array of heart rates
- 136              		.loc 1 57 0
- 137 0048 97F82708 		ldrb	r0, [r7, #2087]	@ zero_extendqisi2
- 138 004c 0138     		subs	r0, r0, #1
- 139 004e C7F82008 		str	r0, [r7, #2080]
- 140 0052 97F82758 		ldrb	r5, [r7, #2087]	@ zero_extendqisi2
- 141 0056 4FF00006 		mov	r6, #0
- 142 005a F200     		lsls	r2, r6, #3
- 143 005c 42EA5572 		orr	r2, r2, r5, lsr #29
- 144 0060 E900     		lsls	r1, r5, #3
- 145 0062 97F82718 		ldrb	r1, [r7, #2087]	@ zero_extendqisi2
- 146 0066 4FF00002 		mov	r2, #0
- 147 006a D400     		lsls	r4, r2, #3
- 148 006c 44EA5174 		orr	r4, r4, r1, lsr #29
- 149 0070 CB00     		lsls	r3, r1, #3
- 150 0072 97F82738 		ldrb	r3, [r7, #2087]	@ zero_extendqisi2
- 151 0076 0733     		adds	r3, r3, #7
- 152 0078 DB08     		lsrs	r3, r3, #3
- 153 007a DB00     		lsls	r3, r3, #3
- 154 007c ADEB030D 		sub	sp, sp, r3
- 155 0080 04AB     		add	r3, sp, #16
- 156 0082 0033     		adds	r3, r3, #0
- 157 0084 C7F81C38 		str	r3, [r7, #2076]
-  58:main.c        ****     uint8_t rateSpot = 0;
- 158              		.loc 1 58 0
- 159 0088 0023     		movs	r3, #0
- 160 008a 87F81B38 		strb	r3, [r7, #2075]
-  59:main.c        ****     long lastBeat = 0; //Time at which the last beat occurred
- 161              		.loc 1 59 0
- 162 008e 0023     		movs	r3, #0
- 163 0090 C7F81438 		str	r3, [r7, #2068]
-  60:main.c        **** 
-  61:main.c        ****     float beatsPerMinute;
-  62:main.c        ****     int beatAvg;
-  63:main.c        ****     
-  64:main.c        ****     // Initialization
-  65:main.c        ****     MAX30101_Start();
- 164              		.loc 1 65 0
- 165 0094 FFF7FEFF 		bl	MAX30101_Start
-  66:main.c        ****     UART_Debug_Start();
- 166              		.loc 1 66 0
- 167 0098 FFF7FEFF 		bl	UART_Debug_Start
-  67:main.c        **** 
-  68:main.c        ****     CyDelay(100);
- 168              		.loc 1 68 0
- 169 009c 6420     		movs	r0, #100
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 6
+  90              		@ args = 0, pretend = 0, frame = 2128
+  91              		@ frame_needed = 1, uses_anonymous_args = 0
+  92 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  93              		.cfi_def_cfa_offset 20
+  94              		.cfi_offset 4, -20
+  95              		.cfi_offset 5, -16
+  96              		.cfi_offset 6, -12
+  97              		.cfi_offset 7, -8
+  98              		.cfi_offset 14, -4
+  99 0002 ADF6640D 		subw	sp, sp, #2148
+ 100              		.cfi_def_cfa_offset 2168
+ 101 0006 04AF     		add	r7, sp, #16
+ 102              		.cfi_def_cfa 7, 2152
+  42:main.c        ****     // Variables
+  43:main.c        ****     
+  44:main.c        ****     
+  45:main.c        ****     MAX30101_Data data;
+  46:main.c        ****     data.head = 0;
+ 103              		.loc 1 46 0
+ 104 0008 07F28C60 		addw	r0, r7, #1676
+ 105 000c 0025     		movs	r5, #0
+ 106 000e 80F88051 		strb	r5, [r0, #384]
+  47:main.c        ****     data.tail = 0;
+ 107              		.loc 1 47 0
+ 108 0012 07F28C60 		addw	r0, r7, #1676
+ 109 0016 0025     		movs	r5, #0
+ 110 0018 80F88151 		strb	r5, [r0, #385]
+  48:main.c        ****     char msg[50];
+  49:main.c        ****     void (*print_ptr)(const char*) = &(UART_Debug_PutString);
+ 111              		.loc 1 49 0
+ 112 001c CE48     		ldr	r0, .L15
+ 113 001e C7F83008 		str	r0, [r7, #2096]
+  50:main.c        ****     uint8_t active_leds = 2;
+ 114              		.loc 1 50 0
+ 115 0022 0220     		movs	r0, #2
+ 116 0024 87F82F08 		strb	r0, [r7, #2095]
+  51:main.c        ****     uint8_t rp, wp, flag = 0;
+ 117              		.loc 1 51 0
+ 118 0028 07F25560 		addw	r0, r7, #1621
+ 119 002c 0025     		movs	r5, #0
+ 120 002e 0570     		strb	r5, [r0]
+  52:main.c        ****     int32_t spo2; //SPO2 value
+  53:main.c        ****     int8_t validSPO2; //indicator to show if the SPO2 calculation is valid
+  54:main.c        ****     int32_t heartRate; //heart rate value
+  55:main.c        ****     int8_t validHeartRate; //indicator to show if the heart rate calculation is valid
+  56:main.c        ****     uint32_t irBuffer[200]; //infrared LED sensor data
+  57:main.c        ****     uint32_t redBuffer[200];  //red LED sensor data
+  58:main.c        ****     int32_t bufferLength = 200;
+ 121              		.loc 1 58 0
+ 122 0030 C820     		movs	r0, #200
+ 123 0032 C7F82808 		str	r0, [r7, #2088]
+  59:main.c        ****     int num_samples;
+  60:main.c        ****     int j=0;
+ 124              		.loc 1 60 0
+ 125 0036 0020     		movs	r0, #0
+ 126 0038 C7F84808 		str	r0, [r7, #2120]
+  61:main.c        ****     int FIFO_max_size = 25;
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 5
 
 
- 170 009e FFF7FEFF 		bl	CyDelay
+ 127              		.loc 1 61 0
+ 128 003c 1920     		movs	r0, #25
+ 129 003e C7F82408 		str	r0, [r7, #2084]
+  62:main.c        ****     const uint8_t RATE_SIZE = 4; //Increase this for more averaging. 4 is good.
+ 130              		.loc 1 62 0
+ 131 0042 0420     		movs	r0, #4
+ 132 0044 87F82308 		strb	r0, [r7, #2083]
+  63:main.c        ****     uint8_t rates[RATE_SIZE]; //Array of heart rates
+ 133              		.loc 1 63 0
+ 134 0048 97F82308 		ldrb	r0, [r7, #2083]	@ zero_extendqisi2
+ 135 004c 0138     		subs	r0, r0, #1
+ 136 004e C7F81C08 		str	r0, [r7, #2076]
+ 137 0052 97F82358 		ldrb	r5, [r7, #2083]	@ zero_extendqisi2
+ 138 0056 4FF00006 		mov	r6, #0
+ 139 005a F200     		lsls	r2, r6, #3
+ 140 005c 42EA5572 		orr	r2, r2, r5, lsr #29
+ 141 0060 E900     		lsls	r1, r5, #3
+ 142 0062 97F82318 		ldrb	r1, [r7, #2083]	@ zero_extendqisi2
+ 143 0066 4FF00002 		mov	r2, #0
+ 144 006a D400     		lsls	r4, r2, #3
+ 145 006c 44EA5174 		orr	r4, r4, r1, lsr #29
+ 146 0070 CB00     		lsls	r3, r1, #3
+ 147 0072 97F82338 		ldrb	r3, [r7, #2083]	@ zero_extendqisi2
+ 148 0076 0733     		adds	r3, r3, #7
+ 149 0078 DB08     		lsrs	r3, r3, #3
+ 150 007a DB00     		lsls	r3, r3, #3
+ 151 007c ADEB030D 		sub	sp, sp, r3
+ 152 0080 04AB     		add	r3, sp, #16
+ 153 0082 0033     		adds	r3, r3, #0
+ 154 0084 C7F81838 		str	r3, [r7, #2072]
+  64:main.c        ****     uint8_t rateSpot = 0;
+ 155              		.loc 1 64 0
+ 156 0088 0023     		movs	r3, #0
+ 157 008a 87F84738 		strb	r3, [r7, #2119]
+  65:main.c        ****     long lastBeat = 0; //Time at which the last beat occurred
+ 158              		.loc 1 65 0
+ 159 008e 0023     		movs	r3, #0
+ 160 0090 C7F84038 		str	r3, [r7, #2112]
+  66:main.c        ****     uint8_t x;
+  67:main.c        ****     uint8_t beatsPerMinute;
+  68:main.c        ****     uint8_t beatAvg;
   69:main.c        ****     
-  70:main.c        ****     debug_print("**************************\r\n");
- 171              		.loc 1 70 0
- 172 00a2 B648     		ldr	r0, .L12+4
- 173 00a4 FFF7FEFF 		bl	UART_Debug_PutString
-  71:main.c        ****     debug_print("         MAX30101         \r\n");
- 174              		.loc 1 71 0
- 175 00a8 B548     		ldr	r0, .L12+8
- 176 00aa FFF7FEFF 		bl	UART_Debug_PutString
-  72:main.c        ****     debug_print("**************************\r\n");
- 177              		.loc 1 72 0
- 178 00ae B348     		ldr	r0, .L12+4
- 179 00b0 FFF7FEFF 		bl	UART_Debug_PutString
-  73:main.c        ****     
-  74:main.c        ****     if (MAX30101_IsDevicePresent() == MAX30101_OK)
- 180              		.loc 1 74 0
- 181 00b4 FFF7FEFF 		bl	MAX30101_IsDevicePresent
- 182 00b8 0346     		mov	r3, r0
- 183 00ba 002B     		cmp	r3, #0
- 184 00bc 72D1     		bne	.L11
- 185              	.LBB2:
-  75:main.c        ****     {
-  76:main.c        ****         // Check if device is present
-  77:main.c        ****         debug_print("Device found on I2C bus\r\n");
- 186              		.loc 1 77 0
- 187 00be B148     		ldr	r0, .L12+12
- 188 00c0 FFF7FEFF 		bl	UART_Debug_PutString
-  78:main.c        ****         Connection_LED_Write(1);
- 189              		.loc 1 78 0
- 190 00c4 0120     		movs	r0, #1
- 191 00c6 FFF7FEFF 		bl	Connection_LED_Write
-  79:main.c        ****         
-  80:main.c        ****         // Read revision and part id
-  81:main.c        ****         uint8_t rev_id, part_id = 0;
- 192              		.loc 1 81 0
- 193 00ca BB1D     		adds	r3, r7, #6
- 194 00cc 0022     		movs	r2, #0
- 195 00ce 1A70     		strb	r2, [r3]
-  82:main.c        ****         MAX30101_ReadPartID(&part_id);
- 196              		.loc 1 82 0
- 197 00d0 BB1D     		adds	r3, r7, #6
- 198 00d2 1846     		mov	r0, r3
- 199 00d4 FFF7FEFF 		bl	MAX30101_ReadPartID
-  83:main.c        ****         MAX30101_ReadRevisionID(&rev_id);
- 200              		.loc 1 83 0
- 201 00d8 FB1D     		adds	r3, r7, #7
- 202 00da 1846     		mov	r0, r3
- 203 00dc FFF7FEFF 		bl	MAX30101_ReadRevisionID
-  84:main.c        ****         sprintf(msg,"Revision ID: 0x%02X\r\n", rev_id);
- 204              		.loc 1 84 0
- 205 00e0 FB1D     		adds	r3, r7, #7
- 206 00e2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 207 00e4 1A46     		mov	r2, r3
- 208 00e6 07F25C63 		addw	r3, r7, #1628
- 209 00ea A749     		ldr	r1, .L12+16
- 210 00ec 1846     		mov	r0, r3
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 7
+  70:main.c        ****     // Initialization
+  71:main.c        ****     MAX30101_Start();
+ 161              		.loc 1 71 0
+ 162 0094 FFF7FEFF 		bl	MAX30101_Start
+  72:main.c        ****     UART_Debug_Start();
+ 163              		.loc 1 72 0
+ 164 0098 FFF7FEFF 		bl	UART_Debug_Start
+  73:main.c        ****     Timer_Start();
+ 165              		.loc 1 73 0
+ 166 009c FFF7FEFF 		bl	Timer_Start
+  74:main.c        **** 
+  75:main.c        ****     CyDelay(100);
+ 167              		.loc 1 75 0
+ 168 00a0 6420     		movs	r0, #100
+ 169 00a2 FFF7FEFF 		bl	CyDelay
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 6
 
 
- 211 00ee FFF7FEFF 		bl	sprintf
-  85:main.c        ****         debug_print(msg);
- 212              		.loc 1 85 0
- 213 00f2 07F25C63 		addw	r3, r7, #1628
- 214 00f6 1846     		mov	r0, r3
- 215 00f8 FFF7FEFF 		bl	UART_Debug_PutString
-  86:main.c        ****         sprintf(msg,"Part ID: 0x%02X\r\n", part_id);
- 216              		.loc 1 86 0
- 217 00fc BB1D     		adds	r3, r7, #6
- 218 00fe 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 219 0100 1A46     		mov	r2, r3
- 220 0102 07F25C63 		addw	r3, r7, #1628
- 221 0106 A149     		ldr	r1, .L12+20
- 222 0108 1846     		mov	r0, r3
- 223 010a FFF7FEFF 		bl	sprintf
-  87:main.c        ****         debug_print(msg);
- 224              		.loc 1 87 0
- 225 010e 07F25C63 		addw	r3, r7, #1628
- 226 0112 1846     		mov	r0, r3
- 227 0114 FFF7FEFF 		bl	UART_Debug_PutString
-  88:main.c        ****         
-  89:main.c        ****         debug_print("Registers before configuration\r\n");
- 228              		.loc 1 89 0
- 229 0118 9D48     		ldr	r0, .L12+24
- 230 011a FFF7FEFF 		bl	UART_Debug_PutString
-  90:main.c        ****         MAX30101_LogRegisters(print_ptr);
- 231              		.loc 1 90 0
- 232 011e D7F83408 		ldr	r0, [r7, #2100]
- 233 0122 FFF7FEFF 		bl	MAX30101_LogRegisters
-  91:main.c        ****         
-  92:main.c        ****         // Soft reset sensor
-  93:main.c        ****         MAX30101_Reset();
- 234              		.loc 1 93 0
- 235 0126 FFF7FEFF 		bl	MAX30101_Reset
-  94:main.c        ****         CyDelay(100);
- 236              		.loc 1 94 0
- 237 012a 6420     		movs	r0, #100
- 238 012c FFF7FEFF 		bl	CyDelay
+  76:main.c        ****     
+  77:main.c        ****     debug_print("**************************\r\n");
+ 170              		.loc 1 77 0
+ 171 00a6 AD48     		ldr	r0, .L15+4
+ 172 00a8 FFF7FEFF 		bl	UART_Debug_PutString
+  78:main.c        ****     debug_print("         MAX30101         \r\n");
+ 173              		.loc 1 78 0
+ 174 00ac AC48     		ldr	r0, .L15+8
+ 175 00ae FFF7FEFF 		bl	UART_Debug_PutString
+  79:main.c        ****     debug_print("**************************\r\n");
+ 176              		.loc 1 79 0
+ 177 00b2 AA48     		ldr	r0, .L15+4
+ 178 00b4 FFF7FEFF 		bl	UART_Debug_PutString
+  80:main.c        ****     
+  81:main.c        ****     if (MAX30101_IsDevicePresent() == MAX30101_OK)
+ 179              		.loc 1 81 0
+ 180 00b8 FFF7FEFF 		bl	MAX30101_IsDevicePresent
+ 181 00bc 0346     		mov	r3, r0
+ 182 00be 002B     		cmp	r3, #0
+ 183 00c0 72D1     		bne	.L14
+ 184              	.LBB2:
+  82:main.c        ****     {
+  83:main.c        ****         // Check if device is present
+  84:main.c        ****         debug_print("Device found on I2C bus\r\n");
+ 185              		.loc 1 84 0
+ 186 00c2 A848     		ldr	r0, .L15+12
+ 187 00c4 FFF7FEFF 		bl	UART_Debug_PutString
+  85:main.c        ****         Connection_LED_Write(1);
+ 188              		.loc 1 85 0
+ 189 00c8 0120     		movs	r0, #1
+ 190 00ca FFF7FEFF 		bl	Connection_LED_Write
+  86:main.c        ****         
+  87:main.c        ****         // Read revision and part id
+  88:main.c        ****         uint8_t rev_id, part_id = 0;
+ 191              		.loc 1 88 0
+ 192 00ce BB1C     		adds	r3, r7, #2
+ 193 00d0 0022     		movs	r2, #0
+ 194 00d2 1A70     		strb	r2, [r3]
+  89:main.c        ****         MAX30101_ReadPartID(&part_id);
+ 195              		.loc 1 89 0
+ 196 00d4 BB1C     		adds	r3, r7, #2
+ 197 00d6 1846     		mov	r0, r3
+ 198 00d8 FFF7FEFF 		bl	MAX30101_ReadPartID
+  90:main.c        ****         MAX30101_ReadRevisionID(&rev_id);
+ 199              		.loc 1 90 0
+ 200 00dc FB1C     		adds	r3, r7, #3
+ 201 00de 1846     		mov	r0, r3
+ 202 00e0 FFF7FEFF 		bl	MAX30101_ReadRevisionID
+  91:main.c        ****         sprintf(msg,"Revision ID: 0x%02X\r\n", rev_id);
+ 203              		.loc 1 91 0
+ 204 00e4 FB1C     		adds	r3, r7, #3
+ 205 00e6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 206 00e8 1A46     		mov	r2, r3
+ 207 00ea 07F5CB63 		add	r3, r7, #1624
+ 208 00ee 9E49     		ldr	r1, .L15+16
+ 209 00f0 1846     		mov	r0, r3
+ 210 00f2 FFF7FEFF 		bl	sprintf
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 7
+
+
+  92:main.c        ****         debug_print(msg);
+ 211              		.loc 1 92 0
+ 212 00f6 07F5CB63 		add	r3, r7, #1624
+ 213 00fa 1846     		mov	r0, r3
+ 214 00fc FFF7FEFF 		bl	UART_Debug_PutString
+  93:main.c        ****         sprintf(msg,"Part ID: 0x%02X\r\n", part_id);
+ 215              		.loc 1 93 0
+ 216 0100 BB1C     		adds	r3, r7, #2
+ 217 0102 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 218 0104 1A46     		mov	r2, r3
+ 219 0106 07F5CB63 		add	r3, r7, #1624
+ 220 010a 9849     		ldr	r1, .L15+20
+ 221 010c 1846     		mov	r0, r3
+ 222 010e FFF7FEFF 		bl	sprintf
+  94:main.c        ****         debug_print(msg);
+ 223              		.loc 1 94 0
+ 224 0112 07F5CB63 		add	r3, r7, #1624
+ 225 0116 1846     		mov	r0, r3
+ 226 0118 FFF7FEFF 		bl	UART_Debug_PutString
   95:main.c        ****         
-  96:main.c        ****         // Wake up sensor
-  97:main.c        ****         MAX30101_WakeUp();
- 239              		.loc 1 97 0
- 240 0130 FFF7FEFF 		bl	MAX30101_WakeUp
+  96:main.c        ****         debug_print("Registers before configuration\r\n");
+ 227              		.loc 1 96 0
+ 228 011c 9448     		ldr	r0, .L15+24
+ 229 011e FFF7FEFF 		bl	UART_Debug_PutString
+  97:main.c        ****         MAX30101_LogRegisters(print_ptr);
+ 230              		.loc 1 97 0
+ 231 0122 D7F83008 		ldr	r0, [r7, #2096]
+ 232 0126 FFF7FEFF 		bl	MAX30101_LogRegisters
   98:main.c        ****         
-  99:main.c        ****         MAX30101_DisableALCOverflowInt();
- 241              		.loc 1 99 0
- 242 0134 FFF7FEFF 		bl	MAX30101_DisableALCOverflowInt
- 100:main.c        ****         MAX30101_DisableTempReadyInt();
- 243              		.loc 1 100 0
- 244 0138 FFF7FEFF 		bl	MAX30101_DisableTempReadyInt
- 101:main.c        ****         MAX30101_DisablePPGReadyInt();
- 245              		.loc 1 101 0
- 246 013c FFF7FEFF 		bl	MAX30101_DisablePPGReadyInt
- 102:main.c        ****         MAX30101_EnableFIFOAFullInt();
- 247              		.loc 1 102 0
- 248 0140 FFF7FEFF 		bl	MAX30101_EnableFIFOAFullInt
- 103:main.c        ****      
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 8
+  99:main.c        ****         // Soft reset sensor
+ 100:main.c        ****         MAX30101_Reset();
+ 233              		.loc 1 100 0
+ 234 012a FFF7FEFF 		bl	MAX30101_Reset
+ 101:main.c        ****         CyDelay(100);
+ 235              		.loc 1 101 0
+ 236 012e 6420     		movs	r0, #100
+ 237 0130 FFF7FEFF 		bl	CyDelay
+ 102:main.c        ****         
+ 103:main.c        ****         // Wake up sensor
+ 104:main.c        ****         MAX30101_WakeUp();
+ 238              		.loc 1 104 0
+ 239 0134 FFF7FEFF 		bl	MAX30101_WakeUp
+ 105:main.c        ****         
+ 106:main.c        ****         MAX30101_DisableALCOverflowInt();
+ 240              		.loc 1 106 0
+ 241 0138 FFF7FEFF 		bl	MAX30101_DisableALCOverflowInt
+ 107:main.c        ****         MAX30101_DisableTempReadyInt();
+ 242              		.loc 1 107 0
+ 243 013c FFF7FEFF 		bl	MAX30101_DisableTempReadyInt
+ 108:main.c        ****         MAX30101_DisablePPGReadyInt();
+ 244              		.loc 1 108 0
+ 245 0140 FFF7FEFF 		bl	MAX30101_DisablePPGReadyInt
+ 109:main.c        ****         MAX30101_EnableFIFOAFullInt();
+ 246              		.loc 1 109 0
+ 247 0144 FFF7FEFF 		bl	MAX30101_EnableFIFOAFullInt
+ 110:main.c        ****      
+ 111:main.c        ****         // set 28 samples to trigger interrupt
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 8
 
 
- 104:main.c        ****         // set 28 samples to trigger interrupt
- 105:main.c        ****         MAX30101_SetFIFOAlmostFull(FIFO_max_size);
- 249              		.loc 1 105 0
- 250 0144 D7F82838 		ldr	r3, [r7, #2088]
- 251 0148 DBB2     		uxtb	r3, r3
- 252 014a 1846     		mov	r0, r3
- 253 014c FFF7FEFF 		bl	MAX30101_SetFIFOAlmostFull
- 106:main.c        **** 
- 107:main.c        ****         // enable fifo rollover
- 108:main.c        ****         MAX30101_EnableFIFORollover();
- 254              		.loc 1 108 0
- 255 0150 FFF7FEFF 		bl	MAX30101_EnableFIFORollover
- 109:main.c        ****         
- 110:main.c        ****         // 8 samples averaged
- 111:main.c        ****         MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_2);
- 256              		.loc 1 111 0
- 257 0154 2020     		movs	r0, #32
- 258 0156 FFF7FEFF 		bl	MAX30101_SetSampleAverage
- 112:main.c        ****         
- 113:main.c        ****         // Set LED Power level
- 114:main.c        ****         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x05);
- 259              		.loc 1 114 0
- 260 015a 0521     		movs	r1, #5
- 261 015c 0020     		movs	r0, #0
- 262 015e FFF7FEFF 		bl	MAX30101_SetLEDPulseAmplitude
- 115:main.c        ****         
- 116:main.c        ****         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x05);
- 263              		.loc 1 116 0
- 264 0162 0521     		movs	r1, #5
- 265 0164 0120     		movs	r0, #1
- 266 0166 FFF7FEFF 		bl	MAX30101_SetLEDPulseAmplitude
- 117:main.c        ****         
- 118:main.c        ****         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_3, 0x1F);
- 267              		.loc 1 118 0
- 268 016a 1F21     		movs	r1, #31
- 269 016c 0220     		movs	r0, #2
- 270 016e FFF7FEFF 		bl	MAX30101_SetLEDPulseAmplitude
+ 112:main.c        ****         MAX30101_SetFIFOAlmostFull(FIFO_max_size);
+ 248              		.loc 1 112 0
+ 249 0148 D7F82438 		ldr	r3, [r7, #2084]
+ 250 014c DBB2     		uxtb	r3, r3
+ 251 014e 1846     		mov	r0, r3
+ 252 0150 FFF7FEFF 		bl	MAX30101_SetFIFOAlmostFull
+ 113:main.c        **** 
+ 114:main.c        ****         // enable fifo rollover
+ 115:main.c        ****         MAX30101_EnableFIFORollover();
+ 253              		.loc 1 115 0
+ 254 0154 FFF7FEFF 		bl	MAX30101_EnableFIFORollover
+ 116:main.c        ****         
+ 117:main.c        ****         // 8 samples averaged
+ 118:main.c        ****         MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_4);
+ 255              		.loc 1 118 0
+ 256 0158 4020     		movs	r0, #64
+ 257 015a FFF7FEFF 		bl	MAX30101_SetSampleAverage
  119:main.c        ****         
- 120:main.c        ****         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_4, 0x1F);
- 271              		.loc 1 120 0
- 272 0172 1F21     		movs	r1, #31
- 273 0174 0320     		movs	r0, #3
- 274 0176 FFF7FEFF 		bl	MAX30101_SetLEDPulseAmplitude
- 121:main.c        ****         
- 122:main.c        ****         // Set ADC Range
- 123:main.c        ****         MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_2048);
- 275              		.loc 1 123 0
- 276 017a 0020     		movs	r0, #0
- 277 017c FFF7FEFF 		bl	MAX30101_SetSpO2ADCRange
+ 120:main.c        ****         // Set LED Power level
+ 121:main.c        ****         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x1F);
+ 258              		.loc 1 121 0
+ 259 015e 1F21     		movs	r1, #31
+ 260 0160 0020     		movs	r0, #0
+ 261 0162 FFF7FEFF 		bl	MAX30101_SetLEDPulseAmplitude
+ 122:main.c        ****         
+ 123:main.c        ****         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x1F);
+ 262              		.loc 1 123 0
+ 263 0166 1F21     		movs	r1, #31
+ 264 0168 0120     		movs	r0, #1
+ 265 016a FFF7FEFF 		bl	MAX30101_SetLEDPulseAmplitude
  124:main.c        ****         
- 125:main.c        ****         // Pulse width
- 126:main.c        ****         MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
- 278              		.loc 1 126 0
- 279 0180 0320     		movs	r0, #3
- 280 0182 FFF7FEFF 		bl	MAX30101_SetSpO2PulseWidth
- 127:main.c        ****         
- 128:main.c        ****         // Set Sample Rate
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 9
+ 125:main.c        ****         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_3, 0x1F);
+ 266              		.loc 1 125 0
+ 267 016e 1F21     		movs	r1, #31
+ 268 0170 0220     		movs	r0, #2
+ 269 0172 FFF7FEFF 		bl	MAX30101_SetLEDPulseAmplitude
+ 126:main.c        ****         
+ 127:main.c        ****         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_4, 0x1F);
+ 270              		.loc 1 127 0
+ 271 0176 1F21     		movs	r1, #31
+ 272 0178 0320     		movs	r0, #3
+ 273 017a FFF7FEFF 		bl	MAX30101_SetLEDPulseAmplitude
+ 128:main.c        ****         
+ 129:main.c        ****         // Set ADC Range
+ 130:main.c        ****         MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_2048);
+ 274              		.loc 1 130 0
+ 275 017e 0020     		movs	r0, #0
+ 276 0180 FFF7FEFF 		bl	MAX30101_SetSpO2ADCRange
+ 131:main.c        ****         
+ 132:main.c        ****         // Pulse width
+ 133:main.c        ****         MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_69); //PW di 69 non funziona con una pulse a
+ 277              		.loc 1 133 0
+ 278 0184 0020     		movs	r0, #0
+ 279 0186 FFF7FEFF 		bl	MAX30101_SetSpO2PulseWidth
+ 134:main.c        ****         
+ 135:main.c        ****         // Set Sample Rate
+ 136:main.c        ****         MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_200);
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 9
 
 
- 129:main.c        ****         MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_50);
- 281              		.loc 1 129 0
- 282 0186 0020     		movs	r0, #0
- 283 0188 FFF7FEFF 		bl	MAX30101_SetSpO2SampleRate
- 130:main.c        ****         
- 131:main.c        ****         // Set mode
- 132:main.c        ****         MAX30101_SetMode(MAX30101_SPO2_MODE);
- 284              		.loc 1 132 0
- 285 018c 0320     		movs	r0, #3
- 286 018e FFF7FEFF 		bl	MAX30101_SetMode
- 133:main.c        ****         
- 134:main.c        ****         // Enable Slots
- 135:main.c        ****         MAX30101_DisableSlots();
- 287              		.loc 1 135 0
- 288 0192 FFF7FEFF 		bl	MAX30101_DisableSlots
- 136:main.c        ****         
- 137:main.c        ****         debug_print("Registers after configuration\r\n");
- 289              		.loc 1 137 0
- 290 0196 7F48     		ldr	r0, .L12+28
- 291 0198 FFF7FEFF 		bl	UART_Debug_PutString
- 138:main.c        ****         MAX30101_LogRegisters(print_ptr);
- 292              		.loc 1 138 0
- 293 019c D7F83408 		ldr	r0, [r7, #2100]
- 294 01a0 FFF7FEFF 		bl	MAX30101_LogRegisters
- 295              	.L11:
- 296              	.LBE2:
- 139:main.c        ****     }
- 140:main.c        ****     
- 141:main.c        ****     debug_print("\r\n\r\n");
- 297              		.loc 1 141 0 discriminator 1
- 298 01a4 7C48     		ldr	r0, .L12+32
- 299 01a6 FFF7FEFF 		bl	UART_Debug_PutString
- 142:main.c        ****     
- 143:main.c        ****     isr_MAX30101_StartEx(MAX30101_ISR);
- 300              		.loc 1 143 0 discriminator 1
- 301 01aa 7C48     		ldr	r0, .L12+36
- 302 01ac FFF7FEFF 		bl	isr_MAX30101_StartEx
- 144:main.c        ****     // Clear FIFO
- 145:main.c        ****     MAX30101_ClearFIFO();
- 303              		.loc 1 145 0 discriminator 1
- 304 01b0 FFF7FEFF 		bl	MAX30101_ClearFIFO
- 146:main.c        ****     
- 147:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
- 305              		.loc 1 147 0 discriminator 1
- 306              		.syntax unified
- 307              	@ 147 "main.c" 1
- 308 01b4 62B6     		CPSIE   i
- 309              	@ 0 "" 2
- 310              		.thumb
- 311              		.syntax unified
- 312              	.L10:
- 148:main.c        ****     
- 149:main.c        ****     for(;;)
- 150:main.c        ****     {
- 151:main.c        ****         if (flag_temp == 1)
- 313              		.loc 1 151 0
- 314 01b6 7A4B     		ldr	r3, .L12+40
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 10
+ 280              		.loc 1 136 0
+ 281 018a 0820     		movs	r0, #8
+ 282 018c FFF7FEFF 		bl	MAX30101_SetSpO2SampleRate
+ 137:main.c        ****         
+ 138:main.c        ****         // Set mode
+ 139:main.c        ****         MAX30101_SetMode(MAX30101_SPO2_MODE);
+ 283              		.loc 1 139 0
+ 284 0190 0320     		movs	r0, #3
+ 285 0192 FFF7FEFF 		bl	MAX30101_SetMode
+ 140:main.c        ****         
+ 141:main.c        ****         // Enable Slots
+ 142:main.c        ****         MAX30101_DisableSlots();
+ 286              		.loc 1 142 0
+ 287 0196 FFF7FEFF 		bl	MAX30101_DisableSlots
+ 143:main.c        ****         
+ 144:main.c        ****         debug_print("Registers after configuration\r\n");
+ 288              		.loc 1 144 0
+ 289 019a 7648     		ldr	r0, .L15+28
+ 290 019c FFF7FEFF 		bl	UART_Debug_PutString
+ 145:main.c        ****         MAX30101_LogRegisters(print_ptr);
+ 291              		.loc 1 145 0
+ 292 01a0 D7F83008 		ldr	r0, [r7, #2096]
+ 293 01a4 FFF7FEFF 		bl	MAX30101_LogRegisters
+ 294              	.L14:
+ 295              	.LBE2:
+ 146:main.c        ****     }
+ 147:main.c        ****     
+ 148:main.c        ****     debug_print("\r\n\r\n");
+ 296              		.loc 1 148 0 discriminator 1
+ 297 01a8 7348     		ldr	r0, .L15+32
+ 298 01aa FFF7FEFF 		bl	UART_Debug_PutString
+ 149:main.c        ****     
+ 150:main.c        ****     isr_MAX30101_StartEx(MAX30101_ISR);
+ 299              		.loc 1 150 0 discriminator 1
+ 300 01ae 7348     		ldr	r0, .L15+36
+ 301 01b0 FFF7FEFF 		bl	isr_MAX30101_StartEx
+ 151:main.c        ****     isr_1_StartEx(Count);
+ 302              		.loc 1 151 0 discriminator 1
+ 303 01b4 7248     		ldr	r0, .L15+40
+ 304 01b6 FFF7FEFF 		bl	isr_1_StartEx
+ 152:main.c        ****     // Clear FIFO
+ 153:main.c        ****     MAX30101_ClearFIFO();
+ 305              		.loc 1 153 0 discriminator 1
+ 306 01ba FFF7FEFF 		bl	MAX30101_ClearFIFO
+ 154:main.c        ****     
+ 155:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+ 307              		.loc 1 155 0 discriminator 1
+ 308              		.syntax unified
+ 309              	@ 155 "main.c" 1
+ 310 01be 62B6     		CPSIE   i
+ 311              	@ 0 "" 2
+ 312              		.thumb
+ 313              		.syntax unified
+ 314              	.L13:
+ 156:main.c        ****     
+ 157:main.c        ****     for(;;)
+ 158:main.c        ****     {
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 10
 
 
- 315 01b8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 316 01ba 012B     		cmp	r3, #1
- 317 01bc FBD1     		bne	.L10
- 152:main.c        ****         {   
- 153:main.c        ****             /*long irValue = getIR();
- 154:main.c        **** 
- 155:main.c        ****               if (checkForBeat(irValue) == true)
- 156:main.c        ****               {
- 157:main.c        ****                 //We sensed a beat!
- 158:main.c        ****                 long delta = millis() - lastBeat;
- 159:main.c        ****                 lastBeat = millis();
- 160:main.c        **** 
- 161:main.c        ****                 beatsPerMinute = 60 / (delta / 1000.0);
- 162:main.c        **** 
- 163:main.c        ****                 if (beatsPerMinute < 255 && beatsPerMinute > 20)
- 164:main.c        ****                 {
- 165:main.c        ****                   rates[rateSpot++] = (uint8_t)beatsPerMinute; //Store this reading in the array
- 166:main.c        ****                   rateSpot %= RATE_SIZE; //Wrap variable
- 167:main.c        **** 
- 168:main.c        ****                   //Take average of readings
- 169:main.c        ****                   beatAvg = 0;
- 170:main.c        ****                   for (uint8_t x = 0 ; x < RATE_SIZE ; x++)
- 171:main.c        ****                     beatAvg += rates[x];
- 172:main.c        ****                   beatAvg /= RATE_SIZE;
- 173:main.c        ****                 }
- 174:main.c        ****               }*/
- 175:main.c        ****             MAX30101_IsFIFOAFull(&flag);
- 318              		.loc 1 175 0
- 319 01be 07F25963 		addw	r3, r7, #1625
- 320 01c2 1846     		mov	r0, r3
- 321 01c4 FFF7FEFF 		bl	MAX30101_IsFIFOAFull
- 176:main.c        ****             if (flag > 0)
- 322              		.loc 1 176 0
- 323 01c8 07F25963 		addw	r3, r7, #1625
- 324 01cc 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 325 01ce 002B     		cmp	r3, #0
- 326 01d0 00F0AA80 		beq	.L4
- 177:main.c        ****             {   
- 178:main.c        ****                 MAX30101_ReadReadPointer(&rp);
- 327              		.loc 1 178 0
- 328 01d4 07F25B63 		addw	r3, r7, #1627
- 329 01d8 1846     		mov	r0, r3
- 330 01da FFF7FEFF 		bl	MAX30101_ReadReadPointer
- 179:main.c        ****                 MAX30101_ReadWritePointer(&wp);
- 331              		.loc 1 179 0
- 332 01de 07F25A63 		addw	r3, r7, #1626
- 333 01e2 1846     		mov	r0, r3
- 334 01e4 FFF7FEFF 		bl	MAX30101_ReadWritePointer
- 180:main.c        ****                 //Calculate the number of readings we need to get from sensor
- 181:main.c        ****                 num_samples = wp - rp;
- 335              		.loc 1 181 0
- 336 01e8 07F25A63 		addw	r3, r7, #1626
- 337 01ec 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 338 01ee 1A46     		mov	r2, r3
- 339 01f0 07F25B63 		addw	r3, r7, #1627
- 340 01f4 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 341 01f6 D31A     		subs	r3, r2, r3
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 11
+ 159:main.c        ****         if (flag_temp == 1)
+ 315              		.loc 1 159 0
+ 316 01c0 704B     		ldr	r3, .L15+44
+ 317 01c2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 318 01c4 012B     		cmp	r3, #1
+ 319 01c6 FBD1     		bne	.L13
+ 160:main.c        ****         {   
+ 161:main.c        ****             
+ 162:main.c        ****             MAX30101_IsFIFOAFull(&flag);
+ 320              		.loc 1 162 0
+ 321 01c8 07F25563 		addw	r3, r7, #1621
+ 322 01cc 1846     		mov	r0, r3
+ 323 01ce FFF7FEFF 		bl	MAX30101_IsFIFOAFull
+ 163:main.c        ****             if (flag > 0)
+ 324              		.loc 1 163 0
+ 325 01d2 07F25563 		addw	r3, r7, #1621
+ 326 01d6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 327 01d8 002B     		cmp	r3, #0
+ 328 01da 00F02781 		beq	.L4
+ 329              	.LBB3:
+ 164:main.c        ****             {   
+ 165:main.c        ****                 MAX30101_ReadReadPointer(&rp);
+ 330              		.loc 1 165 0
+ 331 01de 07F25763 		addw	r3, r7, #1623
+ 332 01e2 1846     		mov	r0, r3
+ 333 01e4 FFF7FEFF 		bl	MAX30101_ReadReadPointer
+ 166:main.c        ****                 MAX30101_ReadWritePointer(&wp);
+ 334              		.loc 1 166 0
+ 335 01e8 07F25663 		addw	r3, r7, #1622
+ 336 01ec 1846     		mov	r0, r3
+ 337 01ee FFF7FEFF 		bl	MAX30101_ReadWritePointer
+ 167:main.c        ****                 //Calculate the number of readings we need to get from sensor
+ 168:main.c        ****                 num_samples = wp - rp;
+ 338              		.loc 1 168 0
+ 339 01f2 07F25663 		addw	r3, r7, #1622
+ 340 01f6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 341 01f8 1A46     		mov	r2, r3
+ 342 01fa 07F25763 		addw	r3, r7, #1623
+ 343 01fe 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 344 0200 D31A     		subs	r3, r2, r3
+ 345 0202 C7F84C38 		str	r3, [r7, #2124]
+ 169:main.c        ****                 if (num_samples <= 0) 
+ 346              		.loc 1 169 0
+ 347 0206 D7F84C38 		ldr	r3, [r7, #2124]
+ 348 020a 002B     		cmp	r3, #0
+ 349 020c 04DC     		bgt	.L5
+ 170:main.c        ****                     num_samples += 32; //Wrap condition
+ 350              		.loc 1 170 0
+ 351 020e D7F84C38 		ldr	r3, [r7, #2124]
+ 352 0212 2033     		adds	r3, r3, #32
+ 353 0214 C7F84C38 		str	r3, [r7, #2124]
+ 354              	.L5:
+ 171:main.c        ****                 // Print out number of samples
+ 172:main.c        ****                 //sprintf(msg, "%d\r\n", num_samples);
+ 173:main.c        ****                 //debug_print(msg);
+ 174:main.c        ****                 // Read FIFO
+ 175:main.c        ****                 MAX30101_ReadFIFO(num_samples, active_leds, &data, j);
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 11
 
 
- 342 01f8 C7F84438 		str	r3, [r7, #2116]
- 182:main.c        ****                 if (num_samples <= 0) 
- 343              		.loc 1 182 0
- 344 01fc D7F84438 		ldr	r3, [r7, #2116]
- 345 0200 002B     		cmp	r3, #0
- 346 0202 04DC     		bgt	.L5
- 183:main.c        ****                     num_samples += 32; //Wrap condition
- 347              		.loc 1 183 0
- 348 0204 D7F84438 		ldr	r3, [r7, #2116]
- 349 0208 2033     		adds	r3, r3, #32
- 350 020a C7F84438 		str	r3, [r7, #2116]
- 351              	.L5:
- 184:main.c        ****                 // Print out number of samples
- 185:main.c        ****                 sprintf(msg, "%d\r\n", num_samples);
- 352              		.loc 1 185 0
- 353 020e 07F25C63 		addw	r3, r7, #1628
- 354 0212 D7F84428 		ldr	r2, [r7, #2116]
- 355 0216 6349     		ldr	r1, .L12+44
- 356 0218 1846     		mov	r0, r3
- 357 021a FFF7FEFF 		bl	sprintf
- 186:main.c        ****                 debug_print(msg);
- 358              		.loc 1 186 0
- 359 021e 07F25C63 		addw	r3, r7, #1628
- 360 0222 1846     		mov	r0, r3
- 361 0224 FFF7FEFF 		bl	UART_Debug_PutString
- 187:main.c        ****                 // Read FIFO
- 188:main.c        ****                 MAX30101_ReadFIFO(num_samples, active_leds, &data, j);
- 362              		.loc 1 188 0
- 363 0228 D7F84438 		ldr	r3, [r7, #2116]
- 364 022c D8B2     		uxtb	r0, r3
- 365 022e 07F5D262 		add	r2, r7, #1680
- 366 0232 97F83318 		ldrb	r1, [r7, #2099]	@ zero_extendqisi2
- 367 0236 D7F84038 		ldr	r3, [r7, #2112]
- 368 023a FFF7FEFF 		bl	MAX30101_ReadFIFO
- 369              	.LBB3:
- 189:main.c        ****                 //int samples = data.head - data.tail;
- 190:main.c        ****                 //sprintf(msg, "%d\r\n", samples);
- 191:main.c        ****                 //debug_print(msg);
- 192:main.c        ****                 for (int i=0;i<num_samples;i++){
- 370              		.loc 1 192 0
- 371 023e 0023     		movs	r3, #0
- 372 0240 C7F83C38 		str	r3, [r7, #2108]
- 373 0244 6AE0     		b	.L6
- 374              	.L7:
- 193:main.c        ****                     sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
- 375              		.loc 1 193 0
- 376 0246 07F5D263 		add	r3, r7, #1680
- 377 024a 93F88131 		ldrb	r3, [r3, #385]	@ zero_extendqisi2
- 378 024e 1A46     		mov	r2, r3
- 379 0250 D7F83C38 		ldr	r3, [r7, #2108]
- 380 0254 1A44     		add	r2, r2, r3
- 381 0256 07F5D263 		add	r3, r7, #1680
- 382 025a 53F82220 		ldr	r2, [r3, r2, lsl #2]
- 383 025e 07F25C63 		addw	r3, r7, #1628
- 384 0262 5149     		ldr	r1, .L12+48
- 385 0264 1846     		mov	r0, r3
- 386 0266 FFF7FEFF 		bl	sprintf
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 12
+ 355              		.loc 1 175 0
+ 356 0218 D7F84C38 		ldr	r3, [r7, #2124]
+ 357 021c D8B2     		uxtb	r0, r3
+ 358 021e 07F28C62 		addw	r2, r7, #1676
+ 359 0222 97F82F18 		ldrb	r1, [r7, #2095]	@ zero_extendqisi2
+ 360 0226 D7F84838 		ldr	r3, [r7, #2120]
+ 361 022a FFF7FEFF 		bl	MAX30101_ReadFIFO
+ 362              	.LBB4:
+ 176:main.c        ****                 //int samples = data.head - data.tail;
+ 177:main.c        ****                 //sprintf(msg, "%d\r\n", samples);
+ 178:main.c        ****                 //debug_print(msg);
+ 179:main.c        ****                 for (int i=0;i<num_samples;i++){
+ 363              		.loc 1 179 0
+ 364 022e 0023     		movs	r3, #0
+ 365 0230 C7F83838 		str	r3, [r7, #2104]
+ 366 0234 2DE0     		b	.L6
+ 367              	.L7:
+ 180:main.c        ****                     /*sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
+ 181:main.c        ****                     debug_print(msg);
+ 182:main.c        ****                     sprintf(msg, "ir: %lu\r", data.IR[data.tail+i]);
+ 183:main.c        ****                     debug_print(msg);*/
+ 184:main.c        ****                     //data.tail++;
+ 185:main.c        ****                     redBuffer[j] = data.red[data.tail+i];
+ 368              		.loc 1 185 0 discriminator 3
+ 369 0236 07F28C63 		addw	r3, r7, #1676
+ 370 023a 93F88131 		ldrb	r3, [r3, #385]	@ zero_extendqisi2
+ 371 023e 1A46     		mov	r2, r3
+ 372 0240 D7F83838 		ldr	r3, [r7, #2104]
+ 373 0244 1A44     		add	r2, r2, r3
+ 374 0246 07F28C63 		addw	r3, r7, #1676
+ 375 024a 53F82210 		ldr	r1, [r3, r2, lsl #2]
+ 376 024e 3B1D     		adds	r3, r7, #4
+ 377 0250 D7F84828 		ldr	r2, [r7, #2120]
+ 378 0254 43F82210 		str	r1, [r3, r2, lsl #2]
+ 186:main.c        ****                     irBuffer[j] = data.IR[data.tail+i];
+ 379              		.loc 1 186 0 discriminator 3
+ 380 0258 07F28C63 		addw	r3, r7, #1676
+ 381 025c 93F88131 		ldrb	r3, [r3, #385]	@ zero_extendqisi2
+ 382 0260 1A46     		mov	r2, r3
+ 383 0262 D7F83838 		ldr	r3, [r7, #2104]
+ 384 0266 1A44     		add	r2, r2, r3
+ 385 0268 07F28C63 		addw	r3, r7, #1676
+ 386 026c 2032     		adds	r2, r2, #32
+ 387 026e 53F82210 		ldr	r1, [r3, r2, lsl #2]
+ 388 0272 07F54973 		add	r3, r7, #804
+ 389 0276 D7F84828 		ldr	r2, [r7, #2120]
+ 390 027a 43F82210 		str	r1, [r3, r2, lsl #2]
+ 187:main.c        ****                     j++;
+ 391              		.loc 1 187 0 discriminator 3
+ 392 027e D7F84838 		ldr	r3, [r7, #2120]
+ 393 0282 0133     		adds	r3, r3, #1
+ 394 0284 C7F84838 		str	r3, [r7, #2120]
+ 179:main.c        ****                     /*sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
+ 395              		.loc 1 179 0 discriminator 3
+ 396 0288 D7F83838 		ldr	r3, [r7, #2104]
+ 397 028c 0133     		adds	r3, r3, #1
+ 398 028e C7F83838 		str	r3, [r7, #2104]
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 12
 
 
- 194:main.c        ****                     debug_print(msg);
- 387              		.loc 1 194 0
- 388 026a 07F25C63 		addw	r3, r7, #1628
- 389 026e 1846     		mov	r0, r3
- 390 0270 FFF7FEFF 		bl	UART_Debug_PutString
- 195:main.c        ****                     sprintf(msg, "ir: %lu\r", data.IR[data.tail+i]);
- 391              		.loc 1 195 0
- 392 0274 07F5D263 		add	r3, r7, #1680
- 393 0278 93F88131 		ldrb	r3, [r3, #385]	@ zero_extendqisi2
- 394 027c 1A46     		mov	r2, r3
- 395 027e D7F83C38 		ldr	r3, [r7, #2108]
- 396 0282 1A44     		add	r2, r2, r3
- 397 0284 07F5D263 		add	r3, r7, #1680
- 398 0288 2032     		adds	r2, r2, #32
- 399 028a 53F82220 		ldr	r2, [r3, r2, lsl #2]
- 400 028e 07F25C63 		addw	r3, r7, #1628
- 401 0292 4649     		ldr	r1, .L12+52
- 402 0294 1846     		mov	r0, r3
- 403 0296 FFF7FEFF 		bl	sprintf
- 196:main.c        ****                     debug_print(msg);
- 404              		.loc 1 196 0
- 405 029a 07F25C63 		addw	r3, r7, #1628
- 406 029e 1846     		mov	r0, r3
- 407 02a0 FFF7FEFF 		bl	UART_Debug_PutString
- 197:main.c        ****                     //data.tail++;
- 198:main.c        ****                     redBuffer[j] = data.red[data.tail+i];
- 408              		.loc 1 198 0
- 409 02a4 07F5D263 		add	r3, r7, #1680
- 410 02a8 93F88131 		ldrb	r3, [r3, #385]	@ zero_extendqisi2
- 411 02ac 1A46     		mov	r2, r3
- 412 02ae D7F83C38 		ldr	r3, [r7, #2108]
- 413 02b2 1A44     		add	r2, r2, r3
- 414 02b4 07F5D263 		add	r3, r7, #1680
- 415 02b8 53F82210 		ldr	r1, [r3, r2, lsl #2]
- 416 02bc 07F10803 		add	r3, r7, #8
- 417 02c0 D7F84028 		ldr	r2, [r7, #2112]
- 418 02c4 43F82210 		str	r1, [r3, r2, lsl #2]
- 199:main.c        ****                     irBuffer[j] = data.IR[data.tail+i];
+ 399              	.L6:
+ 179:main.c        ****                     /*sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
+ 400              		.loc 1 179 0 is_stmt 0 discriminator 1
+ 401 0292 D7F83828 		ldr	r2, [r7, #2104]
+ 402 0296 D7F84C38 		ldr	r3, [r7, #2124]
+ 403 029a 9A42     		cmp	r2, r3
+ 404 029c CBDB     		blt	.L7
+ 405              	.LBE4:
+ 188:main.c        ****                     //sprintf(msg, "number of samples taken: %d\r", j);
+ 189:main.c        ****                     //debug_print(msg);
+ 190:main.c        ****                 }
+ 191:main.c        ****                 //data.tail = 0;
+ 192:main.c        ****                 //data.head = 0;
+ 193:main.c        ****                 uint32_t irValue = getIR(&data);
+ 406              		.loc 1 193 0 is_stmt 1
+ 407 029e 07F28C63 		addw	r3, r7, #1676
+ 408 02a2 1846     		mov	r0, r3
+ 409 02a4 FFF7FEFF 		bl	getIR
+ 410 02a8 C7F81408 		str	r0, [r7, #2068]
+ 194:main.c        **** 
+ 195:main.c        ****                 if (checkForBeat(irValue) == true)
+ 411              		.loc 1 195 0
+ 412 02ac D7F81438 		ldr	r3, [r7, #2068]
+ 413 02b0 1846     		mov	r0, r3
+ 414 02b2 FFF7FEFF 		bl	checkForBeat
+ 415 02b6 0346     		mov	r3, r0
+ 416 02b8 002B     		cmp	r3, #0
+ 417 02ba 00F08880 		beq	.L8
+ 418              	.LBB5:
+ 196:main.c        ****                 {
+ 197:main.c        ****                     //We sensed a beat!
+ 198:main.c        ****                     //ogni ms incremento la variabile di 1.
+ 199:main.c        ****                     long delta = count - lastBeat;
  419              		.loc 1 199 0
- 420 02c8 07F5D263 		add	r3, r7, #1680
- 421 02cc 93F88131 		ldrb	r3, [r3, #385]	@ zero_extendqisi2
- 422 02d0 1A46     		mov	r2, r3
- 423 02d2 D7F83C38 		ldr	r3, [r7, #2108]
- 424 02d6 1A44     		add	r2, r2, r3
- 425 02d8 07F5D263 		add	r3, r7, #1680
- 426 02dc 2032     		adds	r2, r2, #32
- 427 02de 53F82210 		ldr	r1, [r3, r2, lsl #2]
- 428 02e2 07F54A73 		add	r3, r7, #808
- 429 02e6 D7F84028 		ldr	r2, [r7, #2112]
- 430 02ea 43F82210 		str	r1, [r3, r2, lsl #2]
- 200:main.c        ****                     j++;
- 431              		.loc 1 200 0
- 432 02ee D7F84038 		ldr	r3, [r7, #2112]
- 433 02f2 0133     		adds	r3, r3, #1
- 434 02f4 C7F84038 		str	r3, [r7, #2112]
- 201:main.c        ****                     sprintf(msg, "number of samples taken: %d\r", j);
- 435              		.loc 1 201 0
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 13
+ 420 02be 324B     		ldr	r3, .L15+48
+ 421 02c0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 422 02c2 1A46     		mov	r2, r3
+ 423 02c4 D7F84038 		ldr	r3, [r7, #2112]
+ 424 02c8 D31A     		subs	r3, r2, r3
+ 425 02ca C7F81038 		str	r3, [r7, #2064]
+ 200:main.c        ****                     lastBeat = count;
+ 426              		.loc 1 200 0
+ 427 02ce 2E4B     		ldr	r3, .L15+48
+ 428 02d0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 429 02d2 C7F84038 		str	r3, [r7, #2112]
+ 201:main.c        **** 
+ 202:main.c        ****                     beatsPerMinute = 60 / (delta / 1000.0);
+ 430              		.loc 1 202 0
+ 431 02d6 D7F81008 		ldr	r0, [r7, #2064]
+ 432 02da FFF7FEFF 		bl	__aeabi_i2d
+ 433 02de 4FF00002 		mov	r2, #0
+ 434 02e2 2A4B     		ldr	r3, .L15+52
+ 435 02e4 FFF7FEFF 		bl	__aeabi_ddiv
+ 436 02e8 0346     		mov	r3, r0
+ 437 02ea 0C46     		mov	r4, r1
+ 438 02ec 1A46     		mov	r2, r3
+ 439 02ee 2346     		mov	r3, r4
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 13
 
 
- 436 02f8 07F25C63 		addw	r3, r7, #1628
- 437 02fc D7F84028 		ldr	r2, [r7, #2112]
- 438 0300 2B49     		ldr	r1, .L12+56
- 439 0302 1846     		mov	r0, r3
- 440 0304 FFF7FEFF 		bl	sprintf
- 202:main.c        ****                     debug_print(msg);
- 441              		.loc 1 202 0
- 442 0308 07F25C63 		addw	r3, r7, #1628
- 443 030c 1846     		mov	r0, r3
- 444 030e FFF7FEFF 		bl	UART_Debug_PutString
- 192:main.c        ****                     sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
- 445              		.loc 1 192 0
- 446 0312 D7F83C38 		ldr	r3, [r7, #2108]
- 447 0316 0133     		adds	r3, r3, #1
- 448 0318 C7F83C38 		str	r3, [r7, #2108]
- 449              	.L6:
- 192:main.c        ****                     sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
- 450              		.loc 1 192 0 is_stmt 0 discriminator 1
- 451 031c D7F83C28 		ldr	r2, [r7, #2108]
- 452 0320 D7F84438 		ldr	r3, [r7, #2116]
- 453 0324 9A42     		cmp	r2, r3
- 454 0326 8EDB     		blt	.L7
- 455              	.L4:
- 456              	.LBE3:
- 203:main.c        ****                     /*if(flag_1s) {
- 204:main.c        ****                         sprintf(msg, "spo2: %ld\r", spo2);
- 205:main.c        ****                         debug_print(msg);
- 206:main.c        ****                         sprintf(msg, "validspo2: %d\r", validSPO2);
- 207:main.c        ****                         debug_print(msg);
- 208:main.c        ****                         sprintf(msg, "HR: %ld\r", heartRate);
- 209:main.c        ****                         debug_print(msg);
- 210:main.c        ****                         sprintf(msg, "validHR: %d\r\n", validHeartRate);
- 211:main.c        ****                         debug_print(msg);   
- 212:main.c        ****                         flag_1s = 0;
- 213:main.c        ****                     }*/
- 214:main.c        ****                 }
- 215:main.c        ****                 //data.tail = 0;
- 216:main.c        ****                 //data.head = 0;
- 217:main.c        ****             }
- 218:main.c        ****             flag_temp = 0;
- 457              		.loc 1 218 0 is_stmt 1
- 458 0328 1D4B     		ldr	r3, .L12+40
- 459 032a 0022     		movs	r2, #0
- 460 032c 1A70     		strb	r2, [r3]
- 219:main.c        ****             if(j>=bufferLength) {
- 461              		.loc 1 219 0
- 462 032e D7F84028 		ldr	r2, [r7, #2112]
- 463 0332 D7F82C38 		ldr	r3, [r7, #2092]
- 464 0336 9A42     		cmp	r2, r3
- 465 0338 FFF63DAF 		blt	.L10
- 220:main.c        ****                 maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &v
- 466              		.loc 1 220 0
- 467 033c 07F25461 		addw	r1, r7, #1620
- 468 0340 07F10802 		add	r2, r7, #8
- 469 0344 07F54A70 		add	r0, r7, #808
- 470 0348 07F24B63 		addw	r3, r7, #1611
- 471 034c 0293     		str	r3, [sp, #8]
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 14
+ 440 02f0 4FF00000 		mov	r0, #0
+ 441 02f4 2649     		ldr	r1, .L15+56
+ 442 02f6 FFF7FEFF 		bl	__aeabi_ddiv
+ 443 02fa 0346     		mov	r3, r0
+ 444 02fc 0C46     		mov	r4, r1
+ 445 02fe 1846     		mov	r0, r3
+ 446 0300 2146     		mov	r1, r4
+ 447 0302 FFF7FEFF 		bl	__aeabi_d2uiz
+ 448 0306 0346     		mov	r3, r0
+ 449 0308 87F83E38 		strb	r3, [r7, #2110]
+ 203:main.c        **** 
+ 204:main.c        ****                     if (beatsPerMinute < 255 && beatsPerMinute > 20)
+ 450              		.loc 1 204 0
+ 451 030c 97F83E38 		ldrb	r3, [r7, #2110]	@ zero_extendqisi2
+ 452 0310 FF2B     		cmp	r3, #255
+ 453 0312 5CD0     		beq	.L8
+ 454              		.loc 1 204 0 is_stmt 0 discriminator 1
+ 455 0314 97F83E38 		ldrb	r3, [r7, #2110]	@ zero_extendqisi2
+ 456 0318 142B     		cmp	r3, #20
+ 457 031a 58D9     		bls	.L8
+ 205:main.c        ****                     {
+ 206:main.c        ****                         rates[rateSpot++] = beatsPerMinute; //Store this reading in the array
+ 458              		.loc 1 206 0 is_stmt 1
+ 459 031c 97F84738 		ldrb	r3, [r7, #2119]	@ zero_extendqisi2
+ 460 0320 5A1C     		adds	r2, r3, #1
+ 461 0322 87F84728 		strb	r2, [r7, #2119]
+ 462 0326 1946     		mov	r1, r3
+ 463 0328 D7F81838 		ldr	r3, [r7, #2072]
+ 464 032c 97F83E28 		ldrb	r2, [r7, #2110]
+ 465 0330 5A54     		strb	r2, [r3, r1]
+ 207:main.c        ****                         rateSpot %= RATE_SIZE; //Wrap variable
+ 466              		.loc 1 207 0
+ 467 0332 97F84738 		ldrb	r3, [r7, #2119]	@ zero_extendqisi2
+ 468 0336 97F82328 		ldrb	r2, [r7, #2083]	@ zero_extendqisi2
+ 469 033a B3FBF2F1 		udiv	r1, r3, r2
+ 470 033e 02FB01F2 		mul	r2, r2, r1
+ 471 0342 9B1A     		subs	r3, r3, r2
+ 472 0344 87F84738 		strb	r3, [r7, #2119]
+ 208:main.c        **** 
+ 209:main.c        ****                         //Take average of readings
+ 210:main.c        ****                         beatAvg = 0;
+ 473              		.loc 1 210 0
+ 474 0348 0023     		movs	r3, #0
+ 475 034a 87F83D38 		strb	r3, [r7, #2109]
+ 211:main.c        ****                         for ( x = 0 ; x < RATE_SIZE ; x++)
+ 476              		.loc 1 211 0
+ 477 034e 0023     		movs	r3, #0
+ 478 0350 87F83F38 		strb	r3, [r7, #2111]
+ 479 0354 2DE0     		b	.L9
+ 480              	.L16:
+ 481 0356 00BF     		.align	2
+ 482              	.L15:
+ 483 0358 00000000 		.word	UART_Debug_PutString
+ 484 035c 00000000 		.word	.LC0
+ 485 0360 20000000 		.word	.LC1
+ 486 0364 40000000 		.word	.LC2
+ 487 0368 5C000000 		.word	.LC3
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 14
 
 
- 472 034e 07F24C63 		addw	r3, r7, #1612
- 473 0352 0193     		str	r3, [sp, #4]
- 474 0354 07F25363 		addw	r3, r7, #1619
- 475 0358 0093     		str	r3, [sp]
- 476 035a 0B46     		mov	r3, r1
- 477 035c D7F82C18 		ldr	r1, [r7, #2092]
- 478 0360 FFF7FEFF 		bl	maxim_heart_rate_and_oxygen_saturation
- 221:main.c        ****                 //flag_1s = 1;
- 222:main.c        ****                 j=bufferLength - 50;
- 479              		.loc 1 222 0
- 480 0364 D7F82C38 		ldr	r3, [r7, #2092]
- 481 0368 323B     		subs	r3, r3, #50
- 482 036a C7F84038 		str	r3, [r7, #2112]
- 483              	.LBB4:
- 223:main.c        ****                 for (int i=50; i<bufferLength; i++) {
- 484              		.loc 1 223 0
- 485 036e 3223     		movs	r3, #50
- 486 0370 C7F83838 		str	r3, [r7, #2104]
- 487 0374 3FE0     		b	.L8
- 488              	.L13:
- 489 0376 00BF     		.align	2
- 490              	.L12:
- 491 0378 00000000 		.word	UART_Debug_PutString
- 492 037c 00000000 		.word	.LC0
- 493 0380 20000000 		.word	.LC1
- 494 0384 40000000 		.word	.LC2
- 495 0388 5C000000 		.word	.LC3
- 496 038c 74000000 		.word	.LC4
- 497 0390 88000000 		.word	.LC5
- 498 0394 AC000000 		.word	.LC6
- 499 0398 CC000000 		.word	.LC7
- 500 039c 00000000 		.word	MAX30101_ISR
- 501 03a0 00000000 		.word	flag_temp
- 502 03a4 D4000000 		.word	.LC8
- 503 03a8 DC000000 		.word	.LC9
- 504 03ac E8000000 		.word	.LC10
- 505 03b0 F4000000 		.word	.LC11
- 506              	.L9:
- 224:main.c        ****                     redBuffer[i-50] = redBuffer[i];
- 507              		.loc 1 224 0 discriminator 3
- 508 03b4 D7F83838 		ldr	r3, [r7, #2104]
- 509 03b8 A3F13202 		sub	r2, r3, #50
- 510 03bc 07F10803 		add	r3, r7, #8
- 511 03c0 D7F83818 		ldr	r1, [r7, #2104]
- 512 03c4 53F82110 		ldr	r1, [r3, r1, lsl #2]
- 513 03c8 07F10803 		add	r3, r7, #8
- 514 03cc 43F82210 		str	r1, [r3, r2, lsl #2]
- 225:main.c        ****                     irBuffer[i-50] = irBuffer[i];
- 515              		.loc 1 225 0 discriminator 3
- 516 03d0 D7F83838 		ldr	r3, [r7, #2104]
- 517 03d4 A3F13202 		sub	r2, r3, #50
- 518 03d8 07F54A73 		add	r3, r7, #808
- 519 03dc D7F83818 		ldr	r1, [r7, #2104]
- 520 03e0 53F82110 		ldr	r1, [r3, r1, lsl #2]
- 521 03e4 07F54A73 		add	r3, r7, #808
- 522 03e8 43F82210 		str	r1, [r3, r2, lsl #2]
- 223:main.c        ****                 for (int i=50; i<bufferLength; i++) {
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 15
+ 488 036c 74000000 		.word	.LC4
+ 489 0370 88000000 		.word	.LC5
+ 490 0374 AC000000 		.word	.LC6
+ 491 0378 CC000000 		.word	.LC7
+ 492 037c 00000000 		.word	MAX30101_ISR
+ 493 0380 00000000 		.word	Count
+ 494 0384 00000000 		.word	flag_temp
+ 495 0388 00000000 		.word	count
+ 496 038c 00408F40 		.word	1083129856
+ 497 0390 00004E40 		.word	1078853632
+ 498              	.L10:
+ 212:main.c        ****                             beatAvg += rates[x];
+ 499              		.loc 1 212 0 discriminator 3
+ 500 0394 97F83F38 		ldrb	r3, [r7, #2111]	@ zero_extendqisi2
+ 501 0398 D7F81828 		ldr	r2, [r7, #2072]
+ 502 039c D25C     		ldrb	r2, [r2, r3]	@ zero_extendqisi2
+ 503 039e 97F83D38 		ldrb	r3, [r7, #2109]
+ 504 03a2 1344     		add	r3, r3, r2
+ 505 03a4 87F83D38 		strb	r3, [r7, #2109]
+ 211:main.c        ****                         for ( x = 0 ; x < RATE_SIZE ; x++)
+ 506              		.loc 1 211 0 discriminator 3
+ 507 03a8 97F83F38 		ldrb	r3, [r7, #2111]	@ zero_extendqisi2
+ 508 03ac 0133     		adds	r3, r3, #1
+ 509 03ae 87F83F38 		strb	r3, [r7, #2111]
+ 510              	.L9:
+ 211:main.c        ****                         for ( x = 0 ; x < RATE_SIZE ; x++)
+ 511              		.loc 1 211 0 is_stmt 0 discriminator 1
+ 512 03b2 97F83F28 		ldrb	r2, [r7, #2111]	@ zero_extendqisi2
+ 513 03b6 97F82338 		ldrb	r3, [r7, #2083]	@ zero_extendqisi2
+ 514 03ba 9A42     		cmp	r2, r3
+ 515 03bc EAD3     		bcc	.L10
+ 213:main.c        ****                         beatAvg /= RATE_SIZE;
+ 516              		.loc 1 213 0 is_stmt 1
+ 517 03be 97F83D28 		ldrb	r2, [r7, #2109]	@ zero_extendqisi2
+ 518 03c2 97F82338 		ldrb	r3, [r7, #2083]	@ zero_extendqisi2
+ 519 03c6 B2FBF3F3 		udiv	r3, r2, r3
+ 520 03ca 87F83D38 		strb	r3, [r7, #2109]
+ 521              	.L8:
+ 522              	.LBE5:
+ 214:main.c        ****                     }
+ 215:main.c        ****                 }
+ 216:main.c        **** 
+ 217:main.c        ****                 sprintf(msg, "IR=%lu\r", irValue);
+ 523              		.loc 1 217 0
+ 524 03ce 07F5CB63 		add	r3, r7, #1624
+ 525 03d2 D7F81428 		ldr	r2, [r7, #2068]
+ 526 03d6 4A49     		ldr	r1, .L17
+ 527 03d8 1846     		mov	r0, r3
+ 528 03da FFF7FEFF 		bl	sprintf
+ 218:main.c        ****                 debug_print(msg);
+ 529              		.loc 1 218 0
+ 530 03de 07F5CB63 		add	r3, r7, #1624
+ 531 03e2 1846     		mov	r0, r3
+ 532 03e4 FFF7FEFF 		bl	UART_Debug_PutString
+ 219:main.c        ****                 sprintf(msg, "BPM=%u\r", beatsPerMinute);
+ 533              		.loc 1 219 0
+ 534 03e8 97F83E28 		ldrb	r2, [r7, #2110]	@ zero_extendqisi2
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 15
 
 
- 523              		.loc 1 223 0 discriminator 3
- 524 03ec D7F83838 		ldr	r3, [r7, #2104]
- 525 03f0 0133     		adds	r3, r3, #1
- 526 03f2 C7F83838 		str	r3, [r7, #2104]
- 527              	.L8:
- 223:main.c        ****                 for (int i=50; i<bufferLength; i++) {
- 528              		.loc 1 223 0 is_stmt 0 discriminator 1
- 529 03f6 D7F83828 		ldr	r2, [r7, #2104]
- 530 03fa D7F82C38 		ldr	r3, [r7, #2092]
- 531 03fe 9A42     		cmp	r2, r3
- 532 0400 D8DB     		blt	.L9
- 533              	.LBE4:
- 226:main.c        ****                 }
- 227:main.c        ****                 sprintf(msg, "spo2: %ld\r", spo2);
- 534              		.loc 1 227 0 is_stmt 1
- 535 0402 07F25463 		addw	r3, r7, #1620
- 536 0406 1A68     		ldr	r2, [r3]
- 537 0408 07F25C63 		addw	r3, r7, #1628
- 538 040c 1B49     		ldr	r1, .L14
- 539 040e 1846     		mov	r0, r3
- 540 0410 FFF7FEFF 		bl	sprintf
- 228:main.c        ****                 debug_print(msg);
- 541              		.loc 1 228 0
- 542 0414 07F25C63 		addw	r3, r7, #1628
- 543 0418 1846     		mov	r0, r3
- 544 041a FFF7FEFF 		bl	UART_Debug_PutString
- 229:main.c        ****                 sprintf(msg, "validspo2: %d\r", validSPO2);
- 545              		.loc 1 229 0
- 546 041e 07F25363 		addw	r3, r7, #1619
- 547 0422 93F90030 		ldrsb	r3, [r3]
- 548 0426 1A46     		mov	r2, r3
- 549 0428 07F25C63 		addw	r3, r7, #1628
- 550 042c 1449     		ldr	r1, .L14+4
- 551 042e 1846     		mov	r0, r3
- 552 0430 FFF7FEFF 		bl	sprintf
- 230:main.c        ****                 debug_print(msg);
- 553              		.loc 1 230 0
- 554 0434 07F25C63 		addw	r3, r7, #1628
- 555 0438 1846     		mov	r0, r3
- 556 043a FFF7FEFF 		bl	UART_Debug_PutString
- 231:main.c        ****                 sprintf(msg, "HR: %ld\r", heartRate);
- 557              		.loc 1 231 0
- 558 043e 07F24C63 		addw	r3, r7, #1612
- 559 0442 1A68     		ldr	r2, [r3]
- 560 0444 07F25C63 		addw	r3, r7, #1628
- 561 0448 0E49     		ldr	r1, .L14+8
- 562 044a 1846     		mov	r0, r3
- 563 044c FFF7FEFF 		bl	sprintf
- 232:main.c        ****                 debug_print(msg);
- 564              		.loc 1 232 0
- 565 0450 07F25C63 		addw	r3, r7, #1628
- 566 0454 1846     		mov	r0, r3
- 567 0456 FFF7FEFF 		bl	UART_Debug_PutString
- 233:main.c        ****                 sprintf(msg, "validHR: %d\r\n", validHeartRate);
- 568              		.loc 1 233 0
- 569 045a 07F24B63 		addw	r3, r7, #1611
- 570 045e 93F90030 		ldrsb	r3, [r3]
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 16
+ 535 03ec 07F5CB63 		add	r3, r7, #1624
+ 536 03f0 4449     		ldr	r1, .L17+4
+ 537 03f2 1846     		mov	r0, r3
+ 538 03f4 FFF7FEFF 		bl	sprintf
+ 220:main.c        ****                 debug_print(msg);
+ 539              		.loc 1 220 0
+ 540 03f8 07F5CB63 		add	r3, r7, #1624
+ 541 03fc 1846     		mov	r0, r3
+ 542 03fe FFF7FEFF 		bl	UART_Debug_PutString
+ 221:main.c        ****                 sprintf(msg, "Avg BPM=%u\r\n", beatAvg);
+ 543              		.loc 1 221 0
+ 544 0402 97F83D28 		ldrb	r2, [r7, #2109]	@ zero_extendqisi2
+ 545 0406 07F5CB63 		add	r3, r7, #1624
+ 546 040a 3F49     		ldr	r1, .L17+8
+ 547 040c 1846     		mov	r0, r3
+ 548 040e FFF7FEFF 		bl	sprintf
+ 222:main.c        ****                 debug_print(msg);
+ 549              		.loc 1 222 0
+ 550 0412 07F5CB63 		add	r3, r7, #1624
+ 551 0416 1846     		mov	r0, r3
+ 552 0418 FFF7FEFF 		bl	UART_Debug_PutString
+ 223:main.c        ****                   
+ 224:main.c        **** 
+ 225:main.c        ****                 if (irValue < 1000)
+ 553              		.loc 1 225 0
+ 554 041c D7F81438 		ldr	r3, [r7, #2068]
+ 555 0420 B3F57A7F 		cmp	r3, #1000
+ 556 0424 02D2     		bcs	.L4
+ 226:main.c        ****                     debug_print("no finger\r\n");
+ 557              		.loc 1 226 0 discriminator 1
+ 558 0426 3948     		ldr	r0, .L17+12
+ 559 0428 FFF7FEFF 		bl	UART_Debug_PutString
+ 560              	.L4:
+ 561              	.LBE3:
+ 227:main.c        ****             }
+ 228:main.c        ****             flag_temp = 0;
+ 562              		.loc 1 228 0
+ 563 042c 384B     		ldr	r3, .L17+16
+ 564 042e 0022     		movs	r2, #0
+ 565 0430 1A70     		strb	r2, [r3]
+ 229:main.c        ****             if(j>=bufferLength) {
+ 566              		.loc 1 229 0
+ 567 0432 D7F84828 		ldr	r2, [r7, #2120]
+ 568 0436 D7F82838 		ldr	r3, [r7, #2088]
+ 569 043a 9A42     		cmp	r2, r3
+ 570 043c FFF6C0AE 		blt	.L13
+ 230:main.c        ****                 maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &v
+ 571              		.loc 1 230 0
+ 572 0440 07F5CA61 		add	r1, r7, #1616
+ 573 0444 3A1D     		adds	r2, r7, #4
+ 574 0446 07F54970 		add	r0, r7, #804
+ 575 044a 07F24763 		addw	r3, r7, #1607
+ 576 044e 0293     		str	r3, [sp, #8]
+ 577 0450 07F5C963 		add	r3, r7, #1608
+ 578 0454 0193     		str	r3, [sp, #4]
+ 579 0456 07F24F63 		addw	r3, r7, #1615
+ 580 045a 0093     		str	r3, [sp]
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 16
 
 
- 571 0462 1A46     		mov	r2, r3
- 572 0464 07F25C63 		addw	r3, r7, #1628
- 573 0468 0749     		ldr	r1, .L14+12
- 574 046a 1846     		mov	r0, r3
- 575 046c FFF7FEFF 		bl	sprintf
- 234:main.c        ****                 debug_print(msg); 
- 576              		.loc 1 234 0
- 577 0470 07F25C63 		addw	r3, r7, #1628
- 578 0474 1846     		mov	r0, r3
- 579 0476 FFF7FEFF 		bl	UART_Debug_PutString
- 235:main.c        ****             }
- 236:main.c        ****         }
- 237:main.c        ****     }
- 580              		.loc 1 237 0
- 581 047a 9CE6     		b	.L10
- 582              	.L15:
- 583              		.align	2
- 584              	.L14:
- 585 047c 14010000 		.word	.LC12
- 586 0480 20010000 		.word	.LC13
- 587 0484 30010000 		.word	.LC14
- 588 0488 3C010000 		.word	.LC15
- 589              		.cfi_endproc
- 590              	.LFE64:
- 591              		.size	main, .-main
- 592              		.section	.text.MAX30101_ISR,"ax",%progbits
- 593              		.align	2
- 594              		.global	MAX30101_ISR
- 595              		.thumb
- 596              		.thumb_func
- 597              		.type	MAX30101_ISR, %function
- 598              	MAX30101_ISR:
- 599              	.LFB65:
- 238:main.c        **** }
- 239:main.c        **** 
- 240:main.c        **** CY_ISR(MAX30101_ISR)
- 241:main.c        **** {
- 600              		.loc 1 241 0
- 601              		.cfi_startproc
- 602              		@ args = 0, pretend = 0, frame = 0
- 603              		@ frame_needed = 1, uses_anonymous_args = 0
- 604 0000 80B5     		push	{r7, lr}
- 605              		.cfi_def_cfa_offset 8
- 606              		.cfi_offset 7, -8
- 607              		.cfi_offset 14, -4
- 608 0002 00AF     		add	r7, sp, #0
- 609              		.cfi_def_cfa_register 7
- 242:main.c        ****     Connection_LED_Write(!Connection_LED_Read());
- 610              		.loc 1 242 0
- 611 0004 FFF7FEFF 		bl	Connection_LED_Read
- 612 0008 0346     		mov	r3, r0
- 613 000a 002B     		cmp	r3, #0
- 614 000c 0CBF     		ite	eq
- 615 000e 0123     		moveq	r3, #1
- 616 0010 0023     		movne	r3, #0
- 617 0012 DBB2     		uxtb	r3, r3
- 618 0014 1846     		mov	r0, r3
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 17
+ 581 045c 0B46     		mov	r3, r1
+ 582 045e D7F82818 		ldr	r1, [r7, #2088]
+ 583 0462 FFF7FEFF 		bl	maxim_heart_rate_and_oxygen_saturation
+ 231:main.c        ****                 //flag_1s = 1;
+ 232:main.c        ****                 j=bufferLength - 50;
+ 584              		.loc 1 232 0
+ 585 0466 D7F82838 		ldr	r3, [r7, #2088]
+ 586 046a 323B     		subs	r3, r3, #50
+ 587 046c C7F84838 		str	r3, [r7, #2120]
+ 588              	.LBB6:
+ 233:main.c        ****                 for (int i=50; i<bufferLength; i++) {
+ 589              		.loc 1 233 0
+ 590 0470 3223     		movs	r3, #50
+ 591 0472 C7F83438 		str	r3, [r7, #2100]
+ 592 0476 1EE0     		b	.L11
+ 593              	.L12:
+ 234:main.c        ****                     redBuffer[i-50] = redBuffer[i];
+ 594              		.loc 1 234 0 discriminator 3
+ 595 0478 D7F83438 		ldr	r3, [r7, #2100]
+ 596 047c A3F13202 		sub	r2, r3, #50
+ 597 0480 3B1D     		adds	r3, r7, #4
+ 598 0482 D7F83418 		ldr	r1, [r7, #2100]
+ 599 0486 53F82110 		ldr	r1, [r3, r1, lsl #2]
+ 600 048a 3B1D     		adds	r3, r7, #4
+ 601 048c 43F82210 		str	r1, [r3, r2, lsl #2]
+ 235:main.c        ****                     irBuffer[i-50] = irBuffer[i];
+ 602              		.loc 1 235 0 discriminator 3
+ 603 0490 D7F83438 		ldr	r3, [r7, #2100]
+ 604 0494 A3F13202 		sub	r2, r3, #50
+ 605 0498 07F54973 		add	r3, r7, #804
+ 606 049c D7F83418 		ldr	r1, [r7, #2100]
+ 607 04a0 53F82110 		ldr	r1, [r3, r1, lsl #2]
+ 608 04a4 07F54973 		add	r3, r7, #804
+ 609 04a8 43F82210 		str	r1, [r3, r2, lsl #2]
+ 233:main.c        ****                 for (int i=50; i<bufferLength; i++) {
+ 610              		.loc 1 233 0 discriminator 3
+ 611 04ac D7F83438 		ldr	r3, [r7, #2100]
+ 612 04b0 0133     		adds	r3, r3, #1
+ 613 04b2 C7F83438 		str	r3, [r7, #2100]
+ 614              	.L11:
+ 233:main.c        ****                 for (int i=50; i<bufferLength; i++) {
+ 615              		.loc 1 233 0 is_stmt 0 discriminator 1
+ 616 04b6 D7F83428 		ldr	r2, [r7, #2100]
+ 617 04ba D7F82838 		ldr	r3, [r7, #2088]
+ 618 04be 9A42     		cmp	r2, r3
+ 619 04c0 DADB     		blt	.L12
+ 620              	.LBE6:
+ 236:main.c        ****                 }
+ 237:main.c        ****                 sprintf(msg, "spo2: %ld\r", spo2);
+ 621              		.loc 1 237 0 is_stmt 1
+ 622 04c2 07F5CA63 		add	r3, r7, #1616
+ 623 04c6 1A68     		ldr	r2, [r3]
+ 624 04c8 07F5CB63 		add	r3, r7, #1624
+ 625 04cc 1149     		ldr	r1, .L17+20
+ 626 04ce 1846     		mov	r0, r3
+ 627 04d0 FFF7FEFF 		bl	sprintf
+ 238:main.c        ****                 debug_print(msg);
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 17
 
 
- 619 0016 FFF7FEFF 		bl	Connection_LED_Write
- 243:main.c        ****     MAX30101_INT_ClearInterrupt();
- 620              		.loc 1 243 0
- 621 001a FFF7FEFF 		bl	MAX30101_INT_ClearInterrupt
- 244:main.c        ****     flag_temp = 1;
- 622              		.loc 1 244 0
- 623 001e 024B     		ldr	r3, .L17
- 624 0020 0122     		movs	r2, #1
- 625 0022 1A70     		strb	r2, [r3]
- 245:main.c        **** }
- 626              		.loc 1 245 0
- 627 0024 00BF     		nop
- 628 0026 80BD     		pop	{r7, pc}
- 629              	.L18:
- 630              		.align	2
- 631              	.L17:
- 632 0028 00000000 		.word	flag_temp
- 633              		.cfi_endproc
- 634              	.LFE65:
- 635              		.size	MAX30101_ISR, .-MAX30101_ISR
- 636              		.text
- 637              	.Letext0:
- 638              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 639              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 640              		.file 4 "MAX30101.h"
- 641              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
- 642              		.file 6 "SpO2.h"
- 643              		.section	.debug_info,"",%progbits
- 644              	.Ldebug_info0:
- 645 0000 DE030000 		.4byte	0x3de
- 646 0004 0400     		.2byte	0x4
- 647 0006 00000000 		.4byte	.Ldebug_abbrev0
- 648 000a 04       		.byte	0x4
- 649 000b 01       		.uleb128 0x1
- 650 000c 28000000 		.4byte	.LASF52
- 651 0010 0C       		.byte	0xc
- 652 0011 58020000 		.4byte	.LASF53
- 653 0015 67010000 		.4byte	.LASF54
- 654 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 655 001d 00000000 		.4byte	0
- 656 0021 00000000 		.4byte	.Ldebug_line0
- 657 0025 02       		.uleb128 0x2
- 658 0026 2D020000 		.4byte	.LASF0
- 659 002a 02       		.byte	0x2
- 660 002b 1B       		.byte	0x1b
- 661 002c 30000000 		.4byte	0x30
- 662 0030 03       		.uleb128 0x3
- 663 0031 01       		.byte	0x1
- 664 0032 06       		.byte	0x6
- 665 0033 CF010000 		.4byte	.LASF2
- 666 0037 02       		.uleb128 0x2
- 667 0038 21010000 		.4byte	.LASF1
- 668 003c 02       		.byte	0x2
- 669 003d 1D       		.byte	0x1d
- 670 003e 42000000 		.4byte	0x42
- 671 0042 03       		.uleb128 0x3
- 672 0043 01       		.byte	0x1
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 18
+ 628              		.loc 1 238 0
+ 629 04d4 07F5CB63 		add	r3, r7, #1624
+ 630 04d8 1846     		mov	r0, r3
+ 631 04da FFF7FEFF 		bl	UART_Debug_PutString
+ 239:main.c        ****                 sprintf(msg, "validspo2: %d\r", validSPO2);
+ 632              		.loc 1 239 0
+ 633 04de 07F24F63 		addw	r3, r7, #1615
+ 634 04e2 93F90030 		ldrsb	r3, [r3]
+ 635 04e6 1A46     		mov	r2, r3
+ 636 04e8 07F5CB63 		add	r3, r7, #1624
+ 637 04ec 0A49     		ldr	r1, .L17+24
+ 638 04ee 1846     		mov	r0, r3
+ 639 04f0 FFF7FEFF 		bl	sprintf
+ 240:main.c        ****                 debug_print(msg);
+ 640              		.loc 1 240 0
+ 641 04f4 07F5CB63 		add	r3, r7, #1624
+ 642 04f8 1846     		mov	r0, r3
+ 643 04fa FFF7FEFF 		bl	UART_Debug_PutString
+ 241:main.c        ****                 /*sprintf(msg, "HR: %ld\r", heartRate);
+ 242:main.c        ****                 debug_print(msg);
+ 243:main.c        ****                 sprintf(msg, "validHR: %d\r\n", validHeartRate);
+ 244:main.c        ****                 debug_print(msg);*/ 
+ 245:main.c        ****             }
+ 246:main.c        ****         }
+ 247:main.c        ****     }
+ 644              		.loc 1 247 0
+ 645 04fe 5FE6     		b	.L13
+ 646              	.L18:
+ 647              		.align	2
+ 648              	.L17:
+ 649 0500 D4000000 		.word	.LC8
+ 650 0504 DC000000 		.word	.LC9
+ 651 0508 E4000000 		.word	.LC10
+ 652 050c F4000000 		.word	.LC11
+ 653 0510 00000000 		.word	flag_temp
+ 654 0514 00010000 		.word	.LC12
+ 655 0518 0C010000 		.word	.LC13
+ 656              		.cfi_endproc
+ 657              	.LFE64:
+ 658              		.size	main, .-main
+ 659              		.section	.text.MAX30101_ISR,"ax",%progbits
+ 660              		.align	2
+ 661              		.global	MAX30101_ISR
+ 662              		.thumb
+ 663              		.thumb_func
+ 664              		.type	MAX30101_ISR, %function
+ 665              	MAX30101_ISR:
+ 666              	.LFB65:
+ 248:main.c        **** }
+ 249:main.c        **** 
+ 250:main.c        **** CY_ISR(MAX30101_ISR)
+ 251:main.c        **** {
+ 667              		.loc 1 251 0
+ 668              		.cfi_startproc
+ 669              		@ args = 0, pretend = 0, frame = 0
+ 670              		@ frame_needed = 1, uses_anonymous_args = 0
+ 671 0000 80B5     		push	{r7, lr}
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 18
 
 
- 673 0044 08       		.byte	0x8
- 674 0045 BC010000 		.4byte	.LASF3
- 675 0049 03       		.uleb128 0x3
- 676 004a 02       		.byte	0x2
- 677 004b 05       		.byte	0x5
- 678 004c D0000000 		.4byte	.LASF4
- 679 0050 03       		.uleb128 0x3
- 680 0051 02       		.byte	0x2
- 681 0052 07       		.byte	0x7
- 682 0053 1A020000 		.4byte	.LASF5
- 683 0057 02       		.uleb128 0x2
- 684 0058 A3020000 		.4byte	.LASF6
- 685 005c 02       		.byte	0x2
- 686 005d 3F       		.byte	0x3f
- 687 005e 62000000 		.4byte	0x62
- 688 0062 03       		.uleb128 0x3
- 689 0063 04       		.byte	0x4
- 690 0064 05       		.byte	0x5
- 691 0065 0B010000 		.4byte	.LASF7
- 692 0069 02       		.uleb128 0x2
- 693 006a BB000000 		.4byte	.LASF8
- 694 006e 02       		.byte	0x2
- 695 006f 41       		.byte	0x41
- 696 0070 74000000 		.4byte	0x74
- 697 0074 03       		.uleb128 0x3
- 698 0075 04       		.byte	0x4
- 699 0076 07       		.byte	0x7
- 700 0077 5F020000 		.4byte	.LASF9
- 701 007b 03       		.uleb128 0x3
- 702 007c 08       		.byte	0x8
- 703 007d 05       		.byte	0x5
- 704 007e FD000000 		.4byte	.LASF10
- 705 0082 03       		.uleb128 0x3
- 706 0083 08       		.byte	0x8
- 707 0084 07       		.byte	0x7
- 708 0085 DB010000 		.4byte	.LASF11
- 709 0089 04       		.uleb128 0x4
- 710 008a 04       		.byte	0x4
- 711 008b 05       		.byte	0x5
- 712 008c 696E7400 		.ascii	"int\000"
- 713 0090 03       		.uleb128 0x3
- 714 0091 04       		.byte	0x4
- 715 0092 07       		.byte	0x7
- 716 0093 FB010000 		.4byte	.LASF12
- 717 0097 02       		.uleb128 0x2
- 718 0098 0F000000 		.4byte	.LASF13
- 719 009c 03       		.byte	0x3
- 720 009d 14       		.byte	0x14
- 721 009e 25000000 		.4byte	0x25
- 722 00a2 02       		.uleb128 0x2
- 723 00a3 AD020000 		.4byte	.LASF14
- 724 00a7 03       		.byte	0x3
- 725 00a8 18       		.byte	0x18
- 726 00a9 37000000 		.4byte	0x37
- 727 00ad 02       		.uleb128 0x2
- 728 00ae 3B020000 		.4byte	.LASF15
- 729 00b2 03       		.byte	0x3
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 19
+ 672              		.cfi_def_cfa_offset 8
+ 673              		.cfi_offset 7, -8
+ 674              		.cfi_offset 14, -4
+ 675 0002 00AF     		add	r7, sp, #0
+ 676              		.cfi_def_cfa_register 7
+ 252:main.c        ****     Connection_LED_Write(!Connection_LED_Read());
+ 677              		.loc 1 252 0
+ 678 0004 FFF7FEFF 		bl	Connection_LED_Read
+ 679 0008 0346     		mov	r3, r0
+ 680 000a 002B     		cmp	r3, #0
+ 681 000c 0CBF     		ite	eq
+ 682 000e 0123     		moveq	r3, #1
+ 683 0010 0023     		movne	r3, #0
+ 684 0012 DBB2     		uxtb	r3, r3
+ 685 0014 1846     		mov	r0, r3
+ 686 0016 FFF7FEFF 		bl	Connection_LED_Write
+ 253:main.c        ****     MAX30101_INT_ClearInterrupt();
+ 687              		.loc 1 253 0
+ 688 001a FFF7FEFF 		bl	MAX30101_INT_ClearInterrupt
+ 254:main.c        ****     flag_temp = 1;
+ 689              		.loc 1 254 0
+ 690 001e 024B     		ldr	r3, .L20
+ 691 0020 0122     		movs	r2, #1
+ 692 0022 1A70     		strb	r2, [r3]
+ 255:main.c        **** }
+ 693              		.loc 1 255 0
+ 694 0024 00BF     		nop
+ 695 0026 80BD     		pop	{r7, pc}
+ 696              	.L21:
+ 697              		.align	2
+ 698              	.L20:
+ 699 0028 00000000 		.word	flag_temp
+ 700              		.cfi_endproc
+ 701              	.LFE65:
+ 702              		.size	MAX30101_ISR, .-MAX30101_ISR
+ 703              		.text
+ 704              	.Letext0:
+ 705              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 706              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 707              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 708              		.file 5 "MAX30101.h"
+ 709              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
+ 710              		.file 7 "SpO2.h"
+ 711              		.section	.debug_info,"",%progbits
+ 712              	.Ldebug_info0:
+ 713 0000 3E040000 		.4byte	0x43e
+ 714 0004 0400     		.2byte	0x4
+ 715 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 716 000a 04       		.byte	0x4
+ 717 000b 01       		.uleb128 0x1
+ 718 000c 2E000000 		.4byte	.LASF56
+ 719 0010 0C       		.byte	0xc
+ 720 0011 6C020000 		.4byte	.LASF57
+ 721 0015 73010000 		.4byte	.LASF58
+ 722 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 723 001d 00000000 		.4byte	0
+ 724 0021 00000000 		.4byte	.Ldebug_line0
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 19
 
 
- 730 00b3 2C       		.byte	0x2c
- 731 00b4 57000000 		.4byte	0x57
- 732 00b8 02       		.uleb128 0x2
- 733 00b9 F2010000 		.4byte	.LASF16
- 734 00bd 03       		.byte	0x3
- 735 00be 30       		.byte	0x30
- 736 00bf 69000000 		.4byte	0x69
- 737 00c3 03       		.uleb128 0x3
- 738 00c4 04       		.byte	0x4
- 739 00c5 04       		.byte	0x4
- 740 00c6 F7000000 		.4byte	.LASF17
- 741 00ca 03       		.uleb128 0x3
- 742 00cb 08       		.byte	0x8
- 743 00cc 04       		.byte	0x4
- 744 00cd 88020000 		.4byte	.LASF18
- 745 00d1 03       		.uleb128 0x3
- 746 00d2 01       		.byte	0x1
- 747 00d3 08       		.byte	0x8
- 748 00d4 36020000 		.4byte	.LASF19
- 749 00d8 03       		.uleb128 0x3
- 750 00d9 08       		.byte	0x8
- 751 00da 04       		.byte	0x4
- 752 00db 54010000 		.4byte	.LASF20
- 753 00df 03       		.uleb128 0x3
- 754 00e0 04       		.byte	0x4
- 755 00e1 07       		.byte	0x7
- 756 00e2 1F000000 		.4byte	.LASF21
- 757 00e6 05       		.uleb128 0x5
- 758 00e7 04       		.byte	0x4
- 759 00e8 EC000000 		.4byte	0xec
- 760 00ec 06       		.uleb128 0x6
- 761 00ed D1000000 		.4byte	0xd1
- 762 00f1 07       		.uleb128 0x7
- 763 00f2 8401     		.2byte	0x184
- 764 00f4 04       		.byte	0x4
- 765 00f5 1B       		.byte	0x1b
- 766 00f6 39010000 		.4byte	0x139
- 767 00fa 08       		.uleb128 0x8
- 768 00fb 72656400 		.ascii	"red\000"
- 769 00ff 04       		.byte	0x4
- 770 0100 1D       		.byte	0x1d
- 771 0101 39010000 		.4byte	0x139
- 772 0105 00       		.byte	0
- 773 0106 08       		.uleb128 0x8
- 774 0107 495200   		.ascii	"IR\000"
- 775 010a 04       		.byte	0x4
- 776 010b 1E       		.byte	0x1e
- 777 010c 39010000 		.4byte	0x139
- 778 0110 80       		.byte	0x80
- 779 0111 09       		.uleb128 0x9
- 780 0112 2B010000 		.4byte	.LASF22
- 781 0116 04       		.byte	0x4
- 782 0117 1F       		.byte	0x1f
- 783 0118 39010000 		.4byte	0x139
- 784 011c 0001     		.2byte	0x100
- 785 011e 09       		.uleb128 0x9
- 786 011f DA000000 		.4byte	.LASF23
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 20
+ 725 0025 02       		.uleb128 0x2
+ 726 0026 39020000 		.4byte	.LASF0
+ 727 002a 02       		.byte	0x2
+ 728 002b 1B       		.byte	0x1b
+ 729 002c 30000000 		.4byte	0x30
+ 730 0030 03       		.uleb128 0x3
+ 731 0031 01       		.byte	0x1
+ 732 0032 06       		.byte	0x6
+ 733 0033 DB010000 		.4byte	.LASF2
+ 734 0037 02       		.uleb128 0x2
+ 735 0038 2D010000 		.4byte	.LASF1
+ 736 003c 02       		.byte	0x2
+ 737 003d 1D       		.byte	0x1d
+ 738 003e 42000000 		.4byte	0x42
+ 739 0042 03       		.uleb128 0x3
+ 740 0043 01       		.byte	0x1
+ 741 0044 08       		.byte	0x8
+ 742 0045 C8010000 		.4byte	.LASF3
+ 743 0049 03       		.uleb128 0x3
+ 744 004a 02       		.byte	0x2
+ 745 004b 05       		.byte	0x5
+ 746 004c D6000000 		.4byte	.LASF4
+ 747 0050 03       		.uleb128 0x3
+ 748 0051 02       		.byte	0x2
+ 749 0052 07       		.byte	0x7
+ 750 0053 26020000 		.4byte	.LASF5
+ 751 0057 02       		.uleb128 0x2
+ 752 0058 BD020000 		.4byte	.LASF6
+ 753 005c 02       		.byte	0x2
+ 754 005d 3F       		.byte	0x3f
+ 755 005e 62000000 		.4byte	0x62
+ 756 0062 03       		.uleb128 0x3
+ 757 0063 04       		.byte	0x4
+ 758 0064 05       		.byte	0x5
+ 759 0065 17010000 		.4byte	.LASF7
+ 760 0069 02       		.uleb128 0x2
+ 761 006a C1000000 		.4byte	.LASF8
+ 762 006e 02       		.byte	0x2
+ 763 006f 41       		.byte	0x41
+ 764 0070 74000000 		.4byte	0x74
+ 765 0074 03       		.uleb128 0x3
+ 766 0075 04       		.byte	0x4
+ 767 0076 07       		.byte	0x7
+ 768 0077 73020000 		.4byte	.LASF9
+ 769 007b 03       		.uleb128 0x3
+ 770 007c 08       		.byte	0x8
+ 771 007d 05       		.byte	0x5
+ 772 007e 09010000 		.4byte	.LASF10
+ 773 0082 03       		.uleb128 0x3
+ 774 0083 08       		.byte	0x8
+ 775 0084 07       		.byte	0x7
+ 776 0085 E7010000 		.4byte	.LASF11
+ 777 0089 04       		.uleb128 0x4
+ 778 008a 04       		.byte	0x4
+ 779 008b 05       		.byte	0x5
+ 780 008c 696E7400 		.ascii	"int\000"
+ 781 0090 03       		.uleb128 0x3
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 20
 
 
- 787 0123 04       		.byte	0x4
- 788 0124 20       		.byte	0x20
- 789 0125 A2000000 		.4byte	0xa2
- 790 0129 8001     		.2byte	0x180
- 791 012b 09       		.uleb128 0x9
- 792 012c CA010000 		.4byte	.LASF24
- 793 0130 04       		.byte	0x4
- 794 0131 21       		.byte	0x21
- 795 0132 A2000000 		.4byte	0xa2
- 796 0136 8101     		.2byte	0x181
- 797 0138 00       		.byte	0
- 798 0139 0A       		.uleb128 0xa
- 799 013a B8000000 		.4byte	0xb8
- 800 013e 49010000 		.4byte	0x149
- 801 0142 0B       		.uleb128 0xb
- 802 0143 DF000000 		.4byte	0xdf
- 803 0147 1F       		.byte	0x1f
- 804 0148 00       		.byte	0
- 805 0149 02       		.uleb128 0x2
- 806 014a 71020000 		.4byte	.LASF25
- 807 014e 04       		.byte	0x4
- 808 014f 22       		.byte	0x22
- 809 0150 F1000000 		.4byte	0xf1
- 810 0154 0C       		.uleb128 0xc
- 811 0155 B6000000 		.4byte	.LASF55
- 812 0159 01       		.byte	0x1
- 813 015a 24       		.byte	0x24
- 814 015b 89000000 		.4byte	0x89
- 815 015f 00000000 		.4byte	.LFB64
- 816 0163 8C040000 		.4byte	.LFE64-.LFB64
- 817 0167 01       		.uleb128 0x1
- 818 0168 9C       		.byte	0x9c
- 819 0169 11030000 		.4byte	0x311
- 820 016d 0D       		.uleb128 0xd
- 821 016e 53020000 		.4byte	.LASF26
- 822 0172 01       		.byte	0x1
- 823 0173 27       		.byte	0x27
- 824 0174 49010000 		.4byte	0x149
- 825 0178 03       		.uleb128 0x3
- 826 0179 91       		.byte	0x91
- 827 017a B07C     		.sleb128 -464
- 828 017c 0E       		.uleb128 0xe
- 829 017d 6D736700 		.ascii	"msg\000"
- 830 0181 01       		.byte	0x1
- 831 0182 2A       		.byte	0x2a
- 832 0183 11030000 		.4byte	0x311
- 833 0187 03       		.uleb128 0x3
- 834 0188 91       		.byte	0x91
- 835 0189 FC7B     		.sleb128 -516
- 836 018b 0D       		.uleb128 0xd
- 837 018c 8F020000 		.4byte	.LASF27
- 838 0190 01       		.byte	0x1
- 839 0191 2B       		.byte	0x2b
- 840 0192 2C030000 		.4byte	0x32c
- 841 0196 02       		.uleb128 0x2
- 842 0197 91       		.byte	0x91
- 843 0198 54       		.sleb128 -44
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 21
+ 782 0091 04       		.byte	0x4
+ 783 0092 07       		.byte	0x7
+ 784 0093 07020000 		.4byte	.LASF12
+ 785 0097 02       		.uleb128 0x2
+ 786 0098 0F000000 		.4byte	.LASF13
+ 787 009c 03       		.byte	0x3
+ 788 009d 14       		.byte	0x14
+ 789 009e 25000000 		.4byte	0x25
+ 790 00a2 02       		.uleb128 0x2
+ 791 00a3 C7020000 		.4byte	.LASF14
+ 792 00a7 03       		.byte	0x3
+ 793 00a8 18       		.byte	0x18
+ 794 00a9 37000000 		.4byte	0x37
+ 795 00ad 02       		.uleb128 0x2
+ 796 00ae 4F020000 		.4byte	.LASF15
+ 797 00b2 03       		.byte	0x3
+ 798 00b3 2C       		.byte	0x2c
+ 799 00b4 57000000 		.4byte	0x57
+ 800 00b8 02       		.uleb128 0x2
+ 801 00b9 FE010000 		.4byte	.LASF16
+ 802 00bd 03       		.byte	0x3
+ 803 00be 30       		.byte	0x30
+ 804 00bf 69000000 		.4byte	0x69
+ 805 00c3 05       		.uleb128 0x5
+ 806 00c4 FD000000 		.4byte	.LASF17
+ 807 00c8 04       		.byte	0x4
+ 808 00c9 E801     		.2byte	0x1e8
+ 809 00cb 42000000 		.4byte	0x42
+ 810 00cf 03       		.uleb128 0x3
+ 811 00d0 04       		.byte	0x4
+ 812 00d1 04       		.byte	0x4
+ 813 00d2 03010000 		.4byte	.LASF18
+ 814 00d6 03       		.uleb128 0x3
+ 815 00d7 08       		.byte	0x8
+ 816 00d8 04       		.byte	0x4
+ 817 00d9 9C020000 		.4byte	.LASF19
+ 818 00dd 03       		.uleb128 0x3
+ 819 00de 01       		.byte	0x1
+ 820 00df 08       		.byte	0x8
+ 821 00e0 4A020000 		.4byte	.LASF20
+ 822 00e4 03       		.uleb128 0x3
+ 823 00e5 08       		.byte	0x8
+ 824 00e6 04       		.byte	0x4
+ 825 00e7 60010000 		.4byte	.LASF21
+ 826 00eb 03       		.uleb128 0x3
+ 827 00ec 04       		.byte	0x4
+ 828 00ed 07       		.byte	0x7
+ 829 00ee 1F000000 		.4byte	.LASF22
+ 830 00f2 06       		.uleb128 0x6
+ 831 00f3 04       		.byte	0x4
+ 832 00f4 F8000000 		.4byte	0xf8
+ 833 00f8 07       		.uleb128 0x7
+ 834 00f9 DD000000 		.4byte	0xdd
+ 835 00fd 08       		.uleb128 0x8
+ 836 00fe 8401     		.2byte	0x184
+ 837 0100 05       		.byte	0x5
+ 838 0101 1B       		.byte	0x1b
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 21
 
 
- 844 0199 0D       		.uleb128 0xd
- 845 019a C2020000 		.4byte	.LASF28
- 846 019e 01       		.byte	0x1
- 847 019f 2C       		.byte	0x2c
- 848 01a0 A2000000 		.4byte	0xa2
- 849 01a4 02       		.uleb128 0x2
- 850 01a5 91       		.byte	0x91
- 851 01a6 53       		.sleb128 -45
- 852 01a7 0E       		.uleb128 0xe
- 853 01a8 727000   		.ascii	"rp\000"
- 854 01ab 01       		.byte	0x1
- 855 01ac 2D       		.byte	0x2d
- 856 01ad A2000000 		.4byte	0xa2
- 857 01b1 03       		.uleb128 0x3
- 858 01b2 91       		.byte	0x91
- 859 01b3 FB7B     		.sleb128 -517
- 860 01b5 0E       		.uleb128 0xe
- 861 01b6 777000   		.ascii	"wp\000"
- 862 01b9 01       		.byte	0x1
- 863 01ba 2D       		.byte	0x2d
- 864 01bb A2000000 		.4byte	0xa2
- 865 01bf 03       		.uleb128 0x3
- 866 01c0 91       		.byte	0x91
- 867 01c1 FA7B     		.sleb128 -518
- 868 01c3 0D       		.uleb128 0xd
- 869 01c4 CE020000 		.4byte	.LASF29
- 870 01c8 01       		.byte	0x1
- 871 01c9 2D       		.byte	0x2d
- 872 01ca A2000000 		.4byte	0xa2
- 873 01ce 03       		.uleb128 0x3
- 874 01cf 91       		.byte	0x91
- 875 01d0 F97B     		.sleb128 -519
- 876 01d2 0D       		.uleb128 0xd
- 877 01d3 B5020000 		.4byte	.LASF30
- 878 01d7 01       		.byte	0x1
- 879 01d8 2E       		.byte	0x2e
- 880 01d9 AD000000 		.4byte	0xad
- 881 01dd 03       		.uleb128 0x3
- 882 01de 91       		.byte	0x91
- 883 01df F47B     		.sleb128 -524
- 884 01e1 0D       		.uleb128 0xd
- 885 01e2 49020000 		.4byte	.LASF31
- 886 01e6 01       		.byte	0x1
- 887 01e7 2F       		.byte	0x2f
- 888 01e8 97000000 		.4byte	0x97
- 889 01ec 03       		.uleb128 0x3
- 890 01ed 91       		.byte	0x91
- 891 01ee F37B     		.sleb128 -525
- 892 01f0 0D       		.uleb128 0xd
- 893 01f1 B2010000 		.4byte	.LASF32
- 894 01f5 01       		.byte	0x1
- 895 01f6 30       		.byte	0x30
- 896 01f7 AD000000 		.4byte	0xad
- 897 01fb 03       		.uleb128 0x3
- 898 01fc 91       		.byte	0x91
- 899 01fd EC7B     		.sleb128 -532
- 900 01ff 0D       		.uleb128 0xd
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 22
+ 839 0102 45010000 		.4byte	0x145
+ 840 0106 09       		.uleb128 0x9
+ 841 0107 72656400 		.ascii	"red\000"
+ 842 010b 05       		.byte	0x5
+ 843 010c 1D       		.byte	0x1d
+ 844 010d 45010000 		.4byte	0x145
+ 845 0111 00       		.byte	0
+ 846 0112 09       		.uleb128 0x9
+ 847 0113 495200   		.ascii	"IR\000"
+ 848 0116 05       		.byte	0x5
+ 849 0117 1E       		.byte	0x1e
+ 850 0118 45010000 		.4byte	0x145
+ 851 011c 80       		.byte	0x80
+ 852 011d 0A       		.uleb128 0xa
+ 853 011e 37010000 		.4byte	.LASF23
+ 854 0122 05       		.byte	0x5
+ 855 0123 1F       		.byte	0x1f
+ 856 0124 45010000 		.4byte	0x145
+ 857 0128 0001     		.2byte	0x100
+ 858 012a 0A       		.uleb128 0xa
+ 859 012b E0000000 		.4byte	.LASF24
+ 860 012f 05       		.byte	0x5
+ 861 0130 20       		.byte	0x20
+ 862 0131 A2000000 		.4byte	0xa2
+ 863 0135 8001     		.2byte	0x180
+ 864 0137 0A       		.uleb128 0xa
+ 865 0138 D6010000 		.4byte	.LASF25
+ 866 013c 05       		.byte	0x5
+ 867 013d 21       		.byte	0x21
+ 868 013e A2000000 		.4byte	0xa2
+ 869 0142 8101     		.2byte	0x181
+ 870 0144 00       		.byte	0
+ 871 0145 0B       		.uleb128 0xb
+ 872 0146 B8000000 		.4byte	0xb8
+ 873 014a 55010000 		.4byte	0x155
+ 874 014e 0C       		.uleb128 0xc
+ 875 014f EB000000 		.4byte	0xeb
+ 876 0153 1F       		.byte	0x1f
+ 877 0154 00       		.byte	0
+ 878 0155 02       		.uleb128 0x2
+ 879 0156 85020000 		.4byte	.LASF26
+ 880 015a 05       		.byte	0x5
+ 881 015b 22       		.byte	0x22
+ 882 015c FD000000 		.4byte	0xfd
+ 883 0160 0D       		.uleb128 0xd
+ 884 0161 BC000000 		.4byte	.LASF59
+ 885 0165 01       		.byte	0x1
+ 886 0166 28       		.byte	0x28
+ 887 0167 89000000 		.4byte	0x89
+ 888 016b 00000000 		.4byte	.LFB64
+ 889 016f 1C050000 		.4byte	.LFE64-.LFB64
+ 890 0173 01       		.uleb128 0x1
+ 891 0174 9C       		.byte	0x9c
+ 892 0175 65030000 		.4byte	0x365
+ 893 0179 0E       		.uleb128 0xe
+ 894 017a 67020000 		.4byte	.LASF27
+ 895 017e 01       		.byte	0x1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 22
 
 
- 901 0200 DF000000 		.4byte	.LASF33
- 902 0204 01       		.byte	0x1
- 903 0205 31       		.byte	0x31
- 904 0206 97000000 		.4byte	0x97
- 905 020a 03       		.uleb128 0x3
- 906 020b 91       		.byte	0x91
- 907 020c EB7B     		.sleb128 -533
- 908 020e 0D       		.uleb128 0xd
- 909 020f EE000000 		.4byte	.LASF34
- 910 0213 01       		.byte	0x1
- 911 0214 32       		.byte	0x32
- 912 0215 32030000 		.4byte	0x332
- 913 0219 03       		.uleb128 0x3
- 914 021a 91       		.byte	0x91
- 915 021b C875     		.sleb128 -1336
- 916 021d 0D       		.uleb128 0xd
- 917 021e 99020000 		.4byte	.LASF35
- 918 0222 01       		.byte	0x1
- 919 0223 33       		.byte	0x33
- 920 0224 32030000 		.4byte	0x332
- 921 0228 03       		.uleb128 0x3
- 922 0229 91       		.byte	0x91
- 923 022a A86F     		.sleb128 -2136
- 924 022c 0D       		.uleb128 0xd
- 925 022d 14010000 		.4byte	.LASF36
- 926 0231 01       		.byte	0x1
- 927 0232 34       		.byte	0x34
- 928 0233 AD000000 		.4byte	0xad
- 929 0237 02       		.uleb128 0x2
- 930 0238 91       		.byte	0x91
- 931 0239 4C       		.sleb128 -52
- 932 023a 0D       		.uleb128 0xd
- 933 023b EA020000 		.4byte	.LASF37
- 934 023f 01       		.byte	0x1
- 935 0240 35       		.byte	0x35
- 936 0241 89000000 		.4byte	0x89
- 937 0245 02       		.uleb128 0x2
- 938 0246 91       		.byte	0x91
- 939 0247 64       		.sleb128 -28
- 940 0248 0E       		.uleb128 0xe
- 941 0249 6A00     		.ascii	"j\000"
- 942 024b 01       		.byte	0x1
- 943 024c 36       		.byte	0x36
- 944 024d 89000000 		.4byte	0x89
- 945 0251 02       		.uleb128 0x2
- 946 0252 91       		.byte	0x91
- 947 0253 60       		.sleb128 -32
- 948 0254 0D       		.uleb128 0xd
- 949 0255 3E010000 		.4byte	.LASF38
- 950 0259 01       		.byte	0x1
- 951 025a 37       		.byte	0x37
- 952 025b 89000000 		.4byte	0x89
- 953 025f 02       		.uleb128 0x2
- 954 0260 91       		.byte	0x91
- 955 0261 48       		.sleb128 -56
- 956 0262 0D       		.uleb128 0xd
- 957 0263 C6000000 		.4byte	.LASF39
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 23
+ 896 017f 2D       		.byte	0x2d
+ 897 0180 55010000 		.4byte	0x155
+ 898 0184 03       		.uleb128 0x3
+ 899 0185 91       		.byte	0x91
+ 900 0186 A47C     		.sleb128 -476
+ 901 0188 0F       		.uleb128 0xf
+ 902 0189 6D736700 		.ascii	"msg\000"
+ 903 018d 01       		.byte	0x1
+ 904 018e 30       		.byte	0x30
+ 905 018f 65030000 		.4byte	0x365
+ 906 0193 03       		.uleb128 0x3
+ 907 0194 91       		.byte	0x91
+ 908 0195 F07B     		.sleb128 -528
+ 909 0197 0E       		.uleb128 0xe
+ 910 0198 A3020000 		.4byte	.LASF28
+ 911 019c 01       		.byte	0x1
+ 912 019d 31       		.byte	0x31
+ 913 019e 80030000 		.4byte	0x380
+ 914 01a2 02       		.uleb128 0x2
+ 915 01a3 91       		.byte	0x91
+ 916 01a4 48       		.sleb128 -56
+ 917 01a5 0E       		.uleb128 0xe
+ 918 01a6 DC020000 		.4byte	.LASF29
+ 919 01aa 01       		.byte	0x1
+ 920 01ab 32       		.byte	0x32
+ 921 01ac A2000000 		.4byte	0xa2
+ 922 01b0 02       		.uleb128 0x2
+ 923 01b1 91       		.byte	0x91
+ 924 01b2 47       		.sleb128 -57
+ 925 01b3 0F       		.uleb128 0xf
+ 926 01b4 727000   		.ascii	"rp\000"
+ 927 01b7 01       		.byte	0x1
+ 928 01b8 33       		.byte	0x33
+ 929 01b9 A2000000 		.4byte	0xa2
+ 930 01bd 03       		.uleb128 0x3
+ 931 01be 91       		.byte	0x91
+ 932 01bf EF7B     		.sleb128 -529
+ 933 01c1 0F       		.uleb128 0xf
+ 934 01c2 777000   		.ascii	"wp\000"
+ 935 01c5 01       		.byte	0x1
+ 936 01c6 33       		.byte	0x33
+ 937 01c7 A2000000 		.4byte	0xa2
+ 938 01cb 03       		.uleb128 0x3
+ 939 01cc 91       		.byte	0x91
+ 940 01cd EE7B     		.sleb128 -530
+ 941 01cf 0E       		.uleb128 0xe
+ 942 01d0 E8020000 		.4byte	.LASF30
+ 943 01d4 01       		.byte	0x1
+ 944 01d5 33       		.byte	0x33
+ 945 01d6 A2000000 		.4byte	0xa2
+ 946 01da 03       		.uleb128 0x3
+ 947 01db 91       		.byte	0x91
+ 948 01dc ED7B     		.sleb128 -531
+ 949 01de 0E       		.uleb128 0xe
+ 950 01df CF020000 		.4byte	.LASF31
+ 951 01e3 01       		.byte	0x1
+ 952 01e4 34       		.byte	0x34
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 23
 
 
- 958 0267 01       		.byte	0x1
- 959 0268 38       		.byte	0x38
- 960 0269 42030000 		.4byte	0x342
- 961 026d 02       		.uleb128 0x2
- 962 026e 91       		.byte	0x91
- 963 026f 47       		.sleb128 -57
- 964 0270 0D       		.uleb128 0xd
- 965 0271 43020000 		.4byte	.LASF40
- 966 0275 01       		.byte	0x1
- 967 0276 39       		.byte	0x39
- 968 0277 47030000 		.4byte	0x347
- 969 027b 04       		.uleb128 0x4
- 970 027c 91       		.byte	0x91
- 971 027d BC7F     		.sleb128 -68
- 972 027f 06       		.byte	0x6
- 973 0280 0D       		.uleb128 0xd
- 974 0281 7F020000 		.4byte	.LASF41
- 975 0285 01       		.byte	0x1
- 976 0286 3A       		.byte	0x3a
- 977 0287 A2000000 		.4byte	0xa2
- 978 028b 03       		.uleb128 0x3
- 979 028c 91       		.byte	0x91
- 980 028d BB7F     		.sleb128 -69
- 981 028f 0D       		.uleb128 0xd
- 982 0290 16000000 		.4byte	.LASF42
- 983 0294 01       		.byte	0x1
- 984 0295 3B       		.byte	0x3b
- 985 0296 62000000 		.4byte	0x62
- 986 029a 03       		.uleb128 0x3
- 987 029b 91       		.byte	0x91
- 988 029c B47F     		.sleb128 -76
- 989 029e 0F       		.uleb128 0xf
- 990 029f 00000000 		.4byte	.LASF43
- 991 02a3 01       		.byte	0x1
- 992 02a4 3D       		.byte	0x3d
- 993 02a5 C3000000 		.4byte	0xc3
- 994 02a9 0F       		.uleb128 0xf
- 995 02aa 4C010000 		.4byte	.LASF44
- 996 02ae 01       		.byte	0x1
- 997 02af 3E       		.byte	0x3e
- 998 02b0 89000000 		.4byte	0x89
- 999 02b4 10       		.uleb128 0x10
- 1000 02b5 BE000000 		.4byte	.LBB2
- 1001 02b9 E6000000 		.4byte	.LBE2-.LBB2
- 1002 02bd E0020000 		.4byte	0x2e0
- 1003 02c1 0D       		.uleb128 0xd
- 1004 02c2 60010000 		.4byte	.LASF45
- 1005 02c6 01       		.byte	0x1
- 1006 02c7 51       		.byte	0x51
- 1007 02c8 A2000000 		.4byte	0xa2
- 1008 02cc 03       		.uleb128 0x3
- 1009 02cd 91       		.byte	0x91
- 1010 02ce A76F     		.sleb128 -2137
- 1011 02d0 0D       		.uleb128 0xd
- 1012 02d1 12020000 		.4byte	.LASF46
- 1013 02d5 01       		.byte	0x1
- 1014 02d6 51       		.byte	0x51
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 24
+ 953 01e5 AD000000 		.4byte	0xad
+ 954 01e9 03       		.uleb128 0x3
+ 955 01ea 91       		.byte	0x91
+ 956 01eb E87B     		.sleb128 -536
+ 957 01ed 0E       		.uleb128 0xe
+ 958 01ee 5D020000 		.4byte	.LASF32
+ 959 01f2 01       		.byte	0x1
+ 960 01f3 35       		.byte	0x35
+ 961 01f4 97000000 		.4byte	0x97
+ 962 01f8 03       		.uleb128 0x3
+ 963 01f9 91       		.byte	0x91
+ 964 01fa E77B     		.sleb128 -537
+ 965 01fc 0E       		.uleb128 0xe
+ 966 01fd BE010000 		.4byte	.LASF33
+ 967 0201 01       		.byte	0x1
+ 968 0202 36       		.byte	0x36
+ 969 0203 AD000000 		.4byte	0xad
+ 970 0207 03       		.uleb128 0x3
+ 971 0208 91       		.byte	0x91
+ 972 0209 E07B     		.sleb128 -544
+ 973 020b 0E       		.uleb128 0xe
+ 974 020c E5000000 		.4byte	.LASF34
+ 975 0210 01       		.byte	0x1
+ 976 0211 37       		.byte	0x37
+ 977 0212 97000000 		.4byte	0x97
+ 978 0216 03       		.uleb128 0x3
+ 979 0217 91       		.byte	0x91
+ 980 0218 DF7B     		.sleb128 -545
+ 981 021a 0E       		.uleb128 0xe
+ 982 021b F4000000 		.4byte	.LASF35
+ 983 021f 01       		.byte	0x1
+ 984 0220 38       		.byte	0x38
+ 985 0221 86030000 		.4byte	0x386
+ 986 0225 03       		.uleb128 0x3
+ 987 0226 91       		.byte	0x91
+ 988 0227 BC75     		.sleb128 -1348
+ 989 0229 0E       		.uleb128 0xe
+ 990 022a AD020000 		.4byte	.LASF36
+ 991 022e 01       		.byte	0x1
+ 992 022f 39       		.byte	0x39
+ 993 0230 86030000 		.4byte	0x386
+ 994 0234 03       		.uleb128 0x3
+ 995 0235 91       		.byte	0x91
+ 996 0236 9C6F     		.sleb128 -2148
+ 997 0238 0E       		.uleb128 0xe
+ 998 0239 20010000 		.4byte	.LASF37
+ 999 023d 01       		.byte	0x1
+ 1000 023e 3A       		.byte	0x3a
+ 1001 023f AD000000 		.4byte	0xad
+ 1002 0243 02       		.uleb128 0x2
+ 1003 0244 91       		.byte	0x91
+ 1004 0245 40       		.sleb128 -64
+ 1005 0246 0E       		.uleb128 0xe
+ 1006 0247 04030000 		.4byte	.LASF38
+ 1007 024b 01       		.byte	0x1
+ 1008 024c 3B       		.byte	0x3b
+ 1009 024d 89000000 		.4byte	0x89
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 24
 
 
- 1015 02d7 A2000000 		.4byte	0xa2
- 1016 02db 03       		.uleb128 0x3
- 1017 02dc 91       		.byte	0x91
- 1018 02dd A66F     		.sleb128 -2138
- 1019 02df 00       		.byte	0
- 1020 02e0 10       		.uleb128 0x10
- 1021 02e1 3E020000 		.4byte	.LBB3
- 1022 02e5 EA000000 		.4byte	.LBE3-.LBB3
- 1023 02e9 FA020000 		.4byte	0x2fa
- 1024 02ed 0E       		.uleb128 0xe
- 1025 02ee 6900     		.ascii	"i\000"
- 1026 02f0 01       		.byte	0x1
- 1027 02f1 C0       		.byte	0xc0
- 1028 02f2 89000000 		.4byte	0x89
- 1029 02f6 02       		.uleb128 0x2
- 1030 02f7 91       		.byte	0x91
- 1031 02f8 5C       		.sleb128 -36
- 1032 02f9 00       		.byte	0
- 1033 02fa 11       		.uleb128 0x11
- 1034 02fb 6E030000 		.4byte	.LBB4
- 1035 02ff 94000000 		.4byte	.LBE4-.LBB4
- 1036 0303 0E       		.uleb128 0xe
- 1037 0304 6900     		.ascii	"i\000"
- 1038 0306 01       		.byte	0x1
- 1039 0307 DF       		.byte	0xdf
- 1040 0308 89000000 		.4byte	0x89
- 1041 030c 02       		.uleb128 0x2
- 1042 030d 91       		.byte	0x91
- 1043 030e 58       		.sleb128 -40
- 1044 030f 00       		.byte	0
- 1045 0310 00       		.byte	0
- 1046 0311 0A       		.uleb128 0xa
- 1047 0312 D1000000 		.4byte	0xd1
- 1048 0316 21030000 		.4byte	0x321
- 1049 031a 0B       		.uleb128 0xb
- 1050 031b DF000000 		.4byte	0xdf
- 1051 031f 31       		.byte	0x31
- 1052 0320 00       		.byte	0
- 1053 0321 12       		.uleb128 0x12
- 1054 0322 2C030000 		.4byte	0x32c
- 1055 0326 13       		.uleb128 0x13
- 1056 0327 E6000000 		.4byte	0xe6
- 1057 032b 00       		.byte	0
- 1058 032c 05       		.uleb128 0x5
- 1059 032d 04       		.byte	0x4
- 1060 032e 21030000 		.4byte	0x321
- 1061 0332 0A       		.uleb128 0xa
- 1062 0333 B8000000 		.4byte	0xb8
- 1063 0337 42030000 		.4byte	0x342
- 1064 033b 0B       		.uleb128 0xb
- 1065 033c DF000000 		.4byte	0xdf
- 1066 0340 C7       		.byte	0xc7
- 1067 0341 00       		.byte	0
- 1068 0342 06       		.uleb128 0x6
- 1069 0343 A2000000 		.4byte	0xa2
- 1070 0347 0A       		.uleb128 0xa
- 1071 0348 A2000000 		.4byte	0xa2
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 25
+ 1010 0251 02       		.uleb128 0x2
+ 1011 0252 91       		.byte	0x91
+ 1012 0253 64       		.sleb128 -28
+ 1013 0254 0F       		.uleb128 0xf
+ 1014 0255 6A00     		.ascii	"j\000"
+ 1015 0257 01       		.byte	0x1
+ 1016 0258 3C       		.byte	0x3c
+ 1017 0259 89000000 		.4byte	0x89
+ 1018 025d 02       		.uleb128 0x2
+ 1019 025e 91       		.byte	0x91
+ 1020 025f 60       		.sleb128 -32
+ 1021 0260 0E       		.uleb128 0xe
+ 1022 0261 4A010000 		.4byte	.LASF39
+ 1023 0265 01       		.byte	0x1
+ 1024 0266 3D       		.byte	0x3d
+ 1025 0267 89000000 		.4byte	0x89
+ 1026 026b 03       		.uleb128 0x3
+ 1027 026c 91       		.byte	0x91
+ 1028 026d BC7F     		.sleb128 -68
+ 1029 026f 0E       		.uleb128 0xe
+ 1030 0270 CC000000 		.4byte	.LASF40
+ 1031 0274 01       		.byte	0x1
+ 1032 0275 3E       		.byte	0x3e
+ 1033 0276 96030000 		.4byte	0x396
+ 1034 027a 03       		.uleb128 0x3
+ 1035 027b 91       		.byte	0x91
+ 1036 027c BB7F     		.sleb128 -69
+ 1037 027e 0E       		.uleb128 0xe
+ 1038 027f 57020000 		.4byte	.LASF41
+ 1039 0283 01       		.byte	0x1
+ 1040 0284 3F       		.byte	0x3f
+ 1041 0285 9B030000 		.4byte	0x39b
+ 1042 0289 04       		.uleb128 0x4
+ 1043 028a 91       		.byte	0x91
+ 1044 028b B07F     		.sleb128 -80
+ 1045 028d 06       		.byte	0x6
+ 1046 028e 0E       		.uleb128 0xe
+ 1047 028f 93020000 		.4byte	.LASF42
+ 1048 0293 01       		.byte	0x1
+ 1049 0294 40       		.byte	0x40
+ 1050 0295 A2000000 		.4byte	0xa2
+ 1051 0299 02       		.uleb128 0x2
+ 1052 029a 91       		.byte	0x91
+ 1053 029b 5F       		.sleb128 -33
+ 1054 029c 0E       		.uleb128 0xe
+ 1055 029d 16000000 		.4byte	.LASF43
+ 1056 02a1 01       		.byte	0x1
+ 1057 02a2 41       		.byte	0x41
+ 1058 02a3 62000000 		.4byte	0x62
+ 1059 02a7 02       		.uleb128 0x2
+ 1060 02a8 91       		.byte	0x91
+ 1061 02a9 58       		.sleb128 -40
+ 1062 02aa 0F       		.uleb128 0xf
+ 1063 02ab 7800     		.ascii	"x\000"
+ 1064 02ad 01       		.byte	0x1
+ 1065 02ae 42       		.byte	0x42
+ 1066 02af A2000000 		.4byte	0xa2
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 25
 
 
- 1072 034c 5A030000 		.4byte	0x35a
- 1073 0350 14       		.uleb128 0x14
- 1074 0351 DF000000 		.4byte	0xdf
- 1075 0355 03       		.uleb128 0x3
- 1076 0356 91       		.byte	0x91
- 1077 0357 40       		.sleb128 -64
- 1078 0358 06       		.byte	0x6
- 1079 0359 00       		.byte	0
- 1080 035a 15       		.uleb128 0x15
- 1081 035b 31010000 		.4byte	.LASF56
- 1082 035f 01       		.byte	0x1
- 1083 0360 F0       		.byte	0xf0
- 1084 0361 00000000 		.4byte	.LFB65
- 1085 0365 2C000000 		.4byte	.LFE65-.LFB65
- 1086 0369 01       		.uleb128 0x1
- 1087 036a 9C       		.byte	0x9c
- 1088 036b 16       		.uleb128 0x16
- 1089 036c DD020000 		.4byte	.LASF47
- 1090 0370 05       		.byte	0x5
- 1091 0371 1207     		.2byte	0x712
- 1092 0373 77030000 		.4byte	0x377
- 1093 0377 17       		.uleb128 0x17
- 1094 0378 AD000000 		.4byte	0xad
- 1095 037c 18       		.uleb128 0x18
- 1096 037d 53020000 		.4byte	.LASF26
- 1097 0381 04       		.byte	0x4
- 1098 0382 24       		.byte	0x24
- 1099 0383 49010000 		.4byte	0x149
- 1100 0387 05       		.uleb128 0x5
- 1101 0388 03       		.byte	0x3
- 1102 0389 00000000 		.4byte	data
- 1103 038d 0A       		.uleb128 0xa
- 1104 038e AD000000 		.4byte	0xad
- 1105 0392 9D030000 		.4byte	0x39d
- 1106 0396 0B       		.uleb128 0xb
- 1107 0397 DF000000 		.4byte	0xdf
- 1108 039b C7       		.byte	0xc7
- 1109 039c 00       		.byte	0
- 1110 039d 18       		.uleb128 0x18
- 1111 039e D3020000 		.4byte	.LASF48
- 1112 03a2 06       		.byte	0x6
- 1113 03a3 1C       		.byte	0x1c
- 1114 03a4 8D030000 		.4byte	0x38d
- 1115 03a8 05       		.uleb128 0x5
- 1116 03a9 03       		.byte	0x3
- 1117 03aa 00000000 		.4byte	an_x
- 1118 03ae 18       		.uleb128 0x18
- 1119 03af D8020000 		.4byte	.LASF49
- 1120 03b3 06       		.byte	0x6
- 1121 03b4 1D       		.byte	0x1d
- 1122 03b5 8D030000 		.4byte	0x38d
- 1123 03b9 05       		.uleb128 0x5
- 1124 03ba 03       		.byte	0x3
- 1125 03bb 00000000 		.4byte	an_y
- 1126 03bf 18       		.uleb128 0x18
- 1127 03c0 08020000 		.4byte	.LASF50
- 1128 03c4 01       		.byte	0x1
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 26
+ 1067 02b3 02       		.uleb128 0x2
+ 1068 02b4 91       		.byte	0x91
+ 1069 02b5 57       		.sleb128 -41
+ 1070 02b6 0E       		.uleb128 0xe
+ 1071 02b7 00000000 		.4byte	.LASF44
+ 1072 02bb 01       		.byte	0x1
+ 1073 02bc 43       		.byte	0x43
+ 1074 02bd A2000000 		.4byte	0xa2
+ 1075 02c1 02       		.uleb128 0x2
+ 1076 02c2 91       		.byte	0x91
+ 1077 02c3 56       		.sleb128 -42
+ 1078 02c4 0E       		.uleb128 0xe
+ 1079 02c5 58010000 		.4byte	.LASF45
+ 1080 02c9 01       		.byte	0x1
+ 1081 02ca 44       		.byte	0x44
+ 1082 02cb A2000000 		.4byte	0xa2
+ 1083 02cf 02       		.uleb128 0x2
+ 1084 02d0 91       		.byte	0x91
+ 1085 02d1 55       		.sleb128 -43
+ 1086 02d2 10       		.uleb128 0x10
+ 1087 02d3 C2000000 		.4byte	.LBB2
+ 1088 02d7 E6000000 		.4byte	.LBE2-.LBB2
+ 1089 02db FE020000 		.4byte	0x2fe
+ 1090 02df 0E       		.uleb128 0xe
+ 1091 02e0 6C010000 		.4byte	.LASF46
+ 1092 02e4 01       		.byte	0x1
+ 1093 02e5 58       		.byte	0x58
+ 1094 02e6 A2000000 		.4byte	0xa2
+ 1095 02ea 03       		.uleb128 0x3
+ 1096 02eb 91       		.byte	0x91
+ 1097 02ec 9B6F     		.sleb128 -2149
+ 1098 02ee 0E       		.uleb128 0xe
+ 1099 02ef 1E020000 		.4byte	.LASF47
+ 1100 02f3 01       		.byte	0x1
+ 1101 02f4 58       		.byte	0x58
+ 1102 02f5 A2000000 		.4byte	0xa2
+ 1103 02f9 03       		.uleb128 0x3
+ 1104 02fa 91       		.byte	0x91
+ 1105 02fb 9A6F     		.sleb128 -2150
+ 1106 02fd 00       		.byte	0
+ 1107 02fe 10       		.uleb128 0x10
+ 1108 02ff DE010000 		.4byte	.LBB3
+ 1109 0303 4E020000 		.4byte	.LBE3-.LBB3
+ 1110 0307 4E030000 		.4byte	0x34e
+ 1111 030b 0E       		.uleb128 0xe
+ 1112 030c 42020000 		.4byte	.LASF48
+ 1113 0310 01       		.byte	0x1
+ 1114 0311 C1       		.byte	0xc1
+ 1115 0312 B8000000 		.4byte	0xb8
+ 1116 0316 03       		.uleb128 0x3
+ 1117 0317 91       		.byte	0x91
+ 1118 0318 AC7F     		.sleb128 -84
+ 1119 031a 10       		.uleb128 0x10
+ 1120 031b 2E020000 		.4byte	.LBB4
+ 1121 031f 70000000 		.4byte	.LBE4-.LBB4
+ 1122 0323 34030000 		.4byte	0x334
+ 1123 0327 0F       		.uleb128 0xf
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 26
 
 
- 1129 03c5 21       		.byte	0x21
- 1130 03c6 A2000000 		.4byte	0xa2
- 1131 03ca 05       		.uleb128 0x5
- 1132 03cb 03       		.byte	0x3
- 1133 03cc 00000000 		.4byte	flag_temp
- 1134 03d0 18       		.uleb128 0x18
- 1135 03d1 BA020000 		.4byte	.LASF51
- 1136 03d5 01       		.byte	0x1
- 1137 03d6 22       		.byte	0x22
- 1138 03d7 A2000000 		.4byte	0xa2
- 1139 03db 05       		.uleb128 0x5
- 1140 03dc 03       		.byte	0x3
- 1141 03dd 00000000 		.4byte	flag_1s
- 1142 03e1 00       		.byte	0
- 1143              		.section	.debug_abbrev,"",%progbits
- 1144              	.Ldebug_abbrev0:
- 1145 0000 01       		.uleb128 0x1
- 1146 0001 11       		.uleb128 0x11
- 1147 0002 01       		.byte	0x1
- 1148 0003 25       		.uleb128 0x25
- 1149 0004 0E       		.uleb128 0xe
- 1150 0005 13       		.uleb128 0x13
- 1151 0006 0B       		.uleb128 0xb
- 1152 0007 03       		.uleb128 0x3
- 1153 0008 0E       		.uleb128 0xe
- 1154 0009 1B       		.uleb128 0x1b
- 1155 000a 0E       		.uleb128 0xe
- 1156 000b 55       		.uleb128 0x55
- 1157 000c 17       		.uleb128 0x17
- 1158 000d 11       		.uleb128 0x11
- 1159 000e 01       		.uleb128 0x1
- 1160 000f 10       		.uleb128 0x10
- 1161 0010 17       		.uleb128 0x17
- 1162 0011 00       		.byte	0
- 1163 0012 00       		.byte	0
- 1164 0013 02       		.uleb128 0x2
- 1165 0014 16       		.uleb128 0x16
- 1166 0015 00       		.byte	0
- 1167 0016 03       		.uleb128 0x3
- 1168 0017 0E       		.uleb128 0xe
- 1169 0018 3A       		.uleb128 0x3a
- 1170 0019 0B       		.uleb128 0xb
- 1171 001a 3B       		.uleb128 0x3b
- 1172 001b 0B       		.uleb128 0xb
- 1173 001c 49       		.uleb128 0x49
- 1174 001d 13       		.uleb128 0x13
- 1175 001e 00       		.byte	0
- 1176 001f 00       		.byte	0
- 1177 0020 03       		.uleb128 0x3
- 1178 0021 24       		.uleb128 0x24
- 1179 0022 00       		.byte	0
- 1180 0023 0B       		.uleb128 0xb
- 1181 0024 0B       		.uleb128 0xb
- 1182 0025 3E       		.uleb128 0x3e
- 1183 0026 0B       		.uleb128 0xb
- 1184 0027 03       		.uleb128 0x3
- 1185 0028 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 27
+ 1124 0328 6900     		.ascii	"i\000"
+ 1125 032a 01       		.byte	0x1
+ 1126 032b B3       		.byte	0xb3
+ 1127 032c 89000000 		.4byte	0x89
+ 1128 0330 02       		.uleb128 0x2
+ 1129 0331 91       		.byte	0x91
+ 1130 0332 50       		.sleb128 -48
+ 1131 0333 00       		.byte	0
+ 1132 0334 11       		.uleb128 0x11
+ 1133 0335 BE020000 		.4byte	.LBB5
+ 1134 0339 10010000 		.4byte	.LBE5-.LBB5
+ 1135 033d 0E       		.uleb128 0xe
+ 1136 033e 28000000 		.4byte	.LASF49
+ 1137 0342 01       		.byte	0x1
+ 1138 0343 C7       		.byte	0xc7
+ 1139 0344 62000000 		.4byte	0x62
+ 1140 0348 03       		.uleb128 0x3
+ 1141 0349 91       		.byte	0x91
+ 1142 034a A87F     		.sleb128 -88
+ 1143 034c 00       		.byte	0
+ 1144 034d 00       		.byte	0
+ 1145 034e 11       		.uleb128 0x11
+ 1146 034f 70040000 		.4byte	.LBB6
+ 1147 0353 52000000 		.4byte	.LBE6-.LBB6
+ 1148 0357 0F       		.uleb128 0xf
+ 1149 0358 6900     		.ascii	"i\000"
+ 1150 035a 01       		.byte	0x1
+ 1151 035b E9       		.byte	0xe9
+ 1152 035c 89000000 		.4byte	0x89
+ 1153 0360 02       		.uleb128 0x2
+ 1154 0361 91       		.byte	0x91
+ 1155 0362 4C       		.sleb128 -52
+ 1156 0363 00       		.byte	0
+ 1157 0364 00       		.byte	0
+ 1158 0365 0B       		.uleb128 0xb
+ 1159 0366 DD000000 		.4byte	0xdd
+ 1160 036a 75030000 		.4byte	0x375
+ 1161 036e 0C       		.uleb128 0xc
+ 1162 036f EB000000 		.4byte	0xeb
+ 1163 0373 31       		.byte	0x31
+ 1164 0374 00       		.byte	0
+ 1165 0375 12       		.uleb128 0x12
+ 1166 0376 80030000 		.4byte	0x380
+ 1167 037a 13       		.uleb128 0x13
+ 1168 037b F2000000 		.4byte	0xf2
+ 1169 037f 00       		.byte	0
+ 1170 0380 06       		.uleb128 0x6
+ 1171 0381 04       		.byte	0x4
+ 1172 0382 75030000 		.4byte	0x375
+ 1173 0386 0B       		.uleb128 0xb
+ 1174 0387 B8000000 		.4byte	0xb8
+ 1175 038b 96030000 		.4byte	0x396
+ 1176 038f 0C       		.uleb128 0xc
+ 1177 0390 EB000000 		.4byte	0xeb
+ 1178 0394 C7       		.byte	0xc7
+ 1179 0395 00       		.byte	0
+ 1180 0396 07       		.uleb128 0x7
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 27
 
 
- 1186 0029 00       		.byte	0
- 1187 002a 00       		.byte	0
- 1188 002b 04       		.uleb128 0x4
- 1189 002c 24       		.uleb128 0x24
- 1190 002d 00       		.byte	0
- 1191 002e 0B       		.uleb128 0xb
- 1192 002f 0B       		.uleb128 0xb
- 1193 0030 3E       		.uleb128 0x3e
- 1194 0031 0B       		.uleb128 0xb
- 1195 0032 03       		.uleb128 0x3
- 1196 0033 08       		.uleb128 0x8
- 1197 0034 00       		.byte	0
- 1198 0035 00       		.byte	0
- 1199 0036 05       		.uleb128 0x5
- 1200 0037 0F       		.uleb128 0xf
- 1201 0038 00       		.byte	0
- 1202 0039 0B       		.uleb128 0xb
- 1203 003a 0B       		.uleb128 0xb
- 1204 003b 49       		.uleb128 0x49
- 1205 003c 13       		.uleb128 0x13
- 1206 003d 00       		.byte	0
- 1207 003e 00       		.byte	0
- 1208 003f 06       		.uleb128 0x6
- 1209 0040 26       		.uleb128 0x26
- 1210 0041 00       		.byte	0
- 1211 0042 49       		.uleb128 0x49
- 1212 0043 13       		.uleb128 0x13
- 1213 0044 00       		.byte	0
- 1214 0045 00       		.byte	0
- 1215 0046 07       		.uleb128 0x7
- 1216 0047 13       		.uleb128 0x13
- 1217 0048 01       		.byte	0x1
- 1218 0049 0B       		.uleb128 0xb
- 1219 004a 05       		.uleb128 0x5
- 1220 004b 3A       		.uleb128 0x3a
- 1221 004c 0B       		.uleb128 0xb
- 1222 004d 3B       		.uleb128 0x3b
- 1223 004e 0B       		.uleb128 0xb
- 1224 004f 01       		.uleb128 0x1
- 1225 0050 13       		.uleb128 0x13
- 1226 0051 00       		.byte	0
- 1227 0052 00       		.byte	0
- 1228 0053 08       		.uleb128 0x8
- 1229 0054 0D       		.uleb128 0xd
- 1230 0055 00       		.byte	0
- 1231 0056 03       		.uleb128 0x3
- 1232 0057 08       		.uleb128 0x8
- 1233 0058 3A       		.uleb128 0x3a
- 1234 0059 0B       		.uleb128 0xb
- 1235 005a 3B       		.uleb128 0x3b
- 1236 005b 0B       		.uleb128 0xb
- 1237 005c 49       		.uleb128 0x49
- 1238 005d 13       		.uleb128 0x13
- 1239 005e 38       		.uleb128 0x38
- 1240 005f 0B       		.uleb128 0xb
- 1241 0060 00       		.byte	0
- 1242 0061 00       		.byte	0
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 28
+ 1181 0397 A2000000 		.4byte	0xa2
+ 1182 039b 0B       		.uleb128 0xb
+ 1183 039c A2000000 		.4byte	0xa2
+ 1184 03a0 AF030000 		.4byte	0x3af
+ 1185 03a4 14       		.uleb128 0x14
+ 1186 03a5 EB000000 		.4byte	0xeb
+ 1187 03a9 04       		.uleb128 0x4
+ 1188 03aa 91       		.byte	0x91
+ 1189 03ab B47F     		.sleb128 -76
+ 1190 03ad 06       		.byte	0x6
+ 1191 03ae 00       		.byte	0
+ 1192 03af 15       		.uleb128 0x15
+ 1193 03b0 3D010000 		.4byte	.LASF60
+ 1194 03b4 01       		.byte	0x1
+ 1195 03b5 FA       		.byte	0xfa
+ 1196 03b6 00000000 		.4byte	.LFB65
+ 1197 03ba 2C000000 		.4byte	.LFE65-.LFB65
+ 1198 03be 01       		.uleb128 0x1
+ 1199 03bf 9C       		.byte	0x9c
+ 1200 03c0 16       		.uleb128 0x16
+ 1201 03c1 F7020000 		.4byte	.LASF50
+ 1202 03c5 06       		.byte	0x6
+ 1203 03c6 1207     		.2byte	0x712
+ 1204 03c8 CC030000 		.4byte	0x3cc
+ 1205 03cc 17       		.uleb128 0x17
+ 1206 03cd AD000000 		.4byte	0xad
+ 1207 03d1 18       		.uleb128 0x18
+ 1208 03d2 67020000 		.4byte	.LASF27
+ 1209 03d6 05       		.byte	0x5
+ 1210 03d7 24       		.byte	0x24
+ 1211 03d8 55010000 		.4byte	0x155
+ 1212 03dc 05       		.uleb128 0x5
+ 1213 03dd 03       		.byte	0x3
+ 1214 03de 00000000 		.4byte	data
+ 1215 03e2 0B       		.uleb128 0xb
+ 1216 03e3 AD000000 		.4byte	0xad
+ 1217 03e7 F2030000 		.4byte	0x3f2
+ 1218 03eb 0C       		.uleb128 0xc
+ 1219 03ec EB000000 		.4byte	0xeb
+ 1220 03f0 C7       		.byte	0xc7
+ 1221 03f1 00       		.byte	0
+ 1222 03f2 18       		.uleb128 0x18
+ 1223 03f3 ED020000 		.4byte	.LASF51
+ 1224 03f7 07       		.byte	0x7
+ 1225 03f8 1C       		.byte	0x1c
+ 1226 03f9 E2030000 		.4byte	0x3e2
+ 1227 03fd 05       		.uleb128 0x5
+ 1228 03fe 03       		.byte	0x3
+ 1229 03ff 00000000 		.4byte	an_x
+ 1230 0403 18       		.uleb128 0x18
+ 1231 0404 F2020000 		.4byte	.LASF52
+ 1232 0408 07       		.byte	0x7
+ 1233 0409 1D       		.byte	0x1d
+ 1234 040a E2030000 		.4byte	0x3e2
+ 1235 040e 05       		.uleb128 0x5
+ 1236 040f 03       		.byte	0x3
+ 1237 0410 00000000 		.4byte	an_y
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 28
 
 
- 1243 0062 09       		.uleb128 0x9
- 1244 0063 0D       		.uleb128 0xd
- 1245 0064 00       		.byte	0
- 1246 0065 03       		.uleb128 0x3
- 1247 0066 0E       		.uleb128 0xe
- 1248 0067 3A       		.uleb128 0x3a
- 1249 0068 0B       		.uleb128 0xb
- 1250 0069 3B       		.uleb128 0x3b
- 1251 006a 0B       		.uleb128 0xb
- 1252 006b 49       		.uleb128 0x49
- 1253 006c 13       		.uleb128 0x13
- 1254 006d 38       		.uleb128 0x38
- 1255 006e 05       		.uleb128 0x5
- 1256 006f 00       		.byte	0
- 1257 0070 00       		.byte	0
- 1258 0071 0A       		.uleb128 0xa
- 1259 0072 01       		.uleb128 0x1
- 1260 0073 01       		.byte	0x1
- 1261 0074 49       		.uleb128 0x49
- 1262 0075 13       		.uleb128 0x13
- 1263 0076 01       		.uleb128 0x1
- 1264 0077 13       		.uleb128 0x13
- 1265 0078 00       		.byte	0
- 1266 0079 00       		.byte	0
- 1267 007a 0B       		.uleb128 0xb
- 1268 007b 21       		.uleb128 0x21
- 1269 007c 00       		.byte	0
- 1270 007d 49       		.uleb128 0x49
- 1271 007e 13       		.uleb128 0x13
- 1272 007f 2F       		.uleb128 0x2f
- 1273 0080 0B       		.uleb128 0xb
- 1274 0081 00       		.byte	0
- 1275 0082 00       		.byte	0
- 1276 0083 0C       		.uleb128 0xc
- 1277 0084 2E       		.uleb128 0x2e
- 1278 0085 01       		.byte	0x1
- 1279 0086 3F       		.uleb128 0x3f
- 1280 0087 19       		.uleb128 0x19
- 1281 0088 03       		.uleb128 0x3
- 1282 0089 0E       		.uleb128 0xe
- 1283 008a 3A       		.uleb128 0x3a
- 1284 008b 0B       		.uleb128 0xb
- 1285 008c 3B       		.uleb128 0x3b
- 1286 008d 0B       		.uleb128 0xb
- 1287 008e 27       		.uleb128 0x27
- 1288 008f 19       		.uleb128 0x19
- 1289 0090 49       		.uleb128 0x49
- 1290 0091 13       		.uleb128 0x13
- 1291 0092 11       		.uleb128 0x11
- 1292 0093 01       		.uleb128 0x1
- 1293 0094 12       		.uleb128 0x12
- 1294 0095 06       		.uleb128 0x6
- 1295 0096 40       		.uleb128 0x40
- 1296 0097 18       		.uleb128 0x18
- 1297 0098 9642     		.uleb128 0x2116
- 1298 009a 19       		.uleb128 0x19
- 1299 009b 01       		.uleb128 0x1
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 29
+ 1238 0414 18       		.uleb128 0x18
+ 1239 0415 14020000 		.4byte	.LASF53
+ 1240 0419 01       		.byte	0x1
+ 1241 041a 24       		.byte	0x24
+ 1242 041b A2000000 		.4byte	0xa2
+ 1243 041f 05       		.uleb128 0x5
+ 1244 0420 03       		.byte	0x3
+ 1245 0421 00000000 		.4byte	flag_temp
+ 1246 0425 18       		.uleb128 0x18
+ 1247 0426 D4020000 		.4byte	.LASF54
+ 1248 042a 01       		.byte	0x1
+ 1249 042b 25       		.byte	0x25
+ 1250 042c A2000000 		.4byte	0xa2
+ 1251 0430 05       		.uleb128 0x5
+ 1252 0431 03       		.byte	0x3
+ 1253 0432 00000000 		.4byte	flag_1s
+ 1254 0436 19       		.uleb128 0x19
+ 1255 0437 B7020000 		.4byte	.LASF55
+ 1256 043b 01       		.byte	0x1
+ 1257 043c 26       		.byte	0x26
+ 1258 043d C3000000 		.4byte	0xc3
+ 1259 0441 00       		.byte	0
+ 1260              		.section	.debug_abbrev,"",%progbits
+ 1261              	.Ldebug_abbrev0:
+ 1262 0000 01       		.uleb128 0x1
+ 1263 0001 11       		.uleb128 0x11
+ 1264 0002 01       		.byte	0x1
+ 1265 0003 25       		.uleb128 0x25
+ 1266 0004 0E       		.uleb128 0xe
+ 1267 0005 13       		.uleb128 0x13
+ 1268 0006 0B       		.uleb128 0xb
+ 1269 0007 03       		.uleb128 0x3
+ 1270 0008 0E       		.uleb128 0xe
+ 1271 0009 1B       		.uleb128 0x1b
+ 1272 000a 0E       		.uleb128 0xe
+ 1273 000b 55       		.uleb128 0x55
+ 1274 000c 17       		.uleb128 0x17
+ 1275 000d 11       		.uleb128 0x11
+ 1276 000e 01       		.uleb128 0x1
+ 1277 000f 10       		.uleb128 0x10
+ 1278 0010 17       		.uleb128 0x17
+ 1279 0011 00       		.byte	0
+ 1280 0012 00       		.byte	0
+ 1281 0013 02       		.uleb128 0x2
+ 1282 0014 16       		.uleb128 0x16
+ 1283 0015 00       		.byte	0
+ 1284 0016 03       		.uleb128 0x3
+ 1285 0017 0E       		.uleb128 0xe
+ 1286 0018 3A       		.uleb128 0x3a
+ 1287 0019 0B       		.uleb128 0xb
+ 1288 001a 3B       		.uleb128 0x3b
+ 1289 001b 0B       		.uleb128 0xb
+ 1290 001c 49       		.uleb128 0x49
+ 1291 001d 13       		.uleb128 0x13
+ 1292 001e 00       		.byte	0
+ 1293 001f 00       		.byte	0
+ 1294 0020 03       		.uleb128 0x3
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 29
 
 
- 1300 009c 13       		.uleb128 0x13
- 1301 009d 00       		.byte	0
- 1302 009e 00       		.byte	0
- 1303 009f 0D       		.uleb128 0xd
- 1304 00a0 34       		.uleb128 0x34
- 1305 00a1 00       		.byte	0
- 1306 00a2 03       		.uleb128 0x3
- 1307 00a3 0E       		.uleb128 0xe
- 1308 00a4 3A       		.uleb128 0x3a
- 1309 00a5 0B       		.uleb128 0xb
- 1310 00a6 3B       		.uleb128 0x3b
- 1311 00a7 0B       		.uleb128 0xb
- 1312 00a8 49       		.uleb128 0x49
- 1313 00a9 13       		.uleb128 0x13
- 1314 00aa 02       		.uleb128 0x2
- 1315 00ab 18       		.uleb128 0x18
- 1316 00ac 00       		.byte	0
- 1317 00ad 00       		.byte	0
- 1318 00ae 0E       		.uleb128 0xe
- 1319 00af 34       		.uleb128 0x34
- 1320 00b0 00       		.byte	0
- 1321 00b1 03       		.uleb128 0x3
- 1322 00b2 08       		.uleb128 0x8
- 1323 00b3 3A       		.uleb128 0x3a
- 1324 00b4 0B       		.uleb128 0xb
- 1325 00b5 3B       		.uleb128 0x3b
- 1326 00b6 0B       		.uleb128 0xb
- 1327 00b7 49       		.uleb128 0x49
- 1328 00b8 13       		.uleb128 0x13
- 1329 00b9 02       		.uleb128 0x2
- 1330 00ba 18       		.uleb128 0x18
- 1331 00bb 00       		.byte	0
- 1332 00bc 00       		.byte	0
- 1333 00bd 0F       		.uleb128 0xf
- 1334 00be 34       		.uleb128 0x34
- 1335 00bf 00       		.byte	0
- 1336 00c0 03       		.uleb128 0x3
- 1337 00c1 0E       		.uleb128 0xe
- 1338 00c2 3A       		.uleb128 0x3a
- 1339 00c3 0B       		.uleb128 0xb
- 1340 00c4 3B       		.uleb128 0x3b
- 1341 00c5 0B       		.uleb128 0xb
- 1342 00c6 49       		.uleb128 0x49
- 1343 00c7 13       		.uleb128 0x13
- 1344 00c8 00       		.byte	0
- 1345 00c9 00       		.byte	0
- 1346 00ca 10       		.uleb128 0x10
- 1347 00cb 0B       		.uleb128 0xb
- 1348 00cc 01       		.byte	0x1
- 1349 00cd 11       		.uleb128 0x11
- 1350 00ce 01       		.uleb128 0x1
- 1351 00cf 12       		.uleb128 0x12
- 1352 00d0 06       		.uleb128 0x6
- 1353 00d1 01       		.uleb128 0x1
- 1354 00d2 13       		.uleb128 0x13
- 1355 00d3 00       		.byte	0
- 1356 00d4 00       		.byte	0
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 30
+ 1295 0021 24       		.uleb128 0x24
+ 1296 0022 00       		.byte	0
+ 1297 0023 0B       		.uleb128 0xb
+ 1298 0024 0B       		.uleb128 0xb
+ 1299 0025 3E       		.uleb128 0x3e
+ 1300 0026 0B       		.uleb128 0xb
+ 1301 0027 03       		.uleb128 0x3
+ 1302 0028 0E       		.uleb128 0xe
+ 1303 0029 00       		.byte	0
+ 1304 002a 00       		.byte	0
+ 1305 002b 04       		.uleb128 0x4
+ 1306 002c 24       		.uleb128 0x24
+ 1307 002d 00       		.byte	0
+ 1308 002e 0B       		.uleb128 0xb
+ 1309 002f 0B       		.uleb128 0xb
+ 1310 0030 3E       		.uleb128 0x3e
+ 1311 0031 0B       		.uleb128 0xb
+ 1312 0032 03       		.uleb128 0x3
+ 1313 0033 08       		.uleb128 0x8
+ 1314 0034 00       		.byte	0
+ 1315 0035 00       		.byte	0
+ 1316 0036 05       		.uleb128 0x5
+ 1317 0037 16       		.uleb128 0x16
+ 1318 0038 00       		.byte	0
+ 1319 0039 03       		.uleb128 0x3
+ 1320 003a 0E       		.uleb128 0xe
+ 1321 003b 3A       		.uleb128 0x3a
+ 1322 003c 0B       		.uleb128 0xb
+ 1323 003d 3B       		.uleb128 0x3b
+ 1324 003e 05       		.uleb128 0x5
+ 1325 003f 49       		.uleb128 0x49
+ 1326 0040 13       		.uleb128 0x13
+ 1327 0041 00       		.byte	0
+ 1328 0042 00       		.byte	0
+ 1329 0043 06       		.uleb128 0x6
+ 1330 0044 0F       		.uleb128 0xf
+ 1331 0045 00       		.byte	0
+ 1332 0046 0B       		.uleb128 0xb
+ 1333 0047 0B       		.uleb128 0xb
+ 1334 0048 49       		.uleb128 0x49
+ 1335 0049 13       		.uleb128 0x13
+ 1336 004a 00       		.byte	0
+ 1337 004b 00       		.byte	0
+ 1338 004c 07       		.uleb128 0x7
+ 1339 004d 26       		.uleb128 0x26
+ 1340 004e 00       		.byte	0
+ 1341 004f 49       		.uleb128 0x49
+ 1342 0050 13       		.uleb128 0x13
+ 1343 0051 00       		.byte	0
+ 1344 0052 00       		.byte	0
+ 1345 0053 08       		.uleb128 0x8
+ 1346 0054 13       		.uleb128 0x13
+ 1347 0055 01       		.byte	0x1
+ 1348 0056 0B       		.uleb128 0xb
+ 1349 0057 05       		.uleb128 0x5
+ 1350 0058 3A       		.uleb128 0x3a
+ 1351 0059 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 30
 
 
- 1357 00d5 11       		.uleb128 0x11
- 1358 00d6 0B       		.uleb128 0xb
- 1359 00d7 01       		.byte	0x1
- 1360 00d8 11       		.uleb128 0x11
- 1361 00d9 01       		.uleb128 0x1
- 1362 00da 12       		.uleb128 0x12
- 1363 00db 06       		.uleb128 0x6
- 1364 00dc 00       		.byte	0
- 1365 00dd 00       		.byte	0
- 1366 00de 12       		.uleb128 0x12
- 1367 00df 15       		.uleb128 0x15
- 1368 00e0 01       		.byte	0x1
- 1369 00e1 27       		.uleb128 0x27
- 1370 00e2 19       		.uleb128 0x19
- 1371 00e3 01       		.uleb128 0x1
- 1372 00e4 13       		.uleb128 0x13
- 1373 00e5 00       		.byte	0
- 1374 00e6 00       		.byte	0
- 1375 00e7 13       		.uleb128 0x13
- 1376 00e8 05       		.uleb128 0x5
- 1377 00e9 00       		.byte	0
- 1378 00ea 49       		.uleb128 0x49
- 1379 00eb 13       		.uleb128 0x13
- 1380 00ec 00       		.byte	0
- 1381 00ed 00       		.byte	0
- 1382 00ee 14       		.uleb128 0x14
- 1383 00ef 21       		.uleb128 0x21
- 1384 00f0 00       		.byte	0
- 1385 00f1 49       		.uleb128 0x49
- 1386 00f2 13       		.uleb128 0x13
- 1387 00f3 2F       		.uleb128 0x2f
- 1388 00f4 18       		.uleb128 0x18
- 1389 00f5 00       		.byte	0
- 1390 00f6 00       		.byte	0
- 1391 00f7 15       		.uleb128 0x15
- 1392 00f8 2E       		.uleb128 0x2e
- 1393 00f9 00       		.byte	0
- 1394 00fa 3F       		.uleb128 0x3f
- 1395 00fb 19       		.uleb128 0x19
- 1396 00fc 03       		.uleb128 0x3
- 1397 00fd 0E       		.uleb128 0xe
- 1398 00fe 3A       		.uleb128 0x3a
- 1399 00ff 0B       		.uleb128 0xb
- 1400 0100 3B       		.uleb128 0x3b
- 1401 0101 0B       		.uleb128 0xb
- 1402 0102 27       		.uleb128 0x27
- 1403 0103 19       		.uleb128 0x19
- 1404 0104 11       		.uleb128 0x11
- 1405 0105 01       		.uleb128 0x1
- 1406 0106 12       		.uleb128 0x12
- 1407 0107 06       		.uleb128 0x6
- 1408 0108 40       		.uleb128 0x40
- 1409 0109 18       		.uleb128 0x18
- 1410 010a 9642     		.uleb128 0x2116
- 1411 010c 19       		.uleb128 0x19
- 1412 010d 00       		.byte	0
- 1413 010e 00       		.byte	0
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 31
+ 1352 005a 3B       		.uleb128 0x3b
+ 1353 005b 0B       		.uleb128 0xb
+ 1354 005c 01       		.uleb128 0x1
+ 1355 005d 13       		.uleb128 0x13
+ 1356 005e 00       		.byte	0
+ 1357 005f 00       		.byte	0
+ 1358 0060 09       		.uleb128 0x9
+ 1359 0061 0D       		.uleb128 0xd
+ 1360 0062 00       		.byte	0
+ 1361 0063 03       		.uleb128 0x3
+ 1362 0064 08       		.uleb128 0x8
+ 1363 0065 3A       		.uleb128 0x3a
+ 1364 0066 0B       		.uleb128 0xb
+ 1365 0067 3B       		.uleb128 0x3b
+ 1366 0068 0B       		.uleb128 0xb
+ 1367 0069 49       		.uleb128 0x49
+ 1368 006a 13       		.uleb128 0x13
+ 1369 006b 38       		.uleb128 0x38
+ 1370 006c 0B       		.uleb128 0xb
+ 1371 006d 00       		.byte	0
+ 1372 006e 00       		.byte	0
+ 1373 006f 0A       		.uleb128 0xa
+ 1374 0070 0D       		.uleb128 0xd
+ 1375 0071 00       		.byte	0
+ 1376 0072 03       		.uleb128 0x3
+ 1377 0073 0E       		.uleb128 0xe
+ 1378 0074 3A       		.uleb128 0x3a
+ 1379 0075 0B       		.uleb128 0xb
+ 1380 0076 3B       		.uleb128 0x3b
+ 1381 0077 0B       		.uleb128 0xb
+ 1382 0078 49       		.uleb128 0x49
+ 1383 0079 13       		.uleb128 0x13
+ 1384 007a 38       		.uleb128 0x38
+ 1385 007b 05       		.uleb128 0x5
+ 1386 007c 00       		.byte	0
+ 1387 007d 00       		.byte	0
+ 1388 007e 0B       		.uleb128 0xb
+ 1389 007f 01       		.uleb128 0x1
+ 1390 0080 01       		.byte	0x1
+ 1391 0081 49       		.uleb128 0x49
+ 1392 0082 13       		.uleb128 0x13
+ 1393 0083 01       		.uleb128 0x1
+ 1394 0084 13       		.uleb128 0x13
+ 1395 0085 00       		.byte	0
+ 1396 0086 00       		.byte	0
+ 1397 0087 0C       		.uleb128 0xc
+ 1398 0088 21       		.uleb128 0x21
+ 1399 0089 00       		.byte	0
+ 1400 008a 49       		.uleb128 0x49
+ 1401 008b 13       		.uleb128 0x13
+ 1402 008c 2F       		.uleb128 0x2f
+ 1403 008d 0B       		.uleb128 0xb
+ 1404 008e 00       		.byte	0
+ 1405 008f 00       		.byte	0
+ 1406 0090 0D       		.uleb128 0xd
+ 1407 0091 2E       		.uleb128 0x2e
+ 1408 0092 01       		.byte	0x1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 31
 
 
- 1414 010f 16       		.uleb128 0x16
- 1415 0110 34       		.uleb128 0x34
- 1416 0111 00       		.byte	0
- 1417 0112 03       		.uleb128 0x3
- 1418 0113 0E       		.uleb128 0xe
- 1419 0114 3A       		.uleb128 0x3a
- 1420 0115 0B       		.uleb128 0xb
- 1421 0116 3B       		.uleb128 0x3b
- 1422 0117 05       		.uleb128 0x5
- 1423 0118 49       		.uleb128 0x49
- 1424 0119 13       		.uleb128 0x13
- 1425 011a 3F       		.uleb128 0x3f
- 1426 011b 19       		.uleb128 0x19
- 1427 011c 3C       		.uleb128 0x3c
- 1428 011d 19       		.uleb128 0x19
- 1429 011e 00       		.byte	0
- 1430 011f 00       		.byte	0
- 1431 0120 17       		.uleb128 0x17
- 1432 0121 35       		.uleb128 0x35
- 1433 0122 00       		.byte	0
- 1434 0123 49       		.uleb128 0x49
- 1435 0124 13       		.uleb128 0x13
- 1436 0125 00       		.byte	0
- 1437 0126 00       		.byte	0
- 1438 0127 18       		.uleb128 0x18
- 1439 0128 34       		.uleb128 0x34
- 1440 0129 00       		.byte	0
- 1441 012a 03       		.uleb128 0x3
- 1442 012b 0E       		.uleb128 0xe
- 1443 012c 3A       		.uleb128 0x3a
- 1444 012d 0B       		.uleb128 0xb
- 1445 012e 3B       		.uleb128 0x3b
- 1446 012f 0B       		.uleb128 0xb
- 1447 0130 49       		.uleb128 0x49
- 1448 0131 13       		.uleb128 0x13
- 1449 0132 3F       		.uleb128 0x3f
- 1450 0133 19       		.uleb128 0x19
- 1451 0134 02       		.uleb128 0x2
- 1452 0135 18       		.uleb128 0x18
- 1453 0136 00       		.byte	0
- 1454 0137 00       		.byte	0
- 1455 0138 00       		.byte	0
- 1456              		.section	.debug_aranges,"",%progbits
- 1457 0000 24000000 		.4byte	0x24
- 1458 0004 0200     		.2byte	0x2
- 1459 0006 00000000 		.4byte	.Ldebug_info0
- 1460 000a 04       		.byte	0x4
- 1461 000b 00       		.byte	0
- 1462 000c 0000     		.2byte	0
- 1463 000e 0000     		.2byte	0
- 1464 0010 00000000 		.4byte	.LFB64
- 1465 0014 8C040000 		.4byte	.LFE64-.LFB64
- 1466 0018 00000000 		.4byte	.LFB65
- 1467 001c 2C000000 		.4byte	.LFE65-.LFB65
- 1468 0020 00000000 		.4byte	0
- 1469 0024 00000000 		.4byte	0
- 1470              		.section	.debug_ranges,"",%progbits
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 32
+ 1409 0093 3F       		.uleb128 0x3f
+ 1410 0094 19       		.uleb128 0x19
+ 1411 0095 03       		.uleb128 0x3
+ 1412 0096 0E       		.uleb128 0xe
+ 1413 0097 3A       		.uleb128 0x3a
+ 1414 0098 0B       		.uleb128 0xb
+ 1415 0099 3B       		.uleb128 0x3b
+ 1416 009a 0B       		.uleb128 0xb
+ 1417 009b 27       		.uleb128 0x27
+ 1418 009c 19       		.uleb128 0x19
+ 1419 009d 49       		.uleb128 0x49
+ 1420 009e 13       		.uleb128 0x13
+ 1421 009f 11       		.uleb128 0x11
+ 1422 00a0 01       		.uleb128 0x1
+ 1423 00a1 12       		.uleb128 0x12
+ 1424 00a2 06       		.uleb128 0x6
+ 1425 00a3 40       		.uleb128 0x40
+ 1426 00a4 18       		.uleb128 0x18
+ 1427 00a5 9642     		.uleb128 0x2116
+ 1428 00a7 19       		.uleb128 0x19
+ 1429 00a8 01       		.uleb128 0x1
+ 1430 00a9 13       		.uleb128 0x13
+ 1431 00aa 00       		.byte	0
+ 1432 00ab 00       		.byte	0
+ 1433 00ac 0E       		.uleb128 0xe
+ 1434 00ad 34       		.uleb128 0x34
+ 1435 00ae 00       		.byte	0
+ 1436 00af 03       		.uleb128 0x3
+ 1437 00b0 0E       		.uleb128 0xe
+ 1438 00b1 3A       		.uleb128 0x3a
+ 1439 00b2 0B       		.uleb128 0xb
+ 1440 00b3 3B       		.uleb128 0x3b
+ 1441 00b4 0B       		.uleb128 0xb
+ 1442 00b5 49       		.uleb128 0x49
+ 1443 00b6 13       		.uleb128 0x13
+ 1444 00b7 02       		.uleb128 0x2
+ 1445 00b8 18       		.uleb128 0x18
+ 1446 00b9 00       		.byte	0
+ 1447 00ba 00       		.byte	0
+ 1448 00bb 0F       		.uleb128 0xf
+ 1449 00bc 34       		.uleb128 0x34
+ 1450 00bd 00       		.byte	0
+ 1451 00be 03       		.uleb128 0x3
+ 1452 00bf 08       		.uleb128 0x8
+ 1453 00c0 3A       		.uleb128 0x3a
+ 1454 00c1 0B       		.uleb128 0xb
+ 1455 00c2 3B       		.uleb128 0x3b
+ 1456 00c3 0B       		.uleb128 0xb
+ 1457 00c4 49       		.uleb128 0x49
+ 1458 00c5 13       		.uleb128 0x13
+ 1459 00c6 02       		.uleb128 0x2
+ 1460 00c7 18       		.uleb128 0x18
+ 1461 00c8 00       		.byte	0
+ 1462 00c9 00       		.byte	0
+ 1463 00ca 10       		.uleb128 0x10
+ 1464 00cb 0B       		.uleb128 0xb
+ 1465 00cc 01       		.byte	0x1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 32
 
 
- 1471              	.Ldebug_ranges0:
- 1472 0000 00000000 		.4byte	.LFB64
- 1473 0004 8C040000 		.4byte	.LFE64
- 1474 0008 00000000 		.4byte	.LFB65
- 1475 000c 2C000000 		.4byte	.LFE65
- 1476 0010 00000000 		.4byte	0
- 1477 0014 00000000 		.4byte	0
- 1478              		.section	.debug_line,"",%progbits
- 1479              	.Ldebug_line0:
- 1480 0000 16020000 		.section	.debug_str,"MS",%progbits,1
- 1480      02005701 
- 1480      00000201 
- 1480      FB0E0D00 
- 1480      01010101 
- 1481              	.LASF43:
- 1482 0000 62656174 		.ascii	"beatsPerMinute\000"
- 1482      73506572 
- 1482      4D696E75 
- 1482      746500
- 1483              	.LASF13:
- 1484 000f 696E7438 		.ascii	"int8_t\000"
- 1484      5F7400
- 1485              	.LASF42:
- 1486 0016 6C617374 		.ascii	"lastBeat\000"
- 1486      42656174 
- 1486      00
- 1487              	.LASF21:
- 1488 001f 73697A65 		.ascii	"sizetype\000"
- 1488      74797065 
- 1488      00
- 1489              	.LASF52:
- 1490 0028 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1490      43313120 
- 1490      352E342E 
- 1490      31203230 
- 1490      31363036 
- 1491 005b 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 1491      20726576 
- 1491      6973696F 
- 1491      6E203233 
- 1491      37373135 
- 1492 008e 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
- 1492      66756E63 
- 1492      74696F6E 
- 1492      2D736563 
- 1492      74696F6E 
- 1493              	.LASF55:
- 1494 00b6 6D61696E 		.ascii	"main\000"
- 1494      00
- 1495              	.LASF8:
- 1496 00bb 5F5F7569 		.ascii	"__uint32_t\000"
- 1496      6E743332 
- 1496      5F7400
- 1497              	.LASF39:
- 1498 00c6 52415445 		.ascii	"RATE_SIZE\000"
- 1498      5F53495A 
- 1498      4500
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 33
+ 1466 00cd 11       		.uleb128 0x11
+ 1467 00ce 01       		.uleb128 0x1
+ 1468 00cf 12       		.uleb128 0x12
+ 1469 00d0 06       		.uleb128 0x6
+ 1470 00d1 01       		.uleb128 0x1
+ 1471 00d2 13       		.uleb128 0x13
+ 1472 00d3 00       		.byte	0
+ 1473 00d4 00       		.byte	0
+ 1474 00d5 11       		.uleb128 0x11
+ 1475 00d6 0B       		.uleb128 0xb
+ 1476 00d7 01       		.byte	0x1
+ 1477 00d8 11       		.uleb128 0x11
+ 1478 00d9 01       		.uleb128 0x1
+ 1479 00da 12       		.uleb128 0x12
+ 1480 00db 06       		.uleb128 0x6
+ 1481 00dc 00       		.byte	0
+ 1482 00dd 00       		.byte	0
+ 1483 00de 12       		.uleb128 0x12
+ 1484 00df 15       		.uleb128 0x15
+ 1485 00e0 01       		.byte	0x1
+ 1486 00e1 27       		.uleb128 0x27
+ 1487 00e2 19       		.uleb128 0x19
+ 1488 00e3 01       		.uleb128 0x1
+ 1489 00e4 13       		.uleb128 0x13
+ 1490 00e5 00       		.byte	0
+ 1491 00e6 00       		.byte	0
+ 1492 00e7 13       		.uleb128 0x13
+ 1493 00e8 05       		.uleb128 0x5
+ 1494 00e9 00       		.byte	0
+ 1495 00ea 49       		.uleb128 0x49
+ 1496 00eb 13       		.uleb128 0x13
+ 1497 00ec 00       		.byte	0
+ 1498 00ed 00       		.byte	0
+ 1499 00ee 14       		.uleb128 0x14
+ 1500 00ef 21       		.uleb128 0x21
+ 1501 00f0 00       		.byte	0
+ 1502 00f1 49       		.uleb128 0x49
+ 1503 00f2 13       		.uleb128 0x13
+ 1504 00f3 2F       		.uleb128 0x2f
+ 1505 00f4 18       		.uleb128 0x18
+ 1506 00f5 00       		.byte	0
+ 1507 00f6 00       		.byte	0
+ 1508 00f7 15       		.uleb128 0x15
+ 1509 00f8 2E       		.uleb128 0x2e
+ 1510 00f9 00       		.byte	0
+ 1511 00fa 3F       		.uleb128 0x3f
+ 1512 00fb 19       		.uleb128 0x19
+ 1513 00fc 03       		.uleb128 0x3
+ 1514 00fd 0E       		.uleb128 0xe
+ 1515 00fe 3A       		.uleb128 0x3a
+ 1516 00ff 0B       		.uleb128 0xb
+ 1517 0100 3B       		.uleb128 0x3b
+ 1518 0101 0B       		.uleb128 0xb
+ 1519 0102 27       		.uleb128 0x27
+ 1520 0103 19       		.uleb128 0x19
+ 1521 0104 11       		.uleb128 0x11
+ 1522 0105 01       		.uleb128 0x1
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 33
 
 
- 1499              	.LASF4:
- 1500 00d0 73686F72 		.ascii	"short int\000"
- 1500      7420696E 
- 1500      7400
- 1501              	.LASF23:
- 1502 00da 68656164 		.ascii	"head\000"
- 1502      00
- 1503              	.LASF33:
- 1504 00df 76616C69 		.ascii	"validHeartRate\000"
- 1504      64486561 
- 1504      72745261 
- 1504      746500
- 1505              	.LASF34:
- 1506 00ee 69724275 		.ascii	"irBuffer\000"
- 1506      66666572 
- 1506      00
- 1507              	.LASF17:
- 1508 00f7 666C6F61 		.ascii	"float\000"
- 1508      7400
- 1509              	.LASF10:
- 1510 00fd 6C6F6E67 		.ascii	"long long int\000"
- 1510      206C6F6E 
- 1510      6720696E 
- 1510      7400
- 1511              	.LASF7:
- 1512 010b 6C6F6E67 		.ascii	"long int\000"
- 1512      20696E74 
- 1512      00
- 1513              	.LASF36:
- 1514 0114 62756666 		.ascii	"bufferLength\000"
- 1514      65724C65 
- 1514      6E677468 
- 1514      00
- 1515              	.LASF1:
- 1516 0121 5F5F7569 		.ascii	"__uint8_t\000"
- 1516      6E74385F 
- 1516      7400
- 1517              	.LASF22:
- 1518 012b 67726565 		.ascii	"green\000"
- 1518      6E00
- 1519              	.LASF56:
- 1520 0131 4D415833 		.ascii	"MAX30101_ISR\000"
- 1520      30313031 
- 1520      5F495352 
- 1520      00
- 1521              	.LASF38:
- 1522 013e 4649464F 		.ascii	"FIFO_max_size\000"
- 1522      5F6D6178 
- 1522      5F73697A 
- 1522      6500
- 1523              	.LASF44:
- 1524 014c 62656174 		.ascii	"beatAvg\000"
- 1524      41766700 
- 1525              	.LASF20:
- 1526 0154 6C6F6E67 		.ascii	"long double\000"
- 1526      20646F75 
- 1526      626C6500 
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 34
+ 1523 0106 12       		.uleb128 0x12
+ 1524 0107 06       		.uleb128 0x6
+ 1525 0108 40       		.uleb128 0x40
+ 1526 0109 18       		.uleb128 0x18
+ 1527 010a 9642     		.uleb128 0x2116
+ 1528 010c 19       		.uleb128 0x19
+ 1529 010d 00       		.byte	0
+ 1530 010e 00       		.byte	0
+ 1531 010f 16       		.uleb128 0x16
+ 1532 0110 34       		.uleb128 0x34
+ 1533 0111 00       		.byte	0
+ 1534 0112 03       		.uleb128 0x3
+ 1535 0113 0E       		.uleb128 0xe
+ 1536 0114 3A       		.uleb128 0x3a
+ 1537 0115 0B       		.uleb128 0xb
+ 1538 0116 3B       		.uleb128 0x3b
+ 1539 0117 05       		.uleb128 0x5
+ 1540 0118 49       		.uleb128 0x49
+ 1541 0119 13       		.uleb128 0x13
+ 1542 011a 3F       		.uleb128 0x3f
+ 1543 011b 19       		.uleb128 0x19
+ 1544 011c 3C       		.uleb128 0x3c
+ 1545 011d 19       		.uleb128 0x19
+ 1546 011e 00       		.byte	0
+ 1547 011f 00       		.byte	0
+ 1548 0120 17       		.uleb128 0x17
+ 1549 0121 35       		.uleb128 0x35
+ 1550 0122 00       		.byte	0
+ 1551 0123 49       		.uleb128 0x49
+ 1552 0124 13       		.uleb128 0x13
+ 1553 0125 00       		.byte	0
+ 1554 0126 00       		.byte	0
+ 1555 0127 18       		.uleb128 0x18
+ 1556 0128 34       		.uleb128 0x34
+ 1557 0129 00       		.byte	0
+ 1558 012a 03       		.uleb128 0x3
+ 1559 012b 0E       		.uleb128 0xe
+ 1560 012c 3A       		.uleb128 0x3a
+ 1561 012d 0B       		.uleb128 0xb
+ 1562 012e 3B       		.uleb128 0x3b
+ 1563 012f 0B       		.uleb128 0xb
+ 1564 0130 49       		.uleb128 0x49
+ 1565 0131 13       		.uleb128 0x13
+ 1566 0132 3F       		.uleb128 0x3f
+ 1567 0133 19       		.uleb128 0x19
+ 1568 0134 02       		.uleb128 0x2
+ 1569 0135 18       		.uleb128 0x18
+ 1570 0136 00       		.byte	0
+ 1571 0137 00       		.byte	0
+ 1572 0138 19       		.uleb128 0x19
+ 1573 0139 34       		.uleb128 0x34
+ 1574 013a 00       		.byte	0
+ 1575 013b 03       		.uleb128 0x3
+ 1576 013c 0E       		.uleb128 0xe
+ 1577 013d 3A       		.uleb128 0x3a
+ 1578 013e 0B       		.uleb128 0xb
+ 1579 013f 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 34
 
 
- 1527              	.LASF45:
- 1528 0160 7265765F 		.ascii	"rev_id\000"
- 1528      696400
- 1529              	.LASF54:
- 1530 0167 433A5C55 		.ascii	"C:\\Users\\Perro\\Desktop\\AY2122_II_Project-1\\Pro"
- 1530      73657273 
- 1530      5C506572 
- 1530      726F5C44 
- 1530      65736B74 
- 1531 0195 6A656374 		.ascii	"ject_LTEBS\\Saturimetro.cydsn\000"
- 1531      5F4C5445 
- 1531      42535C53 
- 1531      61747572 
- 1531      696D6574 
- 1532              	.LASF32:
- 1533 01b2 68656172 		.ascii	"heartRate\000"
- 1533      74526174 
- 1533      6500
- 1534              	.LASF3:
- 1535 01bc 756E7369 		.ascii	"unsigned char\000"
- 1535      676E6564 
- 1535      20636861 
- 1535      7200
- 1536              	.LASF24:
- 1537 01ca 7461696C 		.ascii	"tail\000"
- 1537      00
- 1538              	.LASF2:
- 1539 01cf 7369676E 		.ascii	"signed char\000"
- 1539      65642063 
- 1539      68617200 
- 1540              	.LASF11:
- 1541 01db 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1541      206C6F6E 
- 1541      6720756E 
- 1541      7369676E 
- 1541      65642069 
- 1542              	.LASF16:
- 1543 01f2 75696E74 		.ascii	"uint32_t\000"
- 1543      33325F74 
- 1543      00
- 1544              	.LASF12:
- 1545 01fb 756E7369 		.ascii	"unsigned int\000"
- 1545      676E6564 
- 1545      20696E74 
- 1545      00
- 1546              	.LASF50:
- 1547 0208 666C6167 		.ascii	"flag_temp\000"
- 1547      5F74656D 
- 1547      7000
- 1548              	.LASF46:
- 1549 0212 70617274 		.ascii	"part_id\000"
- 1549      5F696400 
- 1550              	.LASF5:
- 1551 021a 73686F72 		.ascii	"short unsigned int\000"
- 1551      7420756E 
- 1551      7369676E 
- 1551      65642069 
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 35
+ 1580 0140 0B       		.uleb128 0xb
+ 1581 0141 49       		.uleb128 0x49
+ 1582 0142 13       		.uleb128 0x13
+ 1583 0143 3F       		.uleb128 0x3f
+ 1584 0144 19       		.uleb128 0x19
+ 1585 0145 3C       		.uleb128 0x3c
+ 1586 0146 19       		.uleb128 0x19
+ 1587 0147 00       		.byte	0
+ 1588 0148 00       		.byte	0
+ 1589 0149 00       		.byte	0
+ 1590              		.section	.debug_aranges,"",%progbits
+ 1591 0000 24000000 		.4byte	0x24
+ 1592 0004 0200     		.2byte	0x2
+ 1593 0006 00000000 		.4byte	.Ldebug_info0
+ 1594 000a 04       		.byte	0x4
+ 1595 000b 00       		.byte	0
+ 1596 000c 0000     		.2byte	0
+ 1597 000e 0000     		.2byte	0
+ 1598 0010 00000000 		.4byte	.LFB64
+ 1599 0014 1C050000 		.4byte	.LFE64-.LFB64
+ 1600 0018 00000000 		.4byte	.LFB65
+ 1601 001c 2C000000 		.4byte	.LFE65-.LFB65
+ 1602 0020 00000000 		.4byte	0
+ 1603 0024 00000000 		.4byte	0
+ 1604              		.section	.debug_ranges,"",%progbits
+ 1605              	.Ldebug_ranges0:
+ 1606 0000 00000000 		.4byte	.LFB64
+ 1607 0004 1C050000 		.4byte	.LFE64
+ 1608 0008 00000000 		.4byte	.LFB65
+ 1609 000c 2C000000 		.4byte	.LFE65
+ 1610 0010 00000000 		.4byte	0
+ 1611 0014 00000000 		.4byte	0
+ 1612              		.section	.debug_line,"",%progbits
+ 1613              	.Ldebug_line0:
+ 1614 0000 59020000 		.section	.debug_str,"MS",%progbits,1
+ 1614      02006401 
+ 1614      00000201 
+ 1614      FB0E0D00 
+ 1614      01010101 
+ 1615              	.LASF44:
+ 1616 0000 62656174 		.ascii	"beatsPerMinute\000"
+ 1616      73506572 
+ 1616      4D696E75 
+ 1616      746500
+ 1617              	.LASF13:
+ 1618 000f 696E7438 		.ascii	"int8_t\000"
+ 1618      5F7400
+ 1619              	.LASF43:
+ 1620 0016 6C617374 		.ascii	"lastBeat\000"
+ 1620      42656174 
+ 1620      00
+ 1621              	.LASF22:
+ 1622 001f 73697A65 		.ascii	"sizetype\000"
+ 1622      74797065 
+ 1622      00
+ 1623              	.LASF49:
+ 1624 0028 64656C74 		.ascii	"delta\000"
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 35
 
 
- 1551      6E7400
- 1552              	.LASF0:
- 1553 022d 5F5F696E 		.ascii	"__int8_t\000"
- 1553      74385F74 
- 1553      00
- 1554              	.LASF19:
- 1555 0236 63686172 		.ascii	"char\000"
- 1555      00
- 1556              	.LASF15:
- 1557 023b 696E7433 		.ascii	"int32_t\000"
- 1557      325F7400 
- 1558              	.LASF40:
- 1559 0243 72617465 		.ascii	"rates\000"
- 1559      7300
- 1560              	.LASF31:
- 1561 0249 76616C69 		.ascii	"validSPO2\000"
- 1561      6453504F 
- 1561      3200
- 1562              	.LASF26:
- 1563 0253 64617461 		.ascii	"data\000"
- 1563      00
- 1564              	.LASF53:
- 1565 0258 6D61696E 		.ascii	"main.c\000"
- 1565      2E6300
- 1566              	.LASF9:
- 1567 025f 6C6F6E67 		.ascii	"long unsigned int\000"
- 1567      20756E73 
- 1567      69676E65 
- 1567      6420696E 
- 1567      7400
- 1568              	.LASF25:
- 1569 0271 4D415833 		.ascii	"MAX30101_Data\000"
- 1569      30313031 
- 1569      5F446174 
- 1569      6100
- 1570              	.LASF41:
- 1571 027f 72617465 		.ascii	"rateSpot\000"
- 1571      53706F74 
- 1571      00
- 1572              	.LASF18:
- 1573 0288 646F7562 		.ascii	"double\000"
- 1573      6C6500
- 1574              	.LASF27:
- 1575 028f 7072696E 		.ascii	"print_ptr\000"
- 1575      745F7074 
- 1575      7200
- 1576              	.LASF35:
- 1577 0299 72656442 		.ascii	"redBuffer\000"
- 1577      75666665 
- 1577      7200
- 1578              	.LASF6:
- 1579 02a3 5F5F696E 		.ascii	"__int32_t\000"
- 1579      7433325F 
- 1579      7400
- 1580              	.LASF14:
- 1581 02ad 75696E74 		.ascii	"uint8_t\000"
- 1581      385F7400 
-ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccGDMBx2.s 			page 36
+ 1624      6100
+ 1625              	.LASF56:
+ 1626 002e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1626      43313120 
+ 1626      352E342E 
+ 1626      31203230 
+ 1626      31363036 
+ 1627 0061 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1627      20726576 
+ 1627      6973696F 
+ 1627      6E203233 
+ 1627      37373135 
+ 1628 0094 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1628      66756E63 
+ 1628      74696F6E 
+ 1628      2D736563 
+ 1628      74696F6E 
+ 1629              	.LASF59:
+ 1630 00bc 6D61696E 		.ascii	"main\000"
+ 1630      00
+ 1631              	.LASF8:
+ 1632 00c1 5F5F7569 		.ascii	"__uint32_t\000"
+ 1632      6E743332 
+ 1632      5F7400
+ 1633              	.LASF40:
+ 1634 00cc 52415445 		.ascii	"RATE_SIZE\000"
+ 1634      5F53495A 
+ 1634      4500
+ 1635              	.LASF4:
+ 1636 00d6 73686F72 		.ascii	"short int\000"
+ 1636      7420696E 
+ 1636      7400
+ 1637              	.LASF24:
+ 1638 00e0 68656164 		.ascii	"head\000"
+ 1638      00
+ 1639              	.LASF34:
+ 1640 00e5 76616C69 		.ascii	"validHeartRate\000"
+ 1640      64486561 
+ 1640      72745261 
+ 1640      746500
+ 1641              	.LASF35:
+ 1642 00f4 69724275 		.ascii	"irBuffer\000"
+ 1642      66666572 
+ 1642      00
+ 1643              	.LASF17:
+ 1644 00fd 75696E74 		.ascii	"uint8\000"
+ 1644      3800
+ 1645              	.LASF18:
+ 1646 0103 666C6F61 		.ascii	"float\000"
+ 1646      7400
+ 1647              	.LASF10:
+ 1648 0109 6C6F6E67 		.ascii	"long long int\000"
+ 1648      206C6F6E 
+ 1648      6720696E 
+ 1648      7400
+ 1649              	.LASF7:
+ 1650 0117 6C6F6E67 		.ascii	"long int\000"
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 36
 
 
- 1582              	.LASF30:
- 1583 02b5 73706F32 		.ascii	"spo2\000"
- 1583      00
- 1584              	.LASF51:
- 1585 02ba 666C6167 		.ascii	"flag_1s\000"
- 1585      5F317300 
- 1586              	.LASF28:
- 1587 02c2 61637469 		.ascii	"active_leds\000"
- 1587      76655F6C 
- 1587      65647300 
- 1588              	.LASF29:
- 1589 02ce 666C6167 		.ascii	"flag\000"
- 1589      00
- 1590              	.LASF48:
- 1591 02d3 616E5F78 		.ascii	"an_x\000"
- 1591      00
- 1592              	.LASF49:
- 1593 02d8 616E5F79 		.ascii	"an_y\000"
- 1593      00
- 1594              	.LASF47:
- 1595 02dd 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 1595      52784275 
- 1595      66666572 
- 1595      00
- 1596              	.LASF37:
- 1597 02ea 6E756D5F 		.ascii	"num_samples\000"
- 1597      73616D70 
- 1597      6C657300 
- 1598              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1650      20696E74 
+ 1650      00
+ 1651              	.LASF37:
+ 1652 0120 62756666 		.ascii	"bufferLength\000"
+ 1652      65724C65 
+ 1652      6E677468 
+ 1652      00
+ 1653              	.LASF1:
+ 1654 012d 5F5F7569 		.ascii	"__uint8_t\000"
+ 1654      6E74385F 
+ 1654      7400
+ 1655              	.LASF23:
+ 1656 0137 67726565 		.ascii	"green\000"
+ 1656      6E00
+ 1657              	.LASF60:
+ 1658 013d 4D415833 		.ascii	"MAX30101_ISR\000"
+ 1658      30313031 
+ 1658      5F495352 
+ 1658      00
+ 1659              	.LASF39:
+ 1660 014a 4649464F 		.ascii	"FIFO_max_size\000"
+ 1660      5F6D6178 
+ 1660      5F73697A 
+ 1660      6500
+ 1661              	.LASF45:
+ 1662 0158 62656174 		.ascii	"beatAvg\000"
+ 1662      41766700 
+ 1663              	.LASF21:
+ 1664 0160 6C6F6E67 		.ascii	"long double\000"
+ 1664      20646F75 
+ 1664      626C6500 
+ 1665              	.LASF46:
+ 1666 016c 7265765F 		.ascii	"rev_id\000"
+ 1666      696400
+ 1667              	.LASF58:
+ 1668 0173 433A5C55 		.ascii	"C:\\Users\\Perro\\Desktop\\AY2122_II_Project-1\\Pro"
+ 1668      73657273 
+ 1668      5C506572 
+ 1668      726F5C44 
+ 1668      65736B74 
+ 1669 01a1 6A656374 		.ascii	"ject_LTEBS\\Saturimetro.cydsn\000"
+ 1669      5F4C5445 
+ 1669      42535C53 
+ 1669      61747572 
+ 1669      696D6574 
+ 1670              	.LASF33:
+ 1671 01be 68656172 		.ascii	"heartRate\000"
+ 1671      74526174 
+ 1671      6500
+ 1672              	.LASF3:
+ 1673 01c8 756E7369 		.ascii	"unsigned char\000"
+ 1673      676E6564 
+ 1673      20636861 
+ 1673      7200
+ 1674              	.LASF25:
+ 1675 01d6 7461696C 		.ascii	"tail\000"
+ 1675      00
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 37
+
+
+ 1676              	.LASF2:
+ 1677 01db 7369676E 		.ascii	"signed char\000"
+ 1677      65642063 
+ 1677      68617200 
+ 1678              	.LASF11:
+ 1679 01e7 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1679      206C6F6E 
+ 1679      6720756E 
+ 1679      7369676E 
+ 1679      65642069 
+ 1680              	.LASF16:
+ 1681 01fe 75696E74 		.ascii	"uint32_t\000"
+ 1681      33325F74 
+ 1681      00
+ 1682              	.LASF12:
+ 1683 0207 756E7369 		.ascii	"unsigned int\000"
+ 1683      676E6564 
+ 1683      20696E74 
+ 1683      00
+ 1684              	.LASF53:
+ 1685 0214 666C6167 		.ascii	"flag_temp\000"
+ 1685      5F74656D 
+ 1685      7000
+ 1686              	.LASF47:
+ 1687 021e 70617274 		.ascii	"part_id\000"
+ 1687      5F696400 
+ 1688              	.LASF5:
+ 1689 0226 73686F72 		.ascii	"short unsigned int\000"
+ 1689      7420756E 
+ 1689      7369676E 
+ 1689      65642069 
+ 1689      6E7400
+ 1690              	.LASF0:
+ 1691 0239 5F5F696E 		.ascii	"__int8_t\000"
+ 1691      74385F74 
+ 1691      00
+ 1692              	.LASF48:
+ 1693 0242 69725661 		.ascii	"irValue\000"
+ 1693      6C756500 
+ 1694              	.LASF20:
+ 1695 024a 63686172 		.ascii	"char\000"
+ 1695      00
+ 1696              	.LASF15:
+ 1697 024f 696E7433 		.ascii	"int32_t\000"
+ 1697      325F7400 
+ 1698              	.LASF41:
+ 1699 0257 72617465 		.ascii	"rates\000"
+ 1699      7300
+ 1700              	.LASF32:
+ 1701 025d 76616C69 		.ascii	"validSPO2\000"
+ 1701      6453504F 
+ 1701      3200
+ 1702              	.LASF27:
+ 1703 0267 64617461 		.ascii	"data\000"
+ 1703      00
+ 1704              	.LASF57:
+ 1705 026c 6D61696E 		.ascii	"main.c\000"
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 38
+
+
+ 1705      2E6300
+ 1706              	.LASF9:
+ 1707 0273 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1707      20756E73 
+ 1707      69676E65 
+ 1707      6420696E 
+ 1707      7400
+ 1708              	.LASF26:
+ 1709 0285 4D415833 		.ascii	"MAX30101_Data\000"
+ 1709      30313031 
+ 1709      5F446174 
+ 1709      6100
+ 1710              	.LASF42:
+ 1711 0293 72617465 		.ascii	"rateSpot\000"
+ 1711      53706F74 
+ 1711      00
+ 1712              	.LASF19:
+ 1713 029c 646F7562 		.ascii	"double\000"
+ 1713      6C6500
+ 1714              	.LASF28:
+ 1715 02a3 7072696E 		.ascii	"print_ptr\000"
+ 1715      745F7074 
+ 1715      7200
+ 1716              	.LASF36:
+ 1717 02ad 72656442 		.ascii	"redBuffer\000"
+ 1717      75666665 
+ 1717      7200
+ 1718              	.LASF55:
+ 1719 02b7 636F756E 		.ascii	"count\000"
+ 1719      7400
+ 1720              	.LASF6:
+ 1721 02bd 5F5F696E 		.ascii	"__int32_t\000"
+ 1721      7433325F 
+ 1721      7400
+ 1722              	.LASF14:
+ 1723 02c7 75696E74 		.ascii	"uint8_t\000"
+ 1723      385F7400 
+ 1724              	.LASF31:
+ 1725 02cf 73706F32 		.ascii	"spo2\000"
+ 1725      00
+ 1726              	.LASF54:
+ 1727 02d4 666C6167 		.ascii	"flag_1s\000"
+ 1727      5F317300 
+ 1728              	.LASF29:
+ 1729 02dc 61637469 		.ascii	"active_leds\000"
+ 1729      76655F6C 
+ 1729      65647300 
+ 1730              	.LASF30:
+ 1731 02e8 666C6167 		.ascii	"flag\000"
+ 1731      00
+ 1732              	.LASF51:
+ 1733 02ed 616E5F78 		.ascii	"an_x\000"
+ 1733      00
+ 1734              	.LASF52:
+ 1735 02f2 616E5F79 		.ascii	"an_y\000"
+ 1735      00
+ 1736              	.LASF50:
+ARM GAS  C:\Users\Perro\AppData\Local\Temp\ccgKmmIB.s 			page 39
+
+
+ 1737 02f7 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1737      52784275 
+ 1737      66666572 
+ 1737      00
+ 1738              	.LASF38:
+ 1739 0304 6E756D5F 		.ascii	"num_samples\000"
+ 1739      73616D70 
+ 1739      6C657300 
+ 1740              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

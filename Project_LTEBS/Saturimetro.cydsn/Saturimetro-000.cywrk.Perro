@@ -18,7 +18,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Saturimetro-000\Saturimetro\TopDesign">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Saturimetro-000\Saturimetro\Source Files\main.c">
 <ExpandedNodeIds>
 <v>Saturimetro-000</v>
 <v>Saturimetro-000\Saturimetro</v>
@@ -53,36 +53,7 @@
 <v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\UART_Debug</v>
 <v>Saturimetro-000\Saturimetro\TopDesign.cysch</v>
 </ExpandedNodeIds>
-<VisibleNodeIds>
-<v>Saturimetro-000</v>
-<v>Saturimetro-000\Saturimetro</v>
-<v>Saturimetro-000\Saturimetro\TopDesign</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Pins</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Analog</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Clocks</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Interrupts</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\DMA</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\System</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Directives</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Flash Security</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\EEPROM</v>
-<v>Saturimetro-000\Saturimetro\Header Files</v>
-<v>Saturimetro-000\Saturimetro\Header Files\cyapicallbacks.h</v>
-<v>Saturimetro-000\Saturimetro\Header Files\HeartRate.h</v>
-<v>Saturimetro-000\Saturimetro\Header Files\I2C_Interface.h</v>
-<v>Saturimetro-000\Saturimetro\Header Files\isr.h</v>
-<v>Saturimetro-000\Saturimetro\Header Files\MAX30101.h</v>
-<v>Saturimetro-000\Saturimetro\Header Files\MAX30101_Defs.h</v>
-<v>Saturimetro-000\Saturimetro\Header Files\SpO2.h</v>
-<v>Saturimetro-000\Saturimetro\Source Files</v>
-<v>Saturimetro-000\Saturimetro\Source Files\HeartRate.c</v>
-<v>Saturimetro-000\Saturimetro\Source Files\I2C_Interface.c</v>
-<v>Saturimetro-000\Saturimetro\Source Files\isr.c</v>
-<v>Saturimetro-000\Saturimetro\Source Files\main.c</v>
-<v>Saturimetro-000\Saturimetro\Source Files\MAX30101.c</v>
-<v>Saturimetro-000\Saturimetro\Source Files\SpO2.c</v>
-</VisibleNodeIds>
+<VisibleNodeIds />
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
 <ExpandedNodeIds>
@@ -91,12 +62,7 @@
 <v>Saturimetro-000\Saturimetro\TopDesign</v>
 <v>Saturimetro-000\Saturimetro\TopDesign\TopDesign.cysch</v>
 </ExpandedNodeIds>
-<VisibleNodeIds>
-<v>Saturimetro-000</v>
-<v>Saturimetro-000\Saturimetro</v>
-<v>Saturimetro-000\Saturimetro\TopDesign</v>
-<v>Saturimetro-000\Saturimetro\TopDesign\TopDesign.cysch</v>
-</VisibleNodeIds>
+<VisibleNodeIds />
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
 <ExpandedNodeIds>
@@ -150,36 +116,7 @@
 <v>Saturimetro-000\Saturimetro\Saturimetro.rpt</v>
 <v>Saturimetro-000\Saturimetro\Saturimetro_timing.html</v>
 </ExpandedNodeIds>
-<VisibleNodeIds>
-<v>Saturimetro-000</v>
-<v>Saturimetro-000\Saturimetro</v>
-<v>Saturimetro-000\Saturimetro\CortexM3</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\Connection_LED.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\HeartRate.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Interface.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Master.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Master_BOOT.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Master_INT.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Master_MASTER.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Master_PM.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Master_SLAVE.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_1.lst</v>
-</VisibleNodeIds>
+<VisibleNodeIds />
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
 <TreeKeysV2>
@@ -204,23 +141,7 @@
 <v>Saturimetro-000\Saturimetro\UART_v2_50.pdf</v>
 <v>Saturimetro-000\Saturimetro\ZeroTerminal.pdf</v>
 </ExpandedNodeIds>
-<VisibleNodeIds>
-<v>Saturimetro-000</v>
-<v>Saturimetro-000\Saturimetro</v>
-<v>Saturimetro-000\Saturimetro\PSoC 5LP Architecture TRM</v>
-<v>Saturimetro-000\Saturimetro\CY8C58LP Family Datasheet</v>
-<v>Saturimetro-000\Saturimetro\System Reference Guides</v>
-<v>Saturimetro-000\Saturimetro\System Reference Guides\cy_boot_v6_0</v>
-<v>Saturimetro-000\Saturimetro\cy_clock_v2_20.pdf</v>
-<v>Saturimetro-000\Saturimetro\cy_isr_v1_70.pdf</v>
-<v>Saturimetro-000\Saturimetro\cy_isr_v1_71.pdf</v>
-<v>Saturimetro-000\Saturimetro\cy_pins_v2_20</v>
-<v>Saturimetro-000\Saturimetro\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
-<v>Saturimetro-000\Saturimetro\I2C_v3_50.pdf</v>
-<v>Saturimetro-000\Saturimetro\Timer_v2_80.pdf</v>
-<v>Saturimetro-000\Saturimetro\UART_v2_50.pdf</v>
-<v>Saturimetro-000\Saturimetro\ZeroTerminal.pdf</v>
-</VisibleNodeIds>
+<VisibleNodeIds />
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStatesV2>
 </CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>

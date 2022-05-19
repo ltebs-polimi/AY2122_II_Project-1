@@ -11457,13 +11457,13 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
  154              	/* isr_1 */
  155              	.set isr_1__INTC_CLR_EN_REG, CYREG_NVIC_CLRENA0
  156              	.set isr_1__INTC_CLR_PD_REG, CYREG_NVIC_CLRPEND0
- 157              	.set isr_1__INTC_MASK, 0x20000
+ 157              	.set isr_1__INTC_MASK, 0x01
 ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 192
 
 
- 158              	.set isr_1__INTC_NUMBER, 17
+ 158              	.set isr_1__INTC_NUMBER, 0
  159              	.set isr_1__INTC_PRIOR_NUM, 7
- 160              	.set isr_1__INTC_PRIOR_REG, CYREG_NVIC_PRI_17
+ 160              	.set isr_1__INTC_PRIOR_REG, CYREG_NVIC_PRI_0
  161              	.set isr_1__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
  162              	.set isr_1__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0
  163              	

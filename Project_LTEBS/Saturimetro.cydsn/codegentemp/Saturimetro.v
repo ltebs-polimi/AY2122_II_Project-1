@@ -1,6 +1,6 @@
 // ======================================================================
 // Saturimetro.v generated from TopDesign.cysch
-// 05/18/2022 at 18:10
+// 05/19/2022 at 10:58
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -1090,7 +1090,7 @@ module top ;
 	cy_isr_v1_0
 		#(.int_type(2'b10))
 		isr_1
-		 (.int_signal(Net_33));
+		 (.int_signal(Net_34));
 
 
 
