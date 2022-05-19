@@ -13,6 +13,8 @@
 #include "HeartRate.h"
 #include "Timer.h"
 #include "isr.h"
+#include "project.h"
+#include "MAX30101.h"
 
 int16 IR_AC_Max = 20;
 int16 IR_AC_Min = -20;
@@ -126,22 +128,16 @@ int32 mul16(int16 x, int16 y)
 
 
 /* [] END OF FILE */
-extern uint8 count;
 
 
-#define RATE_SIZE 4 //Increase this for more averaging. 4 is good.
-uint8 rates[RATE_SIZE]; //Array of heart rates
-uint8 rateSpot = 0;
-long lastBeat = 0; //Time at which the last beat occurred
 
-float beatsPerMinute;
-uint8 beatAvg;
+
+
 void loop()
 {
-    Timer_Init();
-    isr_1_StartEx(Count);
     
-    long irValue = particleSensor.getIR();
+    
+    long irValue = getIR();
 
   if (checkForBeat(irValue) == true)
   {
@@ -154,27 +150,26 @@ void loop()
 
     if (beatsPerMinute < 255 && beatsPerMinute > 20)
     {
-      rates[rateSpot++] = (byte)beatsPerMinute; //Store this reading in the array
+      rates[rateSpot++] = beatsPerMinute; //Store this reading in the array
       rateSpot %= RATE_SIZE; //Wrap variable
 
       //Take average of readings
       beatAvg = 0;
-      for (byte x = 0 ; x < RATE_SIZE ; x++)
+      for ( x = 0 ; x < RATE_SIZE ; x++)
         beatAvg += rates[x];
       beatAvg /= RATE_SIZE;
     }
   }
 
-  Serial.print("IR=");
-  Serial.print(irValue);
-  Serial.print(", BPM=");
-  Serial.print(beatsPerMinute);
-  Serial.print(", Avg BPM=");
-  Serial.print(beatAvg);
+  sprintf(msg, "IR=%ld", irValue);
+  debug_print(msg);
+  sprintf(msg, "BPM=%u", beatsPerMinute);
+  debug_print(msg);
+  sprintf(msg, "Avg BPM=%ld", beatAvg);
+  debug_print(msg);
+  
 
-  if (irValue < 50000)
-    Serial.print(" No finger?");
-
-  Serial.println();
+  if (irValue < 5000)
+    debug_print("no finger");
 }
 */

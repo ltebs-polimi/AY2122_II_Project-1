@@ -29,9 +29,12 @@
 #define debug_print(msg) do { if (DEBUG_TEST) UART_Debug_PutString(msg);} while (0)
 
 CY_ISR_PROTO(MAX30101_ISR);
+    Timer_Init();
+    isr_1_StartEx(Count);
 
 uint8_t flag_temp = 0;
 uint8_t flag_1s = 0;
+extern uint8 count;
 
 int main(void)
 {
@@ -57,9 +60,9 @@ int main(void)
     uint8_t rates[RATE_SIZE]; //Array of heart rates
     uint8_t rateSpot = 0;
     long lastBeat = 0; //Time at which the last beat occurred
-
-    float beatsPerMinute;
-    int beatAvg;
+    uint8_t x;
+    uint8_t beatsPerMinute;
+    uint8_t beatAvg;
     
     // Initialization
     MAX30101_Start();
@@ -150,28 +153,7 @@ int main(void)
     {
         if (flag_temp == 1)
         {   
-            /*long irValue = getIR();
-
-              if (checkForBeat(irValue) == true)
-              {
-                //We sensed a beat!
-                long delta = millis() - lastBeat;
-                lastBeat = millis();
-
-                beatsPerMinute = 60 / (delta / 1000.0);
-
-                if (beatsPerMinute < 255 && beatsPerMinute > 20)
-                {
-                  rates[rateSpot++] = (uint8_t)beatsPerMinute; //Store this reading in the array
-                  rateSpot %= RATE_SIZE; //Wrap variable
-
-                  //Take average of readings
-                  beatAvg = 0;
-                  for (uint8_t x = 0 ; x < RATE_SIZE ; x++)
-                    beatAvg += rates[x];
-                  beatAvg /= RATE_SIZE;
-                }
-              }*/
+            
             
             MAX30101_IsFIFOAFull(&flag);
             if (flag > 0)
