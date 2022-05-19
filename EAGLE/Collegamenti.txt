@@ -1,8 +1,0 @@
-1.8 V (MAX) scollegato!! 
-INT (MAX) --> 12.4 (KIT)
-SCL (MAX) --> 12.0 (KIT)
-SDA (MAX) --> 12.1 (KIT)
-3.3 V (MAX, indicato come 5 V ?) --> a LV (LEVEL) CONTROLLA!! 
-GND (MAX) --> GND (LEVEL)   --> come fare? al momento ho messo direttamente GND
-
-https://www.youtube.com/watch?v=WymJbd3cYgs
