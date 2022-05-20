@@ -215,3 +215,133 @@ class MainWindow(QMainWindow):
         widget = QWidget()
         widget.setLayout(button_hlay)
         self.setCentralWidget(widget)
+
+   ####################
+    # SERIAL INTERFACE #
+    ####################
+    def serialscan(self):
+        """!
+        @brief Scans all serial ports and create a list.
+        """
+        # create the combo box to host port list
+        self.port_text = ""
+        self.com_list_widget = QComboBox() # we want to change the text on the button; we want to read COM10 etc so we need to connect these
+        # quantities --> we use signals
+        self.com_list_widget.currentTextChanged.connect(self.port_changed) # when the user selects another option the text changes, it               generates a signal, it catches the signal and it will use it in this method 
+        
+        # create the connection button
+        # the button has connected to port, which is parametric, it is not fixed but it depends on what ahs been found during the scan and 
+        # on what the user selects in the menu
+        self.conn_btn = QPushButton(
+            text=("Connect to port {}".format(self.port_text)), 
+            checkable=True,
+            toggled=self.on_toggle # not on click, but on toggle (see the documentation); we link toogle to the method on toogle
+            # toogle carries another information in addition to the click; it differentiate if you cikc the button to enable it or to 
+            # disable it (Difference bettwen push and release) 
+        )
+
+        # acquire list of serial ports and add it to the combo box
+        # we need to scan the serial prots; we create a list and take the name of the active serial port 
+        name_kit = "Intel"  # da sostituire con Cypress
+        ports = list(serial.tools.list_ports.comports())
+
+        # Nella lista delle ports ora viene fuori solo quella in cui il manufacturer = name_kit 
+        # --> da ottimizzare!
+        for p in ports:
+            manufacturer = p.manufacturer
+            if manufacturer == name_kit:
+               serial_ports = [
+                p.name # put the name in the lsit         
+                ]
+        self.com_list_widget.addItems(serial_ports)
+
+
+    ##################
+    # SERIAL SIGNALS #
+    ##################
+    
+    def port_changed(self):
+        # signal used when the text was link to the current exchange on the menu; we need to change the text on the button according to
+        # the choice made by the user; so we take the choice made by the user beacuse we have a fucntion that allows to take the ?? and put
+        # onto the button, saving it in a varibale and use the attribute contained as parameter. 
+        """!
+        @brief Update conn_btn label based on selected port.
+        """
+        self.port_text = self.com_list_widget.currentText()
+        self.conn_btn.setText("Connect to port {}".format(self.port_text))
+
+    @pyqtSlot(bool)
+    def on_toggle(self, checked):
+        """!
+        @brief Allow connection and disconnection from selected serial port.
+        """
+        if checked: # the user has pressed it to estalblsih the connection
+            # setup reading worker
+            self.serial_worker = SerialWorker(self.port_text) # needs to be redfined --> now we now the name of the port, which is the oe
+            # selected by the user
+            # connect worker signals to functions
+            self.serial_worker.signals.status.connect(self.check_serialport_status) # we have to tell to the program which are the signals
+            # used to catch the signal status; it is always the same procedure already seen for the button etc.
+            self.serial_worker.signals.device_port.connect(self.connected_device) 
+            # execute the worker
+            self.threadpool.start(self.serial_worker)
+        else:
+            # kill thread
+            self.serial_worker.is_killed = True
+            self.serial_worker.killed()
+            self.com_list_widget.setDisabled(False) # enable the possibility to change port
+            self.conn_btn.setText(
+                "Connect to port {}".format(self.port_text)
+            )
+
+    def check_serialport_status(self, port_name, status):
+        """!
+        @brief Handle the status of the serial port connection.
+
+        Available status:
+            - 0  --> Error during opening of serial port
+            - 1  --> Serial port opened correctly
+        """
+        # if 0 is received, it means that the connection has failed; if the connection has failed we dont change anything in the application
+        # the button will still dispaly "connect to port.."
+        # if instead 1 has been recieved, the connection has been establsihed --> change the drop down menu 
+        if status == 0:
+            self.conn_btn.setChecked(False)
+        elif status == 1:
+            # enable all the widgets on the interface
+            self.com_list_widget.setDisabled(True) # disable the possibility to change COM port when already connected
+            self.conn_btn.setText(
+                "Disconnect from port {}".format(port_name)
+            )
+
+    def connected_device(self, port_name):
+        # it prints the infromation; it is passed the port name, which is passed by the signal 
+        """!
+        @brief Checks on the termination of the serial worker.
+        """
+        logging.info("Port {} closed.".format(port_name))
+
+
+    def ExitHandler(self):
+        # it is called when you close the application, when you press the cross.
+        # also this action generates a signal; you can intercepts this signal and conenct to another method
+        # as you can see, it set the boolean variable is_killed to true so that any parralell thread has stop and then it runs the key               method of the parallel worker 
+        """!
+        @brief Kill every possible running thread upon exiting application.
+        """
+        self.serial_worker.is_killed = True
+        self.serial_worker.killed()
+
+        
+#############
+#  RUN APP  #
+#############
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    w = MainWindow()
+    app.aboutToQuit.connect(w.ExitHandler) # this is the signal generated when you press the cross to quit; before closing the application
+    # but after clicking on the button that is connected to the method ExitHandler. 
+    # this allows to be sure that everything has closed 
+    w.show()
+    sys.exit(app.exec_())
+    
