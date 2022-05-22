@@ -50,7 +50,7 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(80, 40, 91, 91))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../../../../../hr_image.png"))
+        self.label.setPixmap(QtGui.QPixmap("D:\Polimi\LAB\PROJECT\AY2122_II_Project-1\GUI\hr_image.png")) # DA MODIFICARE in base a dove esegui codice
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
