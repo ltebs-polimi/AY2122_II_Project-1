@@ -1,0 +1,1 @@
+pyuic5 -x PhotoDetector.ui -o PhotoDetector.py
