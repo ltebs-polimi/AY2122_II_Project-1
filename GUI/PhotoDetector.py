@@ -9,58 +9,120 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import serial.tools.list_ports
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 593)
+        MainWindow.resize(1077, 571)
         MainWindow.setStyleSheet("background-color: rgb(14, 70, 159);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton_Start = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_Start.setGeometry(QtCore.QRect(70, 400, 61, 41))
+        self.pushButton_Start.setGeometry(QtCore.QRect(630, 480, 61, 41))
         self.pushButton_Start.setAutoFillBackground(False)
         self.pushButton_Start.setStyleSheet("background-color: rgb(212, 228, 255);\n"
-"color: rgb(14, 70, 159);\n"
-"font: 9pt \"Adobe Heiti Std\";\n"
-"border-color: rgb(10, 52, 116);\n"
-"border: 4px solid #082859;\n"
-"border-radius: 5px;\n"
-"border-style: outset;\n"
-"")
+                                            "color: rgb(14, 70, 159);\n"
+                                            "font: 9pt \"Adobe Heiti Std\";\n"
+                                            "border-color: rgb(10, 52, 116);\n"
+                                            "border: 4px solid #082859;\n"
+                                            "border-radius: 5px;\n"
+                                            "border-style: outset;\n"
+                                            "")
         self.pushButton_Start.setObjectName("pushButton_Start")
         self.pushButton_Stop = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_Stop.setGeometry(QtCore.QRect(140, 400, 61, 41))
+        self.pushButton_Stop.setGeometry(QtCore.QRect(780, 480, 61, 41))
         self.pushButton_Stop.setStyleSheet("background-color: rgb(212, 228, 255);\n"
-"color: rgb(14, 70, 159);\n"
-"font: 9pt \"Adobe Heiti Std\";\n"
-"border-color: rgb(10, 52, 116);\n"
-"border: 4px solid #082859;\n"
-"border-radius: 5px;\n"
-"border-style: outset;\n"
-"")
+                                            "color: rgb(14, 70, 159);\n"
+                                            "font: 9pt \"Adobe Heiti Std\";\n"
+                                            "border-color: rgb(10, 52, 116);\n"
+                                            "border: 4px solid #082859;\n"
+                                            "border-radius: 5px;\n"
+                                            "border-style: outset;\n"
+                                            "")
         self.pushButton_Stop.setObjectName("pushButton_Stop")
         self.line = QtWidgets.QFrame(self.centralwidget)
-        self.line.setGeometry(QtCore.QRect(260, -20, 5, 591))
+        self.line.setGeometry(QtCore.QRect(360, -40, 5, 591))
         self.line.setStyleSheet("background-color: rgb(212, 228, 255);")
         self.line.setFrameShape(QtWidgets.QFrame.VLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(80, 40, 91, 91))
+        self.label.setGeometry(QtCore.QRect(40, 20, 91, 91))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("D:\Polimi\LAB\PROJECT\AY2122_II_Project-1\GUI\hr_image.png")) # DA MODIFICARE in base a dove esegui codice
+        #self.label.setPixmap(QtGui.QPixmap("C:\Users\Perro\Desktop\AY2122_II_Project-1\GUI\hr_image.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(70, 140, 131, 16))
+        self.label_2.setGeometry(QtCore.QRect(160, 30, 171, 71))
         self.label_2.setStyleSheet("color: rgb(212, 228, 255);\n"
-"font: 10pt \"Adobe Heiti Std\";")
+                                    "font: 10pt \"Adobe Heiti Std\";")
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
+        self.horizontalSlider = QtWidgets.QSlider(self.centralwidget)
+        self.horizontalSlider.setGeometry(QtCore.QRect(50, 230, 231, 16))
+        self.horizontalSlider.setMinimum(1)
+        self.horizontalSlider.setMaximum(4)
+        self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider.setObjectName("horizontalSlider")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(50, 250, 281, 16))
+        self.label_3.setObjectName("label_3")
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(40, 170, 251, 21))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_4.setFont(font)
+        self.label_4.setObjectName("label_4")
+        self.label_5 = QtWidgets.QLabel(self.centralwidget)
+        self.label_5.setGeometry(QtCore.QRect(70, 210, 191, 16))
+        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_5.setObjectName("label_5")
+        self.horizontalSlider_2 = QtWidgets.QSlider(self.centralwidget)
+        self.horizontalSlider_2.setGeometry(QtCore.QRect(50, 310, 231, 16))
+        self.horizontalSlider_2.setMinimum(1)
+        self.horizontalSlider_2.setMaximum(4)
+        self.horizontalSlider_2.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider_2.setObjectName("horizontalSlider_2")
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(70, 280, 191, 21))
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6.setObjectName("label_6")
+        self.label_7 = QtWidgets.QLabel(self.centralwidget)
+        self.label_7.setGeometry(QtCore.QRect(50, 330, 241, 16))
+        self.label_7.setObjectName("label_7")
+        self.horizontalSlider_3 = QtWidgets.QSlider(self.centralwidget)
+        self.horizontalSlider_3.setGeometry(QtCore.QRect(50, 390, 231, 21))
+        self.horizontalSlider_3.setMinimum(1)
+        self.horizontalSlider_3.setMaximum(32)
+        self.horizontalSlider_3.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider_3.setObjectName("horizontalSlider_3")
+        self.label_8 = QtWidgets.QLabel(self.centralwidget)
+        self.label_8.setGeometry(QtCore.QRect(70, 370, 191, 16))
+        self.label_8.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_8.setObjectName("label_8")
+        self.label_9 = QtWidgets.QLabel(self.centralwidget)
+        self.label_9.setGeometry(QtCore.QRect(50, 420, 281, 16))
+        self.label_9.setObjectName("label_9")
+        self.label_10 = QtWidgets.QLabel(self.centralwidget)
+        self.label_10.setGeometry(QtCore.QRect(70, 441, 191, 20))
+        self.label_10.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_10.setObjectName("label_10")
+        self.label_11 = QtWidgets.QLabel(self.centralwidget)
+        self.label_11.setGeometry(QtCore.QRect(50, 490, 241, 16))
+        self.label_11.setObjectName("label_11")
+        self.horizontalSlider_4 = QtWidgets.QSlider(self.centralwidget)
+        self.horizontalSlider_4.setGeometry(QtCore.QRect(50, 470, 231, 16))
+        self.horizontalSlider_4.setMinimum(1)
+        self.horizontalSlider_4.setMaximum(4)
+        self.horizontalSlider_4.setOrientation(QtCore.Qt.Horizontal)
+        self.horizontalSlider_4.setObjectName("horizontalSlider_4")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1077, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -70,12 +132,54 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.pushButton_Start.clicked.connect(self.clicked)
+
+    def clicked(self):
+        connectPort = findPsoC(ports)
+
+        if connectPort != 'None':
+            ser = serial.Serial(connectPort, baudrate=115200, timeout=1)
+            self.label_2.setText('Connected to ' + connectPort)
+            self.label_2.adjustSize()
+            print('Connected to ' + connectPort)
+
+        else:
+            self.label_2.setText('Error in the connection with PSoC')
+            self.label_2.adjustSize()
+            print('Error in the connection with PSoC')
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton_Start.setText(_translate("MainWindow", "Start"))
         self.pushButton_Stop.setText(_translate("MainWindow", "Stop"))
-        self.label_2.setText(_translate("MainWindow", "Connected to..."))
+        self.label_2.setText(_translate("MainWindow", "Trying to connect"))
+        self.label_3.setText(_translate("MainWindow", "69          118         215         411  μs"))
+        self.label_4.setText(_translate("MainWindow", "Configura i diversi parametri"))
+        self.label_5.setText(_translate("MainWindow", "LED Pulse Width"))
+        self.label_6.setText(_translate("MainWindow", "Samples per second"))
+        self.label_7.setText(_translate("MainWindow", "50          100         200         400"))
+        self.label_8.setText(_translate("MainWindow", "Led Current Control"))
+        self.label_9.setText(_translate("MainWindow", "0.2                                      6.2  mA"))
+        self.label_10.setText(_translate("MainWindow", "SpO2 ADC Range"))
+        self.label_11.setText(_translate("MainWindow", "2048      4096      8192     16384"))
+
+ports = serial.tools.list_ports.comports()
+
+
+def findPsoC(portsFound):
+    commPort = 'None'
+    n_connections = len(portsFound)
+
+    for i in range(0,n_connections):
+        port = portsFound[i]
+        strPort = str(port)
+
+        if '3' in strPort: # poi sostituire con Cypress!
+            splitPort = strPort.split(' ')
+            commPort = (splitPort[0])
+
+    return commPort
 
 
 if __name__ == "__main__":
