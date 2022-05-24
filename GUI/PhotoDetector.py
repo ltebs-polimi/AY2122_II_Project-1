@@ -52,6 +52,7 @@ class Ui_MainWindow(object):
         self.label.setGeometry(QtCore.QRect(40, 20, 91, 91))
         self.label.setText("")
         #self.label.setPixmap(QtGui.QPixmap("C:\Users\Perro\Desktop\AY2122_II_Project-1\GUI\hr_image.png"))
+        self.label.setPixmap(QtGui.QPixmap("D:\Polimi\LAB\PROJECT\AY2122_II_Project-1\GUI\hr_image.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
@@ -153,16 +154,36 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton_Start.setText(_translate("MainWindow", "Start"))
         self.pushButton_Stop.setText(_translate("MainWindow", "Stop"))
-        self.label_2.setText(_translate("MainWindow", "Trying to connect"))
-        self.label_3.setText(_translate("MainWindow", "69          118         215         411  μs"))
-        self.label_4.setText(_translate("MainWindow", "Configura i diversi parametri"))
+        self.label_2.setText(_translate("MainWindow", "Trying to connect"))   
+        self.label_3.setText(_translate("MainWindow", "69                 118                215                411     μs"))
+        self.label_4.setText(_translate("MainWindow", "Parameters configuration"))
         self.label_5.setText(_translate("MainWindow", "LED Pulse Width"))
         self.label_6.setText(_translate("MainWindow", "Samples per second"))
-        self.label_7.setText(_translate("MainWindow", "50          100         200         400"))
+        self.label_7.setText(_translate("MainWindow", "50                100               200               400"))
         self.label_8.setText(_translate("MainWindow", "Led Current Control"))
-        self.label_9.setText(_translate("MainWindow", "0.2                                      6.2  mA"))
+        self.label_9.setText(_translate("MainWindow", "0.2                                                           6.2  mA"))
         self.label_10.setText(_translate("MainWindow", "SpO2 ADC Range"))
-        self.label_11.setText(_translate("MainWindow", "2048      4096      8192     16384"))
+        self.label_11.setText(_translate("MainWindow", "2048          4096          8192         16384"))
+        # change style of writings
+        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_3.setStyleSheet("color: rgb(212, 228, 255);\n"                                   
+                                   "font: 9pt \"Adobe Heiti Std\";\n")      
+        self.label_4.setStyleSheet("color: rgb(212, 228, 255);\n"                                   
+                                   "font: 9pt \"Adobe Heiti Std\";\n")      
+        self.label_5.setStyleSheet("color: rgb(212, 228, 255);\n"                                   
+                                   "font: 9pt \"Adobe Heiti Std\";\n") 
+        self.label_6.setStyleSheet("color: rgb(212, 228, 255);\n"                                   
+                                   "font: 9pt \"Adobe Heiti Std\";\n")
+        self.label_7.setStyleSheet("color: rgb(212, 228, 255);\n"                                   
+                                   "font: 9pt \"Adobe Heiti Std\";\n")      
+        self.label_8.setStyleSheet("color: rgb(212, 228, 255);\n"                                   
+                                   "font: 9pt \"Adobe Heiti Std\";\n")                                   
+        self.label_9.setStyleSheet("color: rgb(212, 228, 255);\n"                                   
+                                   "font: 9pt \"Adobe Heiti Std\";\n")      
+        self.label_10.setStyleSheet("color: rgb(212, 228, 255);\n"                                   
+                                   "font: 9pt \"Adobe Heiti Std\";\n")
+        self.label_11.setStyleSheet("color: rgb(212, 228, 255);\n"                                   
+                                   "font: 9pt \"Adobe Heiti Std\";\n")      
 
 ports = serial.tools.list_ports.comports()
 
