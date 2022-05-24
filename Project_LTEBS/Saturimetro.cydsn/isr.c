@@ -9,29 +9,12 @@
  *
  * ========================================
 */
-#define UART_DEBUG
-
-#ifdef UART_DEBUG
-    
-    #define DEBUG_TEST 1
-    
-#else
-    
-    #define DEBUG_TEST 0
-    
-#endif
-
-#define debug_print(msg) do { if (DEBUG_TEST) UART_Debug_PutString(msg);} while (0)
-
 
 #include "project.h"
 #include "isr.h"
-long count=0;
-char msg[50];
+volatile long count;
 
-CY_ISR_PROTO(Count) {
-    count++;
-    //sprintf(msg, "millis: %ld\r\n", count);
-    //debug_print(msg);
+CY_ISR_PROTO (Count) {
+     count++;
 }
 /* [] END OF FILE */

@@ -7,7 +7,7 @@
   <width>32</width>
   <peripherals>
     <peripheral>
-      <name>Timer</name>
+      <name>Timer_1</name>
       <description>No description available</description>
       <baseAddress>0x0</baseAddress>
       <addressBlock>
@@ -17,7 +17,7 @@
       </addressBlock>
       <registers>
         <register>
-          <name>Timer_GLOBAL_ENABLE</name>
+          <name>Timer_1_GLOBAL_ENABLE</name>
           <description>PM.ACT.CFG</description>
           <addressOffset>0x400043A3</addressOffset>
           <size>8</size>
@@ -35,7 +35,7 @@
           </fields>
         </register>
         <register>
-          <name>Timer_CONTROL</name>
+          <name>Timer_1_CONTROL</name>
           <description>TMRx.CFG0</description>
           <addressOffset>0x40004F00</addressOffset>
           <size>8</size>
@@ -119,7 +119,7 @@
           </fields>
         </register>
         <register>
-          <name>Timer_CONTROL2</name>
+          <name>Timer_1_CONTROL2</name>
           <description>TMRx.CFG1</description>
           <addressOffset>0x40004F01</addressOffset>
           <size>8</size>
@@ -184,7 +184,7 @@
           </fields>
         </register>
         <register>
-          <name>Timer_CONTROL3_</name>
+          <name>Timer_1_CONTROL3_</name>
           <description>TMRx.CFG2</description>
           <addressOffset>0x40004F02</addressOffset>
           <size>8</size>
@@ -279,7 +279,7 @@
           </fields>
         </register>
         <register>
-          <name>Timer_PERIOD</name>
+          <name>Timer_1_PERIOD</name>
           <description>TMRx.PER0 - Assigned Period</description>
           <addressOffset>0x40004F04</addressOffset>
           <size>8</size>
@@ -288,7 +288,7 @@
           <resetMask>0</resetMask>
         </register>
         <register>
-          <name>Timer_COUNTER</name>
+          <name>Timer_1_COUNTER</name>
           <description>TMRx.CNT_CMP0 - Current Down Counter Value</description>
           <addressOffset>0x40004F06</addressOffset>
           <size>8</size>

@@ -13,8 +13,10 @@
 #include "stdio.h"
 #include "I2C_Interface.h"
 #include "SpO2.h"
-#include "isr.h"
 #include "HeartRate.h"
+#include "Timer.h"
+#include "isr.h"
+
 
 #define UART_DEBUG
 
@@ -31,17 +33,15 @@
 #define debug_print(msg) do { if (DEBUG_TEST) UART_Debug_PutString(msg);} while (0)
 
 CY_ISR_PROTO(MAX30101_ISR);
-
+    
 
 uint8_t flag_temp = 0;
 uint8_t flag_1s = 0;
-extern uint8 count;
+
 
 int main(void)
 {
     // Variables
-    
-    
     MAX30101_Data data;
     data.head = 0;
     data.tail = 0;
@@ -58,20 +58,23 @@ int main(void)
     int32_t bufferLength = 200;
     int num_samples;
     int j=0;
-    int FIFO_max_size = 25;
-    const uint8_t RATE_SIZE = 4; //Increase this for more averaging. 4 is good.
+    int FIFO_max_size = 26;
+    const uint8_t RATE_SIZE = 2; //Increase this for more averaging. 4 is good.
     uint8_t rates[RATE_SIZE]; //Array of heart rates
-    uint8_t rateSpot = 0;
-    long lastBeat = 0; //Time at which the last beat occurred
+    uint8_t rateSpot;
+    long lastBeat=0; //Time at which the last beat occurred
     uint8_t x;
     uint8_t beatsPerMinute;
     uint8_t beatAvg;
+    long delta;
+    extern volatile long count;
+    long irValue;
+
     
     // Initialization
     MAX30101_Start();
     UART_Debug_Start();
-    Timer_Start();
-
+//    Timer_Start();
     CyDelay(100);
     
     debug_print("**************************\r\n");
@@ -115,12 +118,12 @@ int main(void)
         MAX30101_EnableFIFORollover();
         
         // 8 samples averaged
-        MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_4);
+        MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_8);
         
         // Set LED Power level
-        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x1F);
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x0A);
         
-        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x1F);
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x0A);
         
         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_3, 0x1F);
         
@@ -130,10 +133,10 @@ int main(void)
         MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_2048);
         
         // Pulse width
-        MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_69); //PW di 69 non funziona con una pulse amplitude bassa (ad esempio 0x05 o 0x0A) ma funziona con 0x1A o 0x1F, PW più alte non danno questi problemi
+        MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
         
         // Set Sample Rate
-        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_200);
+        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_400);
         
         // Set mode
         MAX30101_SetMode(MAX30101_SPO2_MODE);
@@ -146,18 +149,18 @@ int main(void)
     }
     
     debug_print("\r\n\r\n");
-    
+    Timer_1_Start();
     isr_MAX30101_StartEx(MAX30101_ISR);
     isr_1_StartEx(Count);
     // Clear FIFO
     MAX30101_ClearFIFO();
-    
     CyGlobalIntEnable; /* Enable global interrupts. */
     
     for(;;)
     {
         if (flag_temp == 1)
         {   
+            
             
             MAX30101_IsFIFOAFull(&flag);
             if (flag > 0)
@@ -173,30 +176,25 @@ int main(void)
                 //debug_print(msg);
                 // Read FIFO
                 MAX30101_ReadFIFO(num_samples, active_leds, &data, j);
-                //int samples = data.head - data.tail;
-                //sprintf(msg, "%d\r\n", samples);
-                //debug_print(msg);
                 for (int i=0;i<num_samples;i++){
-                    /*sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
-                    debug_print(msg);
-                    sprintf(msg, "ir: %lu\r", data.IR[data.tail+i]);
-                    debug_print(msg);*/
+                    //sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
+                    //debug_print(msg);
+                    //sprintf(msg, "ir: %lu\r", data.IR[data.tail+i]);
+                    //debug_print(msg);
                     //data.tail++;
+                
                     redBuffer[j] = data.red[data.tail+i];
                     irBuffer[j] = data.IR[data.tail+i];
                     j++;
-                    //sprintf(msg, "number of samples taken: %d\r", j);
-                    //debug_print(msg);
-                }
-                //data.tail = 0;
-                //data.head = 0;
-                uint32_t irValue = getIR(&data);
-
-                if (checkForBeat(irValue) == true)
-                {
+                    }  
+                
+                    irValue=getIR(&data);
+                    
+                    //if (checkForBeat(irValue) == true){//NON RIESCE AD ENRARE IN QUESTO IF -> PER QUESTO SEGNAVA SEMPRE UN VALORE FISSO NONOSTANTE IL COUNT INCREMENTASSE
+                  
                     //We sensed a beat!
                     //ogni ms incremento la variabile di 1.
-                    long delta = count - lastBeat;
+                    delta = count - lastBeat;
                     lastBeat = count;
 
                     beatsPerMinute = 60 / (delta / 1000.0);
@@ -209,22 +207,58 @@ int main(void)
                         //Take average of readings
                         beatAvg = 0;
                         for ( x = 0 ; x < RATE_SIZE ; x++)
+                        {
                             beatAvg += rates[x];
+                        }
                         beatAvg /= RATE_SIZE;
                     }
-                }
-
-                sprintf(msg, "IR=%lu\r", irValue);
-                debug_print(msg);
-                sprintf(msg, "BPM=%u\r", beatsPerMinute);
-                debug_print(msg);
-                sprintf(msg, "Avg BPM=%u\r\n", beatAvg);
-                debug_print(msg);
                   
+                    if(irValue > 5000) {       
+                        sprintf(msg, "Count = %ld\r", count);
+                        debug_print(msg);
+                        sprintf(msg, "IR=%u\r", irValue);
+                        debug_print(msg);
+                        sprintf(msg, "BPM=%u\r", beatsPerMinute);
+                        debug_print(msg);
+                        sprintf(msg, "Avg BPM=%u\r\r", beatAvg);
+                        debug_print(msg);
+                    }
+                    
 
-                if (irValue < 1000)
-                    debug_print("no finger\r\n");
-            }
+                    else
+                        debug_print("no finger\r");
+                         // int samples = data.head - data.tail;
+                            //sprintf(msg, "%d\r\n", samples);
+                        //debug_print(msg);
+                
+                
+                /*for (int i=0;i<num_samples;i++){
+                    sprintf(msg, "red: %u\r", data.red[data.tail+i]);
+                    debug_print(msg);
+                    sprintf(msg, "ir: %u\r", data.IR[data.tail+i]);
+                    debug_print(msg);
+                    //data.tail++;
+                    redBuffer[j] = data.red[data.tail+i];
+                    irBuffer[j] = data.IR[data.tail+i];
+                    j++;
+                    sprintf(msg, "number of samples taken: %d\r", j);
+                    debug_print(msg);
+                    if(flag_1s) {
+                        sprintf(msg, "spo2: %ld\r", spo2);
+                        debug_print(msg);
+                        sprintf(msg, "validspo2: %d\r", validSPO2);
+                        debug_print(msg);
+                        sprintf(msg, "HR: %ld\r", heartRate);
+                        debug_print(msg);
+                        sprintf(msg, "validHR: %d\r\n", validHeartRate);
+                        debug_print(msg);   
+                        flag_1s = 0;
+                    }
+                }
+                data.tail = 0;
+                data.head = 0;
+                    
+            } */
             flag_temp = 0;
             if(j>=bufferLength) {
                 maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
@@ -238,10 +272,19 @@ int main(void)
                 debug_print(msg);
                 sprintf(msg, "validspo2: %d\r", validSPO2);
                 debug_print(msg);
+                
                 /*sprintf(msg, "HR: %ld\r", heartRate);
                 debug_print(msg);
                 sprintf(msg, "validHR: %d\r\n", validHeartRate);
-                debug_print(msg);*/ 
+                debug_print(msg); 
+                */
+            
+            
+                
+                   
+                   
+
+              }    
             }
         }
     }
@@ -253,5 +296,3 @@ CY_ISR(MAX30101_ISR)
     MAX30101_INT_ClearInterrupt();
     flag_temp = 1;
 }
-
-/* [] END OF FILE */
