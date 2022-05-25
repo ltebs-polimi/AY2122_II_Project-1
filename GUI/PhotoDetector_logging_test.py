@@ -90,10 +90,12 @@ class SerialWorker(QRunnable):
             try:
                 self.port = serial.Serial(port=self.port_name, baudrate=self.baudrate,
                                           write_timeout=0, timeout=2)
+
                 if self.port.is_open:
                     CONN_STATUS = True
                     self.signals.status.emit(self.port_name, 1)
                     time.sleep(0.01)
+
             except serial.SerialException:
                 logging.info("Error with port {}.".format(self.port_name))
                 self.signals.status.emit(self.port_name, 0)
@@ -108,6 +110,7 @@ class SerialWorker(QRunnable):
             # Non riesce ad entrare all'interno di questa condizione per cui non scrive sul bus della COM.
             # Togliendo la condizione try and except, alla pressione del tasto start si chiude la GUI con un errore
             self.port.write(char.encode('utf-8'))
+            logging.info("ebter")
             logging.info("Written {} on port {}.".format(char, self.port_name))
         except:
             logging.info("Could not write {} on port {}.".format(char, self.port_name))
