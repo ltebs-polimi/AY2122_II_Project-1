@@ -1,7 +1,7 @@
 # VERSIONE 1
 # utilizzo nome del manufacturer
- 
-#name_kit = "Cypress"  
+
+#name_kit = "Cypress"
 #ports = list(serial.tools.list_ports.comports())
 #for p in ports:
  #   manufacturer = p.manufacturer
@@ -25,7 +25,7 @@ def findPsoC(portsFound):
         port = portsFound[i]
         strPort = str(port)
 
-        if 'Intel' in strPort: # poi sostituire con Cypress! 
+        if '3' in strPort: # poi sostituire con Cypress!
             splitPort = strPort.split(' ')
             commPort = (splitPort[0])
 
@@ -41,4 +41,3 @@ if connectPort != 'None':
 else: 
     print('Error in the connection with PSoC')
 
-print('code finished')
