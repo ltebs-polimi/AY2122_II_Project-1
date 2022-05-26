@@ -24,8 +24,9 @@ def findPsoC(portsFound):
     for i in range(0,n_connections):
         port = portsFound[i]
         strPort = str(port)
+        #print(strPort)
 
-        if '3' in strPort: # poi sostituire con Cypress!
+        if 'KitProg' in strPort: # poi sostituire con Cypress!
             splitPort = strPort.split(' ')
             commPort = (splitPort[0])
 

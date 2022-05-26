@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>1077</width>
-    <height>571</height>
+    <height>559</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Photodetector</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(14, 70, 159);</string>
@@ -21,10 +21,13 @@
     <property name="geometry">
      <rect>
       <x>630</x>
-      <y>480</y>
+      <y>490</y>
       <width>61</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
@@ -32,7 +35,7 @@
     <property name="styleSheet">
      <string notr="true">background-color: rgb(212, 228, 255);
 color: rgb(14, 70, 159);
-font: 9pt &quot;Adobe Heiti Std&quot;;
+font: 10pt &quot;Adobe Heiti Std&quot;;
 border-color: rgb(10, 52, 116);
 border: 4px solid #082859;
 border-radius: 5px;
@@ -47,15 +50,18 @@ border-style: outset;
     <property name="geometry">
      <rect>
       <x>780</x>
-      <y>480</y>
+      <y>490</y>
       <width>61</width>
       <height>41</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(212, 228, 255);
 color: rgb(14, 70, 159);
-font: 9pt &quot;Adobe Heiti Std&quot;;
+font: 10pt &quot;Adobe Heiti Std&quot;;
 border-color: rgb(10, 52, 116);
 border: 4px solid #082859;
 border-radius: 5px;
@@ -82,37 +88,18 @@ border-style: outset;
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label_connection">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>20</y>
-      <width>91</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../../../../../hr_image.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>30</y>
-      <width>171</width>
-      <height>71</height>
+      <x>10</x>
+      <y>10</y>
+      <width>351</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(212, 228, 255);
-font: 10pt &quot;Adobe Heiti Std&quot;;</string>
+font: 8pt &quot;Adobe Heiti Std&quot;;</string>
     </property>
     <property name="text">
      <string>Connected to...</string>
@@ -122,13 +109,28 @@ font: 10pt &quot;Adobe Heiti Std&quot;;</string>
     </property>
    </widget>
    <widget class="QSlider" name="horizontalSlider">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>230</y>
+      <x>60</x>
+      <y>240</y>
       <width>231</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="tabletTracking">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
     <property name="minimum">
      <number>1</number>
@@ -139,51 +141,81 @@ font: 10pt &quot;Adobe Heiti Std&quot;;</string>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
+    <property name="invertedAppearance">
+     <bool>false</bool>
+    </property>
+    <property name="tickPosition">
+     <enum>QSlider::TicksBelow</enum>
+    </property>
+    <property name="tickInterval">
+     <number>10</number>
+    </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>250</y>
+      <x>62</x>
+      <y>260</y>
       <width>281</width>
       <height>16</height>
      </rect>
     </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(212, 228, 255);
+font: 8pt &quot;Adobe Heiti Std&quot;;</string>
+    </property>
     <property name="text">
-     <string>69          118         215         411  μs</string>
+     <string>69                 118                 215                   411 </string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="label_choose_parameters">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>170</y>
-      <width>251</width>
-      <height>21</height>
+      <x>10</x>
+      <y>160</y>
+      <width>341</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <family>Adobe Heiti Std</family>
       <pointsize>10</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(14, 70, 159);
+background-color: rgb(212, 228, 255);
+font: 10pt &quot;Adobe Heiti Std&quot;;</string>
+    </property>
     <property name="text">
-     <string>Configura i diversi parametri</string>
+     <string>Parameters setting</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="label_LED_pulse_width">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>210</y>
+      <x>82</x>
+      <y>220</y>
       <width>191</width>
       <height>16</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(212, 228, 255);
+font: 9pt &quot;Adobe Heiti Std&quot;;</string>
+    </property>
     <property name="text">
-     <string>LED Pulse Width</string>
+     <string>LED Pulse Width (μs)</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -192,11 +224,14 @@ font: 10pt &quot;Adobe Heiti Std&quot;;</string>
    <widget class="QSlider" name="horizontalSlider_2">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>310</y>
+      <x>60</x>
+      <y>330</y>
       <width>231</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="minimum">
      <number>1</number>
@@ -207,15 +242,25 @@ font: 10pt &quot;Adobe Heiti Std&quot;;</string>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
+    <property name="tickPosition">
+     <enum>QSlider::TicksBelow</enum>
+    </property>
+    <property name="tickInterval">
+     <number>10</number>
+    </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="label_samples_per_second">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>280</y>
+      <x>82</x>
+      <y>300</y>
       <width>191</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(212, 228, 255);
+font: 9pt &quot;Adobe Heiti Std&quot;;</string>
     </property>
     <property name="text">
      <string>Samples per second</string>
@@ -224,27 +269,17 @@ font: 10pt &quot;Adobe Heiti Std&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>330</y>
-      <width>241</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>50          100         200         400</string>
-    </property>
-   </widget>
    <widget class="QSlider" name="horizontalSlider_3">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>390</y>
+      <x>60</x>
+      <y>410</y>
       <width>231</width>
-      <height>21</height>
+      <height>16</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="minimum">
      <number>1</number>
@@ -255,18 +290,28 @@ font: 10pt &quot;Adobe Heiti Std&quot;;</string>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
+    <property name="tickPosition">
+     <enum>QSlider::TicksBelow</enum>
+    </property>
+    <property name="tickInterval">
+     <number>10</number>
+    </property>
    </widget>
-   <widget class="QLabel" name="label_8">
+   <widget class="QLabel" name="label_LED_current_control">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>370</y>
+      <x>82</x>
+      <y>390</y>
       <width>191</width>
       <height>16</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(212, 228, 255);
+font: 9pt &quot;Adobe Heiti Std&quot;;</string>
+    </property>
     <property name="text">
-     <string>Led Current Control</string>
+     <string>LED Current Control (mA)</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -275,24 +320,32 @@ font: 10pt &quot;Adobe Heiti Std&quot;;</string>
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>420</y>
+      <x>62</x>
+      <y>430</y>
       <width>281</width>
       <height>16</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(212, 228, 255);
+font: 8pt &quot;Adobe Heiti Std&quot;;</string>
+    </property>
     <property name="text">
-     <string>0.2                                      6.2  mA</string>
+     <string>0.2                                                                   6.2</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_10">
+   <widget class="QLabel" name="label_SpO2_ADC_range">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>441</y>
+      <x>82</x>
+      <y>461</y>
       <width>191</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(212, 228, 255);
+font: 9pt &quot;Adobe Heiti Std&quot;;</string>
     </property>
     <property name="text">
      <string>SpO2 ADC Range</string>
@@ -301,27 +354,17 @@ font: 10pt &quot;Adobe Heiti Std&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_11">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>490</y>
-      <width>241</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>2048      4096      8192     16384</string>
-    </property>
-   </widget>
    <widget class="QSlider" name="horizontalSlider_4">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>470</y>
+      <x>60</x>
+      <y>490</y>
       <width>231</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="minimum">
      <number>1</number>
@@ -332,7 +375,231 @@ font: 10pt &quot;Adobe Heiti Std&quot;;</string>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
+    <property name="tickPosition">
+     <enum>QSlider::TicksBelow</enum>
+    </property>
+    <property name="tickInterval">
+     <number>10</number>
+    </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>40</y>
+      <width>101</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>hr_image.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>62</x>
+      <y>350</y>
+      <width>281</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(212, 228, 255);
+font: 8pt &quot;Adobe Heiti Std&quot;;</string>
+    </property>
+    <property name="text">
+     <string>50                 100                 200                   400 </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>510</y>
+      <width>281</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(212, 228, 255);
+font: 8pt &quot;Adobe Heiti Std&quot;;</string>
+    </property>
+    <property name="text">
+     <string>2048               4096               8192               16384 </string>
+    </property>
+   </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>20</y>
+      <width>661</width>
+      <height>451</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::NoContextMenu</enum>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(14, 70, 159);
+font: 9pt &quot;Adobe Heiti Std&quot;;
+background-color: rgb(212, 228, 255);
+</string>
+    </property>
+    <property name="tabPosition">
+     <enum>QTabWidget::North</enum>
+    </property>
+    <property name="tabShape">
+     <enum>QTabWidget::Rounded</enum>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>20</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="elideMode">
+     <enum>Qt::ElideNone</enum>
+    </property>
+    <property name="documentMode">
+     <bool>false</bool>
+    </property>
+    <property name="tabsClosable">
+     <bool>false</bool>
+    </property>
+    <property name="movable">
+     <bool>false</bool>
+    </property>
+    <property name="tabBarAutoHide">
+     <bool>false</bool>
+    </property>
+    <widget class="QWidget" name="tab_HR">
+     <attribute name="title">
+      <string>                                        Heart Rate                                     </string>
+     </attribute>
+     <widget class="QLabel" name="label_HR_prova">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>150</y>
+        <width>181</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Heart Rate - prova</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line_3">
+      <property name="geometry">
+       <rect>
+        <x>-10</x>
+        <y>-5</y>
+        <width>681</width>
+        <height>10</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(14, 70, 159);</string>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_spo2">
+     <attribute name="title">
+      <string>                                             SpO2                                          </string>
+     </attribute>
+     <widget class="QLabel" name="label_spo2_prova">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>140</y>
+        <width>181</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Spo2 - prova</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line_2">
+      <property name="geometry">
+       <rect>
+        <x>-10</x>
+        <y>-5</y>
+        <width>681</width>
+        <height>10</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(14, 70, 159);</string>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="Line" name="line_4">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>20</y>
+      <width>5</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <zorder>tabWidget</zorder>
+   <zorder>pushButton_Start</zorder>
+   <zorder>pushButton_Stop</zorder>
+   <zorder>line</zorder>
+   <zorder>horizontalSlider</zorder>
+   <zorder>label_3</zorder>
+   <zorder>label_choose_parameters</zorder>
+   <zorder>label_LED_pulse_width</zorder>
+   <zorder>horizontalSlider_2</zorder>
+   <zorder>label_samples_per_second</zorder>
+   <zorder>horizontalSlider_3</zorder>
+   <zorder>label_LED_current_control</zorder>
+   <zorder>label_9</zorder>
+   <zorder>label_SpO2_ADC_range</zorder>
+   <zorder>horizontalSlider_4</zorder>
+   <zorder>label_connection</zorder>
+   <zorder>label</zorder>
+   <zorder>label_4</zorder>
+   <zorder>label_5</zorder>
+   <zorder>line_4</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
