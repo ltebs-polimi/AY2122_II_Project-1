@@ -7,7 +7,7 @@
 
 #ifndef __MAX30101_H__
     #define __MAX30101_H__
-    
+    #include <stdbool.h>
     #include "cytypes.h"
     #include "MAX30101_Defs.h"
 
@@ -254,7 +254,7 @@
     *   \retval #MAX30101_OK if device is present.
     *   \retval #MAX30101_DEV_NOT_FOUND if device is not present.  
     */
-    uint8_t MAX30101_ReadFIFO(uint8_t num_samples, uint8_t active_leds, MAX30101_Data* data, int k);
+    uint8_t MAX30101_ReadFIFO(uint8_t num_samples, uint8_t active_leds, MAX30101_Data* data, int j);
     
     uint32_t getFIFORed(MAX30101_Data* data);
     uint32_t getFIFOIR(MAX30101_Data* data);
@@ -572,7 +572,11 @@
 
       uint32_t getFIFORed(MAX30101_Data* data); //Returns the FIFO sample pointed to by tail
       uint32_t getFIFOIR(MAX30101_Data* data); //Returns the FIFO sample pointed to by tail
-    uint32_t getIR(MAX30101_Data *data); //Returns immediate IR value
-    
+    uint32_t getIR(MAX30101_Data *data);//, uint8_t num_samples, volatile long count); //Returns immediate IR value  
+    //bool MAX30105_safeCheck(uint16_t maxTimeToCheck, uint8_t num_samples, volatile long count);
+    uint16_t check(uint8 *wp, uint8 *rp);
+    uint32_t getRED(MAX30101_Data *data);
+    void MAX30105_nextSample(void);
+    uint32_t getIR_n(uint32_t x[], int i);
 #endif
 /* [] END OF FILE */

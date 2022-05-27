@@ -7,6 +7,8 @@
 #include "MAX30101.h"
 #include "string.h"
 #include "stdio.h"
+#include "project.h"
+#include "isr.h"
 
 //==============================================
 //          MACROS
@@ -488,7 +490,7 @@ uint8_t MAX30101_ReadFIFO(uint8_t num_samples, uint8_t active_leds, MAX30101_Dat
     }
     
     I2C_Master_MasterSendStop();
-    return error;
+    return num_samples;
 }
 
 //==============================================
@@ -792,9 +794,135 @@ uint8_t MAX30105_available(void)
   return (samples_FIFO);
 }
 
-uint32_t getIR(MAX30101_Data *data)
+uint32_t getIR_n(uint32_t x[], int i) //uint8_t num_samples, volatile long count)//
 {
-  return (data ->IR[data->head]);
+            return (x[i]);
+            
 }
 
+uint32_t getIR(MAX30101_Data *data) //uint8_t num_samples, volatile long count)//
+{
+    //if(MAX30105_safeCheck(250, num_samples, count))
+    
+     return (data->IR[data->head]);  
+}
+
+uint32_t getRED(MAX30101_Data *data) //uint8_t num_samples, volatile long count)//
+{
+    //if(MAX30105_safeCheck(250, num_samples, count))
+    
+     return (data->red[data->head]);  
+}
+
+/*
+uint16_t check(uint8 *wp, uint8 *rp)
+{
+    int num_samples=0;
+    int active_leds=2;
+    
+    
+    //if(rp != wp)
+    //Calculate the number of readings we need to get from sensor
+    num_samples = MAX30101_ReadReadPointer(rp) -MAX30101_ReadWritePointer(wp); 
+    if (num_samples <= 0) num_samples += 32; //Wrap condition                       
+    // Print out number of samples
+    //sprintf(msg, "%d\r\n", num_samples);
+    //debug_print(msg);
+    uint16_t bytes_left_ro_read = num_samples * 3 * active_leds;
+    uint8_t error = MAX30101_OK;
+    
+    
+    // Read current resolution so that we know how much shift to apply
+    uint8_t resolution = 0;
+    I2C_Peripheral_ReadRegister(MAX30101_I2C_ADDRESS, MAX30101_SPO2_CONF, &resolution);
+    resolution &= (~MAX30101_SPO2_PULSEWIDTH_MASK);
+    
+    I2C_Master_MasterSendStart(MAX30101_I2C_ADDRESS, I2C_Master_WRITE_XFER_MODE);
+    I2C_Master_MasterWriteByte(MAX30101_FIFO_DATA);
+    I2C_Master_MasterSendRestart(MAX30101_I2C_ADDRESS, I2C_Master_READ_XFER_MODE);
+    
+    //I2C_Peripheral_WriteRegisterNoData(MAX30101_I2C_ADDRESS, MAX30101_FIFO_DATA);
+    //I2C_Peripheral_StartReadNoAddress(MAX30101_I2C_ADDRESS);
+    
+    while(bytes_left_ro_read > 0)
+    {
+        uint16_t bytes_to_get =  active_leds * 3;
+        
+        bytes_left_ro_read -= bytes_to_get;
+        
+        data.head++; //Advance the head of the storage struct
+        data.head %= BUFFER_STORAGE_SIZE; //Wrap condition
+        
+        uint8_t temp[sizeof(uint32_t)];
+        uint32_t tempLong;
+        
+        //error = I2C_Peripheral_ReadBytes(temp_bytes, 3);
+        
+        //Burst read three bytes - RED
+        temp[3] = 0;
+        temp[2] = I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
+        temp[1] = I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
+        temp[0] = I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
+
+        //Convert array to long
+        memcpy(&tempLong, temp, sizeof(tempLong));
+		
+        //Zero out all but 18 bits
+		tempLong &= 0x3FFFF; 
+        
+        // Shift according to resolution
+        tempLong = tempLong >> (MAX30101_SHIFT(resolution));
+        
+        data.red[data.head] = tempLong; //Store this reading into the data array
+        
+        if (active_leds > 1)
+        {
+            //error = I2C_Peripheral_ReadBytes(temp_bytes, 3);
+           
+            //Burst read three bytes - IR
+            temp[3] = 0;
+            temp[2] = I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
+            temp[1] = I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
+            temp[0] = I2C_Master_MasterReadByte(I2C_Master_ACK_DATA);
+        
+            //Convert array to long
+            memcpy(&tempLong, temp, sizeof(tempLong));
+    		
+            //Zero out all but 18 bits
+    		tempLong &= 0x3FFFF;
+            tempLong = tempLong >> (MAX30101_SHIFT(resolution));
+            
+            data.IR[data.head] = tempLong; //Store this reading into the sense array
+        }
+    }
+    
+    I2C_Master_MasterSendStop();
+    return num_samples;
+}
+
+
+void MAX30105_nextSample(void)
+{
+  if(MAX30105_available()) //Only advance the tail if new data is available
+  {
+    data.tail++;
+    data.tail %= BUFFER_STORAGE_SIZE; //Wrap condition
+  }
+}
+*/
+/*bool MAX30105_safeCheck(uint16_t maxTimeToCheck, uint8_t num_samples,  volatile long count)
+{   
+    uint32_t markTime = count;
+  
+  while(1)
+  {
+	if(count - markTime > maxTimeToCheck) return(false);
+
+	if(num_samples != 0) //We found new data!
+	  return(true);
+
+	CyDelay(1);
+  }
+}
+*/
 /* [] END OF FILE */

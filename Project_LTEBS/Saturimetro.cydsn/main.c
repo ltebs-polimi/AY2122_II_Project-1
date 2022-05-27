@@ -69,6 +69,7 @@ int main(void)
     long delta;
     extern volatile long count;
     long irValue;
+    int i=0;
 
     
     // Initialization
@@ -121,9 +122,9 @@ int main(void)
         MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_8);
         
         // Set LED Power level
-        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x0A);
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x05);
         
-        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x0A);
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x05);
         
         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_3, 0x1F);
         
@@ -149,7 +150,7 @@ int main(void)
     }
     
     debug_print("\r\n\r\n");
-    Timer_1_Start();
+    //Timer_1_Start();
     isr_MAX30101_StartEx(MAX30101_ISR);
     isr_1_StartEx(Count);
     // Clear FIFO
@@ -160,10 +161,29 @@ int main(void)
     {
         if (flag_temp == 1)
         {   
-            
-            
+            MAX30101_ReadReadPointer(&rp);
+            MAX30101_ReadWritePointer(&wp);
+                //Calculate the number of readings we need to get from sensor
+            num_samples = wp - rp;
+            if (num_samples <= 0) num_samples += 32; //Wrap condition
+                // Print out number of samples
+                //sprintf(msg, "%d\r\n", num_samples);
+                //debug_print(msg);
+                // Read FIFO
+            MAX30101_ReadFIFO(num_samples, active_leds, &data, j);
+            for (i=0;i<num_samples;i++)
+            {                    
+                redBuffer[j] = data.red[data.tail+i];
+                irBuffer[j] = data.IR[data.tail+i];
+                j++;    
+            }
             MAX30101_IsFIFOAFull(&flag);
-            if (flag > 0)
+            for (i=0; i<j; i++)
+            {
+                irValue=getIR_n(&irBuffer[i],i);
+            
+            
+            /*if (flag > 0)
             {   
                 MAX30101_ReadReadPointer(&rp);
                 MAX30101_ReadWritePointer(&wp);
@@ -176,24 +196,27 @@ int main(void)
                 //debug_print(msg);
                 // Read FIFO
                 MAX30101_ReadFIFO(num_samples, active_leds, &data, j);
-                for (int i=0;i<num_samples;i++){
-                    //sprintf(msg, "red: %lu\r", data.red[data.tail+i]);
-                    //debug_print(msg);
-                    //sprintf(msg, "ir: %lu\r", data.IR[data.tail+i]);
-                    //debug_print(msg);
-                    //data.tail++;
-                
+                for (int i=0;i<num_samples;i++)
+                {                    
                     redBuffer[j] = data.red[data.tail+i];
                     irBuffer[j] = data.IR[data.tail+i];
                     j++;
-                    }  
-                
-                    irValue=getIR(&data);
+                    //sprintf(msg, "red: %lu\r", data.red[data.tail]);
+                    //debug_print(msg);
+                    //sprintf(msg, "ir: %lu\r", data.IR[data.tail]);
+                    //debug_print(msg);
+                    //data.tail++;
+                } */
                     
-                    //if (checkForBeat(irValue) == true){//NON RIESCE AD ENRARE IN QUESTO IF -> PER QUESTO SEGNAVA SEMPRE UN VALORE FISSO NONOSTANTE IL COUNT INCREMENTASSE
-                  
-                    //We sensed a beat!
-                    //ogni ms incremento la variabile di 1.
+                //irValue=getIR_n(&irBuffer[i],i);     
+                
+                    
+                    
+                if (checkForBeat(irValue)== true)
+                {//NON RIESCE AD ENRARE IN QUESTO IF -> PER QUESTO SEGNAVA SEMPRE UN VALORE FISSO NONOSTANTE IL COUNT INCREMENTASSE
+                    debug_print("beat sensed!\r");
+                //We sensed a beat!
+                //ogni ms incremento la variabile di 1.
                     delta = count - lastBeat;
                     lastBeat = count;
 
@@ -204,19 +227,20 @@ int main(void)
                         rates[rateSpot++] = beatsPerMinute; //Store this reading in the array
                         rateSpot %= RATE_SIZE; //Wrap variable
 
-                        //Take average of readings
+                    //Take average of readings
                         beatAvg = 0;
                         for ( x = 0 ; x < RATE_SIZE ; x++)
                         {
                             beatAvg += rates[x];
                         }
-                        beatAvg /= RATE_SIZE;
+                            beatAvg /= RATE_SIZE;
                     }
                   
-                    if(irValue > 5000) {       
-                        sprintf(msg, "Count = %ld\r", count);
+                    if(irValue > 5000) 
+                    {       
+                        sprintf(msg, "delta = %ld\r", delta);
                         debug_print(msg);
-                        sprintf(msg, "IR=%u\r", irValue);
+                        sprintf(msg, "IR=%ld\r", irValue);
                         debug_print(msg);
                         sprintf(msg, "BPM=%u\r", beatsPerMinute);
                         debug_print(msg);
@@ -225,12 +249,11 @@ int main(void)
                     }
                     
 
-                    else
-                        debug_print("no finger\r");
-                         // int samples = data.head - data.tail;
-                            //sprintf(msg, "%d\r\n", samples);
-                        //debug_print(msg);
-                
+                    else debug_print("no finger\r");
+                    // int samples = data.head - data.tail;
+                    //sprintf(msg, "%d\r\n", samples);
+                    //debug_print(msg);
+                }
                 
                 /*for (int i=0;i<num_samples;i++){
                     sprintf(msg, "red: %u\r", data.red[data.tail+i]);
@@ -260,11 +283,13 @@ int main(void)
                     
             } */
             flag_temp = 0;
-            if(j>=bufferLength) {
+            if(j>=bufferLength) 
+            {
                 maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
                 //flag_1s = 1;
                 j=bufferLength - 50;
-                for (int i=50; i<bufferLength; i++) {
+                for (int i=50; i<bufferLength; i++) 
+                {
                     redBuffer[i-50] = redBuffer[i];
                     irBuffer[i-50] = irBuffer[i];
                 }
@@ -277,16 +302,10 @@ int main(void)
                 debug_print(msg);
                 sprintf(msg, "validHR: %d\r\n", validHeartRate);
                 debug_print(msg); 
-                */
-            
-            
-                
-                   
-                   
-
-              }    
-            }
+                */                                                                              
+            }    
         }
+    }
     }
 }
 
@@ -296,3 +315,4 @@ CY_ISR(MAX30101_ISR)
     MAX30101_INT_ClearInterrupt();
     flag_temp = 1;
 }
+
