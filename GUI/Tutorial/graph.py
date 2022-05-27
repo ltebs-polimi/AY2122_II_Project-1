@@ -6,7 +6,6 @@ from matplotlib.figure import Figure
 import tkinter as tk
 import numpy as np
 import serial as sr
-import time
 
 # global variables
 data = np.array([])
@@ -15,7 +14,7 @@ cond = False
 # plot data
 # create a function that will be executed 
 def plot_data():
-    global cond # condition on the start button
+    global cond, data # condition on the start button
     if (cond == True): # if it is true, plot data
         a = s.readline() # reading serial data on serial port
         a.decode() # decode serial data 
@@ -30,7 +29,7 @@ def plot_data():
 
         canvas.draw()
 
-        root.after(1,plot_data)
+    root.after(1,plot_data)
 
 # Functions associated to Start and Stop buttons
 def plot_start():
@@ -70,12 +69,12 @@ start = tk.Button(root,text = "Start", font = ('calibri',12), command = lambda: 
 start.place(x=100,y=500) # positioning 
 
 root.update()
-stop = tk.Button(root,text = "Stop", font = ('calibri',12), command = lambda:plot_stop())
+stop = tk.Button(root,text = "Stop", font = ('calibri',12), command = lambda: plot_stop())
 stop.place(x=start.winfo_x()+start.winfo_reqwidth()+20, y=500) # stop botton is positioned with respect to the start button
 #(winfo_x gives the position location along x, winfo_reqwidt gives the object width, then we add 20)
 
 # start serial port
-s = sr.Serial('COM10',115200) # COM port and baudrate
+s = sr.Serial('COM9',115200) # COM port and baudrate
 s.reset_input_buffer() # ?? flash out
 
 

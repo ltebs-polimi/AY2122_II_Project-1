@@ -70,7 +70,7 @@ class SerialWorker(QRunnable):
         """!
         @brief Init worker.
         """
-        connectPort = findPsoC(ports)
+        connectPort = connectPort
         self.is_killed = False
         super().__init__()
         # init port, params and signals
@@ -90,9 +90,9 @@ class SerialWorker(QRunnable):
             try:
                 self.port = serial.Serial(port=self.port_name, baudrate=self.baudrate,
                                           write_timeout=0, timeout=2)
-
                 if self.port.is_open:
                     CONN_STATUS = True
+                    logging.info("opened")
                     self.signals.status.emit(self.port_name, 1)
                     time.sleep(0.01)
 
@@ -154,7 +154,7 @@ class Ui_MainWindow(QMainWindow):
         MainWindow.setStyleSheet("background-color: rgb(14, 70, 159);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.pushButton_Start = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_Start = QtWidgets.QPushButton(self.centralwidget, toggled=self.clicked)
         self.pushButton_Start.setGeometry(QtCore.QRect(630, 480, 61, 41))
         self.pushButton_Start.setAutoFillBackground(False)
         self.pushButton_Start.setStyleSheet("background-color: rgb(212, 228, 255);\n"
@@ -275,7 +275,7 @@ class Ui_MainWindow(QMainWindow):
     ####################
     # SERIAL INTERFACE #
     ####################
-    def serialscan(self):
+    '''def serialscan(self):
         """!
         @brief Scans all serial ports and create a list.
         """
@@ -289,19 +289,19 @@ class Ui_MainWindow(QMainWindow):
             text=("Connect to port {}".format(self.port_text)),
             checkable=True,
             toggled=self.on_toggle
-        )
+        )'''
 
     ##################
     # SERIAL SIGNALS #
     ##################
-    def port_changed(self):
+    '''def port_changed(self):
         """!
         @brief Update conn_btn label based on selected port.
         """
         self.port_text = self.com_list_widget.currentText()
-        self.conn_btn.setText("Connect to port {}".format(self.port_text))
+        self.conn_btn.setText("Connect to port {}".format(self.port_text))'''
 
-    @pyqtSlot(bool)
+    '''@pyqtSlot(bool)
     def on_toggle(self, checked):
         """!
         @brief Allow connection and disconnection from selected serial port.
@@ -317,13 +317,10 @@ class Ui_MainWindow(QMainWindow):
         else:
             # kill thread
             self.serial_worker.is_killed = True
-            self.serial_worker.killed()
-            self.com_list_widget.setDisabled(False)  # enable the possibility to change port
-            self.conn_btn.setText(
-                "Connect to port {}".format(self.port_text)
-            )
+            self.serial_worker.killed()'''
 
-    '''def check_serialport_status(self, port_name, status):
+
+    def check_serialport_status(self, port_name, status):
         """!
         @brief Handle the status of the serial port connection.
 
@@ -332,15 +329,22 @@ class Ui_MainWindow(QMainWindow):
             - 1  --> Serial port opened correctly
         """
         if status == 0:
-            self.conn_btn.setChecked(False)
+            self.pushButton_Start.setChecked(False)
+            self.label_2.setText(
+                "Unable to connect to port {}".format(port_name)
+            )
+            self.label_2.adjustSize()
+
         elif status == 1:
             # enable all the widgets on the interface
-            self.com_list_widget.setDisabled(
-                True)  # disable the possibility to change COM port when already connected
-            self.conn_btn.setText(
-                "Disconnect from port {}".format(port_name)
+
+            self.label_2.setText(
+                "Connected to port {}".format(port_name)
             )
-            logging.info("Connected to port {}".format(port_name))'''
+            self.label_2.adjustSize()
+            logging.info("Connected to port {}".format(port_name))
+            self.pushButton_Start.setDisabled(True)  # disable the possibility to start again when already connected
+
 
     def connected_device(self, port_name):
         """!
@@ -369,21 +373,21 @@ class Ui_MainWindow(QMainWindow):
         connectPort = findPsoC(ports)
 
         if connectPort != 'None':
-            if x!=STOP:
+            if x != STOP:
                 #ser = serial.Serial(connectPort, baudrate=115200, timeout=1)
                 self.port_name = connectPort
                 # setup reading worker
                 self.serial_worker = SerialWorker(self.port_name)  # needs to be re defined
                 # connect worker signals to functions
-                #self.serial_worker.signals.status.connect(self.check_serialport_status)
+                self.serial_worker.signals.status.connect(self.check_serialport_status)
                 self.serial_worker.signals.device_port.connect(self.connected_device)
                 # execute the worker
                 self.threadpool.start(self.serial_worker)
-                self.label_2.setText('Connected to {}'.format(self.port_name))
-                self.label_2.adjustSize()
-                logging.info('Connected to {}'.format(self.port_name))
+                #self.label_2.setText('Connected to {}'.format(self.port_name))
 
-            elif x==STOP:
+                #logging.info('Connected to {}'.format(self.port_name))
+
+            if x == STOP:
                 self.serial_worker.is_killed = True
                 self.serial_worker.killed()
                 self.label_2.setText('Stopped the connection with {}'.format(self.port_name))
@@ -421,7 +425,7 @@ def findPsoC(portsFound):
         port = portsFound[i]
         strPort = str(port)
 
-        if '3' in strPort: # poi sostituire con Cypress!
+        if '8' in strPort: # poi sostituire con Cypress!
             splitPort = strPort.split(' ')
             commPort = (splitPort[0])
 
