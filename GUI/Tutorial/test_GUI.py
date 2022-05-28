@@ -13,7 +13,7 @@ import tkinter as tk
 import numpy as np
 import serial as sr
 
-# ------global variables
+
 data = np.array([])
 cond = False
 
@@ -26,12 +26,13 @@ def plot_data():
 
         a = s.readline()
         a.decode()
+        print(int(a[0:4]))
 
         if (len(data) < 100):
-            data = np.append(data, float(a[0:4]))
+            data = np.append(data, int(a[0:4]))
         else:
             data[0:99] = data[1:100]
-            data[99] = float(a[0:4])
+            data[99] = int(a[0:4])
 
         lines.set_xdata(np.arange(0, len(data)))
         lines.set_ydata(data)
@@ -68,7 +69,7 @@ ax.set_title('Serial Data')
 ax.set_xlabel('Sample')
 ax.set_ylabel('Voltage')
 ax.set_xlim(0, 100)
-ax.set_ylim(-0.5, 6)
+ax.set_ylim(-0.5, 3500)
 lines = ax.plot([], [])[0]
 
 canvas = FigureCanvasTkAgg(fig, master=root)  # A tk.DrawingArea.
@@ -85,7 +86,7 @@ stop = tk.Button(root, text="Stop", font=('calbiri', 12), command=lambda: plot_s
 stop.place(x=start.winfo_x() + start.winfo_reqwidth() + 20, y=450)
 
 # ----start serial port----
-s = sr.Serial('COM8', 115200)
+s = sr.Serial('COM8', 9600)
 s.reset_input_buffer()
 
 root.after(1, plot_data)
