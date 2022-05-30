@@ -63,13 +63,55 @@ def plot_data():
     root.after(1, plot_data)
 
 def plot_start():
-    global cond
+    global cond, button_SPO2, button_HR, label_parameters
     cond = True
     s.reset_input_buffer()
+
+    # Buttons that appear when "Start" is clicked
+    # ----- Title - Parameters ----#
+    label_parameters = customtkinter.CTkLabel(master=root.frame_left,
+                                                text="Parameters",
+                                                width = 8,
+                                                text_color='white',
+                                                text_font=("Roboto Medium", -14),
+                                                fg_color = '#3373b8',
+                                                corner_radius = 6
+                                                )  
+    label_parameters.grid(row=5, column=0, columnspan=1, pady=5, padx=10)
+
+    # -----SPO2 BUTTON----#
+    root.update()
+    button_SPO2 = customtkinter.CTkButton(master=root.frame_left,
+                                        height=25,
+                                        text="SpO₂",
+                                        text_font=("Roboto Medium",-12),             
+                                        text_color='white',
+                                        fg_color='#4d4d4d',
+                                        hover_color='#1d538d',
+                                        #command=lambda: plot_start()          
+                                        )
+    button_SPO2.grid(row=6, column=0, pady=6, padx=20)
+
+    # -----HEART RATE BUTTON----#
+    root.update()
+    button_HR = customtkinter.CTkButton(master=root.frame_left,
+                                        height=25,
+                                        text="Heart Rate",
+                                        text_font=("Roboto Medium",-12),             
+                                        text_color='white',
+                                        fg_color='#4d4d4d',
+                                        hover_color='#1d538d',
+                                        #command=lambda: plot_start()          
+                                        )
+    button_HR.grid(row=7, column=0, pady=6, padx=20)
+    
 
 def plot_stop():
     global cond
     cond = False
+    button_HR.grid_remove()
+    button_SPO2.grid_remove()
+    label_parameters.grid_remove()
 
 ############
 # MAIN GUI #
@@ -102,7 +144,7 @@ root.frame_left.grid_rowconfigure(0, minsize=10)
 root.frame_left.grid_rowconfigure(4, minsize=245)   
 root.frame_right.grid_rowconfigure(0, weight=60)
 root.frame_right.grid_columnconfigure(0, weight=3)
-root.frame_right.grid_columnconfigure(1, weight=24)
+root.frame_right.grid_columnconfigure(1, weight=24) #24
 
 # Start serial port
 ports = serial.tools.list_ports.comports()
@@ -148,34 +190,6 @@ button_stop = customtkinter.CTkButton(master=root.frame_left,
 root.bind("s", plot_stop)  # command of b start data streaming
 button_stop.grid(row=3, column=0, pady=10, padx=20)    
 
-# -----SPO2 BUTTON----#
-root.update()
-button_SPO2 = customtkinter.CTkButton(master=root.frame_left,
-                                       height=25,
-                                       text="SpO₂",
-                                       text_font=("Roboto Medium",-12),             
-                                       text_color='white',
-                                       fg_color='#4d4d4d',
-                                       hover_color='#1d538d',
-                                      #command=lambda: plot_start()          
-                                       )
-button_SPO2.grid(row=6, column=0, pady=6, padx=20)
-
-# -----HEART RATE BUTTON----#
-root.update()
-button_HR = customtkinter.CTkButton(master=root.frame_left,
-                                       height=25,
-                                       text="Heart Rate",
-                                       text_font=("Roboto Medium",-12),             
-                                       text_color='white',
-                                       fg_color='#4d4d4d',
-                                       hover_color='#1d538d',
-                                      #command=lambda: plot_start()          
-                                       )
-button_HR.grid(row=7, column=0, pady=6, padx=20)
-
-
-
 
 # ---- HEART RATE LOGO ----#
 logo_image = Image.open("D:\Polimi\LAB\PROJECT\AY2122_II_Project-1\GUI/heart_rate_line_reduced.png")
@@ -194,7 +208,7 @@ root.label_LED_PW_title = customtkinter.CTkLabel(master=root.frame_right,
                                                 text_color='#666666',
                                                 width = 30,
                                                 text_font=("Roboto Medium", -12))  # font name and size in px
-root.label_LED_PW_title.place(x=120, y=481, anchor = W)
+root.label_LED_PW_title.place(x=104, y=481, anchor = W)
 
 def values_LED_PW(value):
     value_LED_PW = root.slider_LED_PW.get()  
@@ -209,10 +223,10 @@ def values_LED_PW(value):
  
     root.label_LED_PW = customtkinter.CTkLabel(master=root.frame_right,
                                                 text=str(value_LED_PW_to_use),
-                                                text_color='white',
-                                                width = 30,
+                                                text_color='#dcd8d8',
+                                                width = 50,
                                                 text_font=("Roboto Medium", -12))  # font name and size in px
-    root.label_LED_PW.place(x=17, y=498, anchor = W)
+    root.label_LED_PW.place(x=275, y=498, anchor = W)
     return value_LED_PW_to_use
 
 root.slider_LED_PW = customtkinter.CTkSlider(master=root.frame_right,
@@ -224,7 +238,7 @@ root.slider_LED_PW = customtkinter.CTkSlider(master=root.frame_right,
                                              fg_color='#000000',
                                              command = values_LED_PW
                                             )
-
+root.slider_LED_PW.set(183.0) #118 (Initalize value)
 root.slider_LED_PW.grid(row=2, column=0, columnspan=1, pady=15, padx=55, sticky="we")
 
 # Samples per second
@@ -233,7 +247,7 @@ root.label_SAMPLES_title = customtkinter.CTkLabel(master=root.frame_right,
                                                 text_color='#666666',
                                                 width = 30,
                                                 text_font=("Roboto Medium", -12))  # font name and size in px
-root.label_SAMPLES_title.place(x=120, y=527, anchor = W)
+root.label_SAMPLES_title.place(x=100, y=527, anchor = W)
 
 def values_SAMPLES(value):
     value_SAMPLES = root.slider_SAMPLES.get() 
@@ -248,10 +262,10 @@ def values_SAMPLES(value):
 
     root.label_SAMPLES= customtkinter.CTkLabel(master=root.frame_right,
                                                 text=str(value_SAMPLES_to_use),
-                                                text_color='white',
+                                                text_color='#dcd8d8',
                                                 width = 30,
                                                 text_font=("Roboto Medium", -12))  # font name and size in px
-    root.label_SAMPLES.place(x=17, y=545, anchor = W)
+    root.label_SAMPLES.place(x=280, y=545, anchor = W)
     return value_SAMPLES_to_use
 
 root.slider_SAMPLES = customtkinter.CTkSlider(master=root.frame_right,
@@ -263,6 +277,7 @@ root.slider_SAMPLES = customtkinter.CTkSlider(master=root.frame_right,
                                               fg_color='#000000',
                                               command = values_SAMPLES
                                              )
+root.slider_SAMPLES.set(50) #50 (Initalize value)
 root.slider_SAMPLES.grid(row=3, column=0, columnspan=1, pady=15, padx=55, sticky="we")
 
 # LED current control (mA)
@@ -271,7 +286,7 @@ root.label_LED_CURRENT_title = customtkinter.CTkLabel(master=root.frame_right,
                                                 text_color='#666666',
                                                 width = 30,
                                                 text_font=("Roboto Medium", -12))  # font name and size in px
-root.label_LED_CURRENT_title.place(x=110, y=574, anchor = W)
+root.label_LED_CURRENT_title.place(x=90, y=574, anchor = W)
 
 def values_LED_CURRENT(value):
     value_LED_CURRENT_to_use = root.slider_LED_CURRENT.get()
@@ -279,10 +294,10 @@ def values_LED_CURRENT(value):
 
     root.label_LED_CURRENT= customtkinter.CTkLabel(master=root.frame_right,
                                                 text=str(value_LED_CURRENT_to_use),
-                                                text_color='white',
+                                                text_color='#dcd8d8',
                                                 width = 30,
                                                 text_font=("Roboto Medium", -12))  # font name and size in px
-    root.label_LED_CURRENT.place(x=17, y=590, anchor = W)
+    root.label_LED_CURRENT.place(x=280, y=590, anchor = W)
     return value_LED_CURRENT_to_use
 
 root.slider_LED_CURRENT = customtkinter.CTkSlider(master=root.frame_right,
@@ -294,6 +309,7 @@ root.slider_LED_CURRENT = customtkinter.CTkSlider(master=root.frame_right,
                                                   fg_color='#000000',
                                                   command = values_LED_CURRENT
                                                  )
+root.slider_LED_CURRENT.set(2.0) #2 mA (Initalize value)
 root.slider_LED_CURRENT.grid(row=4, column=0, columnspan=1, pady=15, padx=55, sticky="we")
 
 # SpO2 ADC range 
@@ -302,7 +318,7 @@ root.label_SPO2_title = customtkinter.CTkLabel(master=root.frame_right,
                                                 text_color='#666666',
                                                 width = 30,
                                                 text_font=("Roboto Medium", -12))  # font name and size in px
-root.label_SPO2_title.place(x=130, y=620, anchor = W)
+root.label_SPO2_title.place(x=110, y=620, anchor = W)
 
 def values_SPO2(value):
     value_SPO2 = root.slider_SPO2.get() 
@@ -318,10 +334,10 @@ def values_SPO2(value):
 
     root.label_SPO2= customtkinter.CTkLabel(master=root.frame_right,
                                             text=str(value_SPO2_to_use),
-                                            text_color='white',
+                                            text_color='#dcd8d8',
                                             width = 30,
                                             text_font=("Roboto Medium", -12))  # font name and size in px
-    root.label_SPO2.place(x=17, y=636, anchor = W)
+    root.label_SPO2.place(x=280, y=636, anchor = W)
     return value_SPO2_to_use
 
 root.slider_SPO2 = customtkinter.CTkSlider(master=root.frame_right,
@@ -333,7 +349,7 @@ root.slider_SPO2 = customtkinter.CTkSlider(master=root.frame_right,
                                            fg_color='#000000',
                                            command = values_SPO2
                                            )
-
+root.slider_SPO2.set(11605.333333333332) #4096 (Initalize value)
 root.slider_SPO2.grid(row=5, column=0, columnspan=1, pady=15, padx=55, sticky="we")
 
 
@@ -369,17 +385,20 @@ canvas.draw()
 
 root.after(1, plot_data)
 
+# VALUES 
+
+root.label_values = customtkinter.CTkLabel(master=root.frame_right,
+                                                   text ="SpO₂ and heart rate values will appear here",
+                                                   height=120,
+                                                   width = 400,
+                                                   fg_color='#666666',  #''
+                                                   justify=tkinter.LEFT
+                                                   # command = show_values)
+                                           )
+root.label_values.grid(row=2, column=1, rowspan=3, pady=5, padx=0)
+
 # WIDGET TITLES
-# SpO2 or Heart Rate
-root.label_parameters = customtkinter.CTkLabel(master=root.frame_left,
-                                                text="Parameters",
-                                                width = 8,
-                                                text_color='white',
-                                                text_font=("Roboto Medium", -14),
-                                                fg_color = '#3373b8',
-                                                corner_radius = 6
-                                                )  
-root.label_parameters.grid(row=5, column=0, columnspan=1, pady=5, padx=10)
+
 
 root.label_settings = customtkinter.CTkLabel(master=root.frame_right,
                                                 text="Settings",
@@ -419,7 +438,5 @@ def motion(event):
 root.bind('<Motion>', motion)
 root.mainloop()
 """
-
-
 
 root.mainloop()
