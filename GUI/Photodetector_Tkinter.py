@@ -28,10 +28,11 @@ def findPsoC(portsFound):
         strPort = str(port)
         #print(strPort)
 
-        if 'COM3' in strPort: #KitProg #COM3
+        if 'KitProg' in strPort: #KitProg #COM3
             splitPort = strPort.split(' ')
             commPort = (splitPort[0])
-
+            print(commPort)
+            
     return commPort
 
 #############
@@ -48,9 +49,12 @@ def plot_data():
         a = s.readline()
         a.decode()
         print(int(a[0:4]))
+        root.label_values.configure(text=str(int(a[0:4])))    
 
         if (len(data) < 100):
             data = np.append(data, int(a[0:4]))
+            #root.label_values.configure(text=str(last_data))    
+            
         else:
             data[0:99] = data[1:100]
             data[99] = int(a[0:4])
@@ -58,7 +62,9 @@ def plot_data():
         lines.set_xdata(np.arange(0, len(data)))
         lines.set_ydata(data)
 
+        #print(data)
         canvas.draw()
+
 
     root.after(1, plot_data)
 
@@ -80,7 +86,6 @@ def plot_start():
     label_parameters.grid(row=5, column=0, columnspan=1, pady=5, padx=10)
 
     # -----SPO2 BUTTON----#
-    root.update()
     button_SPO2 = customtkinter.CTkButton(master=root.frame_left,
                                         height=25,
                                         text="SpO₂",
@@ -93,7 +98,6 @@ def plot_start():
     button_SPO2.grid(row=6, column=0, pady=6, padx=20)
 
     # -----HEART RATE BUTTON----#
-    root.update()
     button_HR = customtkinter.CTkButton(master=root.frame_left,
                                         height=25,
                                         text="Heart Rate",
@@ -160,7 +164,11 @@ if connectPort != 'None':
     s.reset_input_buffer()
 else: 
     print('Error in the connection with PSoC')
-
+    root.label_connected = customtkinter.CTkLabel(master=root.frame_left,
+                                                text="Not connected",
+                                                text_color='#666666',
+                                                text_font=("Roboto Medium", -12))  
+    root.label_connected.grid(row=1, column=0, pady=10, padx=10)
 
 # -----START BUTTON----#
 root.update()
@@ -386,20 +394,18 @@ canvas.draw()
 root.after(1, plot_data)
 
 # VALUES 
-
-root.label_values = customtkinter.CTkLabel(master=root.frame_right,
+root.label_values = customtkinter.CTkButton(master=root.frame_right,
                                                    text ="SpO₂ and heart rate values will appear here",
                                                    height=120,
                                                    width = 400,
-                                                   fg_color='#666666',  #''
-                                                   justify=tkinter.LEFT
-                                                   # command = show_values)
-                                           )
+                                                   fg_color='#666666',
+                                                   hover_color='#666666',
+                                                  # justify=tkinter.LEFT
+                                           )                                                                             
 root.label_values.grid(row=2, column=1, rowspan=3, pady=5, padx=0)
 
+
 # WIDGET TITLES
-
-
 root.label_settings = customtkinter.CTkLabel(master=root.frame_right,
                                                 text="Settings",
                                                 text_color='white',

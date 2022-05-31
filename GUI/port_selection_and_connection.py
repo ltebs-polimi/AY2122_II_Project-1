@@ -40,5 +40,6 @@ if connectPort != 'None':
     print('Connected to ' + connectPort)
 
 else: 
+    ser = serial.Serial(connectPort, baudrate = 115200, timeout = 1)
     print('Error in the connection with PSoC')
 
