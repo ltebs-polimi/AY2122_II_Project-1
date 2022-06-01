@@ -78,14 +78,14 @@ int main(void)
 //    Timer_1_Start();
     CyDelay(100);
     
-    debug_print("**************************\r\n");
+    /*debug_print("**************************\r\n");
     debug_print("         MAX30101         \r\n");
-    debug_print("**************************\r\n");
+    debug_print("**************************\r\n");*/
     
     if (MAX30101_IsDevicePresent() == MAX30101_OK)
     {
         // Check if device is present
-        debug_print("Device found on I2C bus\r\n");
+        //debug_print("Device found on I2C bus\r\n");
         Connection_LED_Write(1);
         
         // Read revision and part id
@@ -93,12 +93,12 @@ int main(void)
         MAX30101_ReadPartID(&part_id);
         MAX30101_ReadRevisionID(&rev_id);
         sprintf(msg,"Revision ID: 0x%02X\r\n", rev_id);
-        debug_print(msg);
+        //debug_print(msg);
         sprintf(msg,"Part ID: 0x%02X\r\n", part_id);
-        debug_print(msg);
+        //debug_print(msg);
         
-        debug_print("Registers before configuration\r\n");
-        MAX30101_LogRegisters(print_ptr);
+        //debug_print("Registers before configuration\r\n");
+        //MAX30101_LogRegisters(print_ptr);
         
         // Soft reset sensor
         MAX30101_Reset();
@@ -131,7 +131,7 @@ int main(void)
         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_4, 0x1F);
         
         // Set ADC Range
-        MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_2048);
+        MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_4096);
         
         // Pulse width
         MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
@@ -145,11 +145,11 @@ int main(void)
         // Enable Slots
         MAX30101_DisableSlots();
         
-        debug_print("Registers after configuration\r\n");
-        MAX30101_LogRegisters(print_ptr);
+        //debug_print("Registers after configuration\r\n");
+       // MAX30101_LogRegisters(print_ptr);
     }
     
-    debug_print("\r\n\r\n");
+    //debug_print("\r\n\r\n");
     //Timer_1_Start();
     isr_MAX30101_StartEx(MAX30101_ISR);
     isr_1_StartEx(Count);
@@ -212,11 +212,13 @@ int main(void)
            //for (i=0; i<j; i++)
            //{
            
-            long irValue=getIR(&data, rp, wp, active_leds, j);       
+            long irValue=getIR(&data);
+            sprintf(msg,"%ld\r\n",irValue);
+            debug_print(msg);
                     
             if (checkForBeat(irValue)== true)
             {
-                debug_print("beat sensed!\r");
+                //debug_print("beat sensed!\r");
                 //We sensed a beat!
                 //ogni ms incremento la variabile di 1.
                 delta = count - lastBeat;
@@ -241,23 +243,23 @@ int main(void)
                 if(irValue > 5000) 
                 {       
                     sprintf(msg, "delta = %u\r", delta);
-                    debug_print(msg);
+                    //debug_print(msg);
                        // sprintf(msg, "count = %ld\r", count);
                         //debug_print(msg);
                     sprintf(msg, "IR=%ld\r", irValue);
-                    debug_print(msg);
+                    //debug_print(msg);
                     sprintf(msg, "BPM=%u\r\r", beatsPerMinute);
-                    debug_print(msg);
+                    //debug_print(msg);
                         //sprintf(msg, "Avg BPM=%u\r\r", beatAvg);
                         //debug_print(msg);
                 }
                     
 
-                else debug_print("no finger\r");
+                else //debug_print("no finger\r");
                     // int samples = data.head - data.tail;
                     //sprintf(msg, "%d\r\n", samples);
                     //debug_print(msg);
-            }
+            //}
            //}
                 
                 
@@ -273,15 +275,15 @@ int main(void)
                     irBuffer[i-50] = irBuffer[i];
                 }
                 sprintf(msg, "spo2: %ld\r", spo2);
-                debug_print(msg);
+                //debug_print(msg);
                 sprintf(msg, "HR: %ld\r", heartRate);
-                debug_print(msg);
+                //debug_print(msg);
                 //sprintf(msg, "validspo2: %d\r", validSPO2);
                 //debug_print(msg);
                                                                                         
             
             }
-            
+            }  
                 
         }
         flag_temp = 0;
@@ -295,30 +297,3 @@ CY_ISR(MAX30101_ISR)
     MAX30101_INT_ClearInterrupt();
     flag_temp = 1;
 }
-/*for (int i=0;i<num_samples;i++){
-                    sprintf(msg, "red: %u\r", data.red[data.tail+i]);
-                    debug_print(msg);
-                    sprintf(msg, "ir: %u\r", data.IR[data.tail+i]);
-                    debug_print(msg);
-                    //data.tail++;
-                    redBuffer[j] = data.red[data.tail+i];
-                    irBuffer[j] = data.IR[data.tail+i];
-                    j++;
-                    sprintf(msg, "number of samples taken: %d\r", j);
-                    debug_print(msg);
-                    if(flag_1s) {
-                        sprintf(msg, "spo2: %ld\r", spo2);
-                        debug_print(msg);
-                        sprintf(msg, "validspo2: %d\r", validSPO2);
-                        debug_print(msg);
-                        sprintf(msg, "HR: %ld\r", heartRate);
-                        debug_print(msg);
-                        sprintf(msg, "validHR: %d\r\n", validHeartRate);
-                        debug_print(msg);   
-                        flag_1s = 0;
-                    }
-                }
-                data.tail = 0;
-                data.head = 0;
-                    
-            } */
