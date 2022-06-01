@@ -49,15 +49,16 @@ def plot_data():
         a = s.readline()
         a.decode()
         print(int(a[0:4]))
-        root.label_values.configure(text=str(int(a[0:4])))    
+        root.label_values_SPO2.configure(text=str(int(a[0:7])))    
+        root.label_values_HR.configure(text=str(int(a[0:7])))
 
         if (len(data) < 100):
-            data = np.append(data, int(a[0:4]))
+            data = np.append(data, int(a[0:7]))
             #root.label_values.configure(text=str(last_data))    
             
         else:
             data[0:99] = data[1:100]
-            data[99] = int(a[0:4])
+            data[99] = int(a[0:7])
 
         lines.set_xdata(np.arange(0, len(data)))
         lines.set_ydata(data)
@@ -69,53 +70,15 @@ def plot_data():
     root.after(1, plot_data)
 
 def plot_start():
-    global cond, button_SPO2, button_HR, label_parameters
+    global cond, button_SPO2, button_HR
     cond = True
     s.reset_input_buffer()
-
-    # Buttons that appear when "Start" is clicked
-    # ----- Title - Parameters ----#
-    label_parameters = customtkinter.CTkLabel(master=root.frame_left,
-                                                text="Parameters",
-                                                width = 8,
-                                                text_color='white',
-                                                text_font=("Roboto Medium", -14),
-                                                fg_color = '#3373b8',
-                                                corner_radius = 6
-                                                )  
-    label_parameters.grid(row=5, column=0, columnspan=1, pady=5, padx=10)
-
-    # -----SPO2 BUTTON----#
-    button_SPO2 = customtkinter.CTkButton(master=root.frame_left,
-                                        height=25,
-                                        text="SpO₂",
-                                        text_font=("Roboto Medium",-12),             
-                                        text_color='white',
-                                        fg_color='#4d4d4d',
-                                        hover_color='#1d538d',
-                                        #command=lambda: plot_start()          
-                                        )
-    button_SPO2.grid(row=6, column=0, pady=6, padx=20)
-
-    # -----HEART RATE BUTTON----#
-    button_HR = customtkinter.CTkButton(master=root.frame_left,
-                                        height=25,
-                                        text="Heart Rate",
-                                        text_font=("Roboto Medium",-12),             
-                                        text_color='white',
-                                        fg_color='#4d4d4d',
-                                        hover_color='#1d538d',
-                                        #command=lambda: plot_start()          
-                                        )
-    button_HR.grid(row=7, column=0, pady=6, padx=20)
-    
 
 def plot_stop():
     global cond
     cond = False
     button_HR.grid_remove()
     button_SPO2.grid_remove()
-    label_parameters.grid_remove()
 
 ############
 # MAIN GUI #
@@ -394,15 +357,43 @@ canvas.draw()
 root.after(1, plot_data)
 
 # VALUES 
-root.label_values = customtkinter.CTkButton(master=root.frame_right,
-                                                   text ="SpO₂ and heart rate values will appear here",
-                                                   height=120,
-                                                   width = 400,
+# -----SPO2 LABEL----#
+root.label_SPO2_values_title = customtkinter.CTkLabel(master=root.frame_right,
+                                        height=25,
+                                        text="SpO₂",
+                                        text_font=("Roboto Medium",-12),             
+                                        text_color='white',
+                                        fg_color='#4d4d4d',        
+                                        )
+root.label_SPO2_values_title.place(x=465, y=485)
+
+# -----HEART RATE LABEL----#
+root.label_HR_values_title = customtkinter.CTkLabel(master=root.frame_right,
+                                        height=25,
+                                        text="Heart Rate",
+                                        text_font=("Roboto Medium",-12),             
+                                        text_color='white',
+                                        fg_color='#4d4d4d',      
+                                  )
+root.label_HR_values_title.place(x=650, y=485)
+
+root.label_values_SPO2 = customtkinter.CTkButton(master=root.frame_right,
+                                                   text =". . .",
+                                                   height=90,
+                                                   width = 120,
                                                    fg_color='#666666',
                                                    hover_color='#666666',
-                                                  # justify=tkinter.LEFT
+                                                )                                                                             
+root.label_values_SPO2.place(x=465, y=520)
+
+root.label_values_HR = customtkinter.CTkButton(master=root.frame_right,
+                                                   text =". . .",
+                                                   height= 90,
+                                                   width = 120,
+                                                   fg_color='#666666',
+                                                   hover_color='#666666',
                                            )                                                                             
-root.label_values.grid(row=2, column=1, rowspan=3, pady=5, padx=0)
+root.label_values_HR.place(x=650, y=520)
 
 
 # WIDGET TITLES
