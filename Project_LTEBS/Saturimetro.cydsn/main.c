@@ -157,44 +157,9 @@ int main(void)
       
     for(;;)
     {       
-            int32 irValue=getIR(&data);                             
-            if (checkForBeat(irValue)== true)
-            {                  
-                sprintf(msg, "count = %lu\r", count);
-                //debug_print(msg);
-                delta = count - lastBeat;
-                sprintf(msg, "delta = %u\r", delta);
-                //debug_print(msg);
-                lastBeat = count;
-                float freq = (delta / 100.0);
-
-                beatsPerMinute = 60/freq ;
-
-                if (beatsPerMinute > 20 && beatsPerMinute < 200)
-                {  
-                    sum+= beatsPerMinute;                                       
-                    beatAvg=sum/rateSpot;                                       
-                    sprintf(msg, "BPM=%lu\r\r", beatsPerMinute);
-                    debug_print(msg);
-                    if (rateSpot>1)
-                    {
-                        sprintf(msg, "Avg BPM=%u\r\r", beatAvg);
-                        debug_print(msg);
-                    }
-                    rateSpot++;
-                    if(rateSpot==RATE_SIZE) 
-                    {
-                        rateSpot=1;
-                        sum=0;
-                        beatAvg=0;
-                    }                   
-                }
-                            
-            }
-                
-
-            if(irValue<10000) debug_print("no finger?\r");
             
+        if (flag_temp == 1)
+        {
             MAX30101_IsFIFOAFull(&flag);
             if(flag>0)
             {
@@ -209,7 +174,12 @@ int main(void)
                 {                    
                     redBuffer[j] = data.red[data.tail+i];
                     irBuffer[j] = data.IR[data.tail+i];
-                    j++;    
+                    j++;
+                    sprintf(msg, "%ld\r\n", data.IR[data.tail+i]);
+                    debug_print(msg);
+                    sprintf(msg, "%ld\r\n", data.red[data.tail+i]);
+                    debug_print(msg);
+                    
                 }                       
                 if(j>=bufferLength) 
                 {
@@ -222,11 +192,13 @@ int main(void)
                         irBuffer[i-50] = irBuffer[i];
                     }
                     sprintf(msg, "spo2: %ld\r", spo2);
-                    debug_print(msg);
+                    //debug_print(msg);
                     sprintf(msg, "HR: %ld\r", heartRate);
                     //debug_print(msg);
                 }                
-            }                                          
+            }
+            flag_temp = 0;
+        }
     }
 }   
 
@@ -235,5 +207,6 @@ CY_ISR(MAX30101_ISR)
 {
     Connection_LED_Write(!Connection_LED_Read());
     MAX30101_INT_ClearInterrupt();
+    flag_temp = 1;
 }
 
