@@ -800,9 +800,9 @@ uint32_t getIR_n(uint32_t x[], int i) //uint8_t num_samples, volatile long count
             
 }
 
-uint32_t getIR(MAX30101_Data *data, uint8_t rp, uint8_t wp, uint8_t active_leds, int j) //uint8_t num_samples, volatile long count)//
+uint32_t getIR(MAX30101_Data *data) //, uint8_t rp, uint8_t wp, uint8_t active_leds, int j) //uint8_t num_samples, volatile long count)//
 {
-    //if(MAX30105_safeCheck(250, num_samples, count))
+   /* //if(MAX30105_safeCheck(250, num_samples, count))
     MAX30101_ReadReadPointer(&rp);
     MAX30101_ReadWritePointer(&wp);
                 //Calculate the number of readings we need to get from sensor
@@ -813,7 +813,7 @@ uint32_t getIR(MAX30101_Data *data, uint8_t rp, uint8_t wp, uint8_t active_leds,
                 //sprintf(msg, "%d\r\n", num_samples);
                 //debug_print(msg);
                 // Read FIFO
-    MAX30101_ReadFIFO(num_samples, active_leds, data, j);
+    MAX30101_ReadFIFO(num_samples, active_leds, data, j);*/
     
     return (data->IR[data->head]);  
 }

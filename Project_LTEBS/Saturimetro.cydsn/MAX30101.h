@@ -572,7 +572,7 @@
 
       uint32_t getFIFORed(MAX30101_Data* data); //Returns the FIFO sample pointed to by tail
       uint32_t getFIFOIR(MAX30101_Data* data); //Returns the FIFO sample pointed to by tail
-    uint32_t getIR(MAX30101_Data *data, uint8_t rp, uint8_t wp, uint8_t active_leds, int j);//, uint8_t num_samples, volatile long count); //Returns immediate IR value  
+    uint32_t getIR(MAX30101_Data *data);//, uint8_t rp, uint8_t wp, uint8_t active_leds, int j);//, uint8_t num_samples, volatile long count); //Returns immediate IR value  
     //bool MAX30105_safeCheck(uint16_t maxTimeToCheck, uint8_t num_samples, volatile long count);
     uint16_t check(uint8 *wp, uint8 *rp);
     uint32_t getRED(MAX30101_Data *data);
