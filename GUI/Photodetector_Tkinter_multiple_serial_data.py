@@ -47,7 +47,7 @@ def plot_data():
     if (cond == True):
 
         a = s.readline() # usare read
-        a.decode()
+        a.decode('utf-8')
         print(int(a[0:4]))
         root.label_values_SPO2.configure(text=str(int(a[0:7])))    
        # root.label_values_HR.configure(text=str(int(a[0:7])))
