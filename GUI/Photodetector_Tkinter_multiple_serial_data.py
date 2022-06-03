@@ -4,7 +4,7 @@
 
 import unicodedata
 import text_unidecode
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 from tkinter import *
 import tkinter.messagebox
@@ -43,34 +43,57 @@ def findPsoC(portsFound):
 ir = np.array([])
 red = np.array([])
 cond = False
-flag_ir = 1
-flag_red = 0
+flag = 0
+
 
 
 def plot_data():
-    global cond, data, flag_ir, flag_red
+    global cond, ir, red, flag
 
     if (cond == True):
 
         a = s.readline() # usare read
         a.decode('utf-8')
-        print(a)
-        a.splitlines()
+        print(int(a[0:7]))
 
-        root.label_values_SPO2.configure(text=str(int(a[0:7])))
-        # root.label_values_HR.configure(text=str(int(a[0:7])))
+        #a.splitlines()
+        #print(a)
 
-        if flag_ir == 1:
-        if (len(ir) < 100):
-            data = np.append(data, int(a[0:7]))
-            # root.label_values.configure(text=str(last_data))
 
-        else:
-            data[0:99] = data[1:100]
-            data[99] = int(a[0:7])
+        if flag == 1:
+            if len(ir) < 200:
+                ir = np.append(ir, int(a[0:7]))
+                root.label_values_SPO2.configure(text=str(int(a[0:7])))
+                flag = 0
 
-        lines.set_xdata(np.arange(0, len(data)))
-        lines.set_ydata(data)
+            else:
+                ir[0:199] = ir[1:200]
+                ir[199] = int(a[0:7])
+                root.label_values_SPO2.configure(text=str(int(a[0:7])))
+                flag = 0
+
+            lines_ir.set_xdata(np.arange(0, len(ir)))
+            lines_ir.set_ydata(ir)
+
+        if flag == 2:
+            if len(red) < 200:
+                red = np.append(red, int(a[0:7]))
+                root.label_values_HR.configure(text=str(int(a[0:7])))
+                flag = 0
+
+            else:
+                red[0:199] = red[1:200]
+                red[199] = int(a[0:7])
+                root.label_values_HR.configure(text=str(int(a[0:7])))
+                flag = 0
+
+            lines_red.set_xdata(np.arange(0, len(red)))
+            lines_red.set_ydata(red)
+
+        if int(a[0:7]) == 2:
+            flag = 2 #modalità lettura RED
+        if int(a[0:7]) == 1:
+            flag = 1 #modalità lettura IR
 
         # print(data)
         canvas.draw()
@@ -79,7 +102,7 @@ def plot_data():
 
 
 def plot_start():
-    global cond, button_SPO2
+    global cond
     cond = True
     s.reset_input_buffer()
 
@@ -100,6 +123,7 @@ root.geometry("1077x700")  # set the window size
 root.minsize(1077, 700)  # to maintain dimensions fixed
 root.maxsize(1077, 700)
 root.configure(background='#1f1f1f')
+
 
 # -----FRAMES----#
 # configure grid layout (2x1)
@@ -362,14 +386,16 @@ ax.title.set_visible(False)
 ax.set_xlabel('Sample')
 ax.set_ylabel('Voltage')
 ax.set_xlim(0, 150)
-ax.set_ylim(105000, 107000) #105000-107000 IR values ylim --- 97000 - 99000 fra
+ax.set_ylim(104000, 110000) #105000-107000 IR values ylim --- 97000 - 99000 fra, 104000, 110000 per entrambi
 ax.set_facecolor('#dcd8d8')
 
-lines = ax.plot([], [], 'r')[0]
+lines_ir = ax.plot([], [], 'r')[0]
+lines_red = ax.plot([], [], 'b')[0]
 
 canvas = FigureCanvasTkAgg(fig, master=root)  # A tk.DrawingArea.
 canvas.get_tk_widget().place(x=255, y=75, width=730, height=350)
 canvas.draw()
+
 
 root.after(1, plot_data)
 
