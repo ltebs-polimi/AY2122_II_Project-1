@@ -385,8 +385,8 @@ fig.subplots_adjust(bottom=0.19, right=0.94)
 ax.title.set_visible(False)
 ax.set_xlabel('Sample')
 ax.set_ylabel('Voltage')
-ax.set_xlim(0, 150)
-ax.set_ylim(104000, 110000) #105000-107000 IR values ylim --- 97000 - 99000 fra, 104000, 110000 per entrambi
+ax.set_xlim(5, 220)
+ax.set_ylim(0, 110000) #105000-107000 IR values ylim --- 97000 - 99000 fra, 104000, 110000 per entrambi
 ax.set_facecolor('#dcd8d8')
 
 lines_ir = ax.plot([], [], 'r')[0]
@@ -395,7 +395,9 @@ lines_red = ax.plot([], [], 'b')[0]
 canvas = FigureCanvasTkAgg(fig, master=root)  # A tk.DrawingArea.
 canvas.get_tk_widget().place(x=255, y=75, width=730, height=350)
 canvas.draw()
-
+toolbar = NavigationToolbar2Tk(canvas, root, pack_toolbar=False)
+toolbar.update()
+toolbar.place(x=500, y=70)
 
 root.after(1, plot_data)
 
