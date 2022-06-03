@@ -4,7 +4,7 @@
 
 import unicodedata
 import text_unidecode
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 from tkinter import *
 import tkinter.messagebox 
@@ -336,24 +336,36 @@ root.label_bg_plot = customtkinter.CTkLabel(master=root.frame_right,
 root.label_bg_plot.place(x=66, y=230, anchor = W)
 
 # Add figure canvas
-fig = Figure()
-ax = fig.add_subplot(111)
-fig.patch.set_facecolor('#dcd8d8')
-fig.subplots_adjust(bottom=0.19, right=0.94)
+root.fig = Figure()
+root.ax = root.fig.add_subplot(111)
+root.fig.patch.set_facecolor('#dcd8d8')
+root.fig.subplots_adjust(bottom=0.19, right=0.94)
 
 # ax = plt.axes(xlim=(0,100),ylim=(0, 120)); #displaying only 100 samples
-ax.title.set_visible(False)
-ax.set_xlabel('Sample')
-ax.set_ylabel('Voltage')
-ax.set_xlim(0, 150)
-ax.set_ylim(100, 58000)
-ax.set_facecolor('#dcd8d8')
+root.ax.title.set_visible(False)
+root.ax.set_xlabel('Sample')
+root.ax.set_ylabel('Voltage')
+root.ax.set_xlim(0, 150)
+root.ax.set_ylim(100, 58000)
+root.ax.set_facecolor('#dcd8d8')
 
-lines = ax.plot([], [])[0]
+root.lines = root.ax.plot([], [])[0]
 
-canvas = FigureCanvasTkAgg(fig, master=root)  # A tk.DrawingArea.
-canvas.get_tk_widget().place(x=255, y=75, width=730, height=350)
+root.canvas = FigureCanvasTkAgg(root.fig, master=root)  # A tk.DrawingArea.
+#root.canvas.get_tk_widget().place(x=255, y=75, width=730, height=350)
+root.canvas.draw()
+
+canvas = FigureCanvasTkAgg(root.fig, master=root)  # A tk.DrawingArea.
 canvas.draw()
+
+# pack_toolbar=False will make it easier to use a layout manager later on.
+toolbar = NavigationToolbar2Tk(canvas, root, pack_toolbar=False)
+toolbar.update()
+
+toolbar.pack(side=tkinter.BOTTOM, fill=tkinter.X)
+canvas.get_tk_widget().place(x=255, y=75, width=730, height=350)
+
+
 
 root.after(1, plot_data)
 
