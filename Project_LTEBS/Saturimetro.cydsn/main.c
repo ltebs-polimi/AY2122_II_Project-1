@@ -150,6 +150,7 @@ int main(void)
     //debug_print("\r\n\r\n");    
     isr_MAX30101_StartEx(MAX30101_ISR);
     isr_1_StartEx(Count);
+//    isr_RX_StartEx(Custom_ISR_RX);
     //isr_flag_StartEx(FLAG);
     // Clear FIFO
     MAX30101_ClearFIFO();
@@ -175,8 +176,10 @@ int main(void)
                     redBuffer[j] = data.red[data.tail+i];
                     irBuffer[j] = data.IR[data.tail+i];
                     j++;
+                    debug_print("1\r\n");
                     sprintf(msg, "%ld\r\n", data.IR[data.tail+i]);
                     debug_print(msg);
+                    debug_print("2\r\n");
                     sprintf(msg, "%ld\r\n", data.red[data.tail+i]);
                     debug_print(msg);
                     
@@ -191,10 +194,12 @@ int main(void)
                         redBuffer[i-50] = redBuffer[i];
                         irBuffer[i-50] = irBuffer[i];
                     }
-                    sprintf(msg, "spo2: %ld\r", spo2);
-                    //debug_print(msg);
-                    sprintf(msg, "HR: %ld\r", heartRate);
-                    //debug_print(msg);
+                    debug_print("3\r\n");
+                    sprintf(msg, "%ld\r\n", spo2);
+                    debug_print(msg);
+                    debug_print("4\r\n");
+                    sprintf(msg, "%ld\r\n", heartRate);
+                    debug_print(msg);
                 }                
             }
             flag_temp = 0;
