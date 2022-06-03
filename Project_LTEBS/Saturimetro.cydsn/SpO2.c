@@ -60,21 +60,21 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_b
     an_x[k] = -1*(pun_ir_buffer[k] - un_ir_mean) ; 
     
   // 4 pt Moving Average
-  for(k=0; k< BUFFER_SIZE-MA4_SIZE+1; k++){
+  for(k=0; k< BUFFER_SIZE-MA4_SIZE; k++){
     an_x[k]=( an_x[k]+an_x[k+1]+ an_x[k+2]+ an_x[k+3])/(int)4;        
   }
   // calculate threshold  
   n_th1=0; 
-  for ( k=0 ; k<BUFFER_SIZE ;k++){
+  for ( k=0 ; k<BUFFER_SIZE-MA4_SIZE ;k++){
     n_th1 +=  an_x[k];
   }
-  n_th1=  n_th1/ ( BUFFER_SIZE);
+  n_th1=  n_th1/ ( BUFFER_SIZE-MA4_SIZE);
   if( n_th1<30) n_th1=30; // min allowed
   if( n_th1>60) n_th1=60; // max allowed
 
   for ( k=0 ; k<15;k++) an_ir_valley_locs[k]=0;
   // since we flipped signal, we use peak detector as valley detector
-  maxim_find_peaks(an_ir_valley_locs, &n_npks, an_x, BUFFER_SIZE, n_th1, 10, 15);//peak_height, peak_distance, max_num_peaks 
+  maxim_find_peaks(an_ir_valley_locs, &n_npks, an_x, BUFFER_SIZE-MA4_SIZE, n_th1, 25, 15);//peak_height, peak_distance, max_num_peaks 
   n_peak_interval_sum =0;
   if (n_npks>=2){
     for (k=1; k<n_npks; k++) n_peak_interval_sum += (an_ir_valley_locs[k] -an_ir_valley_locs[k -1] ) ;

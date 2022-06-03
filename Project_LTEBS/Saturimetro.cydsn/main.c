@@ -61,7 +61,7 @@ int main(void)
     int num_samples;
     int j=0;
     int FIFO_max_size = 25;
-    const uint8_t RATE_SIZE = 4; //Increase this for more averaging. 4 is good.
+    const uint8_t RATE_SIZE = 5; //Increase this for more averaging. 4 is good.
     uint8_t rates[RATE_SIZE]; //Array of heart rates
     uint8_t rateSpot=1;
     uint16 lastBeat=0; //Time at which the last beat occurred
@@ -73,6 +73,9 @@ int main(void)
     //long irValue;
     int i=0;
     uint8_t sum=0;
+    uint8_t BPM;
+    int32_t somma=0;
+    int f=1;
     
     // Initialization
     MAX30101_Start();
@@ -121,7 +124,7 @@ int main(void)
         MAX30101_EnableFIFORollover();
         
         // 8 samples averaged
-        MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_8);
+        MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_4);
         
         // Set LED Power level
         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x1F);
@@ -129,13 +132,13 @@ int main(void)
         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x1F);
                
         // Set ADC Range
-        MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_2048);
+        MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_4096);
         
         // Pulse width
         MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
         
         // Set Sample Rate
-        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_400);
+        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_200);
         
         // Set mode
         MAX30101_SetMode(MAX30101_SPO2_MODE);
@@ -158,7 +161,7 @@ int main(void)
     for(;;)
     {       
             int32 irValue=getIR(&data);                             
-            if (checkForBeat(irValue)== true)
+            /*if (checkForBeat(irValue)== true)
             {                  
                 sprintf(msg, "count = %lu\r", count);
                 //debug_print(msg);
@@ -170,30 +173,33 @@ int main(void)
 
                 beatsPerMinute = 60/freq ;
 
-                if (beatsPerMinute > 20 && beatsPerMinute < 200)
+                if (beatsPerMinute > 50 && beatsPerMinute < 200)
                 {  
                     sum+= beatsPerMinute;                                       
-                    beatAvg=sum/rateSpot;                                       
+                    beatAvg+=sum/rateSpot;                    
                     sprintf(msg, "BPM=%lu\r\r", beatsPerMinute);
-                    debug_print(msg);
-                    if (rateSpot>1)
-                    {
-                        sprintf(msg, "Avg BPM=%u\r\r", beatAvg);
-                        debug_print(msg);
-                    }
-                    rateSpot++;
+                    //debug_print(msg);                   
+                    sprintf(msg, "BPM=%u\r\r", beatAvg);
+                   // debug_print(msg);
+                    
                     if(rateSpot==RATE_SIZE) 
-                    {
-                        rateSpot=1;
+                    {                                                                   
+                        BPM = beatAvg/RATE_SIZE;
+                        sprintf(msg, "AVG=%u\r\n", BPM);
+                       // debug_print(msg);                        
+                        rateSpot=0;
+                        i=-1;
                         sum=0;
+                        somma=0;
                         beatAvg=0;
-                    }                   
-                }
-                            
-            }
-                
 
-            if(irValue<10000) debug_print("no finger?\r");
+                    }
+                    rateSpot++;                 
+                }                              
+            } 
+            */
+            
+            if(irValue<10000) debug_print("NO FINGER\r");
             
             MAX30101_IsFIFOAFull(&flag);
             if(flag>0)
@@ -221,10 +227,26 @@ int main(void)
                         redBuffer[i-50] = redBuffer[i];
                         irBuffer[i-50] = irBuffer[i];
                     }
+                    sprintf(msg, "HR: %ld\r", heartRate);
+                    debug_print(msg);
                     sprintf(msg, "spo2: %ld\r", spo2);
                     debug_print(msg);
-                    sprintf(msg, "HR: %ld\r", heartRate);
-                    //debug_print(msg);
+                    
+                    if(heartRate > 50 && heartRate < 160) 
+                    {
+                        somma += heartRate;
+                        if(f==5) 
+                        {
+                            somma = somma/5;
+                            sprintf(msg, "AVG_HR: %ld\r", somma);
+                            debug_print(msg);
+                            f = 0;
+                            somma = 0;
+                        }
+                        f++;
+                    }
+                            
+
                 }                
             }                                          
     }
