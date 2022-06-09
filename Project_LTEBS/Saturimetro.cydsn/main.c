@@ -69,7 +69,7 @@ int main(void)
     uint8_t rates[RATE_SIZE]; //Array of heart rates
     uint8_t rateSpot=1;
     uint16 lastBeat=0; //Time at which the last beat occurred
-    uint8_t x;
+    uint16_t x;
     uint32 beatsPerMinute;
     uint8_t beatAvg=0;
     uint16_t delta;
@@ -167,7 +167,7 @@ int main(void)
     isr_Timer_StartEx(WAKEUP_TIMER);
     isr_SM_StartEx(Count);
     SleepTimer_Start();
-    USER();
+    USER(&x);
     //isr_flag_StartEx(FLAG);
     // Clear FIFO
     MAX30101_ClearFIFO();
@@ -175,8 +175,8 @@ int main(void)
       
     for(;;)
     {       
-
-            USER();
+            x = UART_Debug_GetByte();
+            USER(&x);
             int32 irValue=getIR(&data);  
             //sprintf(msg, "IRVALUE=%ld\r\n",irValue);
             //debug_print(msg);
