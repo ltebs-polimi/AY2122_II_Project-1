@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Saturimetro-000\Saturimetro\Header Files\isr.h">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Saturimetro-000\Saturimetro\Header Files\HeartRate.h">
 <ExpandedNodeIds>
 <v>Saturimetro-000</v>
 <v>Saturimetro-000\Saturimetro</v>
@@ -30,6 +30,7 @@
 <v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\EEPROM</v>
 <v>Saturimetro-000\Saturimetro\Header Files</v>
 <v>Saturimetro-000\Saturimetro\Header Files\cyapicallbacks.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\CyPm.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\HeartRate.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\I2C_Interface.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\isr.h</v>
@@ -37,7 +38,9 @@
 <v>Saturimetro-000\Saturimetro\Header Files\MAX30101_Defs.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\millis.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\SpO2.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\USER.h</v>
 <v>Saturimetro-000\Saturimetro\Source Files</v>
+<v>Saturimetro-000\Saturimetro\Source Files\CyPm.c</v>
 <v>Saturimetro-000\Saturimetro\Source Files\HeartRate.c</v>
 <v>Saturimetro-000\Saturimetro\Source Files\I2C_Interface.c</v>
 <v>Saturimetro-000\Saturimetro\Source Files\isr.c</v>
@@ -45,6 +48,7 @@
 <v>Saturimetro-000\Saturimetro\Source Files\MAX30101.c</v>
 <v>Saturimetro-000\Saturimetro\Source Files\millis.c</v>
 <v>Saturimetro-000\Saturimetro\Source Files\SpO2.c</v>
+<v>Saturimetro-000\Saturimetro\Source Files\USER.c</v>
 <v>Saturimetro-000\Saturimetro\Generated_Source</v>
 <v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5</v>
 <v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\I2C_Master</v>
@@ -52,21 +56,13 @@
 <v>Saturimetro-000\Saturimetro\TopDesign.cysch</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
-<v>Saturimetro-000</v>
-<v>Saturimetro-000\Saturimetro</v>
-<v>Saturimetro-000\Saturimetro\TopDesign</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Pins</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Analog</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Clocks</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Interrupts</v>
-<v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\DMA</v>
 <v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\System</v>
 <v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Directives</v>
 <v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\Flash Security</v>
 <v>Saturimetro-000\Saturimetro\Saturimetro.cydwr\EEPROM</v>
 <v>Saturimetro-000\Saturimetro\Header Files</v>
 <v>Saturimetro-000\Saturimetro\Header Files\cyapicallbacks.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\CyPm.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\HeartRate.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\I2C_Interface.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\isr.h</v>
@@ -74,7 +70,9 @@
 <v>Saturimetro-000\Saturimetro\Header Files\MAX30101_Defs.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\millis.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\SpO2.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\USER.h</v>
 <v>Saturimetro-000\Saturimetro\Source Files</v>
+<v>Saturimetro-000\Saturimetro\Source Files\CyPm.c</v>
 <v>Saturimetro-000\Saturimetro\Source Files\HeartRate.c</v>
 <v>Saturimetro-000\Saturimetro\Source Files\I2C_Interface.c</v>
 <v>Saturimetro-000\Saturimetro\Source Files\isr.c</v>
@@ -82,12 +80,18 @@
 <v>Saturimetro-000\Saturimetro\Source Files\MAX30101.c</v>
 <v>Saturimetro-000\Saturimetro\Source Files\millis.c</v>
 <v>Saturimetro-000\Saturimetro\Source Files\SpO2.c</v>
+<v>Saturimetro-000\Saturimetro\Source Files\USER.c</v>
 <v>Saturimetro-000\Saturimetro\Generated_Source</v>
 <v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\Clock</v>
 <v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\Connection_LED</v>
 <v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\cy_boot</v>
 <v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
 <v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\I2C_Master</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\I2C_Master\I2C_Master.c</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\I2C_Master\I2C_Master.h</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\I2C_Master\I2C_Master_BOOT.c</v>
+<v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5\I2C_Master\I2C_Master_INT.c</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -112,6 +116,7 @@
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\Connection_LED.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
@@ -133,16 +138,17 @@
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Master_PM.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Master_SLAVE.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_1.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_MAX30101.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_SM.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Timer.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\MAX30101.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\MAX30101_INT.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\millis.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\SCL_1.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\SDA_1.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\SleepTimer.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\SpO2.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\timer_clock.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_Debug.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_Debug_BOOT.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_Debug_INT.lst</v>
@@ -162,6 +168,7 @@
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\Connection_LED.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
@@ -183,15 +190,14 @@
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Master_PM.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Master_SLAVE.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_1.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_MAX30101.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_SM.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Timer.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\MAX30101.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\MAX30101_INT.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\millis.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\SCL_1.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\SDA_1.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\SpO2.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -208,11 +214,13 @@
 <v>Saturimetro-000\Saturimetro\System Reference Guides</v>
 <v>Saturimetro-000\Saturimetro\System Reference Guides\cy_boot_v6_0</v>
 <v>Saturimetro-000\Saturimetro\cy_clock_v2_20.pdf</v>
-<v>Saturimetro-000\Saturimetro\cy_isr_v1_70.pdf</v>
+<v>Saturimetro-000\Saturimetro\cy_isr_v1_70</v>
+<v>Saturimetro-000\Saturimetro\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
 <v>Saturimetro-000\Saturimetro\cy_isr_v1_71.pdf</v>
 <v>Saturimetro-000\Saturimetro\cy_pins_v2_20</v>
 <v>Saturimetro-000\Saturimetro\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
 <v>Saturimetro-000\Saturimetro\I2C_v3_50.pdf</v>
+<v>Saturimetro-000\Saturimetro\SleepTimer_v3_20.pdf</v>
 <v>Saturimetro-000\Saturimetro\UART_v2_50.pdf</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
@@ -223,11 +231,13 @@
 <v>Saturimetro-000\Saturimetro\System Reference Guides</v>
 <v>Saturimetro-000\Saturimetro\System Reference Guides\cy_boot_v6_0</v>
 <v>Saturimetro-000\Saturimetro\cy_clock_v2_20.pdf</v>
-<v>Saturimetro-000\Saturimetro\cy_isr_v1_70.pdf</v>
+<v>Saturimetro-000\Saturimetro\cy_isr_v1_70</v>
+<v>Saturimetro-000\Saturimetro\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
 <v>Saturimetro-000\Saturimetro\cy_isr_v1_71.pdf</v>
 <v>Saturimetro-000\Saturimetro\cy_pins_v2_20</v>
 <v>Saturimetro-000\Saturimetro\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
 <v>Saturimetro-000\Saturimetro\I2C_v3_50.pdf</v>
+<v>Saturimetro-000\Saturimetro\SleepTimer_v3_20.pdf</v>
 <v>Saturimetro-000\Saturimetro\UART_v2_50.pdf</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
@@ -266,7 +276,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1209, 510" SelectedTabbedMdiWindow="a742ef3b-07d1-4bf4-99cf-af81195db50f"><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\main.c" Guid="a742ef3b-07d1-4bf4-99cf-af81195db50f" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\TopDesign\TopDesign.cysch" Guid="8c6b55e1-94ce-488d-9e64-5392f0a9d45e" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\MAX30101.c" Guid="f61a3c1f-0f64-4a9d-9619-122c68a4fa74" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\MAX30101.h" Guid="d1233476-be07-4cd4-84a9-58807dbd8b6b" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\MAX30101_Defs.h" Guid="9697a8e6-4492-465f-8938-427404b0fe79" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\HeartRate.c" Guid="c1cbd965-726c-474f-825d-bb159fb454e6" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\SpO2.c" Guid="93bf95a2-7abb-4f9c-9a92-10ed0d6ef10f" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\isr.h" Guid="bda8ed20-f8d9-49e9-84bb-b614bcd2daa0" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cydwr" Guid="f49657b9-75d5-4789-a2a3-22abc3a5119a" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="3e810fa7-4e47-492e-8132-c54ed4977113" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1055, 510" SelectedTabbedMdiWindow="8c6b55e1-94ce-488d-9e64-5392f0a9d45e"><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\main.c" Guid="a742ef3b-07d1-4bf4-99cf-af81195db50f" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\TopDesign\TopDesign.cysch" Guid="8c6b55e1-94ce-488d-9e64-5392f0a9d45e" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\MAX30101.c" Guid="f61a3c1f-0f64-4a9d-9619-122c68a4fa74" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\MAX30101.h" Guid="d1233476-be07-4cd4-84a9-58807dbd8b6b" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\MAX30101_Defs.h" Guid="9697a8e6-4492-465f-8938-427404b0fe79" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\HeartRate.c" Guid="c1cbd965-726c-474f-825d-bb159fb454e6" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\SpO2.c" Guid="93bf95a2-7abb-4f9c-9a92-10ed0d6ef10f" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\isr.h" Guid="bda8ed20-f8d9-49e9-84bb-b614bcd2daa0" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cydwr" Guid="f49657b9-75d5-4789-a2a3-22abc3a5119a" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="3e810fa7-4e47-492e-8132-c54ed4977113" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

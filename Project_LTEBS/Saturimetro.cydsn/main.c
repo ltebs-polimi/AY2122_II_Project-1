@@ -16,9 +16,12 @@
 #include "HeartRate.h"
 #include "Timer.h"
 #include "isr.h"
+#include "USER.h"
+//#include "CyPm.h"
 
 #include "math.h"
 
+#define SLEEPTIMER_INTERVAL_COUNTER (768u)
 #define UART_DEBUG
 
 #ifdef UART_DEBUG
@@ -35,6 +38,7 @@
 
 CY_ISR_PROTO(MAX30101_ISR);
 //CY_ISR_PROTO(FLAG);
+CY_ISR_PROTO(WAKEUP_TIMER);
     
 
 uint8_t flag_temp = 0;
@@ -70,17 +74,23 @@ int main(void)
     uint8_t beatAvg=0;
     uint16_t delta;
     extern volatile long count;
+    extern volatile uint8 SM;
+    extern volatile uint8 flag_SM;
+    
     //long irValue;
     int i=0;
     uint8_t sum=0;
     uint8_t BPM;
     int32_t somma=0;
     int f=1;
+    uint16 wakeupIntervalCounter;
+    
+    //SET BY THE USER
+
     
     // Initialization
     MAX30101_Start();
     UART_Debug_Start();
-//    Timer_1_Start();
     CyDelay(100);
     
     /*debug_print("**************************\r\n");
@@ -108,7 +118,7 @@ int main(void)
         // Soft reset sensor
         MAX30101_Reset();
         CyDelay(100);
-        
+       
         // Wake up sensor
         MAX30101_WakeUp();
         
@@ -124,6 +134,8 @@ int main(void)
         MAX30101_EnableFIFORollover();
         
         // 8 samples averaged
+        
+        
         MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_4);
         
         // Set LED Power level
@@ -152,7 +164,10 @@ int main(void)
     
     //debug_print("\r\n\r\n");    
     isr_MAX30101_StartEx(MAX30101_ISR);
-    isr_1_StartEx(Count);
+    isr_Timer_StartEx(WAKEUP_TIMER);
+    isr_SM_StartEx(Count);
+    SleepTimer_Start();
+    USER();
     //isr_flag_StartEx(FLAG);
     // Clear FIFO
     MAX30101_ClearFIFO();
@@ -160,47 +175,34 @@ int main(void)
       
     for(;;)
     {       
-            int32 irValue=getIR(&data);                             
-            /*if (checkForBeat(irValue)== true)
-            {                  
-                sprintf(msg, "count = %lu\r", count);
-                //debug_print(msg);
-                delta = count - lastBeat;
-                sprintf(msg, "delta = %u\r", delta);
-                //debug_print(msg);
-                lastBeat = count;
-                float freq = (delta / 100.0);
 
-                beatsPerMinute = 60/freq ;
-
-                if (beatsPerMinute > 50 && beatsPerMinute < 200)
-                {  
-                    sum+= beatsPerMinute;                                       
-                    beatAvg+=sum/rateSpot;                    
-                    sprintf(msg, "BPM=%lu\r\r", beatsPerMinute);
-                    //debug_print(msg);                   
-                    sprintf(msg, "BPM=%u\r\r", beatAvg);
-                   // debug_print(msg);
-                    
-                    if(rateSpot==RATE_SIZE) 
-                    {                                                                   
-                        BPM = beatAvg/RATE_SIZE;
-                        sprintf(msg, "AVG=%u\r\n", BPM);
-                       // debug_print(msg);                        
-                        rateSpot=0;
-                        i=-1;
-                        sum=0;
-                        somma=0;
-                        beatAvg=0;
-
-                    }
-                    rateSpot++;                 
-                }                              
-            } 
-            */
-            
-            if(irValue<10000) debug_print("NO FINGER\r");
-            
+            USER();
+            int32 irValue=getIR(&data);  
+            //sprintf(msg, "IRVALUE=%ld\r\n",irValue);
+            //debug_print(msg);
+            if(irValue<10000) 
+            {
+                //debug_print("NO FINGER\r");
+                flag_SM=1;
+                
+                if(SM==1)
+                {
+                    flag_SM=0;
+                    debug_print("SLEEP_MODE\r\n");
+                    CyDelay(50);
+                    CyPmSaveClocks();
+                    CyPmAltAct(PM_ALT_ACT_TIME_NONE,PM_ALT_ACT_SRC_CTW);
+                    CyPmRestoreClocks();
+                    count=0;
+                }
+            }               
+            else if(irValue>=10000)
+            { 
+                SM=0;
+                flag_SM=0;
+                count=0;
+            }
+    
             MAX30101_IsFIFOAFull(&flag);
             if(flag>0)
             {
@@ -248,9 +250,16 @@ int main(void)
                             
 
                 }                
-            }                                          
-    }
+        
+            } 
+         
+    } 
 }   
+
+CY_ISR(WAKEUP_TIMER)
+{
+    SleepTimer_GetStatus();
+}
 
 
 CY_ISR(MAX30101_ISR)

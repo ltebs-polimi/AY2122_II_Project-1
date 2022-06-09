@@ -11,18 +11,5 @@
 */
 
 #include "project.h"
-#include "isr.h"
-volatile long count=0;
-volatile uint8 flag_SM=0;
-volatile uint8 SM=0;
-
-CY_ISR_PROTO (Count) 
-{
-    if (flag_SM==1)
-    {
-     count++;
-        if (count==5) SM=1;
-    }
-    
-}
+void USER(void);
 /* [] END OF FILE */

@@ -1,13 +1,17 @@
-Loading plugins phase: Elapsed time ==> 0s.153ms
+Loading plugins phase: Elapsed time ==> 0s.154ms
 <CYPRESSTAG name="CyDsfit arguments...">
 cydsfit arguments: -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cyprj -d CY8C5888LTQ-LP097 -s C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
 </CYPRESSTAG>
 <CYPRESSTAG name="Design elaboration results...">
+ADD: fit.M0032: warning: Clock Warning: (Clock's accuracy range '1  Hz -50% +100%, (0.5  Hz - 2  Hz)' is not within the specified tolerance range '1  Hz +/- 1%, (0.99  Hz - 1.01  Hz)'.).
+ * C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cydwr (Clock)
+ * C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\TopDesign\TopDesign.cysch (Instance:Clock)
+
 </CYPRESSTAG>
-Elaboration phase: Elapsed time ==> 1s.606ms
+Elaboration phase: Elapsed time ==> 2s.205ms
 <CYPRESSTAG name="HDL generation results...">
 </CYPRESSTAG>
-HDL generation phase: Elapsed time ==> 0s.041ms
+HDL generation phase: Elapsed time ==> 0s.050ms
 <CYPRESSTAG name="Synthesis results...">
 
      | | | | | | |
@@ -41,7 +45,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\feder
 ======================================================================
 
 vlogfe V6.3 IR 41:  Verilog parser
-Fri Jun 03 16:48:37 2022
+Thu Jun 09 12:32:00 2022
 
 
 ======================================================================
@@ -51,7 +55,7 @@ Options  :    -yv2 -q10 Saturimetro.v
 ======================================================================
 
 vpp V6.3 IR 41:  Verilog Pre-Processor
-Fri Jun 03 16:48:37 2022
+Thu Jun 09 12:32:00 2022
 
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_virtualmux_v1_0\cy_virtualmux_v1_0.v'
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\OneTerminal\OneTerminal.v'
@@ -97,7 +101,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\feder
 ======================================================================
 
 tovif V6.3 IR 41:  High-level synthesis
-Fri Jun 03 16:48:37 2022
+Thu Jun 09 12:32:00 2022
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -132,7 +136,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\feder
 ======================================================================
 
 topld V6.3 IR 41:  Synthesis and optimization
-Fri Jun 03 16:48:37 2022
+Thu Jun 09 12:32:01 2022
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -358,10 +362,10 @@ Removing Lhs of wire tmpOE__Rx_1_net_0[332] = tmpOE__SDA_1_net_0[1]
 Removing Lhs of wire tmpOE__Tx_1_net_0[337] = tmpOE__SDA_1_net_0[1]
 Removing Lhs of wire tmpOE__Connection_LED_net_0[343] = tmpOE__SDA_1_net_0[1]
 Removing Lhs of wire tmpOE__MAX30101_INT_net_0[351] = tmpOE__SDA_1_net_0[1]
-Removing Lhs of wire \UART_Debug:BUART:reset_reg\\D\[358] = zero[2]
-Removing Lhs of wire \UART_Debug:BUART:rx_bitclk\\D\[373] = \UART_Debug:BUART:rx_bitclk_pre\[171]
-Removing Lhs of wire \UART_Debug:BUART:rx_parity_error_pre\\D\[382] = \UART_Debug:BUART:rx_parity_error_pre\[248]
-Removing Lhs of wire \UART_Debug:BUART:rx_break_status\\D\[383] = zero[2]
+Removing Lhs of wire \UART_Debug:BUART:reset_reg\\D\[361] = zero[2]
+Removing Lhs of wire \UART_Debug:BUART:rx_bitclk\\D\[376] = \UART_Debug:BUART:rx_bitclk_pre\[171]
+Removing Lhs of wire \UART_Debug:BUART:rx_parity_error_pre\\D\[385] = \UART_Debug:BUART:rx_parity_error_pre\[248]
+Removing Lhs of wire \UART_Debug:BUART:rx_break_status\\D\[386] = zero[2]
 
 ------------------------------------------------------
 Aliased 0 equations, 112 wires.
@@ -512,12 +516,12 @@ Aliasing \UART_Debug:BUART:rx_addr_match_status\\D\ to zero
 Removing Rhs of wire \UART_Debug:BUART:rx_bitclk_enable\[135] = \UART_Debug:BUART:rx_bitclk\[183]
 Removing Lhs of wire \UART_Debug:BUART:rx_status_0\[234] = zero[2]
 Removing Lhs of wire \UART_Debug:BUART:rx_status_6\[243] = zero[2]
-Removing Lhs of wire \UART_Debug:BUART:tx_ctrl_mark_last\\D\[365] = \UART_Debug:BUART:tx_ctrl_mark_last\[126]
-Removing Lhs of wire \UART_Debug:BUART:rx_markspace_status\\D\[377] = zero[2]
-Removing Lhs of wire \UART_Debug:BUART:rx_parity_error_status\\D\[378] = zero[2]
-Removing Lhs of wire \UART_Debug:BUART:rx_addr_match_status\\D\[380] = zero[2]
-Removing Lhs of wire \UART_Debug:BUART:rx_markspace_pre\\D\[381] = \UART_Debug:BUART:rx_markspace_pre\[247]
-Removing Lhs of wire \UART_Debug:BUART:rx_parity_bit\\D\[386] = \UART_Debug:BUART:rx_parity_bit\[253]
+Removing Lhs of wire \UART_Debug:BUART:tx_ctrl_mark_last\\D\[368] = \UART_Debug:BUART:tx_ctrl_mark_last\[126]
+Removing Lhs of wire \UART_Debug:BUART:rx_markspace_status\\D\[380] = zero[2]
+Removing Lhs of wire \UART_Debug:BUART:rx_parity_error_status\\D\[381] = zero[2]
+Removing Lhs of wire \UART_Debug:BUART:rx_addr_match_status\\D\[383] = zero[2]
+Removing Lhs of wire \UART_Debug:BUART:rx_markspace_pre\\D\[384] = \UART_Debug:BUART:rx_markspace_pre\[247]
+Removing Lhs of wire \UART_Debug:BUART:rx_parity_bit\\D\[389] = \UART_Debug:BUART:rx_parity_bit\[253]
 
 ------------------------------------------------------
 Aliased 0 equations, 9 wires.
@@ -556,14 +560,14 @@ CYPRESS_DIR    : C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\wa
 Warp Program   : C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\bin\warp.exe
 Warp Arguments : -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya "-.fftprj=C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cyprj" -dcpsoc3 Saturimetro.v -verilog
 </CYPRESSTAG>
-Warp synthesis phase: Elapsed time ==> 1s.239ms
+Warp synthesis phase: Elapsed time ==> 2s.102ms
 <CYPRESSTAG name="Fitter results...">
 <CYPRESSTAG name="Fitter startup details...">
-cyp3fit: V4.4.0.80, Family: PSoC3, Started at: Friday, 03 June 2022 16:48:37
+cyp3fit: V4.4.0.80, Family: PSoC3, Started at: Thursday, 09 June 2022 12:32:02
 Options: -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cyprj -d CY8C5888LTQ-LP097 Saturimetro.v -verilog
 </CYPRESSTAG>
 <CYPRESSTAG name="Design parsing">
-Design parsing phase: Elapsed time ==> 0s.015ms
+Design parsing phase: Elapsed time ==> 0s.031ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Tech Mapping">
 <CYPRESSTAG name="Initial Mapping" icon="FILE_RPT_TECHM">
@@ -575,7 +579,7 @@ Design parsing phase: Elapsed time ==> 0s.015ms
 Assigning clock I2C_Master_BusClock to clock BUS_CLK because it is a pass-through
 <CYPRESSTAG name="Global Clock Selection" icon="FILE_RPT_TECHM">
     Digital Clock 0: Automatic-assigning  clock 'UART_Debug_IntClock'. Fanout=1, Signal=\UART_Debug:Net_9\
-    Digital Clock 1: Automatic-assigning  clock 'timer_clock'. Fanout=1, Signal=Net_62
+    Digital Clock 1: Automatic-assigning  clock 'Clock'. Fanout=1, Signal=Net_96
 </CYPRESSTAG>
 
 Removing unused cells resulting from optimization
@@ -1561,9 +1565,18 @@ Design Equations
             is_nmi = 0
         }
 
-    interrupt: Name =isr_1
+    interrupt: Name =isr_Timer
         PORT MAP (
-            interrupt => Net_62_local );
+            interrupt => CTW_OUT );
+        Properties:
+        {
+            int_type = "10"
+            is_nmi = 0
+        }
+
+    interrupt: Name =isr_SM
+        PORT MAP (
+            interrupt => Net_96_local );
         Properties:
         {
             int_type = "10"
@@ -1583,7 +1596,7 @@ Digital Clocks                :    2 :    6 :    8 : 25.00 %
 Analog Clocks                 :    0 :    4 :    4 :  0.00 %
 CapSense Buffers              :    0 :    2 :    2 :  0.00 %
 Digital Filter Block          :    0 :    1 :    1 :  0.00 %
-Interrupts                    :    3 :   29 :   32 :  9.38 %
+Interrupts                    :    4 :   28 :   32 : 12.50 %
 IO                            :    9 :   39 :   48 : 18.75 %
 Segment LCD                   :    0 :    1 :    1 :  0.00 %
 CAN 2.0b                      :    0 :    1 :    1 :  0.00 %
@@ -1610,8 +1623,8 @@ Analog (SC/CT) Blocks         :    0 :    4 :    4 :  0.00 %
 DAC                           :      :      :      :        
   VIDAC                       :    0 :    4 :    4 :  0.00 %
 </CYPRESSTAG>
-Technology Mapping: Elapsed time ==> 0s.131ms
-Tech Mapping phase: Elapsed time ==> 0s.216ms
+Technology Mapping: Elapsed time ==> 0s.200ms
+Tech Mapping phase: Elapsed time ==> 0s.300ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Placement">
 Initial Analog Placement Results:
@@ -1639,11 +1652,11 @@ Dump of CyP35AnalogRoutingResultsDB
 IsVddaHalfUsedForComp = False
 IsVddaHalfUsedForSar0 = False
 IsVddaHalfUsedForSar1 = False
-Analog Code Generation phase: Elapsed time ==> 0s.261ms
+Analog Code Generation phase: Elapsed time ==> 0s.354ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Placement">
 <CYPRESSTAG name="Detailed placement messages">
-I2076: Total run-time: 0.7 sec.
+I2076: Total run-time: 0.8 sec.
 
 </CYPRESSTAG>
 <CYPRESSTAG name="PLD Packing">
@@ -1674,7 +1687,7 @@ PLD Packing: Elapsed time ==> 0s.000ms
 Initial Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
 <CYPRESSTAG name="Final Partitioning Summary">
 Final Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
-Partitioning: Elapsed time ==> 0s.015ms
+Partitioning: Elapsed time ==> 0s.031ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Final Placement Summary">
 
@@ -2391,9 +2404,18 @@ UDB [UDB=(3,4)] is empty.
 UDB [UDB=(3,5)] is empty.
 Intr container @ [IntrContainer=(0)]: 
   Intr@ [IntrContainer=(0)][IntrId=(0)] 
-    interrupt: Name =isr_1
+    interrupt: Name =isr_SM
         PORT MAP (
-            interrupt => Net_62_local );
+            interrupt => Net_96_local );
+        Properties:
+        {
+            int_type = "10"
+            is_nmi = 0
+        }
+  Intr@ [IntrContainer=(0)][IntrId=(1)] 
+    interrupt: Name =isr_Timer
+        PORT MAP (
+            interrupt => CTW_OUT );
         Properties:
         {
             int_type = "10"
@@ -2757,8 +2779,8 @@ Clock group 0:
             clk_bus => ClockBlock_BUS_CLK_local ,
             dclk_glb_0 => \UART_Debug:Net_9\ ,
             dclk_0 => \UART_Debug:Net_9_local\ ,
-            dclk_glb_1 => Net_62 ,
-            dclk_1 => Net_62_local );
+            dclk_glb_1 => Net_96 ,
+            dclk_1 => Net_96_local );
         Properties:
         {
         }
@@ -2785,7 +2807,14 @@ I2C group 0:
 LCD group 0: empty
 LVD group 0: empty
 PICU group 0: empty
-PM group 0: empty
+PM group 0: 
+    Pm Block @ F(PM,0): 
+    pmcell: Name =PM
+        PORT MAP (
+            ctw_int => CTW_OUT );
+        Properties:
+        {
+        }
 SC group 0: empty
 SPC group 0: empty
 Timer group 0: empty
@@ -2819,32 +2848,32 @@ Port | Pin | Fixed |      Type |       Drive Mode |              Name | Connecti
 </CYPRESSTAG>
 </CYPRESSTAG>
 Digital component placer commit/Report: Elapsed time ==> 0s.031ms
-Digital Placement phase: Elapsed time ==> 0s.972ms
+Digital Placement phase: Elapsed time ==> 1s.156ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Routing">
 "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\bin/sjrouter.exe" --xml-path "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc5/psoc5lp/route_arch-rrg.cydata" --vh2-path "Saturimetro_r.vh2" --pcf-path "Saturimetro.pco" --des-name "Saturimetro" --dsf-path "Saturimetro.dsf" --sdc-path "Saturimetro.sdc" --lib-path "Saturimetro_r.lib"
 Routing successful.
-Digital Routing phase: Elapsed time ==> 1s.486ms
+Digital Routing phase: Elapsed time ==> 1s.566ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Generation">
-Bitstream Generation phase: Elapsed time ==> 0s.184ms
+Bitstream Generation phase: Elapsed time ==> 0s.216ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Verification">
 Bitstream Verification phase: Elapsed time ==> 0s.046ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Static timing analysis">
 Timing report is in Saturimetro_timing.html.
-Static timing analysis phase: Elapsed time ==> 0s.286ms
+Static timing analysis phase: Elapsed time ==> 0s.338ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Data reporting">
 Data reporting phase: Elapsed time ==> 0s.000ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Database update...">
-Design database save phase: Elapsed time ==> 0s.216ms
+Design database save phase: Elapsed time ==> 0s.200ms
 </CYPRESSTAG>
-cydsfit: Elapsed time ==> 3s.770ms
+cydsfit: Elapsed time ==> 4s.311ms
 </CYPRESSTAG>
-Fitter phase: Elapsed time ==> 3s.770ms
-API generation phase: Elapsed time ==> 0s.980ms
+Fitter phase: Elapsed time ==> 4s.311ms
+API generation phase: Elapsed time ==> 1s.456ms
 Dependency generation phase: Elapsed time ==> 0s.015ms
 Cleanup phase: Elapsed time ==> 0s.000ms
