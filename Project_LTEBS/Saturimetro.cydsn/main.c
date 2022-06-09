@@ -207,7 +207,6 @@ int main(void)
     }
 }   
 
-
 CY_ISR(MAX30101_ISR)
 {
     Connection_LED_Write(!Connection_LED_Read());
