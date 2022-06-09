@@ -350,24 +350,6 @@
 #define isr_MAX30101__INTC_SET_EN_REG CYREG_NVIC_SETENA0
 #define isr_MAX30101__INTC_SET_PD_REG CYREG_NVIC_SETPEND0
 
-/* Timer_TimerHW */
-#define Timer_TimerHW__CAP0 CYREG_TMR0_CAP0
-#define Timer_TimerHW__CAP1 CYREG_TMR0_CAP1
-#define Timer_TimerHW__CFG0 CYREG_TMR0_CFG0
-#define Timer_TimerHW__CFG1 CYREG_TMR0_CFG1
-#define Timer_TimerHW__CFG2 CYREG_TMR0_CFG2
-#define Timer_TimerHW__CNT_CMP0 CYREG_TMR0_CNT_CMP0
-#define Timer_TimerHW__CNT_CMP1 CYREG_TMR0_CNT_CMP1
-#define Timer_TimerHW__PER0 CYREG_TMR0_PER0
-#define Timer_TimerHW__PER1 CYREG_TMR0_PER1
-#define Timer_TimerHW__PM_ACT_CFG CYREG_PM_ACT_CFG3
-#define Timer_TimerHW__PM_ACT_MSK 0x01u
-#define Timer_TimerHW__PM_STBY_CFG CYREG_PM_STBY_CFG3
-#define Timer_TimerHW__PM_STBY_MSK 0x01u
-#define Timer_TimerHW__RT0 CYREG_TMR0_RT0
-#define Timer_TimerHW__RT1 CYREG_TMR0_RT1
-#define Timer_TimerHW__SR0 CYREG_TMR0_SR0
-
 /* Connection_LED */
 #define Connection_LED__0__INTTYPE CYREG_PICU2_INTTYPE1
 #define Connection_LED__0__MASK 0x02u
@@ -561,7 +543,7 @@
 #define CYDEV_ECC_ENABLE 0
 #define CYDEV_HEAP_SIZE 0x80
 #define CYDEV_INSTRUCT_CACHE_ENABLED 1
-#define CYDEV_INTR_RISING 0x00008000u
+#define CYDEV_INTR_RISING 0x00008001u
 #define CYDEV_IS_EXPORTING_CODE 0
 #define CYDEV_IS_IMPORTING_CODE 0
 #define CYDEV_PROJ_TYPE 0

@@ -1,7 +1,6 @@
-C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cyprj|0caabb01-5182-4caa-8a40-cc207138d4ff
-C:\Users\Perro\Desktop\WeBeep\ELECTRONIC TECHNOLOGIES AND BIOSENSORS LABORATORY\03_Support_Materials\PSOC\AnnotationLibrary\AnnotationLibrary_lib\AnnotationLibrary_lib.cylib\AnnotationLibrary_lib.cyprj|2024a47e-17dd-4ef6-9875-8678f60076ba
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|03b42f90-5ba7-485c-bc9e-e991b9f4287b
-C:\Users\Perro\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|b7bba4ad-122a-4049-9dff-6614f46747b5
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|7af353e1-b2c0-492d-af0f-6333b56a8a6e
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|1a2c09be-16da-40ac-ad79-c05ca789562e
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|52af9187-c6c1-432e-b53f-59ddab381524
+C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cyprj|f1c27989-d01e-4ca8-8005-2a811d7d005a
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|a8c5a13b-e32a-4ca8-a37b-ce031886f6a1
+C:\Users\Perro\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|5b73cea9-536c-439e-b9b4-d55584495495
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|f3aca4bd-6100-4e1d-9643-a951dbec07a6
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|b65911ab-c885-45f8-8890-ca9526c4fab8
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|03081787-895d-4196-bcda-15ceaae4ecbe
