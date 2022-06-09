@@ -10,13 +10,13 @@ from tkinter import *
 import tkinter.messagebox
 import customtkinter
 import numpy as np
-import serial as sr
 import serial.tools.list_ports
+import serial
 from math import sin, cos
 
 from PIL import ImageTk, Image  # for image management
 
-
+port = serial.Serial()
 #################################
 # AUTOMATIC COM PORT CONNECTION #
 #################################
@@ -63,13 +63,11 @@ def plot_data():
         if flag == 1:
             if len(ir) < 200:
                 ir = np.append(ir, int(a[0:7]))
-                root.label_values_SPO2.configure(text=str(int(a[0:7])))
                 flag = 0
 
             else:
                 ir[0:199] = ir[1:200]
                 ir[199] = int(a[0:7])
-                root.label_values_SPO2.configure(text=str(int(a[0:7])))
                 flag = 0
 
             lines_ir.set_xdata(np.arange(0, len(ir)))
@@ -78,22 +76,32 @@ def plot_data():
         if flag == 2:
             if len(red) < 200:
                 red = np.append(red, int(a[0:7]))
-                root.label_values_HR.configure(text=str(int(a[0:7])))
                 flag = 0
 
             else:
                 red[0:199] = red[1:200]
                 red[199] = int(a[0:7])
-                root.label_values_HR.configure(text=str(int(a[0:7])))
                 flag = 0
 
             lines_red.set_xdata(np.arange(0, len(red)))
             lines_red.set_ydata(red)
 
+        if flag == 3:
+            root.label_values_SPO2.configure(text=str(int(a[0:7])))
+            flag = 0
+
+        if flag == 4:
+            root.label_values_HR.configure(text=str(int(a[0:7])))
+            flag = 0
+
         if int(a[0:7]) == 2:
-            flag = 2 #modalità lettura RED
+            flag = 2  # modalità lettura RED
         if int(a[0:7]) == 1:
-            flag = 1 #modalità lettura IR
+            flag = 1  # modalità lettura IR
+        if int(a[0:7]) == 3:
+            flag = 3  # salvataggio valore spo2
+        if int(a[0:7]) == 4:
+            flag = 4  # salvataggio valore HR
 
         # print(data)
         canvas.draw()
@@ -227,6 +235,7 @@ def values_LED_PW(value):
     elif value_LED_PW == 411:
         value_LED_PW_to_use = 411
 
+    s.write(str(value_LED_PW_to_use).encode('ascii'))
     root.label_LED_PW = customtkinter.CTkLabel(master=root.frame_right,
                                                text=str(value_LED_PW_to_use),
                                                text_color='#dcd8d8',
@@ -234,7 +243,6 @@ def values_LED_PW(value):
                                                text_font=("Roboto Medium", -12))  # font name and size in px
     root.label_LED_PW.place(x=275, y=498, anchor=W)
     return value_LED_PW_to_use
-
 
 root.slider_LED_PW = customtkinter.CTkSlider(master=root.frame_right,
                                              from_=69,
@@ -246,6 +254,7 @@ root.slider_LED_PW = customtkinter.CTkSlider(master=root.frame_right,
                                              command=values_LED_PW
                                              )
 root.slider_LED_PW.set(183.0)  # 118 (Initalize value)
+
 root.slider_LED_PW.grid(row=2, column=0, columnspan=1, pady=15, padx=55, sticky="we")
 
 # Samples per second
@@ -267,6 +276,8 @@ def values_SAMPLES(value):
         value_SAMPLES_to_use = 200
     elif value_SAMPLES == 400.0:
         value_SAMPLES_to_use = 400
+
+    s.write(str(value_SAMPLES_to_use).encode('ascii'))
 
     root.label_SAMPLES = customtkinter.CTkLabel(master=root.frame_right,
                                                 text=str(value_SAMPLES_to_use),
@@ -301,6 +312,8 @@ root.label_LED_CURRENT_title.place(x=90, y=574, anchor=W)
 def values_LED_CURRENT(value):
     value_LED_CURRENT_to_use = root.slider_LED_CURRENT.get()
     value_LED_CURRENT_to_use = float(f'{value_LED_CURRENT_to_use:.2f}')
+
+    s.write(str(value_LED_CURRENT_to_use).encode('ascii'))
 
     root.label_LED_CURRENT = customtkinter.CTkLabel(master=root.frame_right,
                                                     text=str(value_LED_CURRENT_to_use),
@@ -343,6 +356,8 @@ def values_SPO2(value):
         value_SPO2_to_use = 8192
     elif value_SPO2 == 16384.0:
         value_SPO2_to_use = 16384
+
+    s.write(str(value_SPO2_to_use).encode('ascii'))
 
     root.label_SPO2 = customtkinter.CTkLabel(master=root.frame_right,
                                              text=str(value_SPO2_to_use),
