@@ -1,7 +1,7 @@
 #include "project.h"
 #include "MAX30101.h"
 
-
+uint16_t x;
 void USER(uint16_t *x)
 {
     if(*x==69) MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_69);
@@ -117,9 +117,9 @@ void USER(uint16_t *x)
     if(*x==16384) MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_16384);
 
 
-    //LED_PW 69 118 215 411
-    //SAMPLES 50 100 200 400
-    // CURRENT 0.2 A 6.2 STEP 0.4
-    // SPO2 2048 4096 8192 16384
+    //LED_PW: 69 118 215 411
+    //SAMPLES: 50 100 200 400
+    // CURRENT: da 0.2 a 6.2 con STEP 0.4
+    // SPO2: 2048 4096 8192 16384
     
 }

@@ -16,7 +16,7 @@ volatile long count=0;
 volatile uint8 flag_SM=0;
 volatile uint8 SM=0;
 
-CY_ISR_PROTO (Count) 
+CY_ISR_PROTO(Count) 
 {
     if (flag_SM==1)
     {

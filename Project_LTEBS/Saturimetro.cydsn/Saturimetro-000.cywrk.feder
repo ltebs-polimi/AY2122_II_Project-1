@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Saturimetro-000\Saturimetro\Header Files\HeartRate.h">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Saturimetro-000\Saturimetro\Source Files\USER.c">
 <ExpandedNodeIds>
 <v>Saturimetro-000</v>
 <v>Saturimetro-000\Saturimetro</v>
@@ -154,6 +154,7 @@
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_Debug_INT.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_Debug_IntClock.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_Debug_PM.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\USER.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Saturimetro.elf</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Saturimetro.hex</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Saturimetro.map</v>
@@ -267,8 +268,10 @@
 <name v=".\MAX30101_Defs.h" />
 <name v=".\HeartRate.c" />
 <name v=".\SpO2.c" />
-<name v=".\isr.h" />
-<name v=".\Saturimetro.cydwr" />
+<name v=".\USER.c" />
+<name v=".\USER.h" />
+<name v=".\HeartRate.h" />
+<name v=".\Generated_Source\PSoC5\UART_Debug.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -276,7 +279,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1055, 510" SelectedTabbedMdiWindow="8c6b55e1-94ce-488d-9e64-5392f0a9d45e"><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\main.c" Guid="a742ef3b-07d1-4bf4-99cf-af81195db50f" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\TopDesign\TopDesign.cysch" Guid="8c6b55e1-94ce-488d-9e64-5392f0a9d45e" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\MAX30101.c" Guid="f61a3c1f-0f64-4a9d-9619-122c68a4fa74" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\MAX30101.h" Guid="d1233476-be07-4cd4-84a9-58807dbd8b6b" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\MAX30101_Defs.h" Guid="9697a8e6-4492-465f-8938-427404b0fe79" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\HeartRate.c" Guid="c1cbd965-726c-474f-825d-bb159fb454e6" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\SpO2.c" Guid="93bf95a2-7abb-4f9c-9a92-10ed0d6ef10f" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\isr.h" Guid="bda8ed20-f8d9-49e9-84bb-b614bcd2daa0" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cydwr" Guid="f49657b9-75d5-4789-a2a3-22abc3a5119a" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="3e810fa7-4e47-492e-8132-c54ed4977113" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1182, 615" SelectedTabbedMdiWindow="1ba24483-2cec-4329-bb0a-93c0b22f2fbe"><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\main.c" Guid="a742ef3b-07d1-4bf4-99cf-af81195db50f" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\TopDesign\TopDesign.cysch" Guid="8c6b55e1-94ce-488d-9e64-5392f0a9d45e" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\MAX30101.c" Guid="f61a3c1f-0f64-4a9d-9619-122c68a4fa74" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\MAX30101.h" Guid="d1233476-be07-4cd4-84a9-58807dbd8b6b" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\MAX30101_Defs.h" Guid="9697a8e6-4492-465f-8938-427404b0fe79" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\HeartRate.c" Guid="c1cbd965-726c-474f-825d-bb159fb454e6" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\SpO2.c" Guid="93bf95a2-7abb-4f9c-9a92-10ed0d6ef10f" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\USER.c" Guid="1ba24483-2cec-4329-bb0a-93c0b22f2fbe" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\USER.h" Guid="ff8f6e74-50c8-485f-a408-6c8e5844a57c" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\HeartRate.h" Guid="d6d57199-534f-46b0-ae86-b7fc1f3fffbd" /><DocumentWindow Key="C:\Users\feder\Documents\Politecnico\MAGISTRALE\2 ANNO\LAB\DEFINITIVO\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Generated_Source\PSoC5\UART_Debug.c" Guid="40ad82f7-d6e1-454c-99f4-588268245034" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
