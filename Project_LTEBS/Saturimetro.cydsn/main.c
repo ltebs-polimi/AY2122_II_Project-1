@@ -35,7 +35,6 @@
 #define debug_print(msg) do { if (DEBUG_TEST) UART_Debug_PutString(msg);} while (0)
 
 CY_ISR_PROTO(MAX30101_ISR);
-//CY_ISR_PROTO(FLAG);
 CY_ISR_PROTO(WAKEUP_TIMER);
     
 
@@ -59,6 +58,7 @@ int main(void)
     uint32_t irBuffer[200]; //infrared LED sensor data
     uint32_t redBuffer[200];  //red LED sensor data
     int32_t bufferLength = 200;
+    int32_t somma=0;
     int num_samples;
     int j=0;
     int FIFO_max_size = 25;  
@@ -135,6 +135,7 @@ int main(void)
     
     // Clear FIFO
     MAX30101_ClearFIFO();
+    
     CyGlobalIntEnable; /* Enable global interrupts. */
       
     for(;;)
@@ -230,7 +231,6 @@ CY_ISR(WAKEUP_TIMER)
 {
     SleepTimer_GetStatus();
 }
-
 
 CY_ISR(MAX30101_ISR)
 {
