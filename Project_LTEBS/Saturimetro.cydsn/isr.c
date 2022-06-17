@@ -12,17 +12,25 @@
 
 #include "project.h"
 #include "isr.h"
+#include "USER.h"
 volatile long count=0;
 volatile uint8 flag_SM=0;
 volatile uint8 SM=0;
+uint8 x;
 
-CY_ISR_PROTO (Count) 
+
+CY_ISR (Count) 
 {
     if (flag_SM==1)
     {
      count++;
         if (count==5) SM=1;
     }
-    
+}
+
+CY_ISR (Custom_ISR_RX) 
+{
+    x = UART_Debug_GetChar();
+    USER(x);
 }
 /* [] END OF FILE */

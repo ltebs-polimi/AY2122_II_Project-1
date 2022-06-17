@@ -11,5 +11,5 @@
 */
 
 #include "project.h"
-void USER(uint16_t *x);
+void USER(uint8 x);
 /* [] END OF FILE */

@@ -2,7 +2,7 @@
 --	Conversion of Saturimetro.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Thu May 19 10:58:15 2022
+--	Thu Jun 16 16:13:12 2022
 --
 
 USE cypress.cypress.all;
@@ -15,7 +15,7 @@ ARCHITECTURE R_T_L OF top_RTL IS
 SIGNAL tmpOE__SDA_1_net_0 : bit;
 SIGNAL zero : bit;
 SIGNAL tmpFB_0__SDA_1_net_0 : bit;
-SIGNAL Net_1 : bit;
+SIGNAL Net_101 : bit;
 TERMINAL tmpSIOVREF__SDA_1_net_0 : bit;
 SIGNAL one : bit;
 SIGNAL tmpINTERRUPT_0__SDA_1_net_0 : bit;
@@ -406,16 +406,8 @@ SIGNAL tmpOE__MAX30101_INT_net_0 : bit;
 SIGNAL Net_26 : bit;
 SIGNAL tmpIO_0__MAX30101_INT_net_0 : bit;
 TERMINAL tmpSIOVREF__MAX30101_INT_net_0 : bit;
-SIGNAL Net_27 : bit;
-SIGNAL Net_29 : bit;
-SIGNAL \Timer:Net_260\ : bit;
-SIGNAL \Timer:Net_266\ : bit;
-SIGNAL \Timer:Net_51\ : bit;
-SIGNAL \Timer:Net_261\ : bit;
-SIGNAL \Timer:Net_57\ : bit;
-SIGNAL Net_33 : bit;
-SIGNAL Net_34 : bit;
-SIGNAL \Timer:Net_102\ : bit;
+SIGNAL Net_83 : bit;
+SIGNAL Net_96 : bit;
 SIGNAL \UART_Debug:BUART:reset_reg\\D\ : bit;
 SIGNAL \UART_Debug:BUART:txn\\D\ : bit;
 SIGNAL \UART_Debug:BUART:tx_state_1\\D\ : bit;
@@ -619,7 +611,7 @@ SDA_1:cy_psoc3_pins_v1_10
 		y=>(zero),
 		fb=>(tmpFB_0__SDA_1_net_0),
 		analog=>(open),
-		io=>Net_1,
+		io=>Net_101,
 		siovref=>(tmpSIOVREF__SDA_1_net_0),
 		annotation=>(open),
 		in_clock=>zero,
@@ -730,7 +722,7 @@ SCL_1:cy_psoc3_pins_v1_10
 \I2C_Master:Bufoe_sda\:cy_bufoe
 	PORT MAP(x=>\I2C_Master:sda_x_wire\,
 		oe=>tmpOE__SDA_1_net_0,
-		y=>Net_1,
+		y=>Net_101,
 		yfb=>\I2C_Master:Net_1109_1\);
 \UART_Debug:IntClock\:cy_clock_v1_0
 	GENERIC MAP(cy_registers=>"",
@@ -1036,7 +1028,7 @@ SCL_1:cy_psoc3_pins_v1_10
 		clock=>\UART_Debug:BUART:clock_op\,
 		status=>(zero, \UART_Debug:BUART:rx_status_5\, \UART_Debug:BUART:rx_status_4\, \UART_Debug:BUART:rx_status_3\,
 			\UART_Debug:BUART:rx_status_2\, zero, zero),
-		interrupt=>\UART_Debug:BUART:rx_interrupt_out\);
+		interrupt=>Net_19);
 Rx_1:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"1425177d-0d0e-4468-8bcc-e638e5509a9b",
 		drive_mode=>"001",
@@ -1321,30 +1313,31 @@ MAX30101_INT:cy_psoc3_pins_v1_10
 		out_clock_en=>tmpOE__SDA_1_net_0,
 		out_reset=>zero,
 		interrupt=>Net_38);
-timer_clock:cy_clock_v1_0
-	GENERIC MAP(cy_registers=>"",
-		id=>"c0fb34bd-1044-4931-9788-16b01ce89812",
-		source_clock_id=>"",
-		divisor=>0,
-		period=>"1000000000000",
-		is_direct=>'0',
-		is_digital=>'1')
-	PORT MAP(clock_out=>Net_27,
-		dig_domain_out=>open);
-\Timer:TimerHW\:cy_psoc3_timer_v1_0
-	GENERIC MAP(cy_registers=>"")
-	PORT MAP(clock=>Net_27,
-		kill=>zero,
-		enable=>tmpOE__SDA_1_net_0,
-		capture=>zero,
-		timer_reset=>zero,
-		tc=>Net_34,
-		compare=>\Timer:Net_261\,
-		interrupt=>\Timer:Net_57\);
-isr_1:cy_isr_v1_0
+isr_Timer:cy_isr_v1_0
 	GENERIC MAP(int_type=>"10",
 		is_nmi=>'0')
-	PORT MAP(int_signal=>Net_34);
+	PORT MAP(int_signal=>Net_83);
+\SleepTimer:gsRef_1\:cy_gsref_v1_0
+	GENERIC MAP(guid=>"0335EFD7-9943-4db5-B556-454A5AD8A118")
+	PORT MAP(sig_out=>Net_83);
+Clock:cy_clock_v1_0
+	GENERIC MAP(cy_registers=>"",
+		id=>"4cbea99c-7e1f-4810-8145-3bb5b85ab870",
+		source_clock_id=>"",
+		divisor=>0,
+		period=>"1E+15",
+		is_direct=>'0',
+		is_digital=>'1')
+	PORT MAP(clock_out=>Net_96,
+		dig_domain_out=>open);
+isr_SM:cy_isr_v1_0
+	GENERIC MAP(int_type=>"10",
+		is_nmi=>'0')
+	PORT MAP(int_signal=>Net_96);
+isr_RX:cy_isr_v1_0
+	GENERIC MAP(int_type=>"10",
+		is_nmi=>'0')
+	PORT MAP(int_signal=>Net_19);
 \UART_Debug:BUART:reset_reg\:cy_dff
 	PORT MAP(d=>zero,
 		clk=>\UART_Debug:BUART:clock_op\,

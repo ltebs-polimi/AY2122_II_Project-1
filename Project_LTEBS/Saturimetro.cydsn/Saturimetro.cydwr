@@ -250,6 +250,13 @@
   </Group>
   <Data key="DataVersionKey" value="2" />
   <Group key="DWRInstGuidMapping">
+    <Group key="Interrupt">
+      <Data key="5c2efc6e-a84f-4ef0-949d-e885a38e0e67" value="isr_RX" />
+      <Data key="6f2d57bd-b6d0-4115-93da-ded3485bf4ed/74b069b5-d5c5-469b-a48a-44b8a12146cd" value="I2C_Master_I2C_IRQ" />
+      <Data key="b9a1623e-f41e-4602-81c5-4bce9a66d39e" value="isr_MAX30101" />
+      <Data key="d3ffd73a-6e05-42c5-a5e0-629b8eafbb7b" value="isr_SM" />
+      <Data key="e309a713-55ea-4f31-b651-ebbf5db679ca" value="isr_Timer" />
+    </Group>
     <Group key="Pin">
       <Data key="02f2cf2c-2c7a-49df-9246-7a3435c21be3" value="SCL_1" />
       <Data key="8d318d8b-cf7b-4b6b-b02c-ab1c5c49d0ba" value="MAX30101_INT" />
@@ -3339,6 +3346,43 @@
       </Group>
       <Group key="1024">
         <Data key="LevelKey" value="00" />
+      </Group>
+    </Group>
+  </Group>
+  <Group key="Interrupt">
+    <Group key="5c2efc6e-a84f-4ef0-949d-e885a38e0e67">
+      <Group key="CortexM3">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="7" />
+        <Data key="Vector" value="-1" />
+      </Group>
+    </Group>
+    <Group key="6f2d57bd-b6d0-4115-93da-ded3485bf4ed/74b069b5-d5c5-469b-a48a-44b8a12146cd">
+      <Group key="CortexM3">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="7" />
+        <Data key="Vector" value="-1" />
+      </Group>
+    </Group>
+    <Group key="b9a1623e-f41e-4602-81c5-4bce9a66d39e">
+      <Group key="CortexM3">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="7" />
+        <Data key="Vector" value="-1" />
+      </Group>
+    </Group>
+    <Group key="d3ffd73a-6e05-42c5-a5e0-629b8eafbb7b">
+      <Group key="CortexM3">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="7" />
+        <Data key="Vector" value="-1" />
+      </Group>
+    </Group>
+    <Group key="e309a713-55ea-4f31-b651-ebbf5db679ca">
+      <Group key="CortexM3">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="7" />
+        <Data key="Vector" value="-1" />
       </Group>
     </Group>
   </Group>

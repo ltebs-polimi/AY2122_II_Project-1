@@ -74,7 +74,7 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_b
 
   for ( k=0 ; k<15;k++) an_ir_valley_locs[k]=0;
   // since we flipped signal, we use peak detector as valley detector
-  maxim_find_peaks(an_ir_valley_locs, &n_npks, an_x, BUFFER_SIZE-MA4_SIZE, n_th1, 25, 15);//peak_height, peak_distance, max_num_peaks 
+  maxim_find_peaks(an_ir_valley_locs, &n_npks, an_x, BUFFER_SIZE-MA4_SIZE, n_th1, 29, 15);//peak_height, peak_distance, max_num_peaks 
   n_peak_interval_sum =0;
   if (n_npks>=2){
     for (k=1; k<n_npks; k++) n_peak_interval_sum += (an_ir_valley_locs[k] -an_ir_valley_locs[k -1] ) ;
@@ -83,7 +83,7 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_b
     *pch_hr_valid  = 1;
   }
   else  { 
-    *pn_heart_rate = -999; // unable to calculate because # of peaks are too small
+    *pn_heart_rate = 999; // unable to calculate because # of peaks are too small
     *pch_hr_valid  = 0;
   }
 
@@ -104,7 +104,7 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_b
   for(k=0; k< 5; k++) an_ratio[k]=0;
   for (k=0; k< n_exact_ir_valley_locs_count; k++){
     if (an_ir_valley_locs[k] > BUFFER_SIZE ){
-      *pn_spo2 =  -999 ; // do not use SPO2 since valley loc is out of range
+      *pn_spo2 =  999 ; // do not use SPO2 since valley loc is out of range
       *pch_spo2_valid  = 0; 
       return;
     }
@@ -150,7 +150,7 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_b
     *pch_spo2_valid  = 1;//  float_SPO2 =  -45.060*n_ratio_average* n_ratio_average/10000 + 30.354 *n_ratio_average/100 + 94.845 ;  // for comparison with table
   }
   else{
-    *pn_spo2 =  -999 ; // do not use SPO2 since signal an_ratio is out of range
+    *pn_spo2 =  999 ; // do not use SPO2 since signal an_ratio is out of range
     *pch_spo2_valid  = 0; 
   }
 }

@@ -45,13 +45,16 @@
   <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\MAX30101_INT_aliases.h" value="HEADER;;;;;MAX30101_INT" />
   <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\MAX30101_INT.c" value="SOURCE_C;CortexM3;;;;MAX30101_INT" />
   <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\MAX30101_INT.h" value="HEADER;;;;;MAX30101_INT" />
-  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\timer_clock.c" value="SOURCE_C;CortexM3;;;;timer_clock" />
-  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\timer_clock.h" value="HEADER;;;;;timer_clock" />
-  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\Timer.c" value="SOURCE_C;CortexM3;;;;Timer" />
-  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\Timer.h" value="HEADER;;;;;Timer" />
-  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\Timer_PM.c" value="SOURCE_C;CortexM3;;;;Timer" />
-  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\isr_1.c" value="SOURCE_C;CortexM3;;;;isr_1" />
-  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\isr_1.h" value="HEADER;;;;;isr_1" />
+  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\isr_Timer.c" value="SOURCE_C;CortexM3;;;;isr_Timer" />
+  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\isr_Timer.h" value="HEADER;;;;;isr_Timer" />
+  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\SleepTimer.c" value="SOURCE_C;CortexM3;;;;SleepTimer" />
+  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\SleepTimer.h" value="HEADER;;;;;SleepTimer" />
+  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\Clock.c" value="SOURCE_C;CortexM3;;;;Clock" />
+  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\Clock.h" value="HEADER;;;;;Clock" />
+  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\isr_SM.c" value="SOURCE_C;CortexM3;;;;isr_SM" />
+  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\isr_SM.h" value="HEADER;;;;;isr_SM" />
+  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\isr_RX.c" value="SOURCE_C;CortexM3;;;;isr_RX" />
+  <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\isr_RX.h" value="HEADER;;;;;isr_RX" />
   <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\UART_Debug_IntClock.c" value="SOURCE_C;CortexM3;;;;UART_Debug_IntClock" />
   <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\UART_Debug_IntClock.h" value="HEADER;;;;;UART_Debug_IntClock" />
   <file name="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\codegentemp\cm3gcc.ld" value="LINKER_SCRIPT;;;b98f980c-3bd1-4fc7-a887-c56a20a46fdd;;cy_boot" />

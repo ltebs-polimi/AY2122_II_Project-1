@@ -85,6 +85,17 @@
 #define Tx_1__SIO_REG_HIFREQ CYREG_PRT12_SIO_REG_HIFREQ
 #define Tx_1__SLW CYREG_PRT12_SLW
 
+/* Clock */
+#define Clock__CFG0 CYREG_CLKDIST_DCFG1_CFG0
+#define Clock__CFG1 CYREG_CLKDIST_DCFG1_CFG1
+#define Clock__CFG2 CYREG_CLKDIST_DCFG1_CFG2
+#define Clock__CFG2_SRC_SEL_MASK 0x07u
+#define Clock__INDEX 0x01u
+#define Clock__PM_ACT_CFG CYREG_PM_ACT_CFG2
+#define Clock__PM_ACT_MSK 0x02u
+#define Clock__PM_STBY_CFG CYREG_PM_STBY_CFG2
+#define Clock__PM_STBY_MSK 0x02u
+
 /* SCL_1 */
 #define SCL_1__0__INTTYPE CYREG_PICU12_INTTYPE0
 #define SCL_1__0__MASK 0x01u
@@ -151,15 +162,35 @@
 #define SDA_1__SIO_REG_HIFREQ CYREG_PRT12_SIO_REG_HIFREQ
 #define SDA_1__SLW CYREG_PRT12_SLW
 
-/* isr_1 */
-#define isr_1__INTC_CLR_EN_REG CYREG_NVIC_CLRENA0
-#define isr_1__INTC_CLR_PD_REG CYREG_NVIC_CLRPEND0
-#define isr_1__INTC_MASK 0x01u
-#define isr_1__INTC_NUMBER 0u
-#define isr_1__INTC_PRIOR_NUM 7u
-#define isr_1__INTC_PRIOR_REG CYREG_NVIC_PRI_0
-#define isr_1__INTC_SET_EN_REG CYREG_NVIC_SETENA0
-#define isr_1__INTC_SET_PD_REG CYREG_NVIC_SETPEND0
+/* isr_RX */
+#define isr_RX__INTC_CLR_EN_REG CYREG_NVIC_CLRENA0
+#define isr_RX__INTC_CLR_PD_REG CYREG_NVIC_CLRPEND0
+#define isr_RX__INTC_MASK 0x01u
+#define isr_RX__INTC_NUMBER 0u
+#define isr_RX__INTC_PRIOR_NUM 7u
+#define isr_RX__INTC_PRIOR_REG CYREG_NVIC_PRI_0
+#define isr_RX__INTC_SET_EN_REG CYREG_NVIC_SETENA0
+#define isr_RX__INTC_SET_PD_REG CYREG_NVIC_SETPEND0
+
+/* isr_SM */
+#define isr_SM__INTC_CLR_EN_REG CYREG_NVIC_CLRENA0
+#define isr_SM__INTC_CLR_PD_REG CYREG_NVIC_CLRPEND0
+#define isr_SM__INTC_MASK 0x02u
+#define isr_SM__INTC_NUMBER 1u
+#define isr_SM__INTC_PRIOR_NUM 7u
+#define isr_SM__INTC_PRIOR_REG CYREG_NVIC_PRI_1
+#define isr_SM__INTC_SET_EN_REG CYREG_NVIC_SETENA0
+#define isr_SM__INTC_SET_PD_REG CYREG_NVIC_SETPEND0
+
+/* isr_Timer */
+#define isr_Timer__INTC_CLR_EN_REG CYREG_NVIC_CLRENA0
+#define isr_Timer__INTC_CLR_PD_REG CYREG_NVIC_CLRPEND0
+#define isr_Timer__INTC_MASK 0x04u
+#define isr_Timer__INTC_NUMBER 2u
+#define isr_Timer__INTC_PRIOR_NUM 7u
+#define isr_Timer__INTC_PRIOR_REG CYREG_NVIC_PRI_2
+#define isr_Timer__INTC_SET_EN_REG CYREG_NVIC_SETENA0
+#define isr_Timer__INTC_SET_PD_REG CYREG_NVIC_SETPEND0
 
 /* I2C_Master */
 #define I2C_Master_I2C_FF__ADR CYREG_I2C_ADR
@@ -294,17 +325,6 @@
 #define UART_Debug_IntClock__PM_STBY_CFG CYREG_PM_STBY_CFG2
 #define UART_Debug_IntClock__PM_STBY_MSK 0x01u
 
-/* timer_clock */
-#define timer_clock__CFG0 CYREG_CLKDIST_DCFG1_CFG0
-#define timer_clock__CFG1 CYREG_CLKDIST_DCFG1_CFG1
-#define timer_clock__CFG2 CYREG_CLKDIST_DCFG1_CFG2
-#define timer_clock__CFG2_SRC_SEL_MASK 0x07u
-#define timer_clock__INDEX 0x01u
-#define timer_clock__PM_ACT_CFG CYREG_PM_ACT_CFG2
-#define timer_clock__PM_ACT_MSK 0x02u
-#define timer_clock__PM_STBY_CFG CYREG_PM_STBY_CFG2
-#define timer_clock__PM_STBY_MSK 0x02u
-
 /* MAX30101_INT */
 #define MAX30101_INT__0__INTTYPE CYREG_PICU12_INTTYPE4
 #define MAX30101_INT__0__MASK 0x10u
@@ -349,24 +369,6 @@
 #define isr_MAX30101__INTC_PRIOR_REG CYREG_NVIC_PRI_11
 #define isr_MAX30101__INTC_SET_EN_REG CYREG_NVIC_SETENA0
 #define isr_MAX30101__INTC_SET_PD_REG CYREG_NVIC_SETPEND0
-
-/* Timer_TimerHW */
-#define Timer_TimerHW__CAP0 CYREG_TMR0_CAP0
-#define Timer_TimerHW__CAP1 CYREG_TMR0_CAP1
-#define Timer_TimerHW__CFG0 CYREG_TMR0_CFG0
-#define Timer_TimerHW__CFG1 CYREG_TMR0_CFG1
-#define Timer_TimerHW__CFG2 CYREG_TMR0_CFG2
-#define Timer_TimerHW__CNT_CMP0 CYREG_TMR0_CNT_CMP0
-#define Timer_TimerHW__CNT_CMP1 CYREG_TMR0_CNT_CMP1
-#define Timer_TimerHW__PER0 CYREG_TMR0_PER0
-#define Timer_TimerHW__PER1 CYREG_TMR0_PER1
-#define Timer_TimerHW__PM_ACT_CFG CYREG_PM_ACT_CFG3
-#define Timer_TimerHW__PM_ACT_MSK 0x01u
-#define Timer_TimerHW__PM_STBY_CFG CYREG_PM_STBY_CFG3
-#define Timer_TimerHW__PM_STBY_MSK 0x01u
-#define Timer_TimerHW__RT0 CYREG_TMR0_RT0
-#define Timer_TimerHW__RT1 CYREG_TMR0_RT1
-#define Timer_TimerHW__SR0 CYREG_TMR0_SR0
 
 /* Connection_LED */
 #define Connection_LED__0__INTTYPE CYREG_PICU2_INTTYPE1
@@ -561,7 +563,7 @@
 #define CYDEV_ECC_ENABLE 0
 #define CYDEV_HEAP_SIZE 0x80
 #define CYDEV_INSTRUCT_CACHE_ENABLED 1
-#define CYDEV_INTR_RISING 0x00008000u
+#define CYDEV_INTR_RISING 0x00008003u
 #define CYDEV_IS_EXPORTING_CODE 0
 #define CYDEV_IS_IMPORTING_CODE 0
 #define CYDEV_PROJ_TYPE 0

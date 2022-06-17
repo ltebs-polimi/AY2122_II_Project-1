@@ -18,6 +18,6 @@
     #include "stdio.h"
     
     CY_ISR_PROTO(Count);
-    
+    CY_ISR_PROTO(Custom_ISR_RX);
 #endif
 /* [] END OF FILE */

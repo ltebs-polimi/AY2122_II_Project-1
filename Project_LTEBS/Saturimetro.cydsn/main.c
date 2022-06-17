@@ -17,9 +17,7 @@
 #include "Timer.h"
 #include "isr.h"
 #include "USER.h"
-//#include "CyPm.h"
 
-#include "math.h"
 
 #define SLEEPTIMER_INTERVAL_COUNTER (768u)
 #define UART_DEBUG
@@ -44,7 +42,6 @@ CY_ISR_PROTO(WAKEUP_TIMER);
 uint8_t flag_temp = 0;
 uint8_t flag_1s = 0;
 
-
 int main(void)
 {
     // Variables
@@ -64,26 +61,14 @@ int main(void)
     int32_t bufferLength = 200;
     int num_samples;
     int j=0;
-    int FIFO_max_size = 25;
-    const uint8_t RATE_SIZE = 5; //Increase this for more averaging. 4 is good.
-    uint8_t rates[RATE_SIZE]; //Array of heart rates
-    uint8_t rateSpot=1;
-    uint16 lastBeat=0; //Time at which the last beat occurred
-    uint16_t x;
-    uint32 beatsPerMinute;
-    uint8_t beatAvg=0;
-    uint16_t delta;
+    int FIFO_max_size = 25;  
     extern volatile long count;
     extern volatile uint8 SM;
-    extern volatile uint8 flag_SM;
-    
-    //long irValue;
+    extern volatile uint8 flag_SM;   
     int i=0;
-    uint8_t sum=0;
-    uint8_t BPM;
     int32_t somma=0;
     int f=1;
-    uint16 wakeupIntervalCounter;
+
     
     //SET BY THE USER
 
@@ -91,56 +76,38 @@ int main(void)
     // Initialization
     MAX30101_Start();
     UART_Debug_Start();
-    CyDelay(100);
-    
-    /*debug_print("**************************\r\n");
-    debug_print("         MAX30101         \r\n");
-    debug_print("**************************\r\n");*/
-    
+    CyDelay(100);    
     if (MAX30101_IsDevicePresent() == MAX30101_OK)
     {
         // Check if device is present
-        //debug_print("Device found on I2C bus\r\n");
         Connection_LED_Write(1);
         
         // Read revision and part id
         uint8_t rev_id, part_id = 0;
         MAX30101_ReadPartID(&part_id);
         MAX30101_ReadRevisionID(&rev_id);
-        sprintf(msg,"Revision ID: 0x%02X\r\n", rev_id);
-        //debug_print(msg);
-        sprintf(msg,"Part ID: 0x%02X\r\n", part_id);
-        //debug_print(msg);
-        
-        //debug_print("Registers before configuration\r\n");
-        //MAX30101_LogRegisters(print_ptr);
         
         // Soft reset sensor
         MAX30101_Reset();
         CyDelay(100);
        
         // Wake up sensor
-        MAX30101_WakeUp();
-        
+        MAX30101_WakeUp();        
         MAX30101_DisableALCOverflowInt();
         MAX30101_DisableTempReadyInt();
         MAX30101_DisablePPGReadyInt();
         MAX30101_EnableFIFOAFullInt();
      
-        // set 28 samples to trigger interrupt
+        // set 25 samples to trigger interrupt
         MAX30101_SetFIFOAlmostFull(FIFO_max_size);
 
         // enable fifo rollover
         MAX30101_EnableFIFORollover();
         
-        // 8 samples averaged
-        
-        
-        MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_4);
-        
+        // samples averaged       
+        MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_2);
         // Set LED Power level
-        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x1F);
-        
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x1F);        
         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x1F);
                
         // Set ADC Range
@@ -150,109 +117,112 @@ int main(void)
         MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
         
         // Set Sample Rate
-        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_200);
+        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_100);
         
         // Set mode
         MAX30101_SetMode(MAX30101_SPO2_MODE);
         
         // Enable Slots
         MAX30101_DisableSlots();
-        
-        //debug_print("Registers after configuration\r\n");
-       // MAX30101_LogRegisters(print_ptr);
     }
     
-    //debug_print("\r\n\r\n");    
+   
     isr_MAX30101_StartEx(MAX30101_ISR);
     isr_Timer_StartEx(WAKEUP_TIMER);
     isr_SM_StartEx(Count);
-    SleepTimer_Start();
-    USER(&x);
-    //isr_flag_StartEx(FLAG);
+    isr_RX_StartEx(Custom_ISR_RX);
+    SleepTimer_Start(); 
+    
     // Clear FIFO
     MAX30101_ClearFIFO();
     CyGlobalIntEnable; /* Enable global interrupts. */
       
     for(;;)
     {       
-            x = UART_Debug_GetByte();
-            USER(&x);
-            int32 irValue=getIR(&data);  
-            //sprintf(msg, "IRVALUE=%ld\r\n",irValue);
-            //debug_print(msg);
-            if(irValue<10000) 
+        int32 irValue=getIR(&data);  
+        if(irValue<10000) 
+        {
+           flag_SM=1;
+            
+            if(SM==1)
             {
-                //debug_print("NO FINGER\r");
-                flag_SM=1;
-                
-                if(SM==1)
-                {
-                    flag_SM=0;
-                    debug_print("SLEEP_MODE\r\n");
-                    CyDelay(50);
-                    CyPmSaveClocks();
-                    CyPmAltAct(PM_ALT_ACT_TIME_NONE,PM_ALT_ACT_SRC_CTW);
-                    CyPmRestoreClocks();
-                    count=0;
-                }
-            }               
-            else if(irValue>=10000)
-            { 
-                SM=0;
                 flag_SM=0;
+                //debug_print("SLEEP_MODE\r\n");
+                CyDelay(50);
+                CyPmSaveClocks();
+                CyPmAltAct(PM_ALT_ACT_TIME_NONE,PM_ALT_ACT_SRC_CTW);
+                CyPmRestoreClocks();
                 count=0;
             }
-    
-            MAX30101_IsFIFOAFull(&flag);
-            if(flag>0)
-            {
-                MAX30101_ReadReadPointer(&rp);
-                MAX30101_ReadWritePointer(&wp);
-                //Calculate the number of readings we need to get from sensor
-                num_samples = wp - rp;
-                if (num_samples <= 0) num_samples += 32; //Wrap condition                
-                // Read FIFO
-                MAX30101_ReadFIFO(num_samples, active_leds, &data, j);
-                for (i=0;i<num_samples;i++)
-                {                    
-                    redBuffer[j] = data.red[data.tail+i];
-                    irBuffer[j] = data.IR[data.tail+i];
-                    j++;    
-                }                       
-                if(j>=bufferLength) 
-                {
-                    maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
-                    //flag_1s = 1;
-                    j=bufferLength - 50;
-                    for (int i=50; i<bufferLength; i++) 
-                    {
-                        redBuffer[i-50] = redBuffer[i];
-                        irBuffer[i-50] = irBuffer[i];
-                    }
-                    sprintf(msg, "HR: %ld\r", heartRate);
-                    debug_print(msg);
-                    sprintf(msg, "spo2: %ld\r", spo2);
-                    debug_print(msg);
-                    
-                    if(heartRate > 50 && heartRate < 160) 
-                    {
-                        somma += heartRate;
-                        if(f==5) 
-                        {
-                            somma = somma/5;
-                            sprintf(msg, "AVG_HR: %ld\r", somma);
-                            debug_print(msg);
-                            f = 0;
-                            somma = 0;
-                        }
-                        f++;
-                    }
-                            
+        }               
+        else if(irValue>=10000)
+        { 
+            SM=0;
+            flag_SM=0;
+            count=0;
+        }
 
-                }                
-        
-            } 
-         
+        MAX30101_IsFIFOAFull(&flag);
+        if(flag>0)
+        {
+            MAX30101_ReadReadPointer(&rp);
+            MAX30101_ReadWritePointer(&wp);
+            //Calculate the number of readings we need to get from sensor
+            num_samples = wp - rp;
+            if (num_samples <= 0) num_samples += 32; //Wrap condition                
+            // Read FIFO
+            MAX30101_ReadFIFO(num_samples, active_leds, &data, j);
+            for (i=0;i<num_samples;i++)
+            {                    
+                redBuffer[j] = data.red[data.tail+i];
+                irBuffer[j] = data.IR[data.tail+i];
+                j++;
+                debug_print("1,");
+                sprintf(msg, "%ld,", data.IR[data.tail+i]);
+                debug_print(msg);
+                debug_print("2,");
+                sprintf(msg, "%ld,", data.red[data.tail+i]);
+                debug_print(msg);
+                
+                if(j<bufferLength)
+                {
+                    debug_print("0,");
+                    debug_print("0,");
+                    debug_print("0,");
+                    debug_print("0\n");
+                }
+            }                       
+            if(j>=bufferLength) 
+            {
+                maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
+                j=bufferLength - 50;
+                for (int i=50; i<bufferLength; i++) 
+                {
+                    redBuffer[i-50] = redBuffer[i];
+                    irBuffer[i-50] = irBuffer[i];
+                }
+                debug_print("3,");
+                sprintf(msg, "%ld,", spo2);
+                debug_print(msg);
+                debug_print("4,");
+                sprintf(msg, "%ld\n", heartRate);
+                debug_print(msg);
+                if(heartRate > 50 && heartRate < 160) 
+                {
+                    somma += heartRate;
+                    if(f==3)
+                    {
+                        somma = somma/3;
+                        //debug_print("4,");
+                        //sprintf(msg, "%ld\n", somma);
+                        //debug_print(msg);
+                        f = 0;
+                        somma = 0;
+                    }
+                    f++;
+                }
+            }
+        } 
     } 
 }   
 
