@@ -19,14 +19,14 @@ volatile uint8 SM=0;
 uint8 x;
 
 
-CY_ISR (Count) 
+/*CY_ISR (Count) 
 {
     if (flag_SM==1)
     {
      count++;
         if (count==5) SM=1;
     }
-}
+}*/
 
 CY_ISR (Custom_ISR_RX) 
 {

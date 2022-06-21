@@ -21,6 +21,7 @@
 
 #define SLEEPTIMER_INTERVAL_COUNTER (768u)
 #define UART_DEBUG
+#define FIFO_max_size 25
 
 #ifdef UART_DEBUG
     
@@ -35,11 +36,12 @@
 #define debug_print(msg) do { if (DEBUG_TEST) UART_Debug_PutString(msg);} while (0)
 
 CY_ISR_PROTO(MAX30101_ISR);
-CY_ISR_PROTO(WAKEUP_TIMER);
+//CY_ISR_PROTO(WAKEUP_TIMER);
     
 
 uint8_t flag_temp = 0;
 uint8_t flag_1s = 0;
+
 
 int main(void)
 {
@@ -59,14 +61,14 @@ int main(void)
     uint32_t redBuffer[200];  //red LED sensor data
     int32_t bufferLength = 200;
     int32_t somma=0;
+    int32_t avg_hr=0;
     int num_samples;
     int j=0;
-    int FIFO_max_size = 25;  
+    
     extern volatile long count;
     extern volatile uint8 SM;
     extern volatile uint8 flag_SM;   
     int i=0;
-    int32_t somma=0;
     int f=1;
 
     
@@ -87,15 +89,15 @@ int main(void)
         MAX30101_ReadPartID(&part_id);
         MAX30101_ReadRevisionID(&rev_id);
         
+        debug_print("Registers before configuration\r\n");
+        MAX30101_LogRegisters(print_ptr);
+        
         // Soft reset sensor
         MAX30101_Reset();
         CyDelay(100);
        
         // Wake up sensor
         MAX30101_WakeUp();        
-        MAX30101_DisableALCOverflowInt();
-        MAX30101_DisableTempReadyInt();
-        MAX30101_DisablePPGReadyInt();
         MAX30101_EnableFIFOAFullInt();
      
         // set 25 samples to trigger interrupt
@@ -111,7 +113,7 @@ int main(void)
         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x1F);
                
         // Set ADC Range
-        MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_4096);
+        MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_8192);
         
         // Pulse width
         MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
@@ -124,12 +126,15 @@ int main(void)
         
         // Enable Slots
         MAX30101_DisableSlots();
+        
+        debug_print("Registers after configuration\r\n");
+        MAX30101_LogRegisters(print_ptr);
     }
     
-   
+    
     isr_MAX30101_StartEx(MAX30101_ISR);
-    isr_Timer_StartEx(WAKEUP_TIMER);
-    isr_SM_StartEx(Count);
+    //isr_Timer_StartEx(WAKEUP_TIMER);
+    //isr_SM_StartEx(Count);
     isr_RX_StartEx(Custom_ISR_RX);
     SleepTimer_Start(); 
     
@@ -140,7 +145,7 @@ int main(void)
       
     for(;;)
     {       
-        int32 irValue=getIR(&data);  
+        /*int32 irValue=getIR(&data);  
         if(irValue<10000) 
         {
            flag_SM=1;
@@ -161,7 +166,7 @@ int main(void)
             SM=0;
             flag_SM=0;
             count=0;
-        }
+        }*/
 
         MAX30101_IsFIFOAFull(&flag);
         if(flag>0)
@@ -206,7 +211,7 @@ int main(void)
                 sprintf(msg, "%ld,", spo2);
                 debug_print(msg);
                 debug_print("4,");
-                sprintf(msg, "%ld\n", heartRate);
+                sprintf(msg, "%ld\n", avg_hr);
                 debug_print(msg);
                 if(heartRate > 50 && heartRate < 160) 
                 {
@@ -218,7 +223,9 @@ int main(void)
                         //sprintf(msg, "%ld\n", somma);
                         //debug_print(msg);
                         f = 0;
+                        avg_hr = somma;
                         somma = 0;
+                        
                     }
                     f++;
                 }
@@ -227,13 +234,14 @@ int main(void)
     } 
 }   
 
-CY_ISR(WAKEUP_TIMER)
+/*CY_ISR(WAKEUP_TIMER)
 {
     SleepTimer_GetStatus();
-}
+}*/
 
 CY_ISR(MAX30101_ISR)
 {
+    
     Connection_LED_Write(!Connection_LED_Read());
     MAX30101_INT_ClearInterrupt();
 }

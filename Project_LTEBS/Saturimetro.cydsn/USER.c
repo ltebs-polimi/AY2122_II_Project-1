@@ -1,6 +1,22 @@
 #include "project.h"
 #include "MAX30101.h"
 
+#define UART_DEBUG
+
+#ifdef UART_DEBUG
+    
+    #define DEBUG_TEST 1
+    
+#else
+    
+    #define DEBUG_TEST 0
+    
+#endif
+
+#define debug_print(msg) do { if (DEBUG_TEST) UART_Debug_PutString(msg);} while (0)
+#define FIFO_max_size 25
+
+void (*print_ptr)(const char*) = &(UART_Debug_PutString);
 
 void USER(uint8 x)
 {
@@ -111,10 +127,184 @@ void USER(uint8 x)
         MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x1F);
     }
     */
-    if(x=='a') MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_2048);
-    if(x=='b') MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_4096);
-    if(x=='c') MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_8192);
-    if(x=='d') MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_16384);
+    if(x=='a') 
+    {
+        if(MAX30101_INT_Read() == 0x10u)
+        {
+            MAX30101_Reset();
+            CyDelay(100);
+            
+           
+            // Wake up sensor
+            MAX30101_WakeUp();        
+            MAX30101_EnableFIFOAFullInt();
+         
+            // set 25 samples to trigger interrupt
+            MAX30101_SetFIFOAlmostFull(FIFO_max_size);
+
+            // enable fifo rollover
+            MAX30101_EnableFIFORollover();
+            
+            // samples averaged       
+            MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_2);
+            // Set LED Power level
+            MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x1F);        
+            MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x1F);
+                   
+            // Set ADC Range
+            MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_2048);
+            
+            // Pulse width
+            MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
+            
+            // Set Sample Rate
+            MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_100);
+            
+            // Set mode
+            MAX30101_SetMode(MAX30101_SPO2_MODE);
+            
+            // Enable Slots
+            MAX30101_DisableSlots();
+            
+            debug_print("ADC RANGE 2048\r\n");
+            
+            MAX30101_INT_ClearInterrupt();
+            MAX30101_ClearFIFO();
+        }
+    }
+    
+    if(x=='b')
+    
+    {
+        
+        MAX30101_Reset();
+        CyDelay(100);
+        
+       
+        // Wake up sensor
+        MAX30101_WakeUp();        
+        MAX30101_EnableFIFOAFullInt();
+     
+        // set 25 samples to trigger interrupt
+        MAX30101_SetFIFOAlmostFull(FIFO_max_size);
+
+        // enable fifo rollover
+        MAX30101_EnableFIFORollover();
+        
+        // samples averaged       
+        MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_2);
+        // Set LED Power level
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x1F);        
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x1F);
+               
+        // Set ADC Range
+        MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_4096);
+        
+        // Pulse width
+        MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
+        
+        // Set Sample Rate
+        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_100);
+        
+        // Set mode
+        MAX30101_SetMode(MAX30101_SPO2_MODE);
+        
+        // Enable Slots
+        MAX30101_DisableSlots();
+        
+        debug_print("ADC RANGE 2048\r\n");
+        
+        MAX30101_INT_ClearInterrupt();
+        MAX30101_ClearFIFO();
+    }
+    
+    if(x=='c'){
+        
+        
+        MAX30101_Reset();
+        CyDelay(100);
+        
+       
+        // Wake up sensor
+        MAX30101_WakeUp();        
+        MAX30101_EnableFIFOAFullInt();
+     
+        // set 25 samples to trigger interrupt
+        MAX30101_SetFIFOAlmostFull(FIFO_max_size);
+
+        // enable fifo rollover
+        MAX30101_EnableFIFORollover();
+        
+        // samples averaged       
+        MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_2);
+        // Set LED Power level
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x1F);        
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x1F);
+               
+        // Set ADC Range
+        MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_8192);
+        
+        // Pulse width
+        MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
+        
+        // Set Sample Rate
+        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_100);
+        
+        // Set mode
+        MAX30101_SetMode(MAX30101_SPO2_MODE);
+        
+        // Enable Slots
+        MAX30101_DisableSlots();
+        
+        debug_print("ADC RANGE 2048\r\n");
+        
+        MAX30101_INT_ClearInterrupt();
+        MAX30101_ClearFIFO();
+    }
+    
+    if(x=='d'){
+        
+        
+        MAX30101_Reset();
+        CyDelay(100);
+        
+       
+        // Wake up sensor
+        MAX30101_WakeUp();        
+        MAX30101_EnableFIFOAFullInt();
+     
+        // set 25 samples to trigger interrupt
+        MAX30101_SetFIFOAlmostFull(FIFO_max_size);
+
+        // enable fifo rollover
+        MAX30101_EnableFIFORollover();
+        
+        // samples averaged       
+        MAX30101_SetSampleAverage(MAX30101_SAMPLE_AVG_2);
+        // Set LED Power level
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1, 0x1F);        
+        MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2, 0x1F);
+               
+        // Set ADC Range
+        MAX30101_SetSpO2ADCRange(MAX30101_ADC_RANGE_16384);
+        
+        // Pulse width
+        MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
+        
+        // Set Sample Rate
+        MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_100);
+        
+        // Set mode
+        MAX30101_SetMode(MAX30101_SPO2_MODE);
+        
+        // Enable Slots
+        MAX30101_DisableSlots();
+        
+        debug_print("ADC RANGE 2048\r\n");
+        
+        MAX30101_INT_ClearInterrupt();
+        MAX30101_ClearFIFO();
+    }
 
 
     //LED_PW: 69 118 215 411

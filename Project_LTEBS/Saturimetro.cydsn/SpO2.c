@@ -74,7 +74,7 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_b
 
   for ( k=0 ; k<15;k++) an_ir_valley_locs[k]=0;
   // since we flipped signal, we use peak detector as valley detector
-  maxim_find_peaks(an_ir_valley_locs, &n_npks, an_x, BUFFER_SIZE-MA4_SIZE, n_th1, 29, 15);//peak_height, peak_distance, max_num_peaks 
+  maxim_find_peaks(an_ir_valley_locs, &n_npks, an_x, BUFFER_SIZE-MA4_SIZE, n_th1, 28, 15);//peak_height, peak_distance, max_num_peaks 
   n_peak_interval_sum =0;
   if (n_npks>=2){
     for (k=1; k<n_npks; k++) n_peak_interval_sum += (an_ir_valley_locs[k] -an_ir_valley_locs[k -1] ) ;
