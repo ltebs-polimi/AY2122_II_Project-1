@@ -315,26 +315,9 @@ uint8_t MAX30101_ClearFIFO(void)
         error = MAX30101_WriteRegister(MAX30101_FIFO_RP, 0x00);
         if ( error == MAX30101_OK)
         {
-            // Read current mode to determine number of active leds
-            uint8_t temp_value;
-            error = MAX30101_ReadRegister(MAX30101_MODE_CONF, &temp_value);
-            uint8_t current_mode = temp_value & 0x07;
-            uint8_t active_leds;
-            switch(current_mode)
-            {
-                case MAX30101_HR_MODE:
-                    active_leds = 1;
-                    break;
-                case MAX30101_SPO2_MODE:
-                    active_leds = 2;
-                    break;
-                case MAX30101_MULTI_MODE:
-                    active_leds = 3;
-                    break;
-            }
-            uint8_t fifo_values[active_leds*3];
+            uint8_t fifo_values[6];
             // Read 1 from FIFO to clear the overflow counter
-            error = MAX30101_ReadRawFIFOBytes(1, active_leds, fifo_values);
+            error = MAX30101_ReadRawFIFOBytes(1, 2, fifo_values);
         }
     }
     return error;

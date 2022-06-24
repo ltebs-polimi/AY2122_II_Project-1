@@ -17,7 +17,9 @@ volatile long count=0;
 volatile uint8 flag_SM=0;
 volatile uint8 SM=0;
 uint8 x;
-
+extern volatile int gotInterrupt;
+extern uint32_t redBuffer[200];
+extern uint32_t irBuffer[200];
 
 /*CY_ISR (Count) 
 {
@@ -31,6 +33,13 @@ uint8 x;
 CY_ISR (Custom_ISR_RX) 
 {
     x = UART_Debug_GetChar();
+    gotInterrupt = 1;
     USER(x);
+    CyDelay(100);
+    /*for (int k = 0; k<200; k++)
+    {
+        redBuffer[k] = 0;
+        irBuffer[k] = 0;
+    }*/
 }
 /* [] END OF FILE */

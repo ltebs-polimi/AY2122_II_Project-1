@@ -41,7 +41,8 @@ CY_ISR_PROTO(MAX30101_ISR);
 
 uint8_t flag_temp = 0;
 uint8_t flag_1s = 0;
-
+volatile int gotInterrupt = 0;
+uint8_t j=0;
 
 int main(void)
 {
@@ -63,7 +64,7 @@ int main(void)
     int32_t somma=0;
     int32_t avg_hr=0;
     int num_samples;
-    int j=0;
+    
     
     extern volatile long count;
     extern volatile uint8 SM;
@@ -136,7 +137,7 @@ int main(void)
     //isr_Timer_StartEx(WAKEUP_TIMER);
     //isr_SM_StartEx(Count);
     isr_RX_StartEx(Custom_ISR_RX);
-    SleepTimer_Start(); 
+    //SleepTimer_Start(); 
     
     // Clear FIFO
     MAX30101_ClearFIFO();
@@ -167,70 +168,80 @@ int main(void)
             flag_SM=0;
             count=0;
         }*/
-
-        MAX30101_IsFIFOAFull(&flag);
-        if(flag>0)
+        
+        
+        while(gotInterrupt == 0)
         {
-            MAX30101_ReadReadPointer(&rp);
-            MAX30101_ReadWritePointer(&wp);
-            //Calculate the number of readings we need to get from sensor
-            num_samples = wp - rp;
-            if (num_samples <= 0) num_samples += 32; //Wrap condition                
-            // Read FIFO
-            MAX30101_ReadFIFO(num_samples, active_leds, &data, j);
-            for (i=0;i<num_samples;i++)
-            {                    
-                redBuffer[j] = data.red[data.tail+i];
-                irBuffer[j] = data.IR[data.tail+i];
-                j++;
-                debug_print("1,");
-                sprintf(msg, "%ld,", data.IR[data.tail+i]);
-                debug_print(msg);
-                debug_print("2,");
-                sprintf(msg, "%ld,", data.red[data.tail+i]);
-                debug_print(msg);
-                
-                if(j<bufferLength)
-                {
-                    debug_print("0,");
-                    debug_print("0,");
-                    debug_print("0,");
-                    debug_print("0\n");
-                }
-            }                       
-            if(j>=bufferLength) 
+            MAX30101_IsFIFOAFull(&flag);
+            if(flag>0)
             {
-                maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
-                j=bufferLength - 50;
-                for (int i=50; i<bufferLength; i++) 
+                MAX30101_ReadReadPointer(&rp);
+                MAX30101_ReadWritePointer(&wp);
+                //Calculate the number of readings we need to get from sensor
+                num_samples = wp - rp;
+                if (num_samples <= 0) num_samples += 32; //Wrap condition                
+                // Read FIFO
+                MAX30101_ReadFIFO(num_samples, active_leds, &data, j);
+                if(!gotInterrupt)
                 {
-                    redBuffer[i-50] = redBuffer[i];
-                    irBuffer[i-50] = irBuffer[i];
-                }
-                debug_print("3,");
-                sprintf(msg, "%ld,", spo2);
-                debug_print(msg);
-                debug_print("4,");
-                sprintf(msg, "%ld\n", avg_hr);
-                debug_print(msg);
-                if(heartRate > 50 && heartRate < 160) 
-                {
-                    somma += heartRate;
-                    if(f==3)
-                    {
-                        somma = somma/3;
-                        //debug_print("4,");
-                        //sprintf(msg, "%ld\n", somma);
-                        //debug_print(msg);
-                        f = 0;
-                        avg_hr = somma;
-                        somma = 0;
+                    for (i=0;i<num_samples;i++)
+                    {                    
+                        redBuffer[j] = data.red[data.tail+i];
+                        irBuffer[j] = data.IR[data.tail+i];
+                        j++;
+                        debug_print("1,");
+                        sprintf(msg, "%ld,", data.IR[data.tail+i]);
+                        debug_print(msg);
+                        debug_print("2,");
+                        sprintf(msg, "%ld,", data.red[data.tail+i]);
+                        debug_print(msg);
+                        sprintf(msg, "%d,", j);
+                        debug_print(msg);
                         
+                        if(j<bufferLength)
+                        {
+                            debug_print("0,");
+                            debug_print("0,");
+                            debug_print("0,");
+                            debug_print("0\n");
+                        }
+                    }    
+                }
+                if(j>=bufferLength) 
+                {
+                    maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
+                    j=bufferLength - 50;
+                    for (int i=50; i<bufferLength; i++) 
+                    {
+                        redBuffer[i-50] = redBuffer[i];
+                        irBuffer[i-50] = irBuffer[i];
                     }
-                    f++;
+                    debug_print("3,");
+                    sprintf(msg, "%ld,", spo2);
+                    debug_print(msg);
+                    debug_print("4,");
+                    sprintf(msg, "%ld\n", avg_hr);
+                    debug_print(msg);
+                    if(heartRate > 50 && heartRate < 160) 
+                    {
+                        somma += heartRate;
+                        if(f==3)
+                        {
+                            somma = somma/3;
+                            //debug_print("4,");
+                            //sprintf(msg, "%ld\n", somma);
+                            //debug_print(msg);
+                            f = 0;
+                            avg_hr = somma;
+                            somma = 0;
+                            
+                        }
+                        f++;
+                    }
                 }
             }
-        } 
+            gotInterrupt = 0;
+        }
     } 
 }   
 
@@ -241,7 +252,6 @@ int main(void)
 
 CY_ISR(MAX30101_ISR)
 {
-    
     Connection_LED_Write(!Connection_LED_Read());
     MAX30101_INT_ClearInterrupt();
 }

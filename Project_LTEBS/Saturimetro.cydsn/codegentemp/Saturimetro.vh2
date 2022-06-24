@@ -2,7 +2,7 @@
 --	Conversion of Saturimetro.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Tue Jun 21 16:55:31 2022
+--	Fri Jun 24 17:37:31 2022
 --
 
 USE cypress.cypress.all;
@@ -1323,7 +1323,7 @@ isr_Timer:cy_isr_v1_0
 Clock:cy_clock_v1_0
 	GENERIC MAP(cy_registers=>"",
 		id=>"4cbea99c-7e1f-4810-8145-3bb5b85ab870",
-		source_clock_id=>"",
+		source_clock_id=>"315365C3-2E3E-4f04-84A2-BB564A173261",
 		divisor=>0,
 		period=>"1E+15",
 		is_direct=>'0',

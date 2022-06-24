@@ -11473,7 +11473,7 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
  167              	.set isr_RX__INTC_CLR_PD_REG, CYREG_NVIC_CLRPEND0
  168              	.set isr_RX__INTC_MASK, 0x01
  169              	.set isr_RX__INTC_NUMBER, 0
- 170              	.set isr_RX__INTC_PRIOR_NUM, 7
+ 170              	.set isr_RX__INTC_PRIOR_NUM, 6
  171              	.set isr_RX__INTC_PRIOR_REG, CYREG_NVIC_PRI_0
  172              	.set isr_RX__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
  173              	.set isr_RX__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0
@@ -11522,7 +11522,7 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
 
 
  215              	.set I2C_Master_I2C_IRQ__INTC_NUMBER, 15
- 216              	.set I2C_Master_I2C_IRQ__INTC_PRIOR_NUM, 7
+ 216              	.set I2C_Master_I2C_IRQ__INTC_PRIOR_NUM, 6
  217              	.set I2C_Master_I2C_IRQ__INTC_PRIOR_REG, CYREG_NVIC_PRI_15
  218              	.set I2C_Master_I2C_IRQ__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
  219              	.set I2C_Master_I2C_IRQ__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0
@@ -11680,7 +11680,7 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
  365              	.set isr_MAX30101__INTC_CLR_PD_REG, CYREG_NVIC_CLRPEND0
  366              	.set isr_MAX30101__INTC_MASK, 0x800
  367              	.set isr_MAX30101__INTC_NUMBER, 11
- 368              	.set isr_MAX30101__INTC_PRIOR_NUM, 7
+ 368              	.set isr_MAX30101__INTC_PRIOR_NUM, 6
  369              	.set isr_MAX30101__INTC_PRIOR_REG, CYREG_NVIC_PRI_11
  370              	.set isr_MAX30101__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
  371              	.set isr_MAX30101__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0
