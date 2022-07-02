@@ -187,7 +187,7 @@
 #define isr_Timer__INTC_CLR_PD_REG CYREG_NVIC_CLRPEND0
 #define isr_Timer__INTC_MASK 0x04u
 #define isr_Timer__INTC_NUMBER 2u
-#define isr_Timer__INTC_PRIOR_NUM 7u
+#define isr_Timer__INTC_PRIOR_NUM 5u
 #define isr_Timer__INTC_PRIOR_REG CYREG_NVIC_PRI_2
 #define isr_Timer__INTC_SET_EN_REG CYREG_NVIC_SETENA0
 #define isr_Timer__INTC_SET_PD_REG CYREG_NVIC_SETPEND0

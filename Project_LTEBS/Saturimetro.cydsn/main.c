@@ -17,6 +17,8 @@
 #include "Timer.h"
 #include "isr.h"
 #include "USER.h"
+#include "parameters.h"
+#include "setting_parameters.h"
 
 
 #define SLEEPTIMER_INTERVAL_COUNTER (768u)
@@ -36,13 +38,16 @@
 #define debug_print(msg) do { if (DEBUG_TEST) UART_Debug_PutString(msg);} while (0)
 
 CY_ISR_PROTO(MAX30101_ISR);
-//CY_ISR_PROTO(WAKEUP_TIMER);
+CY_ISR_PROTO(WAKEUP_TIMER);
     
-
+extern volatile long count;
+extern volatile uint8 SM;
+extern volatile uint8 flag_SM;  
 uint8_t flag_temp = 0;
 uint8_t flag_1s = 0;
 volatile int gotInterrupt = 0;
 uint8_t j=0;
+uint8 flag_start = 1;
 
 int main(void)
 {
@@ -66,9 +71,7 @@ int main(void)
     int num_samples;
     
     
-    extern volatile long count;
-    extern volatile uint8 SM;
-    extern volatile uint8 flag_SM;   
+ 
     int i=0;
     int f=1;
 
@@ -90,8 +93,8 @@ int main(void)
         MAX30101_ReadPartID(&part_id);
         MAX30101_ReadRevisionID(&rev_id);
         
-        debug_print("Registers before configuration\r\n");
-        MAX30101_LogRegisters(print_ptr);
+        //debug_print("Registers before configuration\r\n");
+        //MAX30101_LogRegisters(print_ptr);
         
         // Soft reset sensor
         MAX30101_Reset();
@@ -128,16 +131,16 @@ int main(void)
         // Enable Slots
         MAX30101_DisableSlots();
         
-        debug_print("Registers after configuration\r\n");
-        MAX30101_LogRegisters(print_ptr);
     }
     
     
     isr_MAX30101_StartEx(MAX30101_ISR);
-    //isr_Timer_StartEx(WAKEUP_TIMER);
-    //isr_SM_StartEx(Count);
+    isr_Timer_StartEx(WAKEUP_TIMER);
+    isr_SM_StartEx(Count);
     isr_RX_StartEx(Custom_ISR_RX);
-    //SleepTimer_Start(); 
+    SleepTimer_Start();
+    SleepTimer_EnableInt();
+    SleepTimer_SetInterval(SleepTimer__CTW_128_MS);
     
     // Clear FIFO
     MAX30101_ClearFIFO();
@@ -145,32 +148,8 @@ int main(void)
     CyGlobalIntEnable; /* Enable global interrupts. */
       
     for(;;)
-    {       
-        /*int32 irValue=getIR(&data);  
-        if(irValue<10000) 
-        {
-           flag_SM=1;
-            
-            if(SM==1)
-            {
-                flag_SM=0;
-                //debug_print("SLEEP_MODE\r\n");
-                CyDelay(50);
-                CyPmSaveClocks();
-                CyPmAltAct(PM_ALT_ACT_TIME_NONE,PM_ALT_ACT_SRC_CTW);
-                CyPmRestoreClocks();
-                count=0;
-            }
-        }               
-        else if(irValue>=10000)
-        { 
-            SM=0;
-            flag_SM=0;
-            count=0;
-        }*/
-        
-        
-        while(gotInterrupt == 0)
+    {    
+        if(flag_temp == 1)
         {
             MAX30101_IsFIFOAFull(&flag);
             if(flag>0)
@@ -182,31 +161,52 @@ int main(void)
                 if (num_samples <= 0) num_samples += 32; //Wrap condition                
                 // Read FIFO
                 MAX30101_ReadFIFO(num_samples, active_leds, &data, j);
-                if(!gotInterrupt)
-                {
-                    for (i=0;i<num_samples;i++)
-                    {                    
-                        redBuffer[j] = data.red[data.tail+i];
-                        irBuffer[j] = data.IR[data.tail+i];
-                        j++;
-                        debug_print("1,");
-                        sprintf(msg, "%ld,", data.IR[data.tail+i]);
-                        debug_print(msg);
-                        debug_print("2,");
-                        sprintf(msg, "%ld,", data.red[data.tail+i]);
-                        debug_print(msg);
-                        sprintf(msg, "%d,", j);
-                        debug_print(msg);
+                for (i=0;i<num_samples;i++)
+                {                    
+                    redBuffer[j] = data.red[data.tail+i];
+                    irBuffer[j] = data.IR[data.tail+i];
+                    j++;
+                    debug_print("1,");
+                    sprintf(msg, "%ld,", data.IR[data.tail+i]);
+                    debug_print(msg);
+                    debug_print("2,");
+                    sprintf(msg, "%ld,", data.red[data.tail+i]);
+                    debug_print(msg);
+                    sprintf(msg, "%d,", j);
+                    debug_print(msg);
+                    
+                    if(j<bufferLength)
+                    {
+                        debug_print("0,");
+                        debug_print("0,");
+                        debug_print("0,");
+                        debug_print("0\n");
+                    }
+                    
+                    if(data.IR[data.tail+i]<15000) 
+                    {
+                        flag_SM=1;
                         
-                        if(j<bufferLength)
+                        if(SM==1)
                         {
-                            debug_print("0,");
-                            debug_print("0,");
-                            debug_print("0,");
-                            debug_print("0\n");
+                            flag_SM=0;
+                            //debug_print("SLEEP_MODE\r\n");
+                            CyDelay(50);
+                            
+                            CyPmAltAct(PM_ALT_ACT_TIME_NONE,PM_ALT_ACT_SRC_CTW);
+                            
+                            count=0;
                         }
-                    }    
+                    }
+                    
+                    else if(data.IR[data.tail+i]>=15000)
+                    { 
+                        SM=0;
+                        flag_SM=0;
+                        count=0;
+                    }
                 }
+                
                 if(j>=bufferLength) 
                 {
                     maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
@@ -240,18 +240,84 @@ int main(void)
                     }
                 }
             }
-            gotInterrupt = 0;
-        }
+            
+            if(flag_ADC == 1)
+            {
+                if(flag_start)
+                {
+                    Pulse_amp = 0x1F;
+                    Pulse_width = MAX30101_PULSEWIDTH_411;
+                    Samples = MAX30101_SAMPLE_RATE_100;
+                    Average = MAX30101_SAMPLE_AVG_2;
+                    flag_start = 0;
+                }
+                setting_parameters(ADC_range, Pulse_width, Pulse_amp, Samples, Average);
+                flag_ADC = 0;
+                
+            }
+            
+            if(flag_PW == 1)
+            {
+                if(flag_start)
+                {
+                    Pulse_amp = 0x1F;
+                    Samples = MAX30101_SAMPLE_RATE_100;
+                    Average = MAX30101_SAMPLE_AVG_2;
+                    ADC_range = MAX30101_ADC_RANGE_4096;
+                    flag_start = 0;
+                }
+                setting_parameters(ADC_range, Pulse_width,  Pulse_amp, Samples, Average);
+                flag_PW = 0;
+            }
+            
+            if(flag_PA == 1)
+            {
+                if(flag_start)
+                {
+                    Pulse_width = MAX30101_PULSEWIDTH_411;
+                    Samples = MAX30101_SAMPLE_RATE_100;
+                    Average = MAX30101_SAMPLE_AVG_2;
+                    ADC_range = MAX30101_ADC_RANGE_4096;
+                    flag_start = 0;
+                }
+                setting_parameters(ADC_range, Pulse_width,  Pulse_amp, Samples, Average);
+                flag_PA = 0;
+            }
+            
+            if(flag_SR == 1)
+            {
+                if(flag_start)
+                {
+                    Pulse_width = MAX30101_PULSEWIDTH_411;
+                    Pulse_amp = 0x1F;
+                    Average = MAX30101_SAMPLE_AVG_2;
+                    ADC_range = MAX30101_ADC_RANGE_4096;
+                    flag_start = 0;
+                }
+                setting_parameters(ADC_range, Pulse_width,  Pulse_amp, Samples, Average);
+                flag_SR = 0;
+            }
+            flag_temp = 0;
+        }        
     } 
 }   
 
-/*CY_ISR(WAKEUP_TIMER)
+CY_ISR(WAKEUP_TIMER)
 {
     SleepTimer_GetStatus();
-}*/
+    int32 irValue=getIR(&data); 
+    if (irValue >= 15000) 
+    {
+        SM=0;
+        flag_SM=0;
+        count=0;
+        
+    }
+}
 
 CY_ISR(MAX30101_ISR)
 {
+    flag_temp = 1;
     Connection_LED_Write(!Connection_LED_Read());
     MAX30101_INT_ClearInterrupt();
 }

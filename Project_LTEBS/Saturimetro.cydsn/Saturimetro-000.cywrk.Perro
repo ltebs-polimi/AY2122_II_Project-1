@@ -18,7 +18,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Saturimetro-000\Saturimetro\TopDesign">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
 <ExpandedNodeIds>
 <v>Saturimetro-000</v>
 <v>Saturimetro-000\Saturimetro</v>
@@ -40,6 +40,8 @@
 <v>Saturimetro-000\Saturimetro\Header Files\isr.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\MAX30101.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\MAX30101_Defs.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\parameters.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\setting_parameters.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\SpO2.h</v>
 <v>Saturimetro-000\Saturimetro\Source Files</v>
 <v>Saturimetro-000\Saturimetro\Source Files\HeartRate.c</v>
@@ -47,6 +49,7 @@
 <v>Saturimetro-000\Saturimetro\Source Files\isr.c</v>
 <v>Saturimetro-000\Saturimetro\Source Files\main.c</v>
 <v>Saturimetro-000\Saturimetro\Source Files\MAX30101.c</v>
+<v>Saturimetro-000\Saturimetro\Source Files\setting_parameters.c</v>
 <v>Saturimetro-000\Saturimetro\Source Files\SpO2.c</v>
 <v>Saturimetro-000\Saturimetro\Generated_Source</v>
 <v>Saturimetro-000\Saturimetro\Generated_Source\PSoC5</v>
@@ -75,13 +78,12 @@
 <v>Saturimetro-000\Saturimetro\Header Files\MAX30101.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\MAX30101_Defs.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\millis.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\parameters.h</v>
+<v>Saturimetro-000\Saturimetro\Header Files\setting_parameters.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\SpO2.h</v>
 <v>Saturimetro-000\Saturimetro\Header Files\USER.h</v>
 <v>Saturimetro-000\Saturimetro\Source Files</v>
 <v>Saturimetro-000\Saturimetro\Source Files\CyPm.c</v>
-<v>Saturimetro-000\Saturimetro\Source Files\HeartRate.c</v>
-<v>Saturimetro-000\Saturimetro\Source Files\I2C_Interface.c</v>
-<v>Saturimetro-000\Saturimetro\Source Files\isr.c</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -138,6 +140,7 @@
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\millis.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\SCL_1.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\SDA_1.lst</v>
+<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\setting_parameters.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\SleepTimer.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\SpO2.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_Debug.lst</v>
@@ -182,7 +185,6 @@
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Master_PM.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Master_SLAVE.lst</v>
 <v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr.lst</v>
-<v>Saturimetro-000\Saturimetro\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_MAX30101.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -242,20 +244,17 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\Saturimetro.cydwr" />
 <name v=".\main.c" />
 <name v=".\isr.c" />
 <name v=".\USER.c" />
+<name v=".\parameters.h" />
 <name v=".\USER.h" />
-<name v=".\Generated_Source\PSoC5\UART_Debug.c" />
+<name v=".\setting_parameters.c" />
+<name v=".\setting_parameters.h" />
+<name v=".\millis.c" />
 <name v=".\TopDesign\TopDesign.cysch" />
-<name v=".\MAX30101.c" />
-<name v=".\SpO2.c" />
-<name v=".\HeartRate.c" />
-<name v=".\I2C_Interface.c" />
-<name v=".\Generated_Source\PSoC5\MAX30101_INT.c" />
-<name v=".\Generated_Source\PSoC5\MAX30101_INT.h" />
-<name v=".\MAX30101.h" />
+<name v=".\CyPm.c" />
+<name v=".\Saturimetro.cydwr" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -263,7 +262,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="874, 564" SelectedTabbedMdiWindow="8a8de575-e1b0-45a4-be79-0c147c1b3374"><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cydwr" Guid="53b7b894-ae6a-45e6-9f79-5734b4624441" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\main.c" Guid="c7e67496-0ace-471a-a1b8-5db56bbb84c1" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\isr.c" Guid="05d711d4-0c3e-4b56-975c-bec25f71a6ee" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\USER.c" Guid="b0dd3114-4bd2-410f-b02b-c19c00955323" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\USER.h" Guid="df14d6c3-936c-4fe8-88ef-e9573d213fa7" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Generated_Source\PSoC5\UART_Debug.c" Guid="9037f212-f8a0-40f3-95ef-a573d289d600" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\TopDesign\TopDesign.cysch" Guid="dd952cc9-1f36-4d60-a64d-a97ba5a1b47d" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\MAX30101.c" Guid="8a8de575-e1b0-45a4-be79-0c147c1b3374" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\SpO2.c" Guid="7e46910d-949a-4857-9688-a019584ba1cc" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="fd141e05-5341-4623-8d11-033a064196ea" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\HeartRate.c" Guid="276361cb-f1d9-46b2-9158-bd1e5b2019f5" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\I2C_Interface.c" Guid="ebede99e-0be3-4b01-ad50-abb7f6442391" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Generated_Source\PSoC5\MAX30101_INT.c" Guid="7cac2375-87c1-488d-913d-aaa0363a6a71" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Generated_Source\PSoC5\MAX30101_INT.h" Guid="6e690a19-555f-48d5-bf24-a0460fb4bbdf" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\MAX30101.h" Guid="e981681f-ccd8-4296-9d45-179cec776982" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1038, 522" SelectedTabbedMdiWindow="c7e67496-0ace-471a-a1b8-5db56bbb84c1"><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\main.c" Guid="c7e67496-0ace-471a-a1b8-5db56bbb84c1" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\isr.c" Guid="05d711d4-0c3e-4b56-975c-bec25f71a6ee" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\USER.c" Guid="b0dd3114-4bd2-410f-b02b-c19c00955323" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\parameters.h" Guid="c4be40e2-a05c-426a-b51c-eb831169fc58" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\USER.h" Guid="df14d6c3-936c-4fe8-88ef-e9573d213fa7" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\setting_parameters.c" Guid="49f0b36a-5efd-41ed-9fd2-7bd9c1f58376" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\setting_parameters.h" Guid="756a1cb6-58ab-4028-aa90-bbbb126ee212" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\millis.c" Guid="3b9f98b9-09b2-4e17-8c14-2f43851f1d19" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\TopDesign\TopDesign.cysch" Guid="1ac70acf-98a0-4775-81ba-7ac55175c653" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="fd141e05-5341-4623-8d11-033a064196ea" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\CyPm.c" Guid="ff0e9139-d175-4c7c-b0e0-98d2a633a720" /><DocumentWindow Key="C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cydwr" Guid="d82c1129-a57f-4dd3-92c0-b916a875bec8" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

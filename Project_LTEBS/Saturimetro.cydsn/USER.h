@@ -11,6 +11,8 @@
 */
 
 #include "project.h"
+#include "MAX30101_Defs.h"
 void USER(uint8 x);
+
 
 /* [] END OF FILE */

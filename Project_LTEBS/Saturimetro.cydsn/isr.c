@@ -21,19 +21,19 @@ extern volatile int gotInterrupt;
 extern uint32_t redBuffer[200];
 extern uint32_t irBuffer[200];
 
-/*CY_ISR (Count) 
+CY_ISR (Count) 
 {
     if (flag_SM==1)
     {
-     count++;
+        count++;
         if (count==5) SM=1;
     }
-}*/
+}
 
 CY_ISR (Custom_ISR_RX) 
 {
     x = UART_Debug_GetChar();
-    gotInterrupt = 1;
+    
     USER(x);
     CyDelay(100);
     /*for (int k = 0; k<200; k++)
