@@ -52,10 +52,10 @@ def findPsoC(portsFound):
         strPort = str(port)
         # print(strPort)
 
-        if 'COM3' in strPort:  # KitProg #COM3
+        if 'KitProg' in strPort:  # KitProg #COM3
             splitPort = strPort.split(' ')
             commPort = (splitPort[0])
-            print(commPort)
+            #print(commPort)
 
     return commPort
 
@@ -79,7 +79,7 @@ def plot_data():
         #print(a)
         a.decode('utf-8')
         b = a.split(b',')
-        print(b)
+        #print(b)
 
 
         if int(b[0]) == 1:
@@ -133,7 +133,7 @@ def plot_stop():
 ############
 root = Tk()
 root.title("Photodetector")
-# root.iconbitmap("D:\Polimi\LAB\PROJECT\AY2122_II_Project-1\GUI/hr_icon.ico")
+root.iconbitmap(r"C:\Users\Perro\Desktop\AY2122_II_Project-1\GUI\hr_icon.ico")
 root.geometry("1077x700")  # set the window size
 root.minsize(1077, 700)  # to maintain dimensions fixed
 root.maxsize(1077, 700)
@@ -168,7 +168,7 @@ connectPort = findPsoC(ports)
 if connectPort != 'None':
     s = serial.Serial(connectPort, baudrate=115200, timeout=1)
     #reader = ReadLine(s)
-    print('Connected to ' + connectPort)
+    #print('Connected to ' + connectPort)
     root.label_connected = customtkinter.CTkLabel(master=root.frame_left,
                                                   text="Connected",
                                                   text_color='#666666',
@@ -176,7 +176,7 @@ if connectPort != 'None':
     root.label_connected.grid(row=1, column=0, pady=10, padx=10)
     s.reset_input_buffer()
 else:
-    print('Error in the connection with PSoC')
+    #print('Error in the connection with PSoC')
     root.label_connected = customtkinter.CTkLabel(master=root.frame_left,
                                                   text="Not connected",
                                                   text_color='#666666',
@@ -211,15 +211,15 @@ button_stop = customtkinter.CTkButton(master=root.frame_left,
 root.bind("s", plot_stop)  # command of b start data streaming
 button_stop.grid(row=3, column=0, pady=10, padx=20)
 
-"""
+
 # ---- HEART RATE LOGO ----#
-logo_image = Image.open("D:\Polimi\LAB\PROJECT\AY2122_II_Project-1\GUI/heart_rate_line_reduced.png")
+logo_image = Image.open(r"C:\Users\Perro\Desktop\AY2122_II_Project-1\GUI\heart_Rate_line_reduced.png")
 #resize_logo_image = logo_image.resize((180, 92))
 img = ImageTk.PhotoImage(logo_image)
 image_label = Label(image=img,borderwidth=0) # define label containing the image
 image_label.image = img
 image_label.place(x=4, y=160)
-"""
+
 
 # ---- SLIDERS ----#
 
