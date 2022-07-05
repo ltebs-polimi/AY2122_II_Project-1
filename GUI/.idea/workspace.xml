@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="28325019-c02b-47ea-8313-9dc8cb89c420" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/BUILD.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/BUILD.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/.deps/SOURCE_C__ARM_GCC_GENERIC.P" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/.deps/SOURCE_C__ARM_GCC_GENERIC.P" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/Cm3Start.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/Cm3Start.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/Connection_LED.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/Connection_LED.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/CyBootAsmGnu.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/CyBootAsmGnu.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/CyBootAsmGnu.o" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/CyBootAsmGnu.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/CyDmac.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/CyDmac.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/CyFlash.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/CyFlash.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/CyLib.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/CyLib.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/CySpc.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/CySpc.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/HeartRate.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/HeartRate.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/I2C_Interface.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/I2C_Interface.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/I2C_Master.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/I2C_Master.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/I2C_Master_BOOT.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/I2C_Master_BOOT.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/I2C_Master_INT.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/I2C_Master_INT.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/I2C_Master_MASTER.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/I2C_Master_MASTER.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/I2C_Master_PM.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/I2C_Master_PM.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/I2C_Master_SLAVE.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/I2C_Master_SLAVE.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/MAX30101.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/MAX30101.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/MAX30101_INT.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/MAX30101_INT.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/SCL_1.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/SCL_1.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/SDA_1.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/SDA_1.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/SOURCE_C__ARM_GCC_GENERIC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/SOURCE_C__ARM_GCC_GENERIC.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/Saturimetro.a" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/Saturimetro.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/Saturimetro.elf" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/Saturimetro.elf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/Saturimetro.hex" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/Saturimetro.hex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/Saturimetro.map" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/Saturimetro.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/SpO2.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/SpO2.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/UART_Debug.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/UART_Debug.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/UART_Debug_BOOT.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/UART_Debug_BOOT.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/UART_Debug_INT.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/UART_Debug_INT.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/UART_Debug_IntClock.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/UART_Debug_IntClock.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/UART_Debug_PM.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/UART_Debug_PM.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/cyPm.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/cyPm.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/cy_em_eeprom.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/cy_em_eeprom.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/cyfitter_cfg.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/cyfitter_cfg.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/cyutils.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/cyutils.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/isr.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/isr.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/isr.o" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/isr.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/isr_MAX30101.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/isr_MAX30101.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/main.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/main.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/main.o" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/CortexM3/ARM_GCC_541/Debug/main.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Generated_Source/PSoC5/cyfitter.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Generated_Source/PSoC5/cyfitter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Generated_Source/PSoC5/cyfittergnu.inc" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Generated_Source/PSoC5/cyfittergnu.inc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Generated_Source/PSoC5/cyfitteriar.inc" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Generated_Source/PSoC5/cyfitteriar.inc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Generated_Source/PSoC5/cyfitterrv.inc" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Generated_Source/PSoC5/cyfitterrv.inc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Saturimetro-000.cywrk.Perro" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Saturimetro-000.cywrk.Perro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Saturimetro.cydwr" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Saturimetro.cydwr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Saturimetro.cyfit" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Saturimetro.cyfit" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Saturimetro.cyprj.Perro" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Saturimetro.cyprj.Perro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Saturimetro.rpt" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Saturimetro.rpt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Saturimetro_timing.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/Saturimetro_timing.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.ctl" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.ctl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.cyfit" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.cyfit" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.pci" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.pci" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.pco" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.pco" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.plc_log" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.plc_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.rpt" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.rpt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.rt_log" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.rt_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.sdc" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.sdc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.sdf" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.sdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.v" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.v" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.vh2" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro.vh2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro_p.vh2" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro_p.vh2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro_r.vh2" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro_r.vh2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro_t.vh2" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro_t.vh2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro_timing.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro_timing.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro_u.sdc" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/Saturimetro_u.sdc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/cyfitter.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/cyfitter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/cyfittergnu.inc" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/cyfittergnu.inc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/cyfitteriar.inc" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/cyfitteriar.inc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/cyfitterrv.inc" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/cyfitterrv.inc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/lcpsoc3/index" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/lcpsoc3/index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/placer.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/placer.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/project_ids.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/codegentemp/project_ids.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/isr.c" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/isr.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_LTEBS/Saturimetro.cydsn/main.c" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="29bPPsJaAzr6qqEwQQf9RotZHOY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Perro\Desktop\AY2122_II_Project-1\GUI" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.Photodetector_Tkinter_settings">
+    <configuration name="4_main_led" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GUI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../WeBeep/ELECTRONIC TECHNOLOGIES AND BIOSENSORS LABORATORY/02_Practice/Python" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../WeBeep/ELECTRONIC TECHNOLOGIES AND BIOSENSORS LABORATORY/02_Practice/Python/4_main_led.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Photodetector - Tkinter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GUI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Photodetector - Tkinter.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Photodetector_Tkinter_multiple_serial_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GUI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Photodetector_Tkinter_multiple_serial_data.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Photodetector_Tkinter_settings" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GUI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Photodetector_Tkinter_settings.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="zoom_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GUI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/zoom_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.Photodetector_Tkinter_settings" />
+        <item itemvalue="Python.Photodetector_Tkinter_multiple_serial_data" />
+        <item itemvalue="Python.4_main_led" />
+        <item itemvalue="Python.zoom_test" />
+        <item itemvalue="Python.Photodetector - Tkinter" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="28325019-c02b-47ea-8313-9dc8cb89c420" name="Changes" comment="" />
+      <created>1653378791069</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1653378791069</updated>
+    </task>
+    <servers />
+  </component>
+</project>
