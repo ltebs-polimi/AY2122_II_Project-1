@@ -20,8 +20,6 @@
 #include "parameters.h"
 #include "setting_parameters.h"
 
-
-#define SLEEPTIMER_INTERVAL_COUNTER (768u)
 #define UART_DEBUG
 #define FIFO_max_size 25
 
@@ -38,7 +36,7 @@
 #define debug_print(msg) do { if (DEBUG_TEST) UART_Debug_PutString(msg);} while (0)
 
 CY_ISR_PROTO(MAX30101_ISR);
-CY_ISR_PROTO(WAKEUP_TIMER);
+//CY_ISR_PROTO(WAKEUP_TIMER);
     
 extern volatile long count;
 extern volatile uint8 SM;
@@ -135,12 +133,11 @@ int main(void)
     
     
     isr_MAX30101_StartEx(MAX30101_ISR);
-    isr_Timer_StartEx(WAKEUP_TIMER);
-    isr_SM_StartEx(Count);
+    //isr_Timer_StartEx(WAKEUP_TIMER);
+    //isr_SM_StartEx(Count);
     isr_RX_StartEx(Custom_ISR_RX);
-    SleepTimer_Start();
-    SleepTimer_EnableInt();
-    SleepTimer_SetInterval(SleepTimer__CTW_128_MS);
+    //SleepTimer_Start();
+    
     
     // Clear FIFO
     MAX30101_ClearFIFO();
@@ -172,8 +169,6 @@ int main(void)
                     debug_print("2,");
                     sprintf(msg, "%ld,", data.red[data.tail+i]);
                     debug_print(msg);
-                    sprintf(msg, "%d,", j);
-                    debug_print(msg);
                     
                     if(j<bufferLength)
                     {
@@ -183,7 +178,7 @@ int main(void)
                         debug_print("0\n");
                     }
                     
-                    if(data.IR[data.tail+i]<15000) 
+                    /*if(data.IR[data.tail+i]<15000) 
                     {
                         flag_SM=1;
                         
@@ -192,9 +187,9 @@ int main(void)
                             flag_SM=0;
                             //debug_print("SLEEP_MODE\r\n");
                             CyDelay(50);
-                            
+                            CyPmSaveClocks();
                             CyPmAltAct(PM_ALT_ACT_TIME_NONE,PM_ALT_ACT_SRC_CTW);
-                            
+                            CyPmRestoreClocks();
                             count=0;
                         }
                     }
@@ -204,7 +199,7 @@ int main(void)
                         SM=0;
                         flag_SM=0;
                         count=0;
-                    }
+                    }*/
                 }
                 
                 if(j>=bufferLength) 
@@ -302,18 +297,10 @@ int main(void)
     } 
 }   
 
-CY_ISR(WAKEUP_TIMER)
+/*CY_ISR(WAKEUP_TIMER)
 {
     SleepTimer_GetStatus();
-    int32 irValue=getIR(&data); 
-    if (irValue >= 15000) 
-    {
-        SM=0;
-        flag_SM=0;
-        count=0;
-        
-    }
-}
+}*/
 
 CY_ISR(MAX30101_ISR)
 {

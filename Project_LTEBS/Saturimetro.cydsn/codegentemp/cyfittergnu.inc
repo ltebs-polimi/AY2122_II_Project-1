@@ -187,7 +187,7 @@
 .set isr_Timer__INTC_CLR_PD_REG, CYREG_NVIC_CLRPEND0
 .set isr_Timer__INTC_MASK, 0x04
 .set isr_Timer__INTC_NUMBER, 2
-.set isr_Timer__INTC_PRIOR_NUM, 5
+.set isr_Timer__INTC_PRIOR_NUM, 7
 .set isr_Timer__INTC_PRIOR_REG, CYREG_NVIC_PRI_2
 .set isr_Timer__INTC_SET_EN_REG, CYREG_NVIC_SETENA0
 .set isr_Timer__INTC_SET_PD_REG, CYREG_NVIC_SETPEND0

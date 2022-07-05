@@ -21,14 +21,14 @@ extern volatile int gotInterrupt;
 extern uint32_t redBuffer[200];
 extern uint32_t irBuffer[200];
 
-CY_ISR (Count) 
+/*CY_ISR (Count) 
 {
     if (flag_SM==1)
     {
         count++;
         if (count==5) SM=1;
     }
-}
+}*/
 
 CY_ISR (Custom_ISR_RX) 
 {
@@ -36,10 +36,5 @@ CY_ISR (Custom_ISR_RX)
     
     USER(x);
     CyDelay(100);
-    /*for (int k = 0; k<200; k++)
-    {
-        redBuffer[k] = 0;
-        irBuffer[k] = 0;
-    }*/
 }
 /* [] END OF FILE */
