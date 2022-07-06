@@ -1,0 +1,6 @@
+C:\Users\Perro\Desktop\AY2122_II_Project-1\Project_LTEBS\Saturimetro.cydsn\Saturimetro.cyprj|a65333e6-cb18-4798-95a6-2d44f810dcc2
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|de845be6-fd60-4c1c-9456-2b210ec14187
+C:\Users\Perro\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|0fa9cae2-61af-41a0-8368-f7e59d16683d
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|4fd9647e-e26c-4b3d-901f-63cd9456d89d
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|f5d42a61-b3de-4355-ba93-fe9742908d84
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|7b713cd7-ae6e-4355-aabb-8a7905200968
