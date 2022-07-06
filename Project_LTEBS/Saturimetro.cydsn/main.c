@@ -1,18 +1,15 @@
-/**
-*   Main file for testing MAX30101 Library.
-    Last update: il codice funziona con la spo2 anche per FIFO bits diversi da 25, per come ho scritto il codice la prima misurazione 
-    non è da considerare perchè vengono superati i 200 samples però dalla successiva sono giuste.
-    Questo branch serve a provare una nuova funzione, che prende 5 secondi di misura e introduce un Hamming window per cercare di migliorare
-    l'heart rate ma sembra essere troppo variabile così come nell'altro branch. Non so se è dovuto alla mancanza di pressione ma sembra strano
-    perchè la variabilità è davvero alta. Proverò con l'elastico per capire se migliora un minimo, altrimenti c'è da cambiare il codice per l'HR.
-    Emanuele 16.05 18:07
+/*
+    LAB PROJECT 2022, Group 1
+    Emanuele Falli
+    Federico Monterosso
+    Francesca Terranova
 */
 
 #include "project.h"
 #include "MAX30101.h"
 #include "stdio.h"
 #include "I2C_Interface.h"
-#include "SpO2.h"
+#include "SpO2_HR.h"
 #include "HeartRate.h"
 #include "Timer.h"
 #include "isr.h"
@@ -21,7 +18,9 @@
 #include "setting_parameters.h"
 
 #define UART_DEBUG
-#define FIFO_max_size 25
+#define FIFO_max_size 25 
+/*25 has been set as the maximum size so that half a second is measured every
+time the interrupt is triggere by the filling of the FIFO*/
 
 #ifdef UART_DEBUG
     
@@ -36,16 +35,19 @@
 #define debug_print(msg) do { if (DEBUG_TEST) UART_Debug_PutString(msg);} while (0)
 
 CY_ISR_PROTO(MAX30101_ISR);
-//CY_ISR_PROTO(WAKEUP_TIMER);
-    
-extern volatile long count;
-extern volatile uint8 SM;
-extern volatile uint8 flag_SM;  
-uint8_t flag_temp = 0;
-uint8_t flag_1s = 0;
-volatile int gotInterrupt = 0;
-uint8_t j=0;
+
+uint8_t flag_temp = 0; 
+/*flag_temp is activated inside the isr code of the MAX30101 and ensures that the sampling frequency of 
+the main code is executed at the desired frequency equal to that of the filling of the FIFO*/
+
+uint8_t j=0; 
+/*this flag controls the number of samples before reaching the 200 samples 
+(4 seconds of measurement at a sample rate of 50 Sa/s) that trigger the actuation of the maxim function 
+for spo2 and hr calculation*/
 uint8 flag_start = 1;
+/*the flag_start is activated the first time the code is run, after the user activates a changing of a
+parameter inside the GUI; it is done in a way to ensure that all the other parameters not changed
+are still initialized to a default variable, otherwise the program would not function anymore.*/
 
 int main(void)
 {
@@ -54,28 +56,21 @@ int main(void)
     data.head = 0;
     data.tail = 0;
     char msg[50];
-    void (*print_ptr)(const char*) = &(UART_Debug_PutString);
     uint8_t active_leds = 2;
     uint8_t rp, wp, flag = 0;
-    int32_t spo2; //SPO2 value
+    int32_t spo2; //SPO2 value calculated through the maxim function given by the manufacturer
     int8_t validSPO2; //indicator to show if the SPO2 calculation is valid
-    int32_t heartRate; //heart rate value
+    int32_t heartRate; //heart rate value 
     int8_t validHeartRate; //indicator to show if the heart rate calculation is valid
     uint32_t irBuffer[200]; //infrared LED sensor data
     uint32_t redBuffer[200];  //red LED sensor data
     int32_t bufferLength = 200;
-    int32_t somma=0;
+    int32_t somma=0; 
     int32_t avg_hr=0;
     int num_samples;
-    
-    
  
     int i=0;
     int f=1;
-
-    
-    //SET BY THE USER
-
     
     // Initialization
     MAX30101_Start();
@@ -86,20 +81,13 @@ int main(void)
         // Check if device is present
         Connection_LED_Write(1);
         
-        // Read revision and part id
-        uint8_t rev_id, part_id = 0;
-        MAX30101_ReadPartID(&part_id);
-        MAX30101_ReadRevisionID(&rev_id);
-        
-        //debug_print("Registers before configuration\r\n");
-        //MAX30101_LogRegisters(print_ptr);
-        
         // Soft reset sensor
         MAX30101_Reset();
         CyDelay(100);
        
         // Wake up sensor
-        MAX30101_WakeUp();        
+        MAX30101_WakeUp();       
+        // Only the FIFO_AFULL interrupt is activated, therefore the isr code works only in this case.
         MAX30101_EnableFIFOAFullInt();
      
         // set 25 samples to trigger interrupt
@@ -120,10 +108,11 @@ int main(void)
         // Pulse width
         MAX30101_SetSpO2PulseWidth(MAX30101_PULSEWIDTH_411);
         
-        // Set Sample Rate
+        /* Set Sample Rate, in a way to ensure that 50 Sa/s is always kept constant, therefore the 
+        sample average needs to be configured properly when changing the sample rate through the GUI*/ 
         MAX30101_SetSpO2SampleRate(MAX30101_SAMPLE_RATE_100);
         
-        // Set mode
+        // Set mode (always spo2 mode in this project)
         MAX30101_SetMode(MAX30101_SPO2_MODE);
         
         // Enable Slots
@@ -131,13 +120,8 @@ int main(void)
         
     }
     
-    
     isr_MAX30101_StartEx(MAX30101_ISR);
-    //isr_Timer_StartEx(WAKEUP_TIMER);
-    //isr_SM_StartEx(Count);
     isr_RX_StartEx(Custom_ISR_RX);
-    //SleepTimer_Start();
-    
     
     // Clear FIFO
     MAX30101_ClearFIFO();
@@ -147,23 +131,29 @@ int main(void)
     for(;;)
     {    
         if(flag_temp == 1)
+        /*this flag is controlled by the isr of the MAX (issued only by the filling of the FIFO because
+        the other interrupts are all disabled*/
         {
             MAX30101_IsFIFOAFull(&flag);
             if(flag>0)
             {
                 MAX30101_ReadReadPointer(&rp);
                 MAX30101_ReadWritePointer(&wp);
-                //Calculate the number of readings we need to get from sensor
+                //Calculate the number of readings we need to get from sensor (always 25 in this case)
                 num_samples = wp - rp;
                 if (num_samples <= 0) num_samples += 32; //Wrap condition                
                 // Read FIFO
-                MAX30101_ReadFIFO(num_samples, active_leds, &data, j);
+                MAX30101_ReadFIFO(num_samples, active_leds, &data);
                 for (i=0;i<num_samples;i++)
                 {                    
+                    //the 25 samples are stored separately inside two buffers of length 200
                     redBuffer[j] = data.red[data.tail+i];
                     irBuffer[j] = data.IR[data.tail+i];
                     j++;
                     debug_print("1,");
+                    /*these numbers help us in intercepting the right value inside the python code,
+                    so that they are placed in the corresponding array accordingly and are displayed
+                    inside the plot or saved in the labels of Spo2 and HR*/
                     sprintf(msg, "%ld,", data.IR[data.tail+i]);
                     debug_print(msg);
                     debug_print("2,");
@@ -172,45 +162,32 @@ int main(void)
                     
                     if(j<bufferLength)
                     {
+                        /*these null values ensure that the array length sent via UART to the GUI 
+                        is always constant; in this way when, after the iterations, we obtain a measure
+                        of Spo2 and HR, we can save them appropriately.*/
                         debug_print("0,");
                         debug_print("0,");
                         debug_print("0,");
                         debug_print("0\n");
                     }
-                    
-                    /*if(data.IR[data.tail+i]<15000) 
-                    {
-                        flag_SM=1;
-                        
-                        if(SM==1)
-                        {
-                            flag_SM=0;
-                            //debug_print("SLEEP_MODE\r\n");
-                            CyDelay(50);
-                            CyPmSaveClocks();
-                            CyPmAltAct(PM_ALT_ACT_TIME_NONE,PM_ALT_ACT_SRC_CTW);
-                            CyPmRestoreClocks();
-                            count=0;
-                        }
-                    }
-                    
-                    else if(data.IR[data.tail+i]>=15000)
-                    { 
-                        SM=0;
-                        flag_SM=0;
-                        count=0;
-                    }*/
                 }
                 
                 if(j>=bufferLength) 
                 {
+                    //we have reached 200 samples and the maxim function is triggered
                     maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
                     j=bufferLength - 50;
+                    /*50 samples are deleted, and replaced with a new second of measurement
+                    coming from the sensor*/
                     for (int i=50; i<bufferLength; i++) 
                     {
+                        /*The remaining 150 samples are shifter up at the beginning of the array so 
+                        that the last second is entered at the end and the appropriate sequence is kept.*/
                         redBuffer[i-50] = redBuffer[i];
                         irBuffer[i-50] = irBuffer[i];
                     }
+                    /*the spo2 and HR values are generated and will replace the empty values shown before,
+                    to be sent via UART to the GUI*/
                     debug_print("3,");
                     sprintf(msg, "%ld,", spo2);
                     debug_print(msg);
@@ -219,17 +196,14 @@ int main(void)
                     debug_print(msg);
                     if(heartRate > 50 && heartRate < 160) 
                     {
+                        //an average of 5 values of HR is performed to obtain a more constant value
                         somma += heartRate;
-                        if(f==3)
+                        if(f==5)
                         {
-                            somma = somma/3;
-                            //debug_print("4,");
-                            //sprintf(msg, "%ld\n", somma);
-                            //debug_print(msg);
+                            somma = somma/5;
                             f = 0;
                             avg_hr = somma;
                             somma = 0;
-                            
                         }
                         f++;
                     }
@@ -285,7 +259,6 @@ int main(void)
                 {
                     Pulse_width = MAX30101_PULSEWIDTH_411;
                     Pulse_amp = 0x1F;
-                    Average = MAX30101_SAMPLE_AVG_2;
                     ADC_range = MAX30101_ADC_RANGE_4096;
                     flag_start = 0;
                 }
@@ -297,10 +270,6 @@ int main(void)
     } 
 }   
 
-/*CY_ISR(WAKEUP_TIMER)
-{
-    SleepTimer_GetStatus();
-}*/
 
 CY_ISR(MAX30101_ISR)
 {

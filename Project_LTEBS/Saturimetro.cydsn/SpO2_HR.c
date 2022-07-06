@@ -10,7 +10,7 @@
  * ========================================
 */
 
-#include "SpO2.h"
+#include "SpO2_HR.h"
 #include "project.h"
 #include <stdbool.h>
 
