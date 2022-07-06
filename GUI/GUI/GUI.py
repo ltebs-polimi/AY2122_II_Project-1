@@ -14,7 +14,7 @@ The lines of code related to them are commented
 if you to visualize the logo and the image you need to uncomment the following lines and insert the
 location of the images that are uploaded on GitHub:
 - from line 243 to 249
-- line 170
+- line 169
 '''
 
 ######################
@@ -32,10 +32,11 @@ import numpy as np
 import serial.tools.list_ports
 import serial
 from math import sin, cos
-from PIL import ImageTk, Image
+from PIL import ImageTk, Image  # for image management
+
 
 #################################
-# AUTOMATIC COM PORT CONNECTION  #
+# AUTOMATIC COM PORT CONNECTION #
 #################################
 ''' 
 It allows to use the pySerial library in order to analyse which are the ports open on the PC, to identify if the
@@ -64,6 +65,7 @@ class ReadLine:
             else:
                 self.buf.extend(data)
 
+
 def findPsoC(portsFound):
     commPort = 'None'
     n_connections = len(portsFound)
@@ -71,8 +73,8 @@ def findPsoC(portsFound):
     for i in range(0, n_connections):
         port = portsFound[i]
         strPort = str(port)
-        
-        if 'KitProg' in strPort:  
+
+        if 'KitProg' in strPort:
             splitPort = strPort.split(' ')
             commPort = (splitPort[0])
 
@@ -87,11 +89,11 @@ The plot_data function allows to read serial data and distinguish the different 
 values, HR values) on the basis of a label that is transmitted together with the data
 The IR channel and red channel values are shown in a graph while SpO2 and HR values are computed numerically.
 '''
-
 ir = np.array([])
 red = np.array([])
 cond = False
 flag = 0
+
 
 def plot_data():
     global cond, ir, red, flag
@@ -103,7 +105,7 @@ def plot_data():
         b = a.split(b',')
 
         # IR channel
-        if int(b[0]) == 1:   
+        if int(b[0]) == 1:
             if len(ir) < 200:
                 ir = np.append(ir, int(b[1][0:7]))
 
@@ -113,8 +115,8 @@ def plot_data():
 
             lines_ir.set_xdata(np.arange(0, len(ir)))
             lines_ir.set_ydata(ir)
-
-        # Red channel
+        
+        # red channel
         if int(b[2]) == 2:
             if len(red) < 200:
                 red = np.append(red, int(b[3][0:7]))
@@ -130,15 +132,13 @@ def plot_data():
         if int(b[4]) == 3:
             root.label_values_SPO2.configure(text=str(int(b[5])))
 
-        # HR values
+       # HR values
         if int(b[6]) == 4:
             root.label_values_HR.configure(text=str(int(b[7])))
 
-        # print(data)
         canvas.draw()
 
     root.after(1, plot_data)
-
 
 '''
 plot_start and plot_stop allows to start and stop the visualization of the graphs
@@ -164,12 +164,11 @@ The GUI is developed using Tk interface
 The window is composd by a grid layout made of 2 main columns
 The grid structure is used to decide where to place the different GUI elements
 '''
-
 root = Tk()
 root.title("Photodetector")
 #root.iconbitmap("hr_icon.ico")  # icon
-root.geometry("1077x700")       # window size
-root.minsize(1077, 700)         # to maintain dimensions fixed
+root.geometry("1077x700")        # window size
+root.minsize(1077, 700)          # to maintain dimensions fixed
 root.maxsize(1077, 700)
 root.configure(background='#1f1f1f')
 
@@ -180,7 +179,7 @@ root.grid_rowconfigure(0, weight=1)
 
 root.frame_left = customtkinter.CTkFrame(master=root,
                                          width=180,
-                                         fg_color='#292929', 
+                                         fg_color='#292929',
                                          corner_radius=0)
 root.frame_left.grid(row=0, column=0, sticky="nswe")
 
@@ -193,7 +192,7 @@ root.frame_left.grid_rowconfigure(0, minsize=10)
 root.frame_left.grid_rowconfigure(4, minsize=245)
 root.frame_right.grid_rowconfigure(0, weight=60)
 root.frame_right.grid_columnconfigure(0, weight=3)
-root.frame_right.grid_columnconfigure(1, weight=24)  
+root.frame_right.grid_columnconfigure(1, weight=24)  # 24
 
 # The label "Connected" is shown when the KIT-095 is detected on the COM port, while if it is not the label "Not connected" appears
 ports = serial.tools.list_ports.comports()
@@ -201,9 +200,9 @@ connectPort = findPsoC(ports)
 if connectPort != 'None':
     s = serial.Serial(connectPort, baudrate=115200, timeout=1)
     root.label_connected = customtkinter.CTkLabel(master=root.frame_left,
-                                                  text="Connected",
-                                                  text_color='#666666',
-                                                  text_font=("Roboto Medium", -12))
+                                                  text="Connected to PSoC",
+                                                  text_color='#dcd8d8',
+                                                  text_font=("Roboto Medium", -14))
     root.label_connected.grid(row=1, column=0, pady=10, padx=10)
     s.reset_input_buffer()
 else:
@@ -233,7 +232,7 @@ button_stop = customtkinter.CTkButton(master=root.frame_left,
                                       text="Stop",
                                       text_font=("Roboto Medium", -12),
                                       text_color='white',
-                                      fg_color='#4d4d4d',  
+                                      fg_color='#4d4d4d',  # azzurro #3373b8
                                       hover_color='#1d538d',
                                       command=lambda: plot_stop()
                                       )
@@ -254,14 +253,14 @@ image_label.place(x=4, y=160)
 # LED pulse width (micros)
 root.label_LED_PW_title = customtkinter.CTkLabel(master=root.frame_right,
                                                  text='LED Pulse Width (µs)',
-                                                 text_color='#666666',
+                                                 text_color='#dcd8d8',
                                                  width=30,
-                                                 text_font=("Roboto Medium", -12))  
-root.label_LED_PW_title.place(x=104, y=481, anchor=W)
+                                                 text_font=("Roboto Medium", -14))  # font name and size in px
+root.label_LED_PW_title.place(x=100, y=481, anchor=W)
 
 
 def values_LED_PW(value):
-    #global value_LED_PW
+    # global value_LED_PW
     value_LED_PW = root.slider_LED_PW.get()
     if value_LED_PW == 69:
         value_LED_PW_to_use = 69
@@ -280,11 +279,12 @@ def values_LED_PW(value):
                                                text=str(value_LED_PW_to_use),
                                                text_color='#dcd8d8',
                                                width=50,
-                                               text_font=("Roboto Medium", -12))  
+                                               text_font=("Roboto Medium", -14))  
     root.label_LED_PW.place(x=302, y=498, anchor=W)
     s.write(str(value_PSOC).encode('ascii'))
 
     return value_LED_PW_to_use
+
 
 root.slider_LED_PW = customtkinter.CTkSlider(master=root.frame_right,
                                              from_=69,
@@ -295,17 +295,18 @@ root.slider_LED_PW = customtkinter.CTkSlider(master=root.frame_right,
                                              fg_color='#000000',
                                              command=values_LED_PW
                                              )
-root.slider_LED_PW.set(183.0)  # 118 (Initalize value)
+root.slider_LED_PW.set(411)  # 411 (Initalize value)
 
 root.slider_LED_PW.grid(row=2, column=0, columnspan=1, pady=15, padx=55, sticky="we")
 
 # Samples per second
 root.label_SAMPLES_title = customtkinter.CTkLabel(master=root.frame_right,
                                                   text='Samples per second',
-                                                  text_color='#666666',
+                                                  text_color='#dcd8d8',
                                                   width=30,
-                                                  text_font=("Roboto Medium", -12))  # font name and size in px
+                                                  text_font=("Roboto Medium", -14))  
 root.label_SAMPLES_title.place(x=100, y=527, anchor=W)
+
 
 def values_SAMPLES(value):
     value_SAMPLES = root.slider_SAMPLES.get()
@@ -326,7 +327,7 @@ def values_SAMPLES(value):
                                                 text=str(value_SAMPLES_to_use),
                                                 text_color='#dcd8d8',
                                                 width=30,
-                                                text_font=("Roboto Medium", -12))  # font name and size in px
+                                                text_font=("Roboto Medium", -14)) 
     root.label_SAMPLES.place(x=305, y=545, anchor=W)
     s.write(str(value_PSOC).encode('ascii'))
 
@@ -342,16 +343,17 @@ root.slider_SAMPLES = customtkinter.CTkSlider(master=root.frame_right,
                                               fg_color='#000000',
                                               command=values_SAMPLES
                                               )
-root.slider_SAMPLES.set(50)  # 50 (Initalize value)
+root.slider_SAMPLES.set(166.66666666666666)  # 50 (Initalize value)
 root.slider_SAMPLES.grid(row=3, column=0, columnspan=1, pady=15, padx=55, sticky="we")
 
 # LED current control (mA)
 root.label_LED_CURRENT_title = customtkinter.CTkLabel(master=root.frame_right,
                                                       text='LED Current Control (mA)',
-                                                      text_color='#666666',
+                                                      text_color='#dcd8d8',
                                                       width=30,
-                                                      text_font=("Roboto Medium", -12))  # font name and size in px
-root.label_LED_CURRENT_title.place(x=90, y=574, anchor=W)
+                                                      text_font=("Roboto Medium", -14))  
+root.label_LED_CURRENT_title.place(x=95, y=574, anchor=W)
+
 
 def values_LED_CURRENT(value):
     value_LED_CURRENT_to_use = root.slider_LED_CURRENT.get()
@@ -361,7 +363,7 @@ def values_LED_CURRENT(value):
     if value_LED_CURRENT_to_use == 0.6:
         value_PSOC = 'p'
     if value_LED_CURRENT_to_use == 1.0:
-        value_PSOC = 'q'        
+        value_PSOC = 'q'
     if value_LED_CURRENT_to_use == 1.4:
         value_PSOC = 'r'
     if value_LED_CURRENT_to_use == 1.8:
@@ -371,7 +373,7 @@ def values_LED_CURRENT(value):
     if value_LED_CURRENT_to_use == 2.6:
         value_PSOC = 'u'
     if value_LED_CURRENT_to_use == 3.0:
-        value_PSOC = 'v'        
+        value_PSOC = 'v'
     if value_LED_CURRENT_to_use == 3.4:
         value_PSOC = 'z'
     if value_LED_CURRENT_to_use == 3.8:
@@ -379,7 +381,7 @@ def values_LED_CURRENT(value):
     if value_LED_CURRENT_to_use == 4.2:
         value_PSOC = 'B'
     if value_LED_CURRENT_to_use == 4.6:
-        value_PSOC = 'C'        
+        value_PSOC = 'C'
     if value_LED_CURRENT_to_use == 5.0:
         value_PSOC = 'D'
     if value_LED_CURRENT_to_use == 5.4:
@@ -393,7 +395,7 @@ def values_LED_CURRENT(value):
                                                     text=str(value_LED_CURRENT_to_use),
                                                     text_color='#dcd8d8',
                                                     width=30,
-                                                    text_font=("Roboto Medium", -12))  
+                                                    text_font=("Roboto Medium", -14))  
     root.label_LED_CURRENT.place(x=305, y=590, anchor=W)
     s.write(str(value_PSOC).encode('ascii'))
 
@@ -409,16 +411,16 @@ root.slider_LED_CURRENT = customtkinter.CTkSlider(master=root.frame_right,
                                                   fg_color='#000000',
                                                   command=values_LED_CURRENT
                                                   )
-root.slider_LED_CURRENT.set(2.0)  # 2 mA (Initalize value)
+root.slider_LED_CURRENT.set(6.2)  # 2 mA (Initalize value)
 root.slider_LED_CURRENT.grid(row=4, column=0, columnspan=1, pady=15, padx=55, sticky="we")
 
 # SpO2 ADC range
 root.label_SPO2_title = customtkinter.CTkLabel(master=root.frame_right,
-                                               text='SpO₂ ADC Range',
-                                               text_color='#666666',
+                                               text='SpO₂ ADC Range (bits)',
+                                               text_color='#dcd8d8',
                                                width=30,
-                                               text_font=("Roboto Medium", -12))  
-root.label_SPO2_title.place(x=110, y=620, anchor=W)
+                                               text_font=("Roboto Medium", -14))  
+root.label_SPO2_title.place(x=95, y=620, anchor=W)
 
 
 def values_SPO2(value):
@@ -437,12 +439,11 @@ def values_SPO2(value):
         value_SPO2_to_use = 16384
         value_PSOC = 'd'
 
-
     root.label_SPO2 = customtkinter.CTkLabel(master=root.frame_right,
                                              text=str(value_SPO2_to_use),
                                              text_color='#dcd8d8',
                                              width=30,
-                                             text_font=("Roboto Medium", -12))  
+                                             text_font=("Roboto Medium", -14))  
     root.label_SPO2.place(x=305, y=636, anchor=W)
     s.write(str(value_PSOC).encode('ascii'))
 
@@ -458,7 +459,7 @@ root.slider_SPO2 = customtkinter.CTkSlider(master=root.frame_right,
                                            fg_color='#000000',
                                            command=values_SPO2
                                            )
-root.slider_SPO2.set(6826.666666666666)  # 4096 (Initalize value)
+root.slider_SPO2.set(11605.333333333332)  # 4096 (Initalize value)
 root.slider_SPO2.grid(row=5, column=0, columnspan=1, pady=15, padx=55, sticky="we")
 
 # ------PLOT OBJECT------#
@@ -467,7 +468,7 @@ root.label_bg_plot = customtkinter.CTkLabel(master=root.frame_right,
                                             text="",
                                             height=360,
                                             width=750,
-                                            fg_color='#f0f0f0', #dcd8d8
+                                            fg_color='#f0f0f0',  
                                             justify=tkinter.LEFT)
 root.label_bg_plot.place(x=66, y=230, anchor=W)
 
@@ -477,18 +478,19 @@ ax = fig.add_subplot(111)
 fig.patch.set_facecolor('#f0f0f0')
 fig.subplots_adjust(bottom=0.19, right=0.94)
 
-
 ax.title.set_visible(False)
 ax.set_xlabel('Sample')
-ax.set_ylabel('Digit')
-ax.set_xlim(5, 220)
-ax.set_ylim(0, 110000)
+ax.set_ylabel('Amplitude (digits)')
+ax.set_xlim(5, 205)
+ax.set_ylim(0, 130000)
 ax.set_facecolor('#f0f0f0')
 
-lines_ir = ax.plot([], [], 'r')[0]
-lines_red = ax.plot([], [], 'b')[0]
+lines_ir = ax.plot([], [], 'b')[0]
+lines_red = ax.plot([], [], 'r')[0]
 
-canvas = FigureCanvasTkAgg(fig, master=root)  
+fig.legend((lines_ir, lines_red), ('IR LED signal', 'Red LED signal'), bbox_to_anchor=(0.23, 0.13), borderpad=0.5)
+
+canvas = FigureCanvasTkAgg(fig, master=root)  # A tk.DrawingArea.
 canvas.get_tk_widget().place(x=255, y=75, width=730, height=350)
 canvas.draw()
 toolbar = NavigationToolbar2Tk(canvas, root, pack_toolbar=False)
@@ -502,7 +504,7 @@ root.after(1, plot_data)
 root.label_SPO2_values_title = customtkinter.CTkLabel(master=root.frame_right,
                                                       height=25,
                                                       text="SpO₂",
-                                                      text_font=("Roboto Medium", -12),
+                                                      text_font=("Roboto Medium", -15),
                                                       text_color='white',
                                                       fg_color='#4d4d4d',
                                                       )
@@ -512,7 +514,7 @@ root.label_SPO2_values_title.place(x=465, y=485)
 root.label_HR_values_title = customtkinter.CTkLabel(master=root.frame_right,
                                                     height=25,
                                                     text="Heart Rate",
-                                                    text_font=("Roboto Medium", -12),
+                                                    text_font=("Roboto Medium", -15),
                                                     text_color='white',
                                                     fg_color='#4d4d4d',
                                                     )
@@ -520,18 +522,22 @@ root.label_HR_values_title.place(x=650, y=485)
 
 root.label_values_SPO2 = customtkinter.CTkButton(master=root.frame_right,
                                                  text=". . .",
+                                                 text_color='white',
+                                                 text_font=("Roboto Medium", -15),
                                                  height=90,
                                                  width=120,
-                                                 fg_color='#666666',
+                                                 fg_color='#444444',
                                                  hover_color='#666666',
                                                  )
 root.label_values_SPO2.place(x=465, y=520)
 
 root.label_values_HR = customtkinter.CTkButton(master=root.frame_right,
                                                text=". . .",
+                                               text_color='white',
+                                               text_font=("Roboto Medium", -15),
                                                height=90,
                                                width=120,
-                                               fg_color='#666666',
+                                               fg_color='#444444',
                                                hover_color='#666666',
                                                )
 root.label_values_HR.place(x=650, y=520)
