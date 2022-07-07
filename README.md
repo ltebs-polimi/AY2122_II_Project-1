@@ -7,6 +7,6 @@ The project also involved the PCB design and production through press-n-print te
 ![GUI_screenshot](https://user-images.githubusercontent.com/92868195/177736449-8a3d3b33-4399-40a8-bbf1-9a03c5391d3b.jpg)
 On the GUI it is also possible to make instant changes to the registers, which directly influence the MAX30101, such as the ADC range, the LED pulse width of the two LEDs, the LEDs pulse amplitude and the Sample Rate. These values will change the Full Scale Range of the readings, as well as the SNR (signal-to-noise-ratio).
 ## Final assembled device
-The final device resembles a commercial pulseoximeter with a rudimental hinge that secures the finger in place over the photodiode, so that a constant pressure is applied.
+The final device resembles a commercial pulseoximeter with a rudimental hinge that secures the finger in place over the photodiode, so that a constant pressure is applied. Moreover an internal coating was applied in order not to let light pass, so to assure a reliable sensor measure.
 ![photo_2022-07-07_11-20-44](https://user-images.githubusercontent.com/92868195/177739470-68d3b52b-e111-4c24-bd1d-c62aca32fa81.jpg)
 
