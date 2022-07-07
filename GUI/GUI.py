@@ -503,8 +503,8 @@ root.after(1, plot_data)
 # -----SPO2 LABEL----#
 root.label_SPO2_values_title = customtkinter.CTkLabel(master=root.frame_right,
                                                       height=25,
-                                                      text="SpO₂",
-                                                      text_font=("Roboto Medium", -15),
+                                                      text="SpO₂ (%)",
+                                                      text_font=("Roboto Medium", -14),
                                                       text_color='white',
                                                       fg_color='#4d4d4d',
                                                       )
@@ -513,8 +513,8 @@ root.label_SPO2_values_title.place(x=465, y=485)
 # -----HEART RATE LABEL----#
 root.label_HR_values_title = customtkinter.CTkLabel(master=root.frame_right,
                                                     height=25,
-                                                    text="Heart Rate",
-                                                    text_font=("Roboto Medium", -15),
+                                                    text="Heart Rate (bpm)",
+                                                    text_font=("Roboto Medium", -14),
                                                     text_color='white',
                                                     fg_color='#4d4d4d',
                                                     )

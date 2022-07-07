@@ -10,11 +10,9 @@
 #include "stdio.h"
 #include "I2C_Interface.h"
 #include "SpO2_HR.h"
-#include "HeartRate.h"
 #include "Timer.h"
 #include "isr.h"
 #include "USER.h"
-#include "parameters.h"
 #include "setting_parameters.h"
 
 #define UART_DEBUG
@@ -45,9 +43,7 @@ uint8_t j=0;
 (4 seconds of measurement at a sample rate of 50 Sa/s) that trigger the actuation of the maxim function 
 for spo2 and hr calculation*/
 uint8 flag_start = 1;
-/*the flag_start is activated the first time the code is run, after the user activates a changing of a
-parameter inside the GUI; it is done in a way to ensure that all the other parameters not changed
-are still initialized to a default variable, otherwise the program would not function anymore.*/
+
 
 int main(void)
 {
@@ -194,13 +190,13 @@ int main(void)
                     debug_print("4,");
                     sprintf(msg, "%ld\n", avg_hr);
                     debug_print(msg);
-                    if(heartRate > 50 && heartRate < 160) 
+                    if(heartRate > 60 && heartRate < 120) 
                     {
-                        //an average of 5 values of HR is performed to obtain a more constant value
+                        //an average of 10 values of HR is performed to obtain a more constant value
                         somma += heartRate;
-                        if(f==5)
+                        if(f==10)
                         {
-                            somma = somma/5;
+                            somma = somma/10;
                             f = 0;
                             avg_hr = somma;
                             somma = 0;
@@ -212,8 +208,14 @@ int main(void)
             
             if(flag_ADC == 1)
             {
+                /*this series of flags represent each parameter that can be changed via the GUI, each
+                flag is activated when changing a specific parameter and the setting parameters function
+                is performed.*/
                 if(flag_start)
                 {
+                    /*the flag_start is activated the first time the code is run, after the user activates a changing of a
+                    parameter inside the GUI; it is done in a way to ensure that all the other parameters not changed
+                    are still initialized to a default variable, otherwise the program would not function anymore.*/
                     Pulse_amp = 0x1F;
                     Pulse_width = MAX30101_PULSEWIDTH_411;
                     Samples = MAX30101_SAMPLE_RATE_100;

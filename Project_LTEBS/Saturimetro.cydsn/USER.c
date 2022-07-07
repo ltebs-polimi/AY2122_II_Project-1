@@ -1,7 +1,6 @@
 #include "project.h"
 #include "MAX30101.h"
 #include "USER.h"
-#include "parameters.h"
 #include "setting_parameters.h"
 
 #define UART_DEBUG
@@ -19,7 +18,6 @@
 #define debug_print(msg) do { if (DEBUG_TEST) UART_Debug_PutString(msg);} while (0)
 #define FIFO_max_size 25
 
-void (*print_ptr)(const char*) = &(UART_Debug_PutString);
 extern uint8_t j;
 
 

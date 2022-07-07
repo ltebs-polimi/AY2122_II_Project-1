@@ -12,7 +12,6 @@
 #include "project.h"
 #include "MAX30101.h"
 #include "USER.h"
-#include "parameters.h"
 #include "setting_parameters.h"
 
 #define FIFO_max_size 25
@@ -25,8 +24,8 @@ void setting_parameters( uint16 ADC_range, uint16 Pulse_width, uint16 Pulse_amp,
 {
     MAX30101_Shutdown(); //every time we call this function we need shutdown our sensor and reset it to the power-on-state mode
     MAX30101_Reset();
- //These 4 registers are the ones we have set at the beginning ot he main.c file but every time we modify them is like we are performin
- // the inizialization of the sensor with the new values.
+    /*These 4 registers are the ones we have set at the beginning of the main.c file but every time we modify them it's like we are performing
+    the inizialization of the sensor with the new values.*/
     // Wake up sensor
     MAX30101_WakeUp();        
     MAX30101_EnableFIFOAFullInt();
@@ -37,7 +36,7 @@ void setting_parameters( uint16 ADC_range, uint16 Pulse_width, uint16 Pulse_amp,
     // enable fifo rollover
     MAX30101_EnableFIFORollover();
  
-//Now we are setting the registers of our sensor accordingly to the parameters we have changed from the GUI.    
+    //Now we are setting the registers of our sensor accordingly to the parameters we have changed from the GUI.    
     // samples averaged       
     MAX30101_SetSampleAverage(Samples); 
     // Set LED Power level
