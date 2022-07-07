@@ -19,11 +19,14 @@
 
 extern uint8_t j;
 
+//Function used to chage the parameters of our sensor. As input we have the ADC range, the pulse width, the pulse ampl of the leds
+// the sample rate and the average sample.
 void setting_parameters( uint16 ADC_range, uint16 Pulse_width, uint16 Pulse_amp, uint16 Sample_rate, uint16 Samples) 
 {
-    MAX30101_Shutdown();
+    MAX30101_Shutdown(); //every time we call this function we need shutdown our sensor and reset it to the power-on-state mode
     MAX30101_Reset();
-    
+ //These 4 registers are the ones we have set at the beginning ot he main.c file but every time we modify them is like we are performin
+ // the inizialization of the sensor with the new values.
     // Wake up sensor
     MAX30101_WakeUp();        
     MAX30101_EnableFIFOAFullInt();
@@ -33,17 +36,17 @@ void setting_parameters( uint16 ADC_range, uint16 Pulse_width, uint16 Pulse_amp,
 
     // enable fifo rollover
     MAX30101_EnableFIFORollover();
-    
+ 
+//Now we are setting the registers of our sensor accordingly to the parameters we have changed from the GUI.    
     // samples averaged       
-    MAX30101_SetSampleAverage(Samples);
+    MAX30101_SetSampleAverage(Samples); 
     // Set LED Power level
     MAX30101_SetLEDPulseAmplitude(MAX30101_LED_1,Pulse_amp);        
     MAX30101_SetLEDPulseAmplitude(MAX30101_LED_2,Pulse_amp); 
            
     // Set ADC Range
     MAX30101_SetSpO2ADCRange(ADC_range);
-   
-    
+      
     // Pulse width
     MAX30101_SetSpO2PulseWidth(Pulse_width);
     
@@ -56,15 +59,13 @@ void setting_parameters( uint16 ADC_range, uint16 Pulse_width, uint16 Pulse_amp,
     // Enable Slots
     MAX30101_DisableSlots();
     
-    //debug_print("ADC RANGE 2048\r\n");
-    j=0;
+    j=0; //index of the buffer returns to 0
 
     //MAX30101_INT_ClearInterrupt();
     MAX30101_ClearFIFO();
     MAX30101_WakeUp(); 
     CyDelay(100);
     
-    ADC_range = 0;
 }
 
 /* [] END OF FILE */
